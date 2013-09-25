@@ -1,0 +1,7 @@
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\bin\Debug\PM.Config.dll
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\bin\Debug\PM.Config.pdb
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\bin\Debug\PM.Common.dll
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\bin\Debug\PM.Common.pdb
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\obj\Debug\ResolveAssemblyReference.cache
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\obj\Debug\PM.Config.dll
+D:\开发项目\工作项目\计量器监测系统\03 系统开发\01源代码\PreciseMeasurement\PM.Config\obj\Debug\PM.Config.pdb
