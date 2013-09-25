@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PM.Web.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/assets/ico/favicon.png" />
+    <title>生产监测系统</title>
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="<%=ResolveUrl("~/assets/js/html5shiv.js") %>"></script>
+      <script src="<%=ResolveUrl("~/assets/js/respond.min.js") %>"></script>
+    <![endif]-->
+</head>
+<body>
+    <a class="sr-only" href="#content">Skip navigation</a>
+    <!-- Docs master nav -->
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">北京统一饮品</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav" id="main-nav">
+        <li>
+          <a href="<%=ResolveUrl("~/running/") %>">运行结构图</a>
+        </li>
+        <li>
+          <a href="#">实时参数</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/report/") %>">统计报表</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/report/compare.aspx") %>">曲线对比</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+            <li><a href="<%=ResolveUrl("~/admin/organizations.aspx") %>">系统管理</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">张无忌 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">首选项</a></li>
+                <li><a href="<%=ResolveUrl("~/Account/ChangePassword.aspx") %>">修改密码</a></li>
+                <li class="divider"></li>
+                <li><a href="#">退出登陆</a></li>
+              </ul>
+            </li>
+          </ul>
+    </nav>
+  </div>
+</header>
+    <div class="container">
+        <div class="bs-old-docs">
+        【北京】 今日通告，天气阵雨，22度，风力2级
+        </div>
+       <form id="Form1" runat="server" class="form-horizontal" role="form">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </form>
+    </div>
+    <!-- /container -->
+    <!-- Footer
+    ================================================== -->
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+        <p>公司地址：北京市朝阳区德外北沙滩一号</p>
+        <p>电话：64881202 传真：（北京）64881200 （北京）648815134 Email:fp@fipor.com.cn</p>
+        <p>Copyright &copy;2015-2015 北京菲波安乐仪表有限公司</p>
+      </div>
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%=ResolveUrl("~/assets/js/jquery.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/bootstrap.js") %>"></script>
+   
+    <script src="<%=ResolveUrl("~/assets/js/holder.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
+</body>
+</html>
