@@ -34,7 +34,7 @@ namespace PM.Business
                 if (orginfo.Parent.Equals(""))
                 {
                     treeList.Add(orginfo);
-                    CreateOrganizationTree(listAll, orginfo.Orgid, prefix);
+                    CreateOrganizationTree(listAll, orginfo.Orgid, "");
                 }
             }
         }
