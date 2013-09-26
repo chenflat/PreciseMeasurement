@@ -15,6 +15,8 @@ namespace PM.Business
     {
         private static List<OrganizationInfo> treeList = null;
 
+
+
         /// <summary>
         /// 获取所有机构
         /// </summary>
@@ -23,6 +25,21 @@ namespace PM.Business
         {
             return PM.Data.Organizations.FindOrganizationsListDataTable();
         }
+
+        public static void SetOrganizationDropDownList( System.Web.UI.WebControls.DropDownList TypeID,string selectid) {
+            List<OrganizationInfo> listAll = GetOrganizationsList();
+            foreach (OrganizationInfo orginfo in listAll)
+            {
+
+                if (orginfo.Parent.Equals(""))
+                {
+                    treeList.Add(orginfo);
+                    CreateOrganizationTree(listAll, orginfo.Orgid, prefix);
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// 获取所有机构
