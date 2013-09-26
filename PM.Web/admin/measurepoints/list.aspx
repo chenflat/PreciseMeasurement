@@ -22,7 +22,7 @@
                     <th width="10%">
                         计量编号
                     </th>
-                    <th width="20%">
+                    <th width="15%">
                         计量点名称
                     </th>
                     <th width="10%">
@@ -43,7 +43,7 @@
                     <th width="10%">
                         编辑
                     </th>
-                     <th width="10%">
+                     <th width="15%">
                         计量点详细浏览
                     </th>
                 </tr>
@@ -69,13 +69,13 @@
                     <%#Eval("CARDNUM")%>
                 </td>
                 <td>
-                    <a href="paramters.aspx?id=<%#Eval("MEASUREUNITUID") %>">参量设置</a>
+                    <a href="paramters.aspx?id=<%#Eval("MEASUREPOINTID") %>">参量设置</a>
                 </td>
                 <td>
-                    <a href="edit.aspx?id=<%#Eval("MEASUREUNITUID") %>">编辑</a>
+                    <a href="edit.aspx?id=<%#Eval("MEASUREPOINTID") %>">编辑</a>
                 </td>
                 <td>
-                    <a href="edit.aspx?id=<%#Eval("MEASUREUNITUID") %>">计量点详细浏览</a>
+                    <a href="edit.aspx?id=<%#Eval("MEASUREPOINTID") %>">计量点详细浏览</a>
                 </td>
             </tr>
         </ItemTemplate>

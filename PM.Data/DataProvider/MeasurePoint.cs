@@ -100,6 +100,7 @@ namespace PM.Data
             measurePointInfo.Serverport = TypeConverter.ObjectToInt(reader["SERVERPORT"]);
             measurePointInfo.Metername = reader["METERNAME"].ToString();
             measurePointInfo.Orgid = reader["ORGID"].ToString();
+            measurePointInfo.Orgname = reader["ORGNAME"].ToString();
             measurePointInfo.Siteid = reader["SITEID"].ToString();
             measurePointInfo.Location = reader["LOCATION"].ToString();
             measurePointInfo.Carrier = reader["CARRIER"].ToString();
