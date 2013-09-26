@@ -24,7 +24,7 @@ namespace PM.Entity
         private string carrier;
         private string supervisor;
         private string phone;
-
+        private string status;
 
         public long Measurepointid
         {
@@ -119,5 +119,12 @@ namespace PM.Entity
             get { return phone; }
             set { phone = value; }
         }
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
     }
 }

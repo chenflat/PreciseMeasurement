@@ -16,8 +16,9 @@ namespace PM.Data.SqlServer
 
         public DataTable FindMeasurePointByCondition(string condition)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINT] {2}",
-                                                DbFields.MEASUREPOINT,
+            string commandText = string.Format("select {0}MEASUREPOINT.*,{0}ORGANIZATION.DESCRIPTION as ORGNAME from [{0}MEASUREPOINT] "
+                + "left outer join [{0}ORGANIZATION] on [{0}MEASUREPOINT].ORGID=[{0}ORGANIZATION].ORGID where "
+                +"[{0}MEASUREPOINT].STATUS='ACTIVE' {1} ORDER BY [{0}MEASUREPOINT].DISPLAYSEQUENCE ASC",
                                                 BaseConfigs.GetTablePrefix,
                                                 condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
@@ -26,15 +27,15 @@ namespace PM.Data.SqlServer
         public IDataReader FindMeasurePointById(long id)
         {
             DbParameter param = DbHelper.MakeInParam("@MEASUREPOINTID", (DbType)SqlDbType.BigInt, 8, id);
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINT] WHERE [MEASUREPOINTID]=@MEASUREPOINTID",
-                                                DbFields.ORGANIZATION,
+            string commandText = string.Format("select {0}MEASUREPOINT.*,{0}ORGANIZATION.DESCRIPTION as ORGNAME from [{0}MEASUREPOINT] "
+                +"left outer join [{0}ORGANIZATION] on [{0}MEASUREPOINT].ORGID=[{0}ORGANIZATION].ORGID WHERE [MEASUREPOINTID]=@MEASUREPOINTID",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
 
         public DataTable FindMeasurePointTableByLocation(string location)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINT] WHERE LOCATION='{2}'",
+            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINT] WHERE STATUS='ACTIVE' AND LOCATION='{2}' order by DISPLAYSEQUENCE ASC",
                                                 DbFields.MEASUREPOINT,
                                                 BaseConfigs.GetTablePrefix,
                                                 location);
@@ -59,10 +60,14 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LOCATION", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Location),
                                   DbHelper.MakeInParam("@CARRIER", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Carrier),
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
-                                  DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone)
+                                  DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
+                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status)
                                  };
 
-            string commandText = string.Format("INSERT INTO [{0}MEASUREPOINT] ([ORGID],[DESCRIPTION],[ORGTYPE],[LEVEL_],[COMMENTS],[LEADER],[PHONE],[ADDRESS],[PARENT]) VALUES(@ORGID, @DESCRIPTION, @ORGTYPE, @LEVEL, @COMMENTS, @LEADER, @PHONE,@ADDRESS,@PARENT)", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("INSERT INTO [{0}MEASUREPOINT] ([POINTNUM],[POINTCODE],[DESCRIPTION],[DISPLAYSEQUENCE],[IPADDRESS],"
+                                + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS])"
+                                + " VALUES(@POINTNUM, @POINTCODE, @DESCRIPTION, @DISPLAYSEQUENCE, @IPADDRESS, @CARDNUM, @DEVICENUM,@SERVERIP,@SERVERPORT,"
+                                + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS)", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
 
@@ -85,21 +90,22 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LOCATION", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Location),
                                   DbHelper.MakeInParam("@CARRIER", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Carrier),
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
-                                  DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone)
+                                  DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
+                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status)
                                  };
 
 
             string commandText = string.Format("UPDATE [{0}MEASUREPOINT] SET [POINTNUM]=@POINTNUM,[POINTCODE]=@POINTCODE,"
             + "[DESCRIPTION]=@DESCRIPTION,[DISPLAYSEQUENCE]=@DISPLAYSEQUENCE,[IPADDRESS]=@IPADDRESS,[CARDNUM]=@CARDNUM,"
             + "[DEVICENUM]=@DEVICENUM,[SERVERIP]=@SERVERIP,[SERVERPORT]=@SERVERPORT,[METERNAME]=@METERNAME,ORGID=@ORGID,"
-            + "[SITEID]=@SITEID,[LOCATION]=@LOCATION,[CARRIER]=@CARRIER,[SUPERVISOR]=@SUPERVISOR,[PHONE]=@PHONE"
+            + "[SITEID]=@SITEID,[LOCATION]=@LOCATION,[CARRIER]=@CARRIER,[SUPERVISOR]=@SUPERVISOR,[PHONE]=@PHONE,[STATUS]=@STATUS"
             + " WHERE [MEASUREPOINTID]=@MEASUREPOINTID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
         public int DeleteMeasurePoint(string idList)
         {
-            string commandText = string.Format("DELETE FROM [{0}MEASUREPOINT] WHERE [MEASUREPOINTID] IN ({1}))",
+            string commandText = string.Format("UPDATE [{0}MEASUREPOINT] SET [STATUS]='DELETED' WHERE [MEASUREPOINTID] IN ({1})",
                                               BaseConfigs.GetTablePrefix,
                                               idList);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
@@ -110,14 +116,14 @@ namespace PM.Data.SqlServer
             if (condition == "") {
                 condition = "1=1";
             }
-            string commandText = string.Format("SELECT COUNT(MEASUREPOINTID) FROM [{0}MEASUREPOINT] WHERE {1})",
+            string commandText = string.Format("SELECT COUNT(MEASUREPOINTID) FROM [{0}MEASUREPOINT] WHERE STATUS='ACTIVE' {1})",
                                              BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
         }
 
         public DataTable FindMeasurePointParamByPointNum(string pointnum)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINTPARAM] where [POINTNUM]={2}",
+            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINTPARAM] where STATUS='ACTIVE' AND [POINTNUM]={2}",
                                                 DbFields.MEASUREPOINTPARAM,
                                                 BaseConfigs.GetTablePrefix,
                                                 pointnum);

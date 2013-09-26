@@ -76,6 +76,7 @@
     <Content Include="assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="assets\ico\favicon.png" />
+    <Content Include="assets\img\systemrunchart.png" />
     <Content Include="assets\js\application.js" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
@@ -306,6 +307,10 @@
     <ProjectReference Include="..\PM.Common\PM.Common.csproj">
       <Project>{A4CDBF26-2EED-4F4E-B23E-229E42AE590B}</Project>
       <Name>PM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PM.Config\PM.Config.csproj">
+      <Project>{F0BAAC8E-982C-4EFE-88F9-9E1FE09BD73B}</Project>
+      <Name>PM.Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\PM.Data\PM.Data.csproj">
       <Project>{9BD3666B-7BE9-42C1-B316-BCD3CE52192C}</Project>

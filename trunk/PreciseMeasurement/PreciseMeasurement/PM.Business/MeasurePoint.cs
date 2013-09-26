@@ -25,11 +25,15 @@ namespace PM.Business
 
         public static int CreateMeasurePoint(MeasurePointInfo measurePointInfo)
         {
+            if (measurePointInfo.Status==null || measurePointInfo.Status.Length == 0)
+                measurePointInfo.Status = "ACTIVE";
             return Data.MeasurePoint.CreateMeasurePoint(measurePointInfo);
         }
 
         public static bool UpdateMeasurePoint(MeasurePointInfo measurePointInfo)
         {
+            if (measurePointInfo.Status==null || measurePointInfo.Status.Length == 0)
+                measurePointInfo.Status = "ACTIVE";
             return Data.MeasurePoint.UpdateMeasurePoint(measurePointInfo);
         }
 
