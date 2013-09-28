@@ -92,10 +92,10 @@
     <Content Include="assets\js\uglify.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="realtime\default.aspx" />
     <Content Include="report\compare.aspx" />
     <Content Include="report\default.aspx" />
-    <Content Include="running\Default.aspx" />
-    <Content Include="structure.aspx" />
+    <Content Include="structure\default.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -256,6 +256,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="realtime\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="realtime\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="report\compare.aspx.cs">
       <DependentUpon>compare.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,13 +277,6 @@
     <Compile Include="report\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="running\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="running\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,18 +284,17 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="structure.aspx.cs">
-      <DependentUpon>structure.aspx</DependentUpon>
+    <Compile Include="structure\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="structure.aspx.designer.cs">
-      <DependentUpon>structure.aspx</DependentUpon>
+    <Compile Include="structure\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\lib\" />
-    <Folder Include="structure\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

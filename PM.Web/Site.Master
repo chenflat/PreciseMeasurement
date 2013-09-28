@@ -37,10 +37,10 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" id="main-nav">
         <li>
-          <a href="<%=ResolveUrl("~/running/") %>">运行结构图</a>
+          <a href="<%=ResolveUrl("~/structure/default.aspx") %>">运行结构图</a>
         </li>
         <li>
-          <a href="#">实时参数</a>
+          <a href="<%=ResolveUrl("~/realtime/default.aspx") %>">实时参数</a>
         </li>
         <li>
           <a href="<%=ResolveUrl("~/report/") %>">统计报表</a>
