@@ -51,23 +51,32 @@ namespace PM.Web.admin.measureunits
 
         void btnSave_Click(object sender, EventArgs e)
         {
-            MeasureUnitInfo measureUnitInfo = new MeasureUnitInfo();
-            measureUnitInfo.Measureunituid = Utils.StrToInt(measureunituid.Value, -1);
-            measureUnitInfo.Description = description.Text.Trim();
-            measureUnitInfo.Type = type.Text.Trim();
-            measureUnitInfo.Measureunitid = measureunitid.Text.Trim();
-            measureUnitInfo.Abbreviation = abbreviation.Text.Trim();
-            measureUnitInfo.IsCalculate = isCalculate.SelectedValue == "1";
-            measureUnitInfo.Visabled = visabled.SelectedValue == "1";
-            measureUnitInfo.IsMainParam = isMainParam.SelectedValue == "1";
-            measureUnitInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
-            if (measureUnitInfo.Measureunituid == -1)
+            if (this.IsValid)
             {
-                long id = PM.Business.MeasureUnit.CreateMeasureUnit(measureUnitInfo);  
-                Response.Redirect("edit.aspx?id=" + id);
-            }
-            else {
-                PM.Business.MeasureUnit.UpdateMeasureUnit(measureUnitInfo);
+                MeasureUnitInfo measureUnitInfo = new MeasureUnitInfo();
+                measureUnitInfo.Measureunituid = Utils.StrToInt(measureunituid.Value, -1);
+                measureUnitInfo.Description = description.Text.Trim();
+                measureUnitInfo.Type = type.Text.Trim();
+                measureUnitInfo.Measureunitid = measureunitid.Text.Trim();
+                measureUnitInfo.Abbreviation = abbreviation.Text.Trim();
+                measureUnitInfo.IsCalculate = isCalculate.SelectedValue == "1";
+                measureUnitInfo.Visabled = visabled.SelectedValue == "1";
+                measureUnitInfo.IsMainParam = isMainParam.SelectedValue == "1";
+                measureUnitInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
+                bool isSuccess = false;
+                if (measureUnitInfo.Measureunituid>0)
+                {
+                    isSuccess = PM.Business.MeasureUnit.UpdateMeasureUnit(measureUnitInfo) > 0;
+                   
+                }
+                else
+                {
+                    isSuccess = PM.Business.MeasureUnit.CreateMeasureUnit(measureUnitInfo) > 0;
+                }
+                if (isSuccess)
+                {
+                    Response.Redirect("list.aspx");
+                }
             }
 
 

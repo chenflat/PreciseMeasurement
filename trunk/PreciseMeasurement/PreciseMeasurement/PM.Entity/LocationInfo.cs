@@ -28,7 +28,12 @@ namespace PM.Entity
         private string status;
         private DateTime statusdate;
         private string changeby;
-        private DateTime changedate;
+        private DateTime changedate = DateTime.Now;
+
+        private string parent;
+        private bool children;
+        private int level;
+
 
         public long Locationsid
         {
@@ -132,6 +137,30 @@ namespace PM.Entity
         {
             get { return changedate; }
             set { changedate = value; }
+        }
+
+        /// <summary>
+        /// 本位置的父级
+        /// </summary>
+        public string Parent {
+            get { return parent; }
+            set { parent = value; }
+        }
+
+        /// <summary>
+        /// 是否有有子级
+        /// </summary>
+        public bool Children {
+            get { return children; }
+            set { children = value; }
+        }
+
+        /// <summary>
+        /// 层级
+        /// </summary>
+        public int Level {
+            get { return level; }
+            set { level = value; }
         }
     }
 }

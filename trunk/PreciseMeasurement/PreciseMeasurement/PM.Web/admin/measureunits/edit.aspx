@@ -80,6 +80,7 @@
          <div class="toolbar bs-callout-danger">
             <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
             <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
+            <a href="list.aspx" class="btn btn-info">返回</a>
         </div>
     </div>
 </asp:Content>

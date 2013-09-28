@@ -55,10 +55,18 @@ namespace PM.Data
 
 
         /// <summary>
-        ///  获取位置
+        /// 查找指定条件的位置信息
         /// </summary>
+        /// <param name="condition"></param>
         /// <returns></returns>
-        IDataReader FindLocationsList();
+        DataTable FindLocationsByCondition(string condition);
+
+        /// <summary>
+        /// 查找指定条件的位置信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        IDataReader FindLocationsListByCondition(string condition);
 
         /// <summary>
         /// 获取位置
@@ -87,7 +95,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="locationInfo">位置信息</param>
         /// <returns>返回位置ID, 如果已存在该位置则返回-1</returns>
-        int CreateLocation(LocationInfo locationInfo);
+        bool CreateLocation(LocationInfo locationInfo);
 
         /// <summary>
         /// 更新位置信息
@@ -102,6 +110,14 @@ namespace PM.Data
         /// <param name="idList">位置ID列表</param>
         /// <returns></returns>
         int DeleteLocation(string idList);
+
+        /// <summary>
+        /// 获取计量点条数
+        /// </summary>
+        /// <returns></returns>
+        int LocationsCount(string condition);
+
+
 
         /// <summary>
         /// 获取位置层级关系

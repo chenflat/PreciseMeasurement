@@ -18,23 +18,26 @@ namespace PM.Web.admin.organizations
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
             if (!Page.IsPostBack)
             {
                 string keyId = PMRequest.GetString("id");
                 if (keyId == "")
                 {
                     //Response.Redirect("list.aspx");
+                    btnDelte.Enabled = false;
                 }
-                else {
+                else
+                {
                     LoadOrganizationInfo(PMRequest.GetInt("id", -1));
                 }
 
-               
+
             }
         }
 
-        public void LoadOrganizationInfo(long id) {
+        public void LoadOrganizationInfo(long id)
+        {
             OrganizationInfo orginfo = Organizations.GetOrganizationInfo(id);
             if (orginfo == null)
                 return;
@@ -53,35 +56,44 @@ namespace PM.Web.admin.organizations
 
         void btnSave_Click(object sender, EventArgs e)
         {
-            OrganizationInfo orgInfo = new OrganizationInfo();
-            orgInfo.Organizationid = Utils.StrToInt(organizationid.Value, 0);
-            orgInfo.Orgid = orgid.Text.Trim();
-            orgInfo.Description = description.Text.Trim();
-            orgInfo.Orgtype = orgtype.SelectedValue;
-            orgInfo.Parent = parent.SelectedValue ;
-            orgInfo.Leader = leader.Text.Trim();
-            orgInfo.Phone = phone.Text.Trim();
-            orgInfo.Address = address.Text.Trim();
-            orgInfo.Comments = comments.Text.Trim();
-            if (Utils.StrToInt(organizationid.Value, 0) == 0)
+            if (this.IsValid)
             {
-               long id = Organizations.CreateOrganizationInfo(orgInfo);
-                Response.Redirect("edit.aspx?id="+ id );
-            }
-            else {
-                Organizations.UpdateOrganizationInfo(orgInfo);
-            }
-          
+                OrganizationInfo orgInfo = new OrganizationInfo();
+                orgInfo.Organizationid = Utils.StrToInt(organizationid.Value, 0);
+                orgInfo.Orgid = orgid.Text.Trim();
+                orgInfo.Description = description.Text.Trim();
+                orgInfo.Orgtype = orgtype.SelectedValue;
+                orgInfo.Parent = parent.SelectedValue;
+                orgInfo.Leader = leader.Text.Trim();
+                orgInfo.Phone = phone.Text.Trim();
+                orgInfo.Address = address.Text.Trim();
+                orgInfo.Comments = comments.Text.Trim();
+                bool isSuccess = false;
+                if (Utils.StrToInt(organizationid.Value, 0) == 0)
+                {
+                    isSuccess = Organizations.CreateOrganizationInfo(orgInfo) > 0;
 
-           
+                }
+                else
+                {
+                    isSuccess = Organizations.UpdateOrganizationInfo(orgInfo) > 0;
+                }
+
+                if (isSuccess)
+                {
+                    Response.Redirect("list.aspx");
+                }
+            }
+
+
         }
 
         void btnDelte_Click(object sender, EventArgs e)
         {
-            Organizations.DeleteOrganizationInfo(PMRequest.GetInt("id",-1));
+            Organizations.DeleteOrganizationInfo(PMRequest.GetInt("id", -1));
             Response.Redirect("list.aspx");
-           // base.RegisterStartupScript("PAGE", "window.location.href='global_announcegrid.aspx';");
-            
+            // base.RegisterStartupScript("PAGE", "window.location.href='global_announcegrid.aspx';");
+
         }
 
         #region Web 窗体设计器生成的代码
@@ -98,7 +110,7 @@ namespace PM.Web.admin.organizations
             btnDelte.Click += new EventHandler(btnDelte_Click);
         }
 
-       
+
 
         #endregion
     }

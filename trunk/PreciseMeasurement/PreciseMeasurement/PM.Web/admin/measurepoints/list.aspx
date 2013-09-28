@@ -19,14 +19,14 @@
         <HeaderTemplate>
             <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
                 <tr>
-                    <th width="10%">
+                    <th width="120">
                         计量编号
                     </th>
-                    <th width="15%">
+                    <th width="18%">
                         计量点名称
                     </th>
-                    <th width="10%">
-                        计量序号
+                    <th width="60">
+                        序号
                     </th>
                     <th width="10%">
                         所属公司
@@ -40,7 +40,7 @@
                      <th width="10%">
                         参量设置
                     </th>
-                    <th width="10%">
+                    <th width="60">
                         编辑
                     </th>
                      <th width="15%">
