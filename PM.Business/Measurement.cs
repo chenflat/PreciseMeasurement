@@ -9,5 +9,7 @@ namespace PM.Business
     /// </summary>
     public class Measurement
     {
+
+
     }
 }

@@ -13,9 +13,14 @@ namespace PM.Data
 {
     public class Locations
     {
-        public static IDataReader FindLocationsList()
+        public static DataTable FindLocationsByCondition(string condition)
         {
-            return DatabaseProvider.GetInstance().FindLocationsList();
+            return DatabaseProvider.GetInstance().FindLocationsByCondition(condition);
+        }
+
+        public static IDataReader FindLocationsListByCondition(string condition)
+        {
+            return DatabaseProvider.GetInstance().FindLocationsListByCondition(condition);
         }
 
         public static IDataReader FindLocationsByOrgId(string orgid)
@@ -58,7 +63,11 @@ namespace PM.Data
             locationInfo.Status = reader["STATUS"].ToString();
             locationInfo.Statusdate = TypeConverter.StrToDateTime(reader["STATUSDATE"].ToString(), DateTime.Parse("1900-01-01")); 
             locationInfo.Changeby = reader["CHANGEBY"].ToString();
-            locationInfo.Changedate = TypeConverter.StrToDateTime(reader["CHANGEDATE"].ToString(), DateTime.Parse("1900-01-01")); 
+            locationInfo.Changedate = TypeConverter.StrToDateTime(reader["CHANGEDATE"].ToString(), DateTime.Parse("1900-01-01"));
+            locationInfo.Parent = reader["PARENT"].ToString();
+            locationInfo.Children = TypeConverter.StrToBool(reader["CHILDREN"].ToString(), false);
+            
+            
             return locationInfo;
         }
 
@@ -67,7 +76,7 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindLocationsByOrgIdAndType(orgid, type);
         }
 
-        public static long CreateLocation(LocationInfo locationInfo)
+        public static bool CreateLocation(LocationInfo locationInfo)
         {
             return DatabaseProvider.GetInstance().CreateLocation(locationInfo);
         }
@@ -80,6 +89,11 @@ namespace PM.Data
         public static int DeleteLocation(string idList)
         {
             return DatabaseProvider.GetInstance().DeleteLocation(idList);
+        }
+
+        public static int LocationsCount(string condition)
+        {
+            return DatabaseProvider.GetInstance().LocationsCount(condition);
         }
     }
 }

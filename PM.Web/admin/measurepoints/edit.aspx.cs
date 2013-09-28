@@ -15,21 +15,41 @@ namespace PM.Web.admin.measurepoints
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string keyId = PMRequest.GetString("id");
-            if (keyId != "" && Utils.IsNumeric(keyId))
+            if (!IsPostBack)
             {
-                btnSave.CausesValidation = true;
-                btnDelte.Attributes.Add("onclick", "return confirm('删除数据不可恢复，确定要删除码');");
-                LoadMeasurePointInfo(PMRequest.GetInt("id", -1));
-            }
-            else {
-                btnDelte.Attributes.Add("disabled", "disabled");
+                string keyId = PMRequest.GetString("id");
+                if (keyId != "" && Utils.IsNumeric(keyId))
+                {
+                    BindDropDownList();
+                    btnDelte.Attributes.Add("onclick", "return confirm('删除数据不可恢复，确定要删除码');");
+                    LoadMeasurePointInfo(PMRequest.GetInt("id", -1));
+                }
+                else
+                {
+                    btnDelte.Attributes.Add("disabled", "disabled");
+                }
             }
         }
 
+        private void BindDropDownList()
+        {
+            orgid.DataTextField = "Description";
+            orgid.DataValueField = "ORGID";
+            orgid.DataSource = Business.Organizations.GetOrganizationTreeList("-");
+            orgid.DataBind();
 
-        private void LoadMeasurePointInfo(long id) {
-            if(id<=0)
+            location.DataTextField = "Description";
+            location.DataValueField = "Location";
+            location.DataSource = Business.Locations.GetLocationsTreeList("└");
+            location.DataBind();
+            location.Items.Insert(0, new ListItem("", ""));
+        }
+
+
+
+        private void LoadMeasurePointInfo(long id)
+        {
+            if (id <= 0)
                 return;
             MeasurePointInfo pointInfo = Business.MeasurePoint.GetMeasurePointInfo(id);
             if (pointInfo == null)
@@ -56,41 +76,45 @@ namespace PM.Web.admin.measurepoints
 
         void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (this.IsValid)
             {
-                MeasurePointInfo pointInfo = new MeasurePointInfo();
-                pointInfo.Measurepointid = Utils.StrToInt(measurepointid.Value, -1);
-                pointInfo.Description = description.Text.Trim();
-                pointInfo.PointCode = pointcode.Text.Trim();
-                pointInfo.Pointnum = pointnum.Text.Trim();
-                pointInfo.Carrier = carrier.SelectedValue;
-                pointInfo.Supervisor = supervisor.Text.Trim();
-                pointInfo.Phone = phone.Text.Trim();
-                pointInfo.Orgid = orgid.Text.Trim();
-                pointInfo.Location = location.SelectedValue;
-                pointInfo.Ipaddress = ipaddress.Text.Trim();
-                pointInfo.Cardnum = cardnum.Text.Trim();
-                pointInfo.Devicenum = devicenum.Text.Trim();
-                pointInfo.Serverip = serverip.Text.Trim();
-                pointInfo.Serverport = Utils.StrToInt(serverport.Text.Trim(),-1);
-                pointInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
+                try
+                {
+                    MeasurePointInfo pointInfo = new MeasurePointInfo();
+                    pointInfo.Measurepointid = Utils.StrToInt(measurepointid.Value, -1);
+                    pointInfo.Description = description.Text.Trim();
+                    pointInfo.PointCode = pointcode.Text.Trim();
+                    pointInfo.Pointnum = pointnum.Text.Trim();
+                    pointInfo.Carrier = carrier.SelectedValue;
+                    pointInfo.Supervisor = supervisor.Text.Trim();
+                    pointInfo.Phone = phone.Text.Trim();
+                    pointInfo.Orgid = orgid.Text.Trim();
+                    pointInfo.Location = location.SelectedValue;
+                    pointInfo.Ipaddress = ipaddress.Text.Trim();
+                    pointInfo.Cardnum = cardnum.Text.Trim();
+                    pointInfo.Devicenum = devicenum.Text.Trim();
+                    pointInfo.Serverip = serverip.Text.Trim();
+                    pointInfo.Serverport = Utils.StrToInt(serverport.Text.Trim(), -1);
+                    pointInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
 
-                bool isSuccess = false;
-                if (pointInfo.Measurepointid >0)
+                    bool isSuccess = false;
+                    if (pointInfo.Measurepointid > 0)
+                    {
+                        isSuccess = Business.MeasurePoint.UpdateMeasurePoint(pointInfo);
+                    }
+                    else
+                    {
+                        isSuccess = Business.MeasurePoint.CreateMeasurePoint(pointInfo) > 0;
+                    }
+                    if (isSuccess)
+                    {
+                        Response.Redirect("list.aspx");
+                    }
+                }
+                catch (Exception ex)
                 {
-                    isSuccess = Business.MeasurePoint.UpdateMeasurePoint(pointInfo);
+                    throw;
                 }
-                else
-                {
-                    isSuccess = Business.MeasurePoint.CreateMeasurePoint(pointInfo) > 0;
-                }
-                if (isSuccess) {
-                    Response.Redirect("list.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
         }
 
