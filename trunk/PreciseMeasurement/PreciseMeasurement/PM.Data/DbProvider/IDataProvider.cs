@@ -314,7 +314,7 @@ namespace PM.Data
         int MeasureReplaceCount(string condition);
 
 
-        DataTable FindUserTable();
+        DataTable FindUserTableByCondition(string condition);
 
         /// <summary>
         /// 获取用户信息
@@ -361,7 +361,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="userinfo">用户信息</param>
         /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
-        long CreateUser(UserInfo userinfo);
+        bool CreateUser(UserInfo userinfo);
 
         /// <summary>
         /// 更新用户
