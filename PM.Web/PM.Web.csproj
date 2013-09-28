@@ -50,7 +50,6 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="admin\analysis\default.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
     <Content Include="admin\measurepoints\edit.aspx" />
@@ -150,13 +149,6 @@
     </Compile>
     <Compile Include="admin\Admin.master.designer.cs">
       <DependentUpon>Admin.master</DependentUpon>
-    </Compile>
-    <Compile Include="admin\analysis\default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\analysis\default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\locations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
