@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace PM.Web.structure {
+namespace PM.Web.report {
     
     
-    public partial class _default {
+    public partial class month {
     }
 }

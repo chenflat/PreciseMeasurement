@@ -46,7 +46,7 @@
           <a href="<%=ResolveUrl("~/report/") %>">统计报表</a>
         </li>
         <li>
-          <a href="<%=ResolveUrl("~/report/compare.aspx") %>">曲线对比</a>
+          <a href="<%=ResolveUrl("~/analysis/") %>">曲线对比</a>
         </li>
         <li>
           <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
@@ -67,7 +67,7 @@
     </nav>
   </div>
 </header>
-    <div class="container">
+    <div class="container-full">
         <div class="bs-old-docs">
         【北京】 今日通告，天气阵雨，22度，风力2级
         </div>
