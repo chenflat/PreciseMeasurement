@@ -14,10 +14,14 @@ namespace PM.Data.SqlServer
 {
     public partial class DataProvider : IDataProvider
     {
-       
-        public DataTable FindUserTable()
+
+        public DataTable FindUserTableByCondition(string condition)
         {
-            throw new NotImplementedException();
+            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where 1=1 {2} ORDER BY [USERID] DESC",
+                                                   DbFields.USERS,
+                                                   BaseConfigs.GetTablePrefix,
+                                                   condition);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
         public DataTable GetUserInfo(string userName, string passWord)
@@ -45,7 +49,7 @@ namespace PM.Data.SqlServer
             throw new NotImplementedException();
         }
 
-        public long CreateUser(UserInfo userinfo)
+        public bool CreateUser(UserInfo userinfo)
         {
             throw new NotImplementedException();
         }

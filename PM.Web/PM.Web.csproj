@@ -95,6 +95,7 @@
     <Content Include="report\compare.aspx" />
     <Content Include="report\default.aspx" />
     <Content Include="running\Default.aspx" />
+    <Content Include="structure.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -283,10 +284,18 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="structure.aspx.cs">
+      <DependentUpon>structure.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="structure.aspx.designer.cs">
+      <DependentUpon>structure.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\lib\" />
+    <Folder Include="structure\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
