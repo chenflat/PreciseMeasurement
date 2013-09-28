@@ -64,6 +64,7 @@
     <Content Include="admin\users\list.aspx" />
     <Content Include="admin\users\roles.aspx" />
     <Content Include="alarm\default.aspx" />
+    <Content Include="analysis\default.aspx" />
     <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.css" />
@@ -246,6 +247,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="alarm\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="analysis\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="analysis\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
