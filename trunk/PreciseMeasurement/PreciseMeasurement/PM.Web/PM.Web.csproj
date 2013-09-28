@@ -91,6 +91,8 @@
     <Content Include="assets\js\raw-files.js" />
     <Content Include="assets\js\respond.min.js" />
     <Content Include="assets\js\uglify.js" />
+    <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="realtime\default.aspx" />
@@ -326,7 +328,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\lib\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

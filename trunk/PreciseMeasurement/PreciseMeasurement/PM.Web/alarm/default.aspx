@@ -2,12 +2,16 @@
     CodeBehind="default.aspx.cs" Inherits="PM.Web.alarm._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="bs-docs-section">
             <div class="alert alert-warning">
                 报警状态：<asp:DropDownList ID="status" runat="server">
+                    <asp:ListItem>未确认</asp:ListItem>
+                    <asp:ListItem>已确认</asp:ListItem>
                 </asp:DropDownList>
                 起始时间：<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 &nbsp;终止时间：<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
