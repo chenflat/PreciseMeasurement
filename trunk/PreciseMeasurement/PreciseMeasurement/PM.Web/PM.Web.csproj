@@ -50,6 +50,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="admin\analysis\default.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
     <Content Include="admin\measurepoints\edit.aspx" />
@@ -94,7 +95,10 @@
     <Content Include="Global.asax" />
     <Content Include="realtime\default.aspx" />
     <Content Include="report\compare.aspx" />
+    <Content Include="report\day.aspx" />
     <Content Include="report\default.aspx" />
+    <Content Include="report\month.aspx" />
+    <Content Include="report\week.aspx" />
     <Content Include="structure\default.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -146,6 +150,13 @@
     </Compile>
     <Compile Include="admin\Admin.master.designer.cs">
       <DependentUpon>Admin.master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\analysis\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\analysis\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\locations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
@@ -270,12 +281,33 @@
     <Compile Include="report\compare.aspx.designer.cs">
       <DependentUpon>compare.aspx</DependentUpon>
     </Compile>
+    <Compile Include="report\day.aspx.cs">
+      <DependentUpon>day.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report\day.aspx.designer.cs">
+      <DependentUpon>day.aspx</DependentUpon>
+    </Compile>
     <Compile Include="report\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="report\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report\month.aspx.cs">
+      <DependentUpon>month.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report\month.aspx.designer.cs">
+      <DependentUpon>month.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report\week.aspx.cs">
+      <DependentUpon>week.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report\week.aspx.designer.cs">
+      <DependentUpon>week.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
