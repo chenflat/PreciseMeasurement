@@ -1,14 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="PM.Web.report._default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="default.aspx.cs" Inherits="PM.Web.report._default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="bs-docs-section">
             <div class="alert alert-info">
-
-                起始时间：<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                起始时间：
+                <asp:TextBox ID="TextBox1" runat="server" data-format="yyyy-MM-dd hh:mm:ss"></asp:TextBox>
                 &nbsp;终止时间：<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                                级别：<asp:DropDownList ID="status" runat="server">
+                级别：<asp:DropDownList ID="status" runat="server">
                     <asp:ListItem>全部</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;<asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn btn-info" />

@@ -12,6 +12,7 @@
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
+    <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -88,8 +89,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<%=ResolveUrl("~/assets/js/jquery.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/js/bootstrap.js") %>"></script>
-   
     <script src="<%=ResolveUrl("~/assets/js/holder.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
+     <script src="<%=ResolveUrl("~/assets/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js") %>"></script>
+
+
 </body>
 </html>

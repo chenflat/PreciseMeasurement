@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<img src="../assets/img/systemrunchart.png" width="1140" />
+<img src="../assets/img/systemrunchart.png" />
 
 
 </asp:Content>
