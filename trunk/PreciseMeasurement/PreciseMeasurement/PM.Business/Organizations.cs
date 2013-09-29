@@ -97,7 +97,7 @@ namespace PM.Business
                 {
                     orginfo.Description = prefix + orginfo.Description;
                     treeList.Add(orginfo);
-                    CreateOrganizationTree(list, orginfo.Orgid, prefix + prefix);
+                    CreateOrganizationTree(list, orginfo.Orgid, HttpUtility.HtmlDecode("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;") + prefix);
                 }
                 
             }

@@ -43,7 +43,7 @@ namespace PM.Data.SqlServer
         public IDataReader FindMeasureUnitByDescription(string description)
         {
             DbParameter param = DbHelper.MakeInParam("@DESCRIPTION", (DbType)SqlDbType.VarChar, 100, description);
-            string commandText = string.Format("SELECT {0} FROM [MEASUREUNIT] WHERE DESCRIPTION=@DESCRIPTION ORDER BY [DISPLAYSEQUENCE] ASC",
+            string commandText = string.Format("SELECT {0} FROM [MEASUREUNIT] WHERE DESCRIPTION like '%@DESCRIPTION%' ORDER BY [DISPLAYSEQUENCE] ASC",
                                               DbFields.MEASUREUNIT);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }

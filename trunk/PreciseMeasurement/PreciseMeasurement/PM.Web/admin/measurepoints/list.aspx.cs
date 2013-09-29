@@ -22,16 +22,37 @@ namespace PM.Web.admin.measurepoints
 
             if (!IsPostBack)
             {
+                BindDropDownList();
                 BindData();
             }
         }  
 
+        /// <summary>
+        /// 绑定数据
+        /// </summary>
         private void BindData()
         {
             rptMeasurePoint.DataSource = Business.MeasurePoint.FindMeasurePointByCondition(condition);
             rptMeasurePoint.DataBind();
         }
 
+        /// <summary>
+        /// 绑定DropDownList数据源
+        /// </summary>
+        private void BindDropDownList() {
+            ddlOrgId.Items.Clear();
+            ddlOrgId.DataTextField = "DESCRIPTION";
+            ddlOrgId.DataValueField = "ORGID";
+            ddlOrgId.DataSource = Business.Organizations.GetOrganizationTreeList("└");
+            ddlOrgId.DataBind();
+            ddlOrgId.Items.Insert(0, new ListItem(""));
+        }
+
+        /// <summary>
+        /// 查询事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnQuery_Click(object sender, EventArgs e)
         {
 
