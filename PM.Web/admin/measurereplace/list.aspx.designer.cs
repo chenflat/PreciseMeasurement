@@ -11,5 +11,77 @@ namespace PM.Web.admin.measurereplace {
     
     
     public partial class list {
+        
+        /// <summary>
+        /// startdate 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox startdate;
+        
+        /// <summary>
+        /// enddate 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox enddate;
+        
+        /// <summary>
+        /// level 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList level;
+        
+        /// <summary>
+        /// pointnum 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox pointnum;
+        
+        /// <summary>
+        /// status 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList status;
+        
+        /// <summary>
+        /// btnQuery 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnQuery;
+        
+        /// <summary>
+        /// btnExport 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExport;
+        
+        /// <summary>
+        /// rptMeasureReplace 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptMeasureReplace;
     }
 }

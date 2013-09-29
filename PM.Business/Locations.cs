@@ -6,6 +6,7 @@ using PM.Entity;
 using PM.Data;
 using PM.Common;
 using PM.Config;
+using System.Web;
 
 namespace PM.Business
 {
@@ -54,7 +55,7 @@ namespace PM.Business
                 {
                     locationInfo.Description = prefix + locationInfo.Description;
                     treeList.Add(locationInfo);
-                    CreateLocationTree(list, locationInfo.Location, prefix + prefix);
+                    CreateLocationTree(list, locationInfo.Location, HttpUtility.HtmlDecode("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;") + prefix);
                 }
 
             }

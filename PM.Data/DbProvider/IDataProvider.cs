@@ -290,7 +290,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="measureReplaceInfo"></param>
         /// <returns></returns>
-        int CreateMeasureReplace(MeasureReplaceInfo measureReplaceInfo);
+        bool CreateMeasureReplace(MeasureReplaceInfo measureReplaceInfo);
 
         /// <summary>
         /// 更新换表记录
@@ -311,7 +311,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        int MeasureReplaceCount(string condition);
+        bool MeasureReplaceCount(string condition);
 
 
         DataTable FindUserTableByCondition(string condition);
