@@ -93,6 +93,7 @@
     <Content Include="assets\js\uglify.js" />
     <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="controls\PageControl.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="realtime\default.aspx" />
@@ -257,6 +258,13 @@
     </Compile>
     <Compile Include="analysis\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="controls\PageControl.ascx.cs">
+      <DependentUpon>PageControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\PageControl.ascx.designer.cs">
+      <DependentUpon>PageControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
