@@ -25,6 +25,9 @@ namespace PM.Web.admin.measurereplace
                 {
                     LoadMeasureReplaceInfo(PMRequest.GetInt("id", -1));
                 }
+                else {
+                    btnDelte.Enabled = false;
+                }
             }
         }
 
@@ -103,7 +106,6 @@ namespace PM.Web.admin.measurereplace
                 if (measureReplaceInfo.Measuretransid > 0)
                 {
                     isSuccess = PM.Business.MeasureReplace.UpdateMeasureReplace(measureReplaceInfo);
-
                 }
                 else
                 {
@@ -111,8 +113,14 @@ namespace PM.Web.admin.measurereplace
                 }
                 if (isSuccess)
                 {
+                   // ShowMessage(this.Page, MsgType.SUCCESS, "保存成功");
                     Response.Redirect("list.aspx");
                 }
+                else
+                {
+                    ShowMessage(this.Page, MsgType.DANGER, "保存失败，返回重新操作");
+                }
+               
 
             }
         }

@@ -5,15 +5,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <div class="toolbar bs-callout-danger">
-        起始时间：<asp:TextBox ID="startdate" runat="server" Width="80px"></asp:TextBox>
-        终止时间：<asp:TextBox ID="enddate" runat="server" Width="80px"></asp:TextBox>
+        起始时间：<asp:TextBox ID="startdate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>
+        终止时间：<asp:TextBox ID="enddate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>
         级别：<asp:DropDownList ID="level" runat="server">
             <asp:ListItem Value="1">一级</asp:ListItem>
             <asp:ListItem Value="2">二级</asp:ListItem>
         </asp:DropDownList>
         计量点名称:<asp:TextBox ID="pointnum" runat="server"></asp:TextBox>
         记录状态：<asp:DropDownList ID="status" runat="server">
-            <asp:ListItem Value="realtime">实时</asp:ListItem>
+            <asp:ListItem Value=""></asp:ListItem>
+            <asp:ListItem Value="REALTIME">实时</asp:ListItem>
         </asp:DropDownList>
         <asp:Button ID="btnQuery" class="btn btn-info" runat="server" Text="查询" />
         <asp:Button ID="btnExport" class="btn btn-info" runat="server" Text="导出Excel" />
@@ -21,7 +22,8 @@
     </div>
     <asp:GridView ID="gvMeasureReplace" runat="server" EnableModelValidation="True" 
         AutoGenerateColumns="False" CssClass="table table-striped" 
-        DataKeyNames="MEASURETRANSID" PageSize="20">
+        DataKeyNames="MEASURETRANSID" PageSize="20" BorderStyle="None" 
+        BorderWidth="0px" CellPadding="4" CellSpacing="1">
         <Columns>
             <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />
             <asp:BoundField DataField="MEASUREUNITNAME" HeaderText="参数名" />
@@ -34,7 +36,7 @@
             <asp:BoundField DataField="ENTERDATE" HeaderText="记录时间"  DataFormatString="{0:d}" />
             <asp:TemplateField HeaderText="编辑">
                 <ItemTemplate>
-                    <a href='edit.aspx?Id=<%# DataBinder.Eval(Container.DataItem, "MEASUREUNITUID")%>&PageIndex=<%=PageControl1.CurrentPageIndex %>'
+                    <a href='edit.aspx?Id=<%# DataBinder.Eval(Container.DataItem, "MEASURETRANSID")%>&PageIndex=<%=PageControl1.CurrentPageIndex %>'
                         title="修改">修改</a>
                 </ItemTemplate>
                 <ItemStyle Width="60px" />

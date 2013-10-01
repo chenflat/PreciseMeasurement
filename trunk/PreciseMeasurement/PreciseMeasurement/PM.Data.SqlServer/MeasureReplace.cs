@@ -24,8 +24,9 @@ namespace PM.Data.SqlServer
 
         public IDataReader FindMeasureReplaceById(long id) {
             DbParameter param = DbHelper.MakeInParam("@MEASURETRANSID", (DbType)SqlDbType.BigInt, 8, id);
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREREPLACE] WHERE [MEASURETRANSID]=@MEASURETRANSID",
-                                                DbFields.MEASUREREPLACE,
+            string commandText = string.Format("SELECT [{0}MEASUREREPLACE].*, [{0}MEASUREUNIT].DESCRIPTION as MEASUREUNITNAME"
+                + " FROM [{0}MEASUREREPLACE] left outer join [{0}MEASUREUNIT] on [{0}MEASUREREPLACE].[MEASUREUNITID]=[{0}MEASUREUNIT].[MEASUREUNITID] "
+                + " WHERE [{0}MEASUREREPLACE].MEASURETRANSID=@MEASURETRANSID",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
@@ -97,10 +98,6 @@ namespace PM.Data.SqlServer
 
         public int MeasureReplaceCount(string condition)
         {
-            if (condition == "")
-            {
-                condition = "1=1";
-            }
             string commandText = string.Format("SELECT COUNT([{0}MEASUREREPLACE].MEASURETRANSID) FROM [{0}MEASUREREPLACE] WHERE 1=1 {1}",
                                              BaseConfigs.GetTablePrefix, condition);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);

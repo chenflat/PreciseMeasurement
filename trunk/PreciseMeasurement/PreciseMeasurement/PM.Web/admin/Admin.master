@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row col-md-12">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="bs-sidebar hidden-print" role="complementary">
                 <ul class="nav bs-sidenav" id="admin-nav">
                     <li><a href="<%=ResolveUrl("~/admin/organizations/list.aspx") %>">机构管理</a> </li>
@@ -18,8 +18,16 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-9" role="main">
+        <div class="col-md-10" role="main">
             <div class="bs-docs-section">
+                
+                <asp:PlaceHolder ID="msgPlaceHolder" runat="server" Visible="False">
+                 <div style="margin-top:40px;" class="alert alert-<asp:Literal ID="ltMsgType" runat="server"></asp:Literal> fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×</button>
+                        <asp:Literal ID="message" runat="server"></asp:Literal>
+                    </div>
+                </asp:PlaceHolder>
                 <asp:ContentPlaceHolder ID="cph" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
