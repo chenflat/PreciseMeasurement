@@ -97,7 +97,9 @@
             console.log(link);
         });
 
-        
+        $('.datepicker').datepicker({
+            inline: true
+        });
     })
 
 } (window.jQuery)

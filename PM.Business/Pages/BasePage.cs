@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web.UI;
 
 namespace PM.Business.Pages
 {
@@ -16,6 +17,15 @@ namespace PM.Business.Pages
         /// 当前用户的用户组ID
         /// </summary>
         protected internal int usergroupid;
+
+        /// <summary>
+        /// 机构ID
+        /// </summary>
+        protected internal string orgid;
+        /// <summary>
+        /// 地点ID
+        /// </summary>
+        protected internal string siteid;
 
         /// <summary>
         /// 当前用户的管理组ID
@@ -66,6 +76,16 @@ namespace PM.Business.Pages
               
             }
 
+        }
+
+
+
+        //封装一些公用的类模块及使用方法
+        public static void ShowMessage(System.Web.UI.Page page, string msg)
+        {
+            ClientScriptManager cs = page.ClientScript;
+            cs.RegisterStartupScript(page.GetType(), "message", "");
+            //page.RegisterStartupScript("message", "<script language=javascript>alert('" + msg.Replace("\\r", "").Replace("\\n", "") + "');</script>");
         }
     }
 }

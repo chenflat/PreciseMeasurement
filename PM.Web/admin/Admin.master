@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row">
+    <div class="row col-md-12">
         <div class="col-md-3">
             <div class="bs-sidebar hidden-print" role="complementary">
                 <ul class="nav bs-sidenav" id="admin-nav">

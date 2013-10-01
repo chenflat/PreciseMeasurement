@@ -56,9 +56,18 @@ namespace PM.Business
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public static bool MeasureReplaceCount(string condition) {
+        public static int MeasureReplaceCount(string condition) {
             return Data.MeasureReplace.MeasureReplaceCount(condition);
         }
 
+
+        /// <summary>
+        /// 获取指定ID的换表记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static MeasureReplaceInfo GetMeasureReplaceInfo(long id) {
+            return Data.MeasureReplace.GetMeasureReplaceInfo(id);
+        }
     }
 }
