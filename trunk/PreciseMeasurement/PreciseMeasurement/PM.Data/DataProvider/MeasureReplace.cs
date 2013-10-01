@@ -115,7 +115,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public static bool MeasureReplaceCount(string condition) {
+        public static int MeasureReplaceCount(string condition) {
             return DatabaseProvider.GetInstance().MeasureReplaceCount(condition);
         }
     }

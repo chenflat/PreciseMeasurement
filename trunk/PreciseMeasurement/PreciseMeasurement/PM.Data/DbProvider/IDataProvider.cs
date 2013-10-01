@@ -311,7 +311,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        bool MeasureReplaceCount(string condition);
+        int MeasureReplaceCount(string condition);
 
 
         DataTable FindUserTableByCondition(string condition);

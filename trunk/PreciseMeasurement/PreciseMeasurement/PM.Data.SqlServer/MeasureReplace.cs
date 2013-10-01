@@ -76,14 +76,14 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@REPLACEDATE", (DbType)SqlDbType.DateTime, 8, measureReplaceInfo.ReplaceDate),
                                   DbHelper.MakeInParam("@REPLACETYPE", (DbType)SqlDbType.VarChar, 16, measureReplaceInfo.ReplaceType),
                                   DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 16, measureReplaceInfo.ReplaceType),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, measureReplaceInfo.Orgid),
-                                  DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, measureReplaceInfo.Siteid),
+                                 // DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, measureReplaceInfo.Orgid),
+                                 // DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, measureReplaceInfo.Siteid),
                                   DbHelper.MakeInParam("@MEMO", (DbType)SqlDbType.VarChar, 254, measureReplaceInfo.Memo)
                                  };
             string commandText = string.Format("UPDATE [{0}MEASUREREPLACE] SET [POINTNUM]=@POINTNUM,[MEASUREUNITID]=@MEASUREUNITID,[MEASUREMENTVALUE]=@MEASUREMENTVALUE,"
            + "[ENTERBY]=@ENTERBY,[ENTERDATE]=@ENTERDATE,[TOPOINTNUM]=@TOPOINTNUM,[TOMEASUREMENTVALUE]=@TOMEASUREMENTVALUE,[CORRECTEDVALUE]=@CORRECTEDVALUE,"
-           + "[FROMDEPT]=@FROMDEPT,[FROMLOC]=@FROMLOC,[REPLACEPERSON]=@REPLACEPERSON,[REPLACEDATE]=@REPLACEDATE,[REPLACETYPE]=@REPLACETYPE,ORGID=@ORGID,"
-           + "[SITEID]=@SITEID,[MEMO]=@MEMO,[STATUS]=@STATUS WHERE [MEASURETRANSID]=@MEASURETRANSID", BaseConfigs.GetTablePrefix);
+           + "[FROMDEPT]=@FROMDEPT,[FROMLOC]=@FROMLOC,[REPLACEPERSON]=@REPLACEPERSON,[REPLACEDATE]=@REPLACEDATE,[REPLACETYPE]=@REPLACETYPE,"
+           + "[MEMO]=@MEMO,[STATUS]=@STATUS WHERE [MEASURETRANSID]=@MEASURETRANSID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
@@ -101,8 +101,8 @@ namespace PM.Data.SqlServer
             {
                 condition = "1=1";
             }
-            string commandText = string.Format("SELECT COUNT(MEASURETRANSID) FROM [{0}MEASUREREPLACE] WHERE {1})",
-                                             BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("SELECT COUNT([{0}MEASUREREPLACE].MEASURETRANSID) FROM [{0}MEASUREREPLACE] WHERE 1=1 {1}",
+                                             BaseConfigs.GetTablePrefix, condition);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
         }
     }
