@@ -1,6 +1,3 @@
-// NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
-// IT'S ALL JUST JUNK FOR OUR DOCS!
-// ++++++++++++++++++++++++++++++++++++++++++
 
 !function ($) {
 
@@ -35,17 +32,24 @@
                         var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
                         var navOuterHeight = $('.bs-docs-nav').height()
 
+                        console.log("offsetTop:" + offsetTop);
+                        console.log("sideBarMargin:" + sideBarMargin);
+                        console.log("navOuterHeight:" + navOuterHeight);
+                        console.log("aa:" + (offsetTop - navOuterHeight - sideBarMargin));
+
                         return (this.top = offsetTop - navOuterHeight - sideBarMargin)
                     }
-        , bottom: function () {
-            return (this.bottom = $('.bs-footer').outerHeight(true))
-        }
+                    , bottom: function () {
+                        console.log("bb:" + $('.bs-footer').outerHeight(true));
+
+                        return (this.bottom = $('.bs-footer').outerHeight(true))
+                    }
                 }
             })
         }, 100)
 
         setTimeout(function () {
-            $('.bs-top').affix()
+           // $('.bs-top').affix()
         }, 100)
 
         // tooltip demo
@@ -103,3 +107,26 @@
     })
 
 } (window.jQuery)
+
+
+
+var Message = (function () {
+    "use strict";
+
+    var elem,
+        hideHandler,
+        that = {};
+
+    that.init = function (options) {
+        elem = $(options.selector);
+    };
+
+    that.show = function (text) {
+        clearTimeout(hideHandler);
+
+        elem.find("span").html(text);
+        elem.delay(200).fadeIn().delay(4000).fadeOut();
+    };
+
+    return that;
+} ());

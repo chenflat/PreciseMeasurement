@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace PM.Business.Pages
 {
@@ -21,11 +22,11 @@ namespace PM.Business.Pages
         /// <summary>
         /// 机构ID
         /// </summary>
-        protected internal string orgid;
+        protected internal string orgid = "";
         /// <summary>
         /// 地点ID
         /// </summary>
-        protected internal string siteid;
+        protected internal string siteid = "";
 
         /// <summary>
         /// 当前用户的管理组ID
@@ -72,8 +73,8 @@ namespace PM.Business.Pages
             if (!Page.IsPostBack)
             {
                 //this.RegisterAdminPageClientScriptBlock();
+                // ShowMessage(this.Page, MsgType.SUCCESS, "");
 
-              
             }
 
         }
@@ -81,11 +82,32 @@ namespace PM.Business.Pages
 
 
         //封装一些公用的类模块及使用方法
-        public static void ShowMessage(System.Web.UI.Page page, string msg)
+        public static void ShowMessage(System.Web.UI.Page page, MsgType type, string msg)
         {
-            ClientScriptManager cs = page.ClientScript;
-            cs.RegisterStartupScript(page.GetType(), "message", "");
-            //page.RegisterStartupScript("message", "<script language=javascript>alert('" + msg.Replace("\\r", "").Replace("\\n", "") + "');</script>");
-        }
+            ContentPlaceHolder ph = (ContentPlaceHolder)page.Master.Master.FindControl("MainContent");
+            PlaceHolder msgbox = ph.FindControl("msgPlaceHolder") as PlaceHolder;
+            if (msgbox != null) {
+                Literal ltMsgType = msgbox.FindControl("ltMsgType") as Literal;
+                if (ltMsgType != null)
+                {
+                    ltMsgType.Text = type.ToString().ToLower();
+                }
+                Literal ltMessage = msgbox.FindControl("message") as Literal;
+                if (ltMessage!=null)
+                {
+                    ltMessage.Text = msg;
+                }
+                msgbox.Visible = true;
+            }
+          }
     }
+
+    /// <summary>
+    /// 消息类型
+    /// </summary>
+    public enum MsgType
+    {
+        SUCCESS, INFO, WARNING, DANGER
+    }
+
 }

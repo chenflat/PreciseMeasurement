@@ -26,7 +26,7 @@ namespace PM.Web.admin.measurereplace
 
         void btnQuery_Click(object sender, EventArgs e)
         {
-           
+            BindData();
         }
 
         private void BindData()
