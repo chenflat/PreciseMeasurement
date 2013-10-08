@@ -5,7 +5,7 @@ using System.Text;
 using PM.Entity;
 using PM.Common;
 
-namespace PM.Data.DataProvider
+namespace PM.Data
 {
     /// <summary>
     /// 用户数据操作类
