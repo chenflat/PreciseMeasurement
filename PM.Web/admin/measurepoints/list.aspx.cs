@@ -63,7 +63,7 @@ namespace PM.Web.admin.measurepoints
             }
             if (txtDescription.Text.Trim().Length>0)
             {
-                condition += string.Format(" and {0}MEASUREPOINT.DESCRIPTION='{1}'",
+                condition += string.Format(" and {0}MEASUREPOINT.DESCRIPTION like '%{1}%'",
                     BaseConfigs.GetTablePrefix, txtDescription.Text.Trim());
             }
             if (ddlCarrier.SelectedValue.Length > 0)
