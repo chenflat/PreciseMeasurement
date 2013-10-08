@@ -7,7 +7,7 @@ namespace PM.Entity
     [Serializable()]
     public class UserInfo
     {
-        private long userid;
+        private int userid;
         private string username;
         private string password;
         private bool enabled;
@@ -44,7 +44,7 @@ namespace PM.Entity
         private string address;
         private string status = "ACTIVE";
 
-        public long UserId
+        public int UserId
         {
             get { return userid; }
             set { userid = value; }
@@ -165,12 +165,6 @@ namespace PM.Entity
         {
             get { return comments; }
             set { comments = value; }
-        }
-
-        public string Significantother
-        {
-            get { return significantother; }
-            set { significantother = value; }
         }
 
         public string Significantother
@@ -315,12 +309,6 @@ namespace PM.Entity
             get { return status; }
             set { status = value; }
         }
-
-
-        //username,password,enabled,createddate,modifieddate,passwordencrypted,
-        //passwordmodifieddate,realname,displayname,digest,emailaddress,reminderqueryquestion,reminderqueryanswer,
-        //timezone,language,greeting,website,jobtitle,comments,significantother,birthday,anniversary,
-        //logindate,loginip,lastlogindate,lastloginip,issuperuser,orgid,sex,workphone,workmobile,phone,mobile,address,status;
 
 
     }

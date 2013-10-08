@@ -314,6 +314,11 @@ namespace PM.Data
         int MeasureReplaceCount(string condition);
 
 
+        /// <summary>
+        /// 获取指定条件的用户信息
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
         DataTable FindUserTableByCondition(string condition);
 
         /// <summary>
@@ -329,7 +334,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        DataTable GetUserInfo(int userId);
+        IDataReader GetUserInfo(int userId);
 
 
         /// <summary>
@@ -339,22 +344,7 @@ namespace PM.Data
         /// <returns></returns>
         IDataReader GetUserInfoToReader(string userName);
 
-        /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="column"></param>
-        /// <param name="orderType"></param>
-        /// <returns></returns>
-        DataTable GetUserList(int pageSize, int pageIndex, string column, string orderType);
-        /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="currentPage"></param>
-        /// <returns></returns>
-        DataTable GetUserList(int pageSize, int currentPage);
+
 
         /// <summary>
         /// 创建新用户.
@@ -368,13 +358,21 @@ namespace PM.Data
         /// </summary>
         /// <param name="userinfo">用户信息</param>
         /// <returns>是否更新成功</returns>
-        bool UpdateUser(UserInfo userInfo);
+        bool UpdateUser(UserInfo userinfo);
 
+        /// <summary>
+        /// 更新用户密码
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="password"></param>
+        /// <param name="passwordmodifieddate"></param>
+        /// <returns></returns>
+        bool UpdatePassword(int userid, string password, DateTime passwordmodifieddate);
 
         /// <summary>
         /// 删除用户
         /// </summary>
         /// <param name="uidList">用户Id列表</param>
-        void DeleteUserByUidlist(string uidList);
+        int DeleteUserByUidlist(string uidList);
     }
 }
