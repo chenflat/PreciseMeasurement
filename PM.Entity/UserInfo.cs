@@ -36,6 +36,7 @@ namespace PM.Entity
         private string lastloginip;
         private bool issuperuser;
         private string orgid;
+        private string orgname;
         private string sex;
         private string workphone;
         private string workmobile;
@@ -243,6 +244,14 @@ namespace PM.Entity
         {
             get { return orgid; }
             set { orgid = value; }
+        }
+
+        /// <summary>
+        /// 组织机构名称
+        /// </summary>
+        public string OrgName {
+            get { return orgname; }
+            set { orgname = value; }
         }
 
         /// <summary>

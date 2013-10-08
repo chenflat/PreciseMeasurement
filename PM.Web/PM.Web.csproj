@@ -61,6 +61,7 @@
     <Content Include="admin\measureunits\list.aspx" />
     <Content Include="admin\organizations\edit.aspx" />
     <Content Include="admin\organizations\list.aspx" />
+    <Content Include="admin\users\edit.aspx" />
     <Content Include="admin\users\list.aspx" />
     <Content Include="admin\users\roles.aspx" />
     <Content Include="alarm\default.aspx" />
@@ -251,6 +252,13 @@
     </Compile>
     <Compile Include="admin\organizations\list.aspx.designer.cs">
       <DependentUpon>list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\users\edit.aspx.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\users\edit.aspx.designer.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\users\list.aspx.cs">
       <DependentUpon>list.aspx</DependentUpon>

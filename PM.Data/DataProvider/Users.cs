@@ -22,6 +22,15 @@ namespace PM.Data
         }
 
         /// <summary>
+        /// 用户数
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        public static int UsersCount(string condition) {
+            return DatabaseProvider.GetInstance().UsersCount(condition);
+        }
+
+        /// <summary>
         /// 获取用户信息
         /// </summary>
         /// <param name="userName">用户名</param>
@@ -91,6 +100,11 @@ namespace PM.Data
             userInfo.LastLoginIp = reader["LASTLOGINIP"].ToString();
             userInfo.IsSuperuser = reader.GetBoolean(reader.GetOrdinal("ISSUPERUSER"));
             userInfo.Orgid = reader["ORGID"].ToString();
+
+            if (reader.GetOrdinal("ORGNAME") > -1) {
+                userInfo.OrgName = reader["ORGNAME"].ToString();
+            }
+            
             userInfo.Status = reader["STATUS"].ToString();
 
             return userInfo;

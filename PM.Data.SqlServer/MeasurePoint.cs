@@ -113,11 +113,8 @@ namespace PM.Data.SqlServer
 
         public int MeasurePointCount(string condition)
         {
-            if (condition == "") {
-                condition = "1=1";
-            }
             string commandText = string.Format("SELECT COUNT(MEASUREPOINTID) FROM [{0}MEASUREPOINT] WHERE STATUS='ACTIVE' {1})",
-                                             BaseConfigs.GetTablePrefix);
+                                             BaseConfigs.GetTablePrefix,condition);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
         }
 
