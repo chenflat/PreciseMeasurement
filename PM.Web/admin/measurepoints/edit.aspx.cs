@@ -34,10 +34,10 @@ namespace PM.Web.admin.measurepoints
 
         private void BindDropDownList()
         {
-            orgid.DataTextField = "Description";
-            orgid.DataValueField = "ORGID";
-            orgid.DataSource = Business.Organizations.GetOrganizationTreeList("-");
-            orgid.DataBind();
+            ddlOrgid.DataTextField = "Description";
+            ddlOrgid.DataValueField = "ORGID";
+            ddlOrgid.DataSource = Business.Organizations.GetOrganizationTreeList("-");
+            ddlOrgid.DataBind();
 
             location.DataTextField = "Description";
             location.DataValueField = "Location";
@@ -62,7 +62,7 @@ namespace PM.Web.admin.measurepoints
             carrier.SelectedValue = pointInfo.Carrier;
             supervisor.Text = pointInfo.Supervisor;
             phone.Text = pointInfo.Phone;
-            orgid.SelectedValue = pointInfo.Orgid;
+            ddlOrgid.SelectedValue = pointInfo.Orgid;
             location.SelectedValue = pointInfo.Location;
             ipaddress.Text = pointInfo.Ipaddress;
             cardnum.Text = pointInfo.Cardnum;
@@ -89,7 +89,7 @@ namespace PM.Web.admin.measurepoints
                     pointInfo.Carrier = carrier.SelectedValue;
                     pointInfo.Supervisor = supervisor.Text.Trim();
                     pointInfo.Phone = phone.Text.Trim();
-                    pointInfo.Orgid = orgid.Text.Trim();
+                    pointInfo.Orgid = ddlOrgid.SelectedValue;
                     pointInfo.Location = location.SelectedValue;
                     pointInfo.Ipaddress = ipaddress.Text.Trim();
                     pointInfo.Cardnum = cardnum.Text.Trim();
