@@ -23,7 +23,7 @@
     <asp:GridView ID="gvMeasureReplace" runat="server" EnableModelValidation="True" 
         AutoGenerateColumns="False" CssClass="table table-striped" 
         DataKeyNames="MEASURETRANSID" PageSize="20" CellPadding="4" 
-        CellSpacing="1" GridLines="None">
+    CellSpacing="1" GridLines="None">
         <Columns>
             <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />
             <asp:BoundField DataField="MEASUREUNITNAME" HeaderText="参数名" />

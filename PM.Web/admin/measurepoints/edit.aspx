@@ -182,7 +182,7 @@
     </div>
     <div class="toolbar bs-callout-danger">
         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
-         <a href="paramters.aspx" class="btn btn-info">参量设置</a>
+        <asp:Button ID="btnParams" CssClass="btn btn-info" runat="server" Text="参量设置" />
         <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
         <a href="list.aspx" class="btn btn-info">返回</a>
     </div>

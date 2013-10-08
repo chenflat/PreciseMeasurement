@@ -26,7 +26,8 @@ namespace PM.Web.admin.measurepoints
                 }
                 else
                 {
-                    btnDelte.Attributes.Add("disabled", "disabled");
+                    btnParams.Enabled = false;
+                    btnDelte.Enabled = false;
                 }
             }
         }

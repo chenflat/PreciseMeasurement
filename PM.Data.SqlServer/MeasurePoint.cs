@@ -123,7 +123,10 @@ namespace PM.Data.SqlServer
 
         public DataTable FindMeasurePointParamByPointNum(string pointnum)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINTPARAM] where STATUS='ACTIVE' AND [POINTNUM]={2}",
+            string commandText = string.Format("SELECT [{0}MEASUREPOINTPARAM].*,[{0}MEASUREPOINT].DESCRIPTION as POINTNAME,[{0}MEASUREUNIT].DESCRIPTION as MEASUREUNITNAME"
+                +" FROM [{0}MEASUREPOINTPARAM] left outer join [{0}MEASUREPOINT] on [{0}MEASUREPOINTPARAM].POINTNUM=[{0}MEASUREPOINT].POINTNUM "
+                + " left outer join [{0}MEASUREUNIT] on [{0}MEASUREPOINTPARAM].MEASUREUNITUID=[{0}MEASUREUNIT].MEASUREUNITUID "
+                +" where STATUS='ACTIVE' AND [POINTNUM]={2}",
                                                 DbFields.MEASUREPOINTPARAM,
                                                 BaseConfigs.GetTablePrefix,
                                                 pointnum);
@@ -140,7 +143,7 @@ namespace PM.Data.SqlServer
         }
 
 
-        public int CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
+        public bool CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
         {
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, paramInfo.Pointnum),
@@ -157,7 +160,7 @@ namespace PM.Data.SqlServer
                                 +"[LOWERACTION],[LLPMNUM],[LLPRIORITY],[UPPERWARNING],[UPPERACTION],[ULPMNUM]) "
                                 + "VALUES(@POINTNUM, @MEASUREUNITID, @LOWERWARNING, @LOWERACTION, @LLPMNUM, @LLPRIORITY,"
                                 + " @UPPERWARNING,@UPPERACTION,@ULPMNUM)", BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
         public bool UpdateMeasurePointParam(MeasurePointParamInfo paramInfo)

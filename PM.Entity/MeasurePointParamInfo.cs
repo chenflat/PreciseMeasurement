@@ -8,7 +8,9 @@ namespace PM.Entity
     {
         private int measurepointparamuid;
         private string pointnum;
+        private string pointname;
         private string measureunitid;
+        private string measureunitname;
         private decimal lowerwarning;
         private decimal loweraction;
         private string llpmnum;
@@ -29,10 +31,20 @@ namespace PM.Entity
             set { pointnum = value; }
         }
 
+        public string PointName {
+            get { return pointname; }
+            set { pointname = value; }
+        }
+
         public string Measureunitid
         {
             get { return measureunitid; }
             set { measureunitid = value; }
+        }
+
+        public string MeasureUnitName {
+            get { return measureunitname; }
+            set { measureunitname = value; }
         }
 
         public decimal Lowerwarning
