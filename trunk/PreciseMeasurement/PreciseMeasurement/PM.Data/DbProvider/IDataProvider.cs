@@ -253,7 +253,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="paramInfo">参数信息</param>
         /// <returns></returns>
-        int CreateMeasurePointParam(MeasurePointParamInfo paramInfo);
+        bool CreateMeasurePointParam(MeasurePointParamInfo paramInfo);
 
         /// <summary>
         /// 更新计量点参数信息

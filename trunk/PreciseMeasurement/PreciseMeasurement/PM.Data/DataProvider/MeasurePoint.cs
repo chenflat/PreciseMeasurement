@@ -164,7 +164,9 @@ namespace PM.Data
             MeasurePointParamInfo paramInfo = new MeasurePointParamInfo();
             paramInfo.Measurepointparamuid = reader.GetInt32(reader.GetOrdinal("MEASUREPOINTPARAMUID"));
             paramInfo.Pointnum = reader["POINTNUM"].ToString();
+            paramInfo.PointName = reader["POINTNAME"].ToString();
             paramInfo.Measureunitid = reader["MEASUREUNITID"].ToString();
+            paramInfo.MeasureUnitName = reader["MEASUREUNITNAME"].ToString();
             paramInfo.Lowerwarning = reader.GetDecimal(reader.GetOrdinal("LOWERWARNING"));
             paramInfo.Loweraction = reader.GetDecimal(reader.GetOrdinal("LOWERACTION"));
             paramInfo.Llpmnum = reader["LLPMNUM"].ToString();
@@ -183,7 +185,7 @@ namespace PM.Data
         /// </summary>
         /// <param name="paramInfo">计量点参数信息</param>
         /// <returns></returns>
-        public static int CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
+        public static bool CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
         {
             return DatabaseProvider.GetInstance().CreateMeasurePointParam(paramInfo);
         }
