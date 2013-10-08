@@ -7,9 +7,10 @@ namespace PM.Entity
     /// <summary>
     /// 组织机构
     /// </summary>
+    [Serializable()]
     public class OrganizationInfo
     {
-        [Serializable()]
+        
         private long organizationid = 0;
         private string orgid;
         private string description;
