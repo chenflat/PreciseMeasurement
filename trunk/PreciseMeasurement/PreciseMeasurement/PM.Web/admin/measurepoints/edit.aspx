@@ -84,7 +84,7 @@
                     所属公司
                 </label>
                 <div class="col-lg-7">
-                    <asp:DropDownList ID="orgid" runat="server" CssClass="form-control">
+                    <asp:DropDownList ID="ddlOrgid" runat="server" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
             </div>

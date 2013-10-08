@@ -64,7 +64,7 @@ namespace PM.Business
             return Data.MeasurePoint.GetMeasurePointParamInfo(id);
         }
 
-        public static int CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
+        public static bool CreateMeasurePointParam(MeasurePointParamInfo paramInfo)
         {
             return Data.MeasurePoint.CreateMeasurePointParam(paramInfo);
         }
