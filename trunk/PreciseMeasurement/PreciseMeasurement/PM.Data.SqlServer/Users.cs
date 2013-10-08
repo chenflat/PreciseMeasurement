@@ -17,11 +17,16 @@ namespace PM.Data.SqlServer
 
         public DataTable FindUserTableByCondition(string condition)
         {
-            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where STATUS<>'DELETED' {2} ORDER BY [USERID] DESC",
-                                                   DbFields.USERS,
+            string commandText = string.Format("SELECT  [{0}USERS].*,[{0}LOCATIONS].DESCRIPTION as ORGNAME FROM [{0}USERS] LEFT OUTER JOIN [{0}LOCATIONS] ON [{0}USERS].ORGID=[{0}LOCATIONS].ORGID  where [{0}USERS].STATUS<>'DELETED' {1} ORDER BY [{0}USERS].[USERID] DESC",
                                                    BaseConfigs.GetTablePrefix,
                                                    condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        public int UsersCount(string condition) {
+            string commandText = string.Format("SELECT COUNT(USERID) FROM [{0}USERS] WHERE STATUS<>'DELETED' {1}",
+                                            BaseConfigs.GetTablePrefix, condition);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
         }
 
         public DataTable GetUserInfo(string userName, string passWord)

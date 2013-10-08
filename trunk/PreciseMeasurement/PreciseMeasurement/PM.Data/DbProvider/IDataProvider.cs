@@ -322,6 +322,13 @@ namespace PM.Data
         DataTable FindUserTableByCondition(string condition);
 
         /// <summary>
+        /// 用户数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        int UsersCount(string condition);
+
+        /// <summary>
         /// 获取用户信息
         /// </summary>
         /// <param name="userName"></param>

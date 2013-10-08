@@ -19,6 +19,12 @@ namespace PM.Business
             return Data.Users.FindUserTableByCondition(condition);
         }
 
+        public static int UsersCount(string condition)
+        {
+            return Data.Users.UsersCount(condition);
+        }
+
+
         /// <summary>
         /// 获取用户信息
         /// </summary>
