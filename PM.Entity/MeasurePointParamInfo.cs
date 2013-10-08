@@ -4,6 +4,7 @@ using System.Text;
 
 namespace PM.Entity
 {
+    [Serializable()]
     public class MeasurePointParamInfo
     {
         private int measurepointparamuid;

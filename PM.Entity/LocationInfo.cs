@@ -7,6 +7,7 @@ namespace PM.Entity
     /// <summary>
     /// 位置信息
     /// </summary>
+    [Serializable()]
     public class LocationInfo
     {
         private long locationsid;

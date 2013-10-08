@@ -125,9 +125,8 @@ namespace PM.Data.SqlServer
         {
             string commandText = string.Format("SELECT [{0}MEASUREPOINTPARAM].*,[{0}MEASUREPOINT].DESCRIPTION as POINTNAME,[{0}MEASUREUNIT].DESCRIPTION as MEASUREUNITNAME"
                 +" FROM [{0}MEASUREPOINTPARAM] left outer join [{0}MEASUREPOINT] on [{0}MEASUREPOINTPARAM].POINTNUM=[{0}MEASUREPOINT].POINTNUM "
-                + " left outer join [{0}MEASUREUNIT] on [{0}MEASUREPOINTPARAM].MEASUREUNITUID=[{0}MEASUREUNIT].MEASUREUNITUID "
-                +" where STATUS='ACTIVE' AND [POINTNUM]={2}",
-                                                DbFields.MEASUREPOINTPARAM,
+                + " left outer join [{0}MEASUREUNIT] on [{0}MEASUREPOINTPARAM].MEASUREUNITID=[{0}MEASUREUNIT].MEASUREUNITID "
+                + " where [{0}MEASUREPOINT].STATUS='ACTIVE' AND [{0}MEASUREPOINTPARAM].POINTNUM='{1}'",
                                                 BaseConfigs.GetTablePrefix,
                                                 pointnum);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
