@@ -17,6 +17,7 @@ namespace PM.Web.admin.measureunits
         {
             if (!IsPostBack)
             {
+                btnDelte.Enabled = false;
                 string keyId = PMRequest.GetString("id");
                 if (keyId != "" && Utils.IsNumeric(keyId))
                 {
