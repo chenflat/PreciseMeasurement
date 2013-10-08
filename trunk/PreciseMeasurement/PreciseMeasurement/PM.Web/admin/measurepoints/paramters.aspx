@@ -1,9 +1,14 @@
 ﻿<%@ Page Title="测点参量设置" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true" CodeBehind="paramters.aspx.cs" Inherits="PM.Web.admin.measurepoints.paramters" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+ <div class="bs-docs-section">
+        <div class="page-header">
+            <h3>
+                <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置</h3>
+        </div>
+    </div>
 
 
-
-    <asp:GridView ID="GridView1" runat="server" 
+    <asp:GridView ID="gvParamters" runat="server" 
         AutoGenerateColumns="False" CellPadding="4" CellSpacing="1" 
         CssClass="table table-striped" EnableModelValidation="True">
         <Columns>

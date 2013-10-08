@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupInfo.cs" />
     <Compile Include="LocationInfo.cs" />
     <Compile Include="LochierarchyInfo.cs" />
     <Compile Include="MeasurementInfo.cs" />

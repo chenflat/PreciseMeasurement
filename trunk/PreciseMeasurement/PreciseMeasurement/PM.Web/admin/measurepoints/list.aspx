@@ -69,7 +69,7 @@
                     <%#Eval("CARDNUM")%>
                 </td>
                 <td>
-                    <a href="paramters.aspx?pointnum=<%#Eval("POINTNUM") %>">参量设置</a>
+                    <a href="paramters.aspx?id=<%#Eval("MEASUREPOINTID") %>&pointnum=<%#Eval("POINTNUM") %>">参量设置</a>
                 </td>
                 <td>
                     <a href="edit.aspx?id=<%#Eval("MEASUREPOINTID") %>">编辑</a>

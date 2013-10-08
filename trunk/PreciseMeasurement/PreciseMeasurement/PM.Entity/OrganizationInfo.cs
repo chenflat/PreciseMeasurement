@@ -9,6 +9,7 @@ namespace PM.Entity
     /// </summary>
     public class OrganizationInfo
     {
+        [Serializable()]
         private long organizationid = 0;
         private string orgid;
         private string description;

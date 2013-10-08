@@ -4,6 +4,7 @@ using System.Text;
 
 namespace PM.Entity
 {
+    [Serializable()]
     public class MeasureUnitInfo
     {
         private long measureunituid;

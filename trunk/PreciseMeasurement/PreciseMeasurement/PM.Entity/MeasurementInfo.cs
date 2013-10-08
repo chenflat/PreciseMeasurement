@@ -7,6 +7,7 @@ namespace PM.Entity
     /// <summary>
     /// 计量信息
     /// </summary>
+    [Serializable()]
     public class MeasurementInfo
     {
         private long measurementid;

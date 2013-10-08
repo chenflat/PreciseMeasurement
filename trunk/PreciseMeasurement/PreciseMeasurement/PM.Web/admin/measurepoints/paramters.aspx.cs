@@ -8,6 +8,7 @@ using PM.Business.Pages;
 using PM.Business;
 using PM.Common;
 using PM.Config;
+using PM.Entity;
 
 
 namespace PM.Web.admin.measurepoints
@@ -18,13 +19,27 @@ namespace PM.Web.admin.measurepoints
         {
             if (!IsPostBack)
             {
-                BindData();
+                string keyId = PMRequest.GetString("id");
+                string pointnum = PMRequest.GetString("pointnum");
+                if (keyId != "" && Utils.IsNumeric(keyId))
+                {
+                    SetPointDescrption(long.Parse(keyId));
+                }
+                BindData(pointnum);
             }
         }
 
-        private void BindData()
-        { 
-            
+        private void SetPointDescrption(long id) {
+            if (id <= 0)
+                return;
+            MeasurePointInfo pointInfo = MeasurePoint.GetMeasurePointInfo(id);
+            ltPointName.Text = pointInfo.Description;
+        }
+
+        private void BindData(string pointnum)
+        {
+            gvParamters.DataSource = MeasurePoint.FindMeasurePointParamByPointNum(pointnum);
+            gvParamters.DataBind();
         }
     }
 }
