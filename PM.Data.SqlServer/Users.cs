@@ -17,7 +17,7 @@ namespace PM.Data.SqlServer
 
         public DataTable FindUserTableByCondition(string condition)
         {
-            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where 1=1 {2} ORDER BY [USERID] DESC",
+            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where STATUS<>'DELETED' {2} ORDER BY [USERID] DESC",
                                                    DbFields.USERS,
                                                    BaseConfigs.GetTablePrefix,
                                                    condition);
@@ -26,7 +26,7 @@ namespace PM.Data.SqlServer
 
         public DataTable GetUserInfo(string userName, string passWord)
         {
-            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where USERNAME='{2}' and PASSWORD='{3}'  ORDER BY [USERID] DESC",
+            string commandText = string.Format("SELECT  {0}  FROM [{1}USERS] where  STATUS<>'DELETED' and USERNAME='{2}' and PASSWORD='{3}'  ORDER BY [USERID] DESC",
                                                     DbFields.USERS,
                                                     BaseConfigs.GetTablePrefix,
                                                     userName,passWord);
@@ -45,7 +45,7 @@ namespace PM.Data.SqlServer
         public IDataReader GetUserInfoToReader(string userName)
         {
             DbParameter param = DbHelper.MakeInParam("@USERNAME", (DbType)SqlDbType.Text, 50, userName);
-            string commandText = string.Format("select {0} from [{1}MEASUREPOINT] WHERE [USERNAME]=@USERNAME",
+            string commandText = string.Format("select {0} from [{1}MEASUREPOINT] WHERE  STATUS<>'DELETED' and [USERNAME]=@USERNAME",
                                                 DbFields.USERS,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
