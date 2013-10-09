@@ -11,7 +11,7 @@ namespace PM.Entity
         private string username;
         private string password;
         private bool enabled;
-        private DateTime createddate;
+        private DateTime createddate = DateTime.Now;
         private DateTime modifieddate;
         private int passwordencrypted;
         private DateTime passwordmodifieddate;
