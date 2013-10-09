@@ -100,13 +100,14 @@ namespace PM.Data
             userInfo.LastLoginIp = reader["LASTLOGINIP"].ToString();
             userInfo.IsSuperuser = reader.GetBoolean(reader.GetOrdinal("ISSUPERUSER"));
             userInfo.Orgid = reader["ORGID"].ToString();
+            userInfo.Status = reader["STATUS"].ToString();
 
-            if (reader.GetOrdinal("ORGNAME") > -1) {
+            if (reader.GetSchemaTable().Columns.Contains("ORGNAME"))
+            {
                 userInfo.OrgName = reader["ORGNAME"].ToString();
             }
             
-            userInfo.Status = reader["STATUS"].ToString();
-
+            
             return userInfo;
         }
 

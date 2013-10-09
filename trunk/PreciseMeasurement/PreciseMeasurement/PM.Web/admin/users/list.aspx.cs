@@ -51,7 +51,7 @@ namespace PM.Web.admin.users
             }
             if (txtUsername.Text.Trim().Length>0)
             {
-                condition += string.Format(" and [{0}USERS].USERNAME='{1}'",
+                condition += string.Format(" and ([{0}USERS].USERNAME like '%{1}%' or [{0}USERS].REALNAME like '%{1}%' or [{0}USERS].DISPLAYNAME like '%{1}%')",
                     BaseConfigs.GetTablePrefix, txtUsername.Text.Trim());
             }
 

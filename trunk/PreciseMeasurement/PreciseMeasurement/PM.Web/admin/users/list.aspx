@@ -22,15 +22,16 @@
             <asp:BoundField DataField="SEX" HeaderText="性别" />
             <asp:BoundField DataField="WORKMOBILE" HeaderText="移动电话" />
             <asp:BoundField DataField="LASTLOGINDATE" HeaderText="上次登陆" />
+             <asp:BoundField DataField="ORGNAME" HeaderText="公司" />
             <asp:TemplateField HeaderText="状态">
                 <ItemTemplate>
-                    
+                    <%# (Eval("Enabled").ToString()=="True") ? "启用" : "禁用"%>
                 </ItemTemplate>
                 <ItemStyle Width="60px" />
             </asp:TemplateField>
               <asp:TemplateField HeaderText="编辑">
                 <ItemTemplate>
-                    <a href='edit.aspx?Id=<%# DataBinder.Eval(Container.DataItem, "MEASURETRANSID")%>&PageIndex=<%=PageControl1.CurrentPageIndex %>'
+                    <a href='edit.aspx?Id=<%# DataBinder.Eval(Container.DataItem, "USERID")%>&PageIndex=<%=PageControl1.CurrentPageIndex %>'
                         title="修改">修改</a>
                 </ItemTemplate>
                 <ItemStyle Width="60px" />
