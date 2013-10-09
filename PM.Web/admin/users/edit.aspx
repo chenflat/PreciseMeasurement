@@ -77,7 +77,9 @@
                 </label>
                 <div class="col-lg-7">
                     <asp:DropDownList ID="ddlPasswordEncrypted" CssClass="form-control" runat="server">
-                        <asp:ListItem Value="md5">MD5</asp:ListItem>
+                        <asp:ListItem Value="0">MD5</asp:ListItem>
+                        <asp:ListItem Value="1">AES</asp:ListItem>
+                        <asp:ListItem Value="2">DES</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
@@ -101,7 +103,8 @@
                     密码答案
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="txtReminderQueryAnswer" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtReminderQueryAnswer" CssClass="form-control" placeholder="" 
+                        runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -189,6 +192,16 @@
                 </label>
                 <div class="col-lg-7">
                     <asp:TextBox ID="txtMobile" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=txtAddress.ClientID %>" class="col-lg-5 control-label">
+                    地址
+                </label>
+                <div class="col-lg-7">
+                    <asp:TextBox ID="txtAddress" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>

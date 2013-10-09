@@ -17,7 +17,7 @@ namespace PM.Data.SqlServer
 
         public DataTable FindUserTableByCondition(string condition)
         {
-            string commandText = string.Format("SELECT  [{0}USERS].*,[{0}LOCATIONS].DESCRIPTION as ORGNAME FROM [{0}USERS] LEFT OUTER JOIN [{0}LOCATIONS] ON [{0}USERS].ORGID=[{0}LOCATIONS].ORGID  where [{0}USERS].STATUS<>'DELETED' {1} ORDER BY [{0}USERS].[USERID] DESC",
+            string commandText = string.Format("SELECT  [{0}USERS].*,[{0}ORGANIZATION].DESCRIPTION as ORGNAME FROM [{0}USERS] LEFT OUTER JOIN [{0}ORGANIZATION] ON [{0}USERS].ORGID=[{0}ORGANIZATION].ORGID  where [{0}USERS].STATUS<>'DELETED' {1} ORDER BY [{0}USERS].USERID DESC",
                                                    BaseConfigs.GetTablePrefix,
                                                    condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
@@ -41,7 +41,7 @@ namespace PM.Data.SqlServer
         public IDataReader GetUserInfo(int userId)
         {
             DbParameter param = DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userId);
-            string commandText = string.Format("select {0} from [{1}MEASUREPOINT] WHERE [USERID]=@USERID",
+            string commandText = string.Format("select {0} from [{1}USERS] WHERE [USERID]=@USERID",
                                                 DbFields.USERS,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
@@ -50,7 +50,7 @@ namespace PM.Data.SqlServer
         public IDataReader GetUserInfoToReader(string userName)
         {
             DbParameter param = DbHelper.MakeInParam("@USERNAME", (DbType)SqlDbType.Text, 50, userName);
-            string commandText = string.Format("select {0} from [{1}MEASUREPOINT] WHERE  STATUS<>'DELETED' and [USERNAME]=@USERNAME",
+            string commandText = string.Format("select {0} from [{1}USERS] WHERE  STATUS<>'DELETED' and [USERNAME]=@USERNAME",
                                                 DbFields.USERS,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
@@ -70,7 +70,6 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@REALNAME", (DbType)SqlDbType.VarChar, 45, userinfo.Realname),
                                   DbHelper.MakeInParam("@DISPLAYNAME", (DbType)SqlDbType.VarChar, 45, userinfo.Displayname),
                                   DbHelper.MakeInParam("@DIGEST", (DbType)SqlDbType.VarChar, 255, userinfo.Digest),
-                                  DbHelper.MakeInParam("@PASSWORD", (DbType)SqlDbType.VarChar, 50, userinfo.Password),
                                   DbHelper.MakeInParam("@EMAILADDRESS", (DbType)SqlDbType.VarChar, 100, userinfo.EmailAddress),
                                   DbHelper.MakeInParam("@REMINDERQUERYQUESTION", (DbType)SqlDbType.VarChar, 75, userinfo.ReminderQueryQuestion),
                                   DbHelper.MakeInParam("@REMINDERQUERYANSWER", (DbType)SqlDbType.VarChar, 75, userinfo.ReminderQueryAnswer),
@@ -115,14 +114,11 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@USERNAME", (DbType)SqlDbType.VarChar, 50, userinfo.UserName),
                                   DbHelper.MakeInParam("@PASSWORD", (DbType)SqlDbType.VarChar, 50, userinfo.Password),
                                   DbHelper.MakeInParam("@ENABLED", (DbType)SqlDbType.SmallInt, 1, userinfo.Enabled),
-                                  DbHelper.MakeInParam("@CREATEDDATE", (DbType)SqlDbType.DateTime, 8, userinfo.CreatedDate),
                                   DbHelper.MakeInParam("@MODIFIEDDATE", (DbType)SqlDbType.DateTime, 8, userinfo.ModifiedDate),
                                   DbHelper.MakeInParam("@PASSWORDENCRYPTED", (DbType)SqlDbType.Int, 4, userinfo.PasswordEncrypted),
-                                  DbHelper.MakeInParam("@PASSWORDMODIFIEDDATE", (DbType)SqlDbType.DateTime, 8, userinfo.PasswordModifiedDate),
                                   DbHelper.MakeInParam("@REALNAME", (DbType)SqlDbType.VarChar, 45, userinfo.Realname),
                                   DbHelper.MakeInParam("@DISPLAYNAME", (DbType)SqlDbType.VarChar, 45, userinfo.Displayname),
                                   DbHelper.MakeInParam("@DIGEST", (DbType)SqlDbType.VarChar, 255, userinfo.Digest),
-                                  DbHelper.MakeInParam("@PASSWORD", (DbType)SqlDbType.VarChar, 50, userinfo.Password),
                                   DbHelper.MakeInParam("@EMAILADDRESS", (DbType)SqlDbType.VarChar, 100, userinfo.EmailAddress),
                                   DbHelper.MakeInParam("@REMINDERQUERYQUESTION", (DbType)SqlDbType.VarChar, 75, userinfo.ReminderQueryQuestion),
                                   DbHelper.MakeInParam("@REMINDERQUERYANSWER", (DbType)SqlDbType.VarChar, 75, userinfo.ReminderQueryAnswer),
@@ -141,22 +137,19 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@SIGNIFICANTOTHER", (DbType)SqlDbType.VarChar, 100, userinfo.Significantother),
                                   DbHelper.MakeInParam("@BIRTHDAY", (DbType)SqlDbType.DateTime, 8, userinfo.Birthday),
                                   DbHelper.MakeInParam("@ANNIVERSARY", (DbType)SqlDbType.DateTime, 8, userinfo.Anniversary),
-                                  DbHelper.MakeInParam("@LOGINDATE", (DbType)SqlDbType.DateTime, 8, userinfo.LoginDate),
                                   DbHelper.MakeInParam("@LOGINIP", (DbType)SqlDbType.VarChar, 100, userinfo.LoginIp),
-                                  DbHelper.MakeInParam("@LASTLOGINDATE", (DbType)SqlDbType.DateTime, 8, userinfo.LastLoginDate),
                                   DbHelper.MakeInParam("@LASTLOGINIP", (DbType)SqlDbType.VarChar, 100, userinfo.LastLoginIp),
                                   DbHelper.MakeInParam("@ISSUPERUSER", (DbType)SqlDbType.TinyInt, 1, userinfo.IsSuperuser),
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, userinfo.Orgid),
                                   DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 20, userinfo.Status),
                                  };
             string commandText = string.Format("UPDATE [{0}USERS] SET [USERNAME]=@USERNAME,[PASSWORD]=@PASSWORD,[ENABLED]=@ENABLED,"
-                + "[CREATEDDATE]=@CREATEDDATE,[MODIFIEDDATE]=@MODIFIEDDATE,[PASSWORDENCRYPTED]=@PASSWORDENCRYPTED,"
-                + "[PASSWORDMODIFIEDDATE]=@PASSWORDMODIFIEDDATE,[REALNAME]=@REALNAME,[DISPLAYNAME]=@DISPLAYNAME,[DIGEST]=@DIGEST,"
+                + "[MODIFIEDDATE]=@MODIFIEDDATE,[PASSWORDENCRYPTED]=@PASSWORDENCRYPTED,[REALNAME]=@REALNAME,[DISPLAYNAME]=@DISPLAYNAME,[DIGEST]=@DIGEST,"
                 + "[EMAILADDRESS]=@EMAILADDRESS,[REMINDERQUERYQUESTION]=@REMINDERQUERYQUESTION,[REMINDERQUERYANSWER]=@REMINDERQUERYANSWER,"
                 + "[SEX]=@SEX,[WORKPHONE]=@WORKPHONE,[WORKMOBILE]=@WORKMOBILE,[PHONE]=@PHONE,[MOBILE]=@MOBILE,[ADDRESS]=@ADDRESS,"
                 + "[TIMEZONE]=@TIMEZONE,[LANGUAGE]=@LANGUAGE,[GREETING]=@GREETING,[WEBSITE]=@WEBSITE,[JOBTITLE]=@JOBTITLE,[COMMENTS]=@COMMENTS,"
-                + "[SIGNIFICANTOTHER]=@SIGNIFICANTOTHER,[BIRTHDAY]=@BIRTHDAY,[ANNIVERSARY]=@ANNIVERSARY,[LOGINDATE]=@LOGINDATE,[LOGINIP]=@LOGINIP,"
-                + "[LASTLOGINDATE]=@LASTLOGINDATE,[LASTLOGINIP]=@LASTLOGINIP,[ISSUPERUSER]=@ISSUPERUSER,[ORGID]=@ORGID,[STATUS]=@STATUS"
+                + "[SIGNIFICANTOTHER]=@SIGNIFICANTOTHER,[BIRTHDAY]=@BIRTHDAY,[ANNIVERSARY]=@ANNIVERSARY,[LOGINIP]=@LOGINIP,"
+                + "[LASTLOGINIP]=@LASTLOGINIP,[ISSUPERUSER]=@ISSUPERUSER,[ORGID]=@ORGID,[STATUS]=@STATUS"
                 + " WHERE [USERID]=@USERID", BaseConfigs.GetTablePrefix);
 
 
