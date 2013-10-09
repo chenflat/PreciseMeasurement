@@ -51,7 +51,7 @@ namespace PM.Web.admin.users
                 userinfo.UserName = txtUserName.Text.Trim();
                 userinfo.Realname = txtRealname.Text.Trim();
                 userinfo.Displayname = txtDisplayname.Text.Trim();
-                userinfo.Password = txtPassWord.Text.Trim();
+                userinfo.Password = Utils.MD5(txtPassWord.Text.Trim());
                 
             }
         }

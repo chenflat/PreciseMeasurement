@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encrypt.cs" />
     <Compile Include="FormEvent.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="PMException.cs" />
