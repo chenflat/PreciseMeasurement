@@ -80,7 +80,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="<%=orgid.ClientID %>" class="col-lg-5 control-label">
+                <label for="<%=ddlOrgid.ClientID %>" class="col-lg-5 control-label">
                     所属公司
                 </label>
                 <div class="col-lg-7">
