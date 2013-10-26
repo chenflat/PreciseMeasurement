@@ -23,7 +23,11 @@ namespace PM.Web.realtime
             if (!Page.IsPostBack)
             {
                 setMeasureMeasurePointInfo();
-                BindDummyRow();
+              //  BindDummyRow();
+
+
+                gvMeasurement.DataSource = Business.Measurement.FindMeasurementByPointnum(MeasurePointInfo.Pointnum, "2013-09-07 00:00", "2013-09-07 23:59", "DAY", 1, 15).Tables["Measurement"];
+                gvMeasurement.DataBind();
             }
         }
 

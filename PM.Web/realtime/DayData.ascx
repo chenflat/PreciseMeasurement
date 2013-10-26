@@ -24,7 +24,7 @@
             </Columns>
         </asp:GridView>
         <br />
-        <div class="dayreportpager">
+        <div class="dayreportpager pager">
         </div>
     </div>
 </div>

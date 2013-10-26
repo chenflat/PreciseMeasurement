@@ -75,8 +75,9 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@PageIndex",(DbType)SqlDbType.Int,4,pageindex),
                                   DbHelper.MakeInParam("@PageSize",(DbType)SqlDbType.Int,4,pagesize),
                                   DbHelper.MakeOutParam("@RecordCount",(DbType)SqlDbType.Int,4)
-                                 };
-           DataSet ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementByPointNum", parms);
+                                  };
+           DataSet ds = new DataSet("Measurements");
+           ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementByPointNum", parms);
            ds.Tables[0].TableName = "Measurement";
            DataTable dt = new DataTable("Pager");
            dt.Columns.Add("PageIndex");
@@ -111,7 +112,8 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@PageSize",(DbType)SqlDbType.Int,4,pagesize),
                                   DbHelper.MakeOutParam("@RecordCount",(DbType)SqlDbType.Int,4)
                                  };
-           DataSet ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementByPointNum", parms);
+           DataSet ds = new DataSet("Measurements");
+           ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementByAllPoint", parms);
            ds.Tables[0].TableName = "Measurement";
            DataTable dt = new DataTable("Pager");
            dt.Columns.Add("PageIndex");
