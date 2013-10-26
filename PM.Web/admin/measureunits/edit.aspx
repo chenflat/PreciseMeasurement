@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="<%=type.ClientID %>" class="col-lg-2">
+            <label for="<%=abbreviation.ClientID %>" class="col-lg-2">
                 单位：</label>
             <div class="col-lg-6">
                 <asp:Label ID="abbreviation" runat="server" Text=""></asp:Label>

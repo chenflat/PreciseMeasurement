@@ -2732,5 +2732,22 @@ namespace PM.Common
         {
             return HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"].IndexOf("MSIE") >= 0;
         }
+
+        /// <summary>
+        /// 判断是否包含指定的列
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool ContainsField(System.Data.IDataReader reader, string name)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i) == name)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

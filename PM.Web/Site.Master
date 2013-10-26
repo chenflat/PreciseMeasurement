@@ -14,13 +14,20 @@
     <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
     <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="<%=ResolveUrl("~/assets/js/html5shiv.js") %>"></script>
       <script src="<%=ResolveUrl("~/assets/js/respond.min.js") %>"></script>
     <![endif]-->
+    <script src="<%=ResolveUrl("~/assets/js/jquery.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/bootstrap.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/jquery-ui-1.10.0.custom.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/jquery.ui.datepicker-zh-CN.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/holder.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/lib/bootbox/bootbox.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <a class="sr-only" href="#content">Skip navigation</a>
@@ -88,14 +95,7 @@
       </div>
     </footer>
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<%=ResolveUrl("~/assets/js/jquery.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/js/bootstrap.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/js/jquery-ui-1.10.0.custom.min.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/js/jquery.ui.datepicker-zh-CN.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/js/holder.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/lib/bootbox/bootbox.min.js") %>"></script>
-    <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
-    
+   
 
 
 </body>

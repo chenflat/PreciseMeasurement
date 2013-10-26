@@ -58,13 +58,13 @@ namespace PM.Web.admin.locations {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPointNum;
         
         /// <summary>
-        /// siteid 控件。
+        /// txtSiteid 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox siteid;
+        protected global::System.Web.UI.WebControls.TextBox txtSiteid;
         
         /// <summary>
         /// parent 控件。
@@ -119,6 +119,15 @@ namespace PM.Web.admin.locations {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox z;
+        
+        /// <summary>
+        /// level 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList level;
         
         /// <summary>
         /// btnSave 控件。

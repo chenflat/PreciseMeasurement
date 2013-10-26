@@ -119,6 +119,7 @@ namespace PM.Data
 
 
 
+
         /// <summary>
         /// 获取位置层级关系
         /// </summary>
@@ -132,6 +133,13 @@ namespace PM.Data
         /// <returns></returns>
         IDataReader FindLochierarchyByLocation(string location);
 
+        /// <summary>
+        /// 获取层级
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        IDataReader GetLevels(string orgid,string siteid);
 
 
         /// <summary>
@@ -247,6 +255,15 @@ namespace PM.Data
         /// <param name="id">参数ID</param>
         /// <returns></returns>
         IDataReader FindMeasurePointParamById(int id);
+
+        /// <summary>
+        /// 获取指定层级的计量器列表
+        /// </summary>
+        /// <param name="level">层级ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        IDataReader FindMeasurePointsByLevel(int level,string orgid,string siteid);
 
         /// <summary>
         /// 添加计量点参数信息
@@ -381,5 +398,50 @@ namespace PM.Data
         /// </summary>
         /// <param name="uidList">用户Id列表</param>
         int DeleteUserByUidlist(string uidList);
+
+
+        /// <summary>
+        /// 获取指定计量器的最后记录值
+        /// </summary>
+        /// <param name="pointnum">记录器编号</param>
+        /// <returns></returns>
+        IDataReader FindLastMeasurement(string pointnum);
+
+        /// <summary>
+        /// 获取指定查询条件的读表数据
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <param name="recordcount">总条数</param>
+        /// <returns></returns>
+        DataTable FindMeasurementByCondition(string condition, string type,int pageindex, int pagesize, out int recordcount);
+
+        /// <summary>
+        /// 获取指定测点的读表数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="type">查询类型</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <param name="recordcount">总条数</param>
+        /// <returns></returns>
+        DataSet FindMeasurementByPointnum(string pointnum,string startdate,string enddate, string type, int pageindex, int pagesize);
+
+        /// <summary>
+        /// 获取指定时间内所有计量器的读表数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="type">查询方式： ALL全部 DAY日报 WEEK周报 MONTH月报 </param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <returns></returns>
+        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize); 
+
+
+
     }
 }

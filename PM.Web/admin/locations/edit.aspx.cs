@@ -48,8 +48,8 @@ namespace PM.Web.admin.locations
             location.Text = locationInfo.Location;
             location.Enabled = false;
             description.Text = locationInfo.Description;
-            siteid.Text = locationInfo.Siteid;
-            siteid.Enabled = false;
+            txtSiteid.Text = locationInfo.Siteid;
+            txtSiteid.Enabled = false;
             parent.SelectedValue = locationInfo.Parent;
             type.SelectedValue = locationInfo.Type;
             status.Text = locationInfo.Status;
@@ -57,7 +57,7 @@ namespace PM.Web.admin.locations
             x.Text = locationInfo.X;
             y.Text = locationInfo.Y;
             z.Text = locationInfo.Z;
-
+            level.SelectedValue = locationInfo.Level.ToString();
 
         }
 
@@ -69,7 +69,7 @@ namespace PM.Web.admin.locations
                 locationInfo.Locationsid = Utils.StrToInt(locationsid.Value, -1);
                 locationInfo.Location = location.Text.Trim().ToUpper();
                 locationInfo.Description = description.Text.Trim();
-                locationInfo.Siteid = siteid.Text.Trim();
+                locationInfo.Siteid = txtSiteid.Text.Trim();
                 locationInfo.Parent = parent.SelectedValue;
                 locationInfo.Type = type.SelectedValue;
                 locationInfo.Status = status.Text.Trim();
@@ -78,6 +78,7 @@ namespace PM.Web.admin.locations
                 locationInfo.Z = z.Text.Trim();
                 locationInfo.Changeby = username;
                 locationInfo.Changedate = DateTime.Now;
+                locationInfo.Level = Utils.StrToInt(level.SelectedValue, 0);
                 bool isSuccess = false;
                 if (locationInfo.Locationsid > 0)
                 {

@@ -1,31 +1,42 @@
 ﻿<%@ Page Title="实时参数" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="default.aspx.cs" Inherits="PM.Web.realtime._default" %>
 
+<%@ Register Src="MeasurePointBaseInfo.ascx" TagName="MeasurePointBaseInfo" TagPrefix="uc1" %>
+<%@ Register Src="RealtimeParams.ascx" TagName="RealtimeParams" TagPrefix="uc2" %>
+<%@ Register Src="MinuteData.ascx" TagName="MinuteData" TagPrefix="uc3" %>
+<%@ Register Src="HourData.ascx" TagName="HourData" TagPrefix="uc4" %>
+<%@ Register Src="DayData.ascx" TagName="DayData" TagPrefix="uc5" %>
+<%@ Register Src="HistoryData.ascx" TagName="HistoryData" TagPrefix="uc6" %>
+<%@ Register Src="AlarmData.ascx" TagName="AlarmData" TagPrefix="uc7" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/WdatePicker.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/Pager.min.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/realtime.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-md-2 col-xs-4">
             <div class="bs-sidebar hidden-print affix-top" role="complementary">
                 <ul class="nav bs-sidenav">
-                    <li class="active"><a href="#glyphicons">一级</a>
+                    <%
+                        foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
+                        { 
+                    %>
+                    <li class="active"><a href="#">
+                        <%= pair.Key %></a>
                         <ul class="nav">
-                            <li class="active"><a href="#">1#煤炉出口蒸汽</a></li>
-                            <li><a href="#e">2#煤炉出口蒸汽</a></li>
-                            <li><a href="#">3#煤炉出口蒸汽</a></li>
-                            <li><a href="#">4#气炉出口蒸汽</a></li>
+                            <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
+                               {%>
+                            <li><a href="?measurepointid=<%=point.Measurepointid %>">
+                                <%=point.Description%></a></li>
+                            <% } %>
                         </ul>
                     </li>
-                    <li class="active"><a href="#dropdowns">二级</a>
-                        <ul class="nav">
-                            <li><a href="#">食品出锅炉房蒸汽</a></li>
-                            <li><a href="#">食品入车间蒸汽</a></li>
-                            <li><a href="#">热充出锅炉房蒸汽</a></li>
-                            <li><a href="#">热充入车间蒸汽</a></li>
-                            <li><a href="#">无菌出锅炉房蒸汽</a></li>
-                            <li><a href="#">无菌入车间蒸汽</a></li>
-                        </ul>
-                    </li>
+                    <%
+                    }
+                    %>
+                   
                 </ul>
             </div>
         </div>
@@ -44,46 +55,25 @@
                 </div>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="realtime">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的实时参数</li>
-                        </ol>
-                        realtime
+                        <uc2:RealtimeParams ID="RealtimeParams1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="minute">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的分钟数据</li>
-                        </ol>
-                        minute
+                        <uc3:MinuteData ID="MinuteData1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="hour">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的小时数据</li>
-                        </ol>
-                        hour
+                        <uc4:HourData ID="HourData1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="day">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的每日数据</li>
-                        </ol>
-                        hour
+                        <uc5:DayData ID="DayData1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="history">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的历史曲线</li>
-                        </ol>
-                        history
+                        <uc6:HistoryData ID="HistoryData1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="alarm">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的报警信息</li>
-                        </ol>
-                        alarm
+                        <uc7:AlarmData ID="AlarmData1" runat="server" />
                     </div>
                     <div class="tab-pane fade" id="info">
-                        <ol class="breadcrumb">
-                            <li class="active">1#煤炉出口蒸汽的基础信息</li>
-                        </ol>
-                        info
+                        <uc1:MeasurePointBaseInfo ID="MeasurePointBaseInfo" runat="server" />
                     </div>
                 </div>
             </div>
@@ -95,4 +85,5 @@
             $(this).tab('show')
         })
     </script>
+    
 </asp:Content>

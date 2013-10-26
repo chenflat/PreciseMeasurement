@@ -22,8 +22,14 @@
                     <th>
                         位置名称
                     </th>
+                     <th>
+                        上级位置
+                    </th>
                     <th width="10%">
                         位置类型
+                    </th>
+                     <th width="10%">
+                        层级
                     </th>
                     <th width="10%">
                         位置状态
@@ -42,7 +48,13 @@
                     <%#Eval("DESCRIPTION")%>
                 </td>
                 <td>
+                    <%#Eval("PARENT")%>
+                </td>
+                <td>
                     <%#Eval("TYPE")%>
+                </td>
+                 <td>
+                    <%#Eval("LEVEL")%>
                 </td>
                 <td>
                     <%#Eval("STATUS")%>

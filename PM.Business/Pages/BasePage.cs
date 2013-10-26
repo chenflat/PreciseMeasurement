@@ -22,7 +22,7 @@ namespace PM.Business.Pages
         /// <summary>
         /// 机构ID
         /// </summary>
-        protected internal string orgid = "";
+        protected internal string orgid = "BJTY";
         /// <summary>
         /// 地点ID
         /// </summary>
