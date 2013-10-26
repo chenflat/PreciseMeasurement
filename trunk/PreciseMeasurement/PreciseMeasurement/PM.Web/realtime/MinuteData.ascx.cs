@@ -19,7 +19,7 @@ namespace PM.Web.realtime
             if (!Page.IsPostBack)
             {
                 setMeasureMeasurePointInfo();
-                BindDummyRow();
+               // BindDummyRow();
             }
         }
 
@@ -28,24 +28,11 @@ namespace PM.Web.realtime
             if (MeasurePointInfo == null)
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
+            hdnPointnum.Value = MeasurePointInfo.Pointnum;
 
-
-
-        }
-
-        private void BindDummyRow()
-        {
-            DataTable dummy = new DataTable();
-            dummy.Columns.Add("MEASURETIME");
-            dummy.Columns.Add("SW_TEMPERATURE");
-            dummy.Columns.Add("SW_PRESSURE");
-            dummy.Columns.Add("AF_FLOWINSTANT");
-            dummy.Columns.Add("AT_FLOW");
-            dummy.Columns.Add("AI_DENSITY");
-            dummy.Rows.Add();
-
-            gvMeasurement.DataSource = dummy;
+            gvMeasurement.DataSource = Business.Measurement.FindMeasurementByPointnum(MeasurePointInfo.Pointnum, "2013-09-07 00:00", "2013-09-07 23:59", "DAY", 1, 15).Tables["Measurement"];
             gvMeasurement.DataBind();
+
         }
 
     }

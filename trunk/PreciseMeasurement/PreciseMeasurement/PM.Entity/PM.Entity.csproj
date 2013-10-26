@@ -48,6 +48,8 @@
     <Compile Include="MeasureReplaceInfo.cs" />
     <Compile Include="MeasureUnitInfo.cs" />
     <Compile Include="OrganizationInfo.cs" />
+    <Compile Include="PagerInfo.cs" />
+    <Compile Include="Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>

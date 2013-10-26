@@ -57,5 +57,33 @@ namespace PM.Business
             return Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
         }
 
+        public static List<MeasurementInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize, out PagerInfo pagerInfo)
+        {
+
+            DataSet ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
+
+            DataTable meassurement = ds.Tables["Measurement"];
+
+            List<MeasurementInfo> list = new List<MeasurementInfo>();
+
+            using (IDataReader reader = meassurement.CreateDataReader())
+            {
+                while (reader.Read())
+                {
+                    MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
+                    list.Add(measurementInfo);
+                }
+                reader.Close();
+            }
+
+            DataTable dtPager = ds.Tables["Pager"];
+
+            pagerInfo = Pager.GetPagerInfo(dtPager.CreateDataReader());
+
+            return list;
+
+        }
+
+
     }
 }

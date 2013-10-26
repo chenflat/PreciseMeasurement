@@ -31,7 +31,8 @@ namespace PM.Data
         /// </summary>
         /// <param name="pointnum">计量器编号</param>
         /// <returns></returns>
-        public static MeasurementInfo GetLastMeasurement(string pointnum) {
+        public static MeasurementInfo GetLastMeasurement(string pointnum)
+        {
 
             MeasurementInfo measurement = new MeasurementInfo();
             IDataReader reader = FindLastMeasurement(pointnum);
@@ -62,10 +63,10 @@ namespace PM.Data
             measurement.AfFlowinstant = reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT"));
             measurement.SwPressure = reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE"));
             measurement.AtFlow = reader.GetDecimal(reader.GetOrdinal("AT_FLOW"));
-            measurement.MV1 = reader.GetDecimal(reader.GetOrdinal("MV1"));
-            measurement.MV2 = reader.GetDecimal(reader.GetOrdinal("MV2"));
-            measurement.MV3 = reader.GetDecimal(reader.GetOrdinal("MV3"));
-            measurement.MV4 = reader.GetDecimal(reader.GetOrdinal("MV4"));
+            measurement.MV1 = reader.IsDBNull(reader.GetOrdinal("MV1")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV1"));
+            measurement.MV2 = reader.IsDBNull(reader.GetOrdinal("MV2")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV2"));
+            measurement.MV3 = reader.IsDBNull(reader.GetOrdinal("MV3")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV3"));
+            measurement.MV4 = reader.IsDBNull(reader.GetOrdinal("MV4")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV4"));
             measurement.MV5 = reader.GetOrdinal("MV5").ToString();
 
             return measurement;
@@ -80,9 +81,9 @@ namespace PM.Data
         /// <param name="pagesize">每页显示数</param>
         /// <param name="recordcount">总条数</param>
         /// <returns></returns>
-        public static DataTable FindMeasurementByCondition(string condition, string type,int pageindex, int pagesize, out int recordcount)
+        public static DataTable FindMeasurementByCondition(string condition, string type, int pageindex, int pagesize, out int recordcount)
         {
-            return DatabaseProvider.GetInstance().FindMeasurementByCondition(condition, type,pageindex, pagesize, out recordcount);
+            return DatabaseProvider.GetInstance().FindMeasurementByCondition(condition, type, pageindex, pagesize, out recordcount);
         }
 
         /// <summary>
@@ -96,7 +97,8 @@ namespace PM.Data
         /// <param name="pagesize">每页显示数</param>
         /// <param name="recordcount">总条数</param>
         /// <returns></returns>
-        public static DataSet FindMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize) {
+        public static DataSet FindMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+        {
             return DatabaseProvider.GetInstance().FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
         }
 
@@ -109,7 +111,8 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize) {
+        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+        {
             return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate, type, pageindex, pagesize);
         }
     }

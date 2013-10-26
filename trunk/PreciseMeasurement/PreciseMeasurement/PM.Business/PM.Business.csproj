@@ -45,6 +45,7 @@
     <Compile Include="MeasureReplace.cs" />
     <Compile Include="MeasureUnit.cs" />
     <Compile Include="Organizations.cs" />
+    <Compile Include="Pager.cs" />
     <Compile Include="Pages\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

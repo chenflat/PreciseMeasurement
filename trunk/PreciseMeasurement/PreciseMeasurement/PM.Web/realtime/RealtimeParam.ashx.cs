@@ -5,6 +5,9 @@ using System.Web.Services;
 using System.Data;
 
 using PM.Common;
+using System.Text;
+using System.Web.Script.Serialization;
+using PM.Entity;
 
 namespace PM.Web.realtime
 {
@@ -16,12 +19,28 @@ namespace PM.Web.realtime
 
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/xml; charset=utf-8";
-            DataSet ds = Business.Measurement.FindMeasurementByPointnum("S1", "2013-09-07 00:00", "2013-09-07 21:00", "DAY", 1, 15);
-            context.Response.Write(ds.GetXml());
+            context.Response.ContentType = "text/xml";
+            context.Response.Charset = "UTF-8";
+
+            string pointnum = context.Request["pointnum"];
+            string startdate = context.Request["startdate"];
+            string enddate = context.Request["enddate"];
+            string type = context.Request["type"];
+            int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
 
 
-            //  return Utils.DataTableToJSON(ds.Tables[0]).Append(Utils.DataTableToJSON(ds.Tables["Pager"])).ToString()
+            PagerInfo pagerInfo = new PagerInfo();
+
+            List<MeasurementInfo> list = Business.Measurement.GetMeasurementByPointnum("S1", "2013-09-07 00:00", "2013-09-07 21:00", "DAY", pageindex, 15, out pagerInfo);
+
+            Pagination<MeasurementInfo> pagination = new Pagination<MeasurementInfo>();
+            pagination.List = list;
+            pagination.PagerInfo = pagerInfo;
+
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string strMeasurements = javaScriptSerializer.Serialize(pagination);
+            context.Response.Write(strMeasurements);
+
         }
 
         public bool IsReusable
@@ -31,5 +50,8 @@ namespace PM.Web.realtime
                 return false;
             }
         }
+
+
+
     }
 }
