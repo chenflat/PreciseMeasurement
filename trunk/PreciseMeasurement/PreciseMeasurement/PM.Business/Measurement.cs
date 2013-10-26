@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using PM.Entity;
+using PM.Data;
+using PM.Common;
+using PM.Config;
+using System.Web;
 
 namespace PM.Business
 {
@@ -10,6 +16,46 @@ namespace PM.Business
     public class Measurement
     {
 
+        /// <summary>
+        /// 返回指定计量器的最后记录对象
+        /// </summary>
+        /// <param name="pointnum">计量器编号</param>
+        /// <returns>读数对象</returns>
+        public static MeasurementInfo GetLastMeasurement(string pointnum) {
+            if (pointnum == null || pointnum.Length == 0)
+                return null;
+            return Data.Measurement.GetLastMeasurement(pointnum);
+        }
+
+        /// <summary>
+        /// 获取指定查询条件的读表数据
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <param name="recordcount">总条数</param>
+        /// <returns></returns>
+        public static DataTable FindMeasurementByCondition(string condition,string type, int pageindex, int pagesize, out int recordcount)
+        {
+            return Data.Measurement.FindMeasurementByCondition(condition,type, pageindex, pagesize, out recordcount);
+        }
+
+        
+                /// <summary>
+        /// 获取指定测点的读表数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="type">查询类型</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <param name="recordcount">总条数</param>
+        /// <returns></returns>
+        public static DataSet FindMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+        {
+            return Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
+        }
 
     }
 }

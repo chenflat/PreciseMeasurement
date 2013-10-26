@@ -1088,3 +1088,26 @@ h1[id] {
   margin-top: 15px;
   margin-bottom: 5px;
 }
+
+
+.login {
+    background: #368ee0;
+}
+
+.login .wrapper {
+    width: 400px;
+    height: 500px;
+    margin: 200px -200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.login .wrapper .login-body {
+    margin-top: 20px;
+    background: #fff;
+}
+
+.login .wrapper .login-body form {
+    padding: 30px;
+}

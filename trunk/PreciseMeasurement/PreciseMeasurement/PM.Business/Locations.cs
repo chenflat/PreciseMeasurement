@@ -161,5 +161,32 @@ namespace PM.Business
             string condition = string.Format(" and [{0}LOCATIONS].location='{1}'",BaseConfigs.GetTablePrefix,location);
             return Data.Locations.LocationsCount(condition) > 0;
         }
+
+
+        /// <summary>
+        /// 获取层级
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        public static Dictionary<int, string> GetLevels(string orgid, string siteid)
+        {
+            if(orgid==null) orgid="";
+            if (siteid == null) siteid = "";
+
+            Dictionary<int, string> dicts = new Dictionary<int, string>();
+
+            using (IDataReader reader = Data.Locations.GetLevels(orgid, siteid))
+            {
+                while (reader.Read())
+                {
+                    int level = Utils.StrToInt(reader["LEVEL"].ToString(), 0);
+                    dicts.Add(level, (level+1).ToString()+"级");
+                }
+                reader.Close();
+            }
+            return dicts;
+        }
+
     }
 }

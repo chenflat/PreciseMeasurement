@@ -50,9 +50,31 @@ namespace PM.Business
             return Data.MeasurePoint.MeasurePointCount(condition);
         }
 
+        /// <summary>
+        /// 获取指定测点的参数列表
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <returns></returns>
         public static DataTable FindMeasurePointParamByPointNum(string pointnum)
         {
-            return Data.MeasurePoint.FindMeasurePointParamByPointNum(pointnum);
+            if (pointnum == null || pointnum.Length == 0)
+                return null;
+            DataTable ret = Data.MeasurePoint.FindMeasurePointParamByPointNum(pointnum);
+            if(ret.Rows.Count>0) {
+                return ret;
+            } else {
+
+                foreach (DataRow item in MeasureUnit.FindAllMeasureUnitListDataTable().Rows)
+                {
+                    string measureunitid = item["MEASUREUNITID"].ToString();
+                    MeasurePointParamInfo paramInfo = new MeasurePointParamInfo();
+                    paramInfo.Pointnum = pointnum;
+                    paramInfo.Measureunitid = measureunitid;
+                    paramInfo.MeasureUnitName = item["DESCRIPTION"].ToString();
+                    CreateMeasurePointParam(paramInfo);
+                }
+                return Data.MeasurePoint.FindMeasurePointParamByPointNum(pointnum);
+            }
         }
         public static IDataReader FindMeasurePointParamById(int id)
         {
@@ -77,6 +99,32 @@ namespace PM.Business
         public static int DeleteMeasurePointParam(string idList)
         {
             return Data.MeasurePoint.DeleteMeasurePointParam(idList);
+        }
+
+
+        /// <summary>
+        /// 获取指定层级的计量器列表
+        /// </summary>
+        /// <param name="level">层级ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        public static List<MeasurePointInfo> FindMeasurePointsByLevel(int level, string orgid, string siteid) {
+
+            if (orgid == null) orgid = "";
+            if (siteid == null) siteid = "";
+
+            List<MeasurePointInfo> list = new List<MeasurePointInfo>();
+
+            using (IDataReader reader = Data.MeasurePoint.FindMeasurePointsByLevel(level,orgid,siteid))
+            {
+                while (reader.Read()) {
+                    MeasurePointInfo measurePointInfo = Data.MeasurePoint.LoadMeasurePointInfo(reader);
+                    list.Add(measurePointInfo);
+                }
+                reader.Close();
+            }
+            return list;
         }
     }
 }

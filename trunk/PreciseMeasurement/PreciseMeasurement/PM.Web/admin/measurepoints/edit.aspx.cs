@@ -23,10 +23,12 @@ namespace PM.Web.admin.measurepoints
                     BindDropDownList();
                     btnDelte.Attributes.Add("onclick", "return confirm('删除数据不可恢复，确定要删除码');");
                     LoadMeasurePointInfo(PMRequest.GetInt("id", -1));
+                    btnParams.Visible = true;
+               
                 }
                 else
                 {
-                    btnParams.Enabled = false;
+                    btnParams.Visible = false;
                     btnDelte.Enabled = false;
                 }
             }
@@ -55,6 +57,7 @@ namespace PM.Web.admin.measurepoints
             MeasurePointInfo pointInfo = Business.MeasurePoint.GetMeasurePointInfo(id);
             if (pointInfo == null)
                 return;
+            btnParams.NavigateUrl = string.Format("paramters.aspx?id={0}&pointnum={1}", pointInfo.Measurepointid, pointInfo.Pointnum);
             measurepointid.Value = pointInfo.Measurepointid.ToString();
             description.Text = pointInfo.Description;
             pointcode.Text = pointInfo.PointCode;

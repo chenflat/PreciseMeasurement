@@ -100,7 +100,10 @@ namespace PM.Data
             measurePointInfo.Serverport = TypeConverter.ObjectToInt(reader["SERVERPORT"]);
             measurePointInfo.Metername = reader["METERNAME"].ToString();
             measurePointInfo.Orgid = reader["ORGID"].ToString();
-            measurePointInfo.Orgname = reader["ORGNAME"].ToString();
+            if (Utils.ContainsField(reader, "ORGNAME"))
+            {
+                measurePointInfo.Orgname = reader["ORGNAME"].ToString();
+            }
             measurePointInfo.Siteid = reader["SITEID"].ToString();
             measurePointInfo.Location = reader["LOCATION"].ToString();
             measurePointInfo.Carrier = reader["CARRIER"].ToString();
@@ -209,5 +212,18 @@ namespace PM.Data
         {
             return DatabaseProvider.GetInstance().DeleteMeasurePointParam(idList);
         }
+
+
+        /// <summary>
+        /// 获取指定层级的计量器列表
+        /// </summary>
+        /// <param name="level">层级ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        public static IDataReader FindMeasurePointsByLevel(int level, string orgid, string siteid) {
+            return DatabaseProvider.GetInstance().FindMeasurePointsByLevel(level, orgid, siteid);
+        }
+
     }
 }

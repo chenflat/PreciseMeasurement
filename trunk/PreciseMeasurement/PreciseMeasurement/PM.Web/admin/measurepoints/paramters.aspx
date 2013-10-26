@@ -3,7 +3,7 @@
  <div class="bs-docs-section">
         <div class="page-header">
             <h3>
-                <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置</h3>
+                <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置  </h3> 
         </div>
     </div>
 
@@ -13,6 +13,7 @@
         CssClass="table table-striped" EnableModelValidation="True">
         <Columns>
             <asp:BoundField DataField="MEASUREUNITNAME" HeaderText="参量名称" />
+            <asp:BoundField DataField="ABBREVIATION" HeaderText="单位" />
             <asp:BoundField DataField="LOWERWARNING" HeaderText="第一报警下限" />
             <asp:BoundField DataField="LOWERACTION" HeaderText="第二报警下限" />
             <asp:BoundField DataField="UPPERWARNING" HeaderText="第一报警上限" />
@@ -29,5 +30,8 @@
     </asp:GridView>
 
 
-
+    <div class="toolbar bs-callout-danger">
+       
+        <asp:HyperLink ID="btnBack" CssClass="btn btn-info" runat="server">返回</asp:HyperLink>
+    </div>
 </asp:Content>

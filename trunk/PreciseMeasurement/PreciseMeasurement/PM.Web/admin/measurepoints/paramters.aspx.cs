@@ -26,6 +26,8 @@ namespace PM.Web.admin.measurepoints
                     SetPointDescrption(long.Parse(keyId));
                 }
                 BindData(pointnum);
+
+                btnBack.NavigateUrl = "edit.aspx?id="+ keyId;
             }
         }
 

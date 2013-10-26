@@ -60,8 +60,8 @@ namespace PM.Data.SqlServer
         public IDataReader FindLocationById(long id)
         {
             DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
-            string commandText = string.Format("SELECT {0}LOCATIONS.*, [{0}LOCHIERARCHY].PARENT, [{0}LOCHIERARCHY].CHILDREN FROM [{0}LOCATIONS] "
-                +" inner join [{0}LOCHIERARCHY] on [{0}LOCATIONS].location=[{0}LOCHIERARCHY].location WHERE [LOCATIONSID]=@id",
+            string commandText = string.Format("SELECT {0}LOCATIONS.*, [{0}LOCHIERARCHY].PARENT, [{0}LOCHIERARCHY].CHILDREN,[{0}LOCHIERARCHY].LEVEL FROM [{0}LOCATIONS] "
+                + " inner join [{0}LOCHIERARCHY] on [{0}LOCATIONS].location=[{0}LOCHIERARCHY].location WHERE [{0}LOCATIONS].LOCATIONSID=@id",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
@@ -118,7 +118,7 @@ namespace PM.Data.SqlServer
                                     DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, locationInfo.Siteid),
                                     DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, locationInfo.Orgid),
                                     DbHelper.MakeInParam("@SYSTEMID", (DbType)SqlDbType.VarChar, 50, locationInfo.Ownersysid),
-                                    DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, locationInfo.Level),
+                                    DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, locationInfo.Level)
                                     
                                    };
             string commandText = string.Format("INSERT INTO [{0}LOCATIONS] ([LOCATION],[DESCRIPTION],[TYPE],[DISABLED],[EXTERNALREFID],[ISREPAIRFACILITY],[X],[Y],[Z],[ORGID],[OWNERSYSID],[SENDERSYSID],[SERVICEADDRESSCODE],[SITEID],[SOURCESYSID],[STATUS],[STATUSDATE],[CHANGEBY],[CHANGEDATE]) VALUES(@LOCATION, @DESCRIPTION, @TYPE, @DISABLED, @EXTERNALREFID, @ISREPAIRFACILITY, @X,@Y,@Z,@ORGID,@OWNERSYSID,@SENDERSYSID,@SERVICEADDRESSCODE,@SITEID,@SOURCESYSID,@STATUS,@STATUSDATE,@CHANGEBY,@CHANGEDATE)", BaseConfigs.GetTablePrefix);
@@ -160,7 +160,6 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@SOURCESYSID", (DbType)SqlDbType.VarChar, 10, locationInfo.Sourcesysid),
                                   DbHelper.MakeInParam("@CHANGEBY", (DbType)SqlDbType.VarChar,30, locationInfo.Sendersysid),
                                   DbHelper.MakeInParam("@CHANGEDATE", (DbType)SqlDbType.DateTime, 8, locationInfo.Changedate)
-
                                   };
 
             string commandText = string.Format("UPDATE [{0}LOCATIONS] SET [LOCATION]=@LOCATION,[DESCRIPTION]=@DESCRIPTION, "
@@ -170,7 +169,28 @@ namespace PM.Data.SqlServer
                 + "[SITEID]=@SITEID,[SOURCESYSID]=@SOURCESYSID,[CHANGEBY]=@CHANGEBY,"
                 + "[CHANGEDATE]=@CHANGEDATE WHERE [LOCATIONSID]=@LOCATIONSID",
                                               BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
+
+
+            DbParameter[] parms2 = {
+                                    DbHelper.MakeInParam("@LOCATION", (DbType)SqlDbType.VarChar, 12, locationInfo.Location),
+                                    DbHelper.MakeInParam("@PARENT", (DbType)SqlDbType.VarChar, 12, locationInfo.Parent),
+                                    DbHelper.MakeInParam("@CHILDREN", (DbType)SqlDbType.TinyInt, 1, locationInfo.Children),
+                                    DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, locationInfo.Siteid),
+                                    DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, locationInfo.Orgid),
+                                    DbHelper.MakeInParam("@SYSTEMID", (DbType)SqlDbType.VarChar, 50, locationInfo.Ownersysid),
+                                    DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, locationInfo.Level)
+                                   };
+
+             if(DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0) 
+             {
+
+                 string commandText2 = string.Format("UPDATE [{0}LOCHIERARCHY] SET SITEID=@SITEID,PARENT=@PARENT,CHILDREN=@CHILDREN,ORGID=@ORGID,SYSTEMID=@SYSTEMID,LEVEL=@LEVEL WHERE LOCATION=@LOCATION", BaseConfigs.GetTablePrefix);
+
+                 return DbHelper.ExecuteNonQuery(CommandType.Text, commandText2, parms2) > 0;
+
+             } else {
+                return false;
+             }
         }
 
         /// <summary>
@@ -222,5 +242,23 @@ namespace PM.Data.SqlServer
                                                   location);
             return DbHelper.ExecuteReader(System.Data.CommandType.Text, commandText);
         }
+
+        /// <summary>
+        /// 获取层级
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        public IDataReader GetLevels(string orgid, string siteid)
+        {
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
+                                  DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, siteid)
+                                    };
+            string commandText = string.Format("SELECT DISTINCT [LEVEL] FROM [{0}LOCHIERARCHY] where isnull(ORGID,'')=@ORGID AND isnull(SITEID,'')=@SITEID order by [LEVEL]",
+                                                    BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(System.Data.CommandType.Text, commandText, parms);
+        }
+
     }
 }

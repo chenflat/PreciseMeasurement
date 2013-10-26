@@ -66,7 +66,7 @@ namespace PM.Data
             locationInfo.Changedate = TypeConverter.StrToDateTime(reader["CHANGEDATE"].ToString(), DateTime.Parse("1900-01-01"));
             locationInfo.Parent = reader["PARENT"].ToString();
             locationInfo.Children = TypeConverter.StrToBool(reader["CHILDREN"].ToString(), false);
-            
+            locationInfo.Level = Utils.StrToInt(reader["LEVEL"].ToString(), 0);
             
             return locationInfo;
         }
@@ -94,6 +94,11 @@ namespace PM.Data
         public static int LocationsCount(string condition)
         {
             return DatabaseProvider.GetInstance().LocationsCount(condition);
+        }
+
+        public static IDataReader GetLevels(string orgid, string siteid)
+        {
+            return DatabaseProvider.GetInstance().GetLevels(orgid, siteid); 
         }
     }
 }

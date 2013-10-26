@@ -35,11 +35,11 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="<%=siteid.ClientID %>" class="col-lg-5 control-label">
+                <label for="<%=txtSiteid.ClientID %>" class="col-lg-5 control-label">
                     地点
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="siteid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtSiteid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -115,6 +115,23 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=level.ClientID %>" class="col-lg-5 control-label">
+                    层级
+                </label>
+                <div class="col-lg-7">
+                    <asp:DropDownList ID="level" runat="server"  CssClass="form-control">
+                        <asp:ListItem Value="0">一级</asp:ListItem>
+                        <asp:ListItem Value="1">二级</asp:ListItem>
+                        <asp:ListItem Value="2">三级</asp:ListItem>
+                        <asp:ListItem Value="3">四级</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        </div>
     <div class="toolbar bs-callout-danger">
         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
         <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />

@@ -26,6 +26,7 @@ namespace PM.Entity
         private string supervisor;
         private string phone;
         private string status;
+        private int level;
 
         public long Measurepointid
         {

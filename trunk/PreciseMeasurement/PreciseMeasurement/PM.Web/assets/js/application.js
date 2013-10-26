@@ -98,7 +98,7 @@
             if (link == pathname) {
                 $(li).addClass("active");
             }
-            console.log(link);
+            //console.log(link);
         });
 
         $('.datepicker').datepicker({

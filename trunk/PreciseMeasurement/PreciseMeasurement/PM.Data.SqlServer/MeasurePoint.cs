@@ -42,6 +42,30 @@ namespace PM.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
+        /// <summary>
+        /// 获取指定层级的计量器列表
+        /// </summary>
+        /// <param name="level">层级ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <param name="siteid">地点ID</param>
+        /// <returns></returns>
+        public IDataReader FindMeasurePointsByLevel(int level, string orgid, string siteid) {
+
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, level),
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
+                                  DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, siteid)
+                                    };
+
+
+            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] LEFT OUTER JOIN [{0}LOCHIERARCHY] " +
+                " ON [{0}MEASUREPOINT].LOCATION=[{0}LOCHIERARCHY].LOCATION WHERE [{0}LOCHIERARCHY].LEVEL=@LEVEL " +
+                " and isnull([{0}MEASUREPOINT].orgid,'')=@ORGID and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
+                BaseConfigs.GetTablePrefix);
+
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
         public int CreateMeasurePoint(MeasurePointInfo measurePointInfo)
         {
             DbParameter[] parms = { 
@@ -68,7 +92,33 @@ namespace PM.Data.SqlServer
                                 + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS])"
                                 + " VALUES(@POINTNUM, @POINTCODE, @DESCRIPTION, @DISPLAYSEQUENCE, @IPADDRESS, @CARDNUM, @DEVICENUM,@SERVERIP,@SERVERPORT,"
                                 + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS)", BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            //累计更新行
+            int retRows = 0;
+            if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > -1)
+            {
+                
+                //新增计量器参数信息
+                string commandText2 = string.Format("SELECT * FROM [{0}MEASUREUNIT] WHERE ISMAINPARAM=1",BaseConfigs.GetTablePrefix);
+                using (IDataReader dr = DbHelper.ExecuteReader(CommandType.Text, commandText2))
+                {
+                    while (dr.Read())
+                    {
+                        DbParameter[] unitParams = { 
+                                           DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Pointnum),
+                                           DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 16, dr["MEASUREUNITID"].ToString())
+                                           };
+                        string commandText3 = string.Format("INSERT INTO [{0}MEASUREPOINTPARAM](POINTNUM,MEASUREUNITID)VALUES(@POINTNUM,@MEASUREUNITID)",BaseConfigs.GetTablePrefix);
+                        retRows+=DbHelper.ExecuteNonQuery(CommandType.Text, commandText3, unitParams);
+
+                    }
+                    dr.Close();
+                }
+
+            }
+            return retRows;
+
+
         }
 
         public bool UpdateMeasurePoint(MeasurePointInfo measurePointInfo)
@@ -120,7 +170,7 @@ namespace PM.Data.SqlServer
 
         public DataTable FindMeasurePointParamByPointNum(string pointnum)
         {
-            string commandText = string.Format("SELECT [{0}MEASUREPOINTPARAM].*,[{0}MEASUREPOINT].DESCRIPTION as POINTNAME,[{0}MEASUREUNIT].DESCRIPTION as MEASUREUNITNAME"
+            string commandText = string.Format("SELECT [{0}MEASUREPOINTPARAM].*,[{0}MEASUREUNIT].*,[{0}MEASUREPOINT].DESCRIPTION as POINTNAME,[{0}MEASUREUNIT].DESCRIPTION as MEASUREUNITNAME"
                 +" FROM [{0}MEASUREPOINTPARAM] left outer join [{0}MEASUREPOINT] on [{0}MEASUREPOINTPARAM].POINTNUM=[{0}MEASUREPOINT].POINTNUM "
                 + " left outer join [{0}MEASUREUNIT] on [{0}MEASUREPOINTPARAM].MEASUREUNITID=[{0}MEASUREUNIT].MEASUREUNITID "
                 + " where [{0}MEASUREPOINT].STATUS='ACTIVE' AND [{0}MEASUREPOINTPARAM].POINTNUM='{1}'",
