@@ -1,0 +1,178 @@
+#NavButtons {
+    height: 260px;
+    margin: 60px auto;
+    width: 98%;
+    clear: both;
+    min-width:1240px;
+}
+#NavButtons li
+{
+    color:#333333;
+    cursor: pointer;
+    float: left;
+    height: 117px;
+    margin: 50px;
+    text-align: center;
+    width: 117px;
+    text-shadow:1px 1px 3px #666666;
+    list-style:none;
+}
+
+#NavButtons li:hover
+{
+    color: Blue;
+   }
+.buttonComm {
+    background-image:url("../ico/icon.png");
+    background-repeat: no-repeat;
+}
+.buttonBG {
+    background-position: 0px -117px;
+}
+.buttonInSquare {
+    height: 90px;
+    margin: 0 auto;
+    width: 100%;
+}
+.buttonRealTime {
+    background-position: -585px -940px;
+}
+.buttonRealTime:hover{
+    background-image:url("../ico/realtime.gif");
+    background-position:-1px -4px;
+    background-repeat:no-repeat;
+}
+.buttonRealChart{
+    background-position: -702px -940px;
+}
+.buttonRealChart:hover{
+    background-image:url("../Images/realtimechart.gif");
+    background-position:0px -4px;
+    background-repeat:no-repeat;
+}
+.buttonMinuteData{
+    background-position: 0px -1057px;
+}
+.buttonMinuteData:hover{
+    background-image:url("../Images/minutedata.gif");
+    background-position:0px -5px;
+    background-repeat:no-repeat;
+}
+.buttonHourData{
+    background-position: -117px -1057px;
+}
+.buttonHourData:hover{
+    background-image:url("../Images/hourdata.gif");
+    background-position:-2px -5px;
+    background-repeat:no-repeat;
+}
+.buttonDayData{
+    background-position: -234px -1057px;
+}
+.buttonDayData:hover{
+    background-image:url("../Images/daydata.gif");
+    background-position:-1px -4px;
+    background-repeat:no-repeat;
+}
+.buttonHistoryChart
+{
+    background-position: -351px -1057px;
+}
+.buttonHistoryChart:hover{
+    background-image:url("../Images/historychart.gif");
+    background-position:0px -5px;
+    background-repeat:no-repeat;
+}
+.buttonControlPara{
+    background-position: -468px -1057px;
+}
+.buttonControlPara:hover{
+    background-image:url("../Images/controlpara.gif");
+    background-position:0px -5px;
+    background-repeat:no-repeat;
+}
+.buttonFlowChart{
+    background-position: -585px -1057px;
+}
+.buttonFlowChart:hover{
+    background-image:url("../Images/stationchart.gif");
+    background-position:1px -2px;
+    background-repeat:no-repeat;
+}
+.buttonBlowStandard{
+    background-position: 0px -823px;
+}
+.buttonBlowStandard:hover{
+    background-image:url("../ico/blowstandard.gif");
+    background-position:0 -4px;
+    background-repeat:no-repeat;
+}
+.buttonChartCompare{
+    background-position: -117px -823px;
+}
+.buttonChartCompare:hover{
+    background-image:url("../ico/chartcompare.gif");
+    background-position:0 -4px;
+    background-repeat:no-repeat;
+}
+.buttonPressChart{
+    background-position: -234px -823px;
+}
+.buttonPressChart:hover{
+    background-image:url("../Images/flowchart.gif");
+    background-position:0 -4px;
+    background-repeat:no-repeat;
+}
+.buttonAlarmList{
+    background-position: -351px -823px;
+}
+.buttonAlarmList:hover{
+    background-image:url("../ico/alarminfo.gif");
+    background-position:0px -5px;
+    background-repeat:no-repeat;
+}
+
+.buttonCommState{
+    background-position: -468px -823px;
+}
+.buttonCommState:hover{
+    background-image:url("../Images/commstate.gif");
+    background-position:-1px -4px;
+    background-repeat:no-repeat;
+}
+.buttonRunState{
+    background-position: -468px -940px;
+}
+.buttonRunState:hover{
+    background-image:url("../Images/runstate.gif");
+    background-position:-1px -4px;
+    background-repeat:no-repeat;
+}
+.buttonWorkLog{
+    background-position: -234px -940px;
+}
+.buttonWorkLog:hover{
+    background-image:url("../Images/worklog.gif");
+    background-position:-2px -5px;
+    background-repeat:no-repeat;
+}
+.buttonNoticePub{
+    background-position: -351px -940px;
+}
+.buttonNoticePub:hover{
+    background-image:url("../Images/notice.gif");
+    background-position:0 -4px;
+    background-repeat:no-repeat;
+}
+.buttonStationDayReport{
+    background-position: -702px -823px;
+}
+.buttonCompanyDayReport{
+    background-position: -585px -823px;
+}
+.buttonStationMonthReport{
+    background-position: -117px -940px;
+}
+.buttonCompanyMonthReport{
+    background-position: 0px -940px;
+}

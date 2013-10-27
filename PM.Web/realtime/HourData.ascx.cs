@@ -8,6 +8,7 @@ using PM.Common;
 using PM.Business;
 using PM.Entity;
 using PM.Business.Pages;
+using System.Data;
 
 
 namespace PM.Web.realtime
@@ -19,6 +20,7 @@ namespace PM.Web.realtime
             if (!Page.IsPostBack)
             {
                 setMeasureMeasurePointInfo();
+                BindDummyRow();
             }
         }
 
@@ -27,9 +29,22 @@ namespace PM.Web.realtime
             if (MeasurePointInfo == null)
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
+        }
 
 
+        private void BindDummyRow()
+        {
+            DataTable dummy = new DataTable();
+            dummy.Columns.Add("POINTNUM");
+            dummy.Columns.Add("LEVEL");
+            dummy.Columns.Add("ENDDATE");
+            dummy.Columns.Add("STARTVALUE");
+            dummy.Columns.Add("ENDVALUE");
+            dummy.Columns.Add("DIFFVALUE");
+            dummy.Rows.Add();
 
+            gvHourMeasurement.DataSource = dummy;
+            gvHourMeasurement.DataBind();
         }
     }
 }

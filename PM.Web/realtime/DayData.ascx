@@ -9,22 +9,22 @@
         起始时间： 
         <asp:TextBox ID="startdate" class="Wdate startdate" runat="server"></asp:TextBox> 
         终止时间：<asp:TextBox ID="enddate" class="Wdate enddate" runat="server"></asp:TextBox>
-          <button type="button" class="btn btn-info" id="btnQuery">查询</button>
+          <button type="button" class="btn btn-info" id="btnDayQuery">查询</button>
     </div>
     <div class="panel-body">
-        <asp:GridView ID="gvMeasurement" runat="server" AutoGenerateColumns="False" CssClass="dayreport table table-striped"
+        <asp:GridView ID="gvDayMeasurement" runat="server" AutoGenerateColumns="False" CssClass="dayreport table table-striped"
             EnableModelValidation="True">
             <Columns>
-                <asp:BoundField DataField="MEASURETIME" DataFormatString="{0:d}" HeaderText="采集时间" />
-                <asp:BoundField DataField="SW_TEMPERATURE" HeaderText="温度(℃)" />
-                <asp:BoundField DataField="SW_PRESSURE" HeaderText="压力(MPa)" />
-                <asp:BoundField DataField="AF_FLOWINSTANT" HeaderText="瞬时流量(t/h)" />
-                <asp:BoundField DataField="AT_FLOW" HeaderText="累计流量(t)" />
-                <asp:BoundField DataField="AI_DENSITY" HeaderText="频率(Hz)" />
+                <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />
+                <asp:BoundField DataField="LEVEL" HeaderText="级别" />
+                <asp:BoundField DataField="ENDDATE" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
+                <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
+                <asp:BoundField DataField="ENDVALUE" HeaderText="终止表数(t)" />
+                <asp:BoundField DataField="DIFFVALUE" HeaderText="每日用量(t)" />
             </Columns>
         </asp:GridView>
         <br />
-        <div class="dayreportpager pager">
+        <div id="daypager" class="pager">
         </div>
     </div>
 </div>

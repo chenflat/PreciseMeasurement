@@ -57,8 +57,9 @@ namespace PM.Business
             return Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
         }
 
-        public static List<MeasurementInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize, out PagerInfo pagerInfo)
+        public static Pagination<MeasurementInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
         {
+            Pagination<MeasurementInfo> pagination = new Pagination<MeasurementInfo>();
 
             DataSet ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
 
@@ -78,11 +79,44 @@ namespace PM.Business
 
             DataTable dtPager = ds.Tables["Pager"];
 
-            pagerInfo = Pager.GetPagerInfo(dtPager.CreateDataReader());
+            PagerInfo pagerInfo = Pager.GetPagerInfo(dtPager.CreateDataReader());
 
-            return list;
+            pagination.List = list;
+            pagination.PagerInfo = pagerInfo;
+
+            return pagination;
 
         }
+
+        public static Pagination<ReportDataInfo> GetReportData(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize) {
+            
+            Pagination<ReportDataInfo> pagination = new Pagination<ReportDataInfo>();
+
+            DataSet ds = Data.Measurement.FindMeasurementByAllPoint(pointnum, startdate, enddate, type, pageindex, pagesize);
+
+            DataTable meassurement = ds.Tables["Measurement"];
+
+            List<ReportDataInfo> list = new List<ReportDataInfo>();
+
+            using (IDataReader reader = meassurement.CreateDataReader())
+            {
+                while (reader.Read())
+                {
+                    ReportDataInfo reportDataInfo = Data.Measurement.LoadReportDataInfo(reader);
+                    list.Add(reportDataInfo);
+                }
+                reader.Close();
+            }
+
+            DataTable dtPager = ds.Tables["Pager"];
+            PagerInfo pagerInfo = Pager.GetPagerInfo(dtPager.CreateDataReader());
+            pagination.List = list;
+            pagination.PagerInfo = pagerInfo;
+
+            return pagination;
+
+        }
+
 
 
     }
