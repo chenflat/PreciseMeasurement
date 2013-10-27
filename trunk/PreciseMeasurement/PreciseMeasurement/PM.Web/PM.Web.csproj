@@ -91,20 +91,28 @@
     <Content Include="assets\css\custom-theme\jquery-ui-1.9.2.custom.css" />
     <Content Include="assets\css\custom-theme\jquery.ui.1.10.0.ie.css" />
     <Content Include="assets\css\custom-theme\jquery.ui.1.9.2.ie.css" />
+    <Content Include="assets\css\icon.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\css\pygments-manni.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\ico\alarminfo.gif" />
     <Content Include="assets\ico\apple-touch-icon-114-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-144-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="assets\ico\blowstandard.gif" />
+    <Content Include="assets\ico\chartcompare.gif" />
     <Content Include="assets\ico\favicon.png" />
+    <Content Include="assets\ico\icon.png" />
+    <Content Include="assets\ico\realtime.gif" />
+    <Content Include="assets\img\bg.png" />
     <Content Include="assets\img\systemrunchart.png" />
     <Content Include="assets\js\application.js" />
     <Content Include="assets\js\ASPSnippets_Pager.min.js" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\customizer.js" />
+    <Content Include="assets\js\date.js" />
     <Content Include="assets\js\filesaver.js" />
     <Content Include="assets\js\holder.js" />
     <Content Include="assets\js\html5shiv.js" />
@@ -122,6 +130,7 @@
     <Content Include="assets\lib\bootbox\bootbox.min.js" />
     <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\lib\highcharts\highcharts.js" />
     <Content Include="assets\lib\My97DatePicker\calendar.js" />
     <Content Include="assets\lib\My97DatePicker\lang\en.js" />
     <Content Include="assets\lib\My97DatePicker\lang\zh-cn.js" />
@@ -136,7 +145,10 @@
     <Content Include="assets\lib\My97DatePicker\WdatePicker.js" />
     <Content Include="controls\PageControl.ascx" />
     <Content Include="Default.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="index.htm" />
+    <Content Include="MeasureSystem.aspx" />
     <Content Include="realtime\AlarmData.ascx" />
     <Content Include="realtime\DayData.ascx" />
     <Content Include="realtime\default.aspx" />
@@ -328,8 +340,22 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureSystem.aspx.cs">
+      <DependentUpon>MeasureSystem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeasureSystem.aspx.designer.cs">
+      <DependentUpon>MeasureSystem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="realtime\AlarmData.ascx.cs">
@@ -445,7 +471,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>

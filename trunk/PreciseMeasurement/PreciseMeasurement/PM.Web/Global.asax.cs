@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 
+using PM.Business.Pages;
+using PM.Business;
+using PM.Config;
+
 namespace PM.Web
 {
     public class Global : System.Web.HttpApplication
@@ -25,6 +29,15 @@ namespace PM.Web
         void Application_Error(object sender, EventArgs e)
         {
             // 在出现未处理的错误时运行的代码
+            Exception objErr = Server.GetLastError().GetBaseException();
+            string error = "<br />发生异常页: " + System.Web.HttpContext.Current.Request.Url.ToString() + "<br />";
+            error += "异常信息: " + objErr.Message + "<br />";
+            //写入错误到日志文件
+            BasePage bg = new BasePage();
+            
+            Server.ClearError();
+            Application["error"] = error;
+            System.Web.HttpContext.Current.Response.Redirect("~/Error.aspx");
 
         }
 
@@ -40,7 +53,7 @@ namespace PM.Web
             // 注意: 只有在 Web.config 文件中的 sessionstate 模式设置为
             // InProc 时，才会引发 Session_End 事件。如果会话模式设置为 StateServer 
             // 或 SQLServer，则不会引发该事件。
-
+            Session.RemoveAll();
         }
 
     }

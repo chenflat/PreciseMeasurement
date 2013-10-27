@@ -4,17 +4,12 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <div class="bs-docs-section" style="margin-top:80px;">
-       
-
-            <ul class="bs-glyphicons">
-            <li><span class="glyphicon glyphicon-adjust"></span> 运行结构图</li>
-             <li><span class="glyphicon glyphicon-adjust"></span> 运行结构图</li>
-              <li><span class="glyphicon glyphicon-adjust"></span> 运行结构图</li>
-               <li><span class="glyphicon glyphicon-adjust"></span> 运行结构图</li>
-                <li><span class="glyphicon glyphicon-adjust"></span> 运行结构图</li>
-
-            </ul>
-
+    <div class="bs-docs-section" style="margin-top: 80px;">
+        <ul id="NavButtons">
+            <li class="buttonComm buttonBlowStandard" onclick="window.location.href='<%=ResolveUrl("~/measuresystem.aspx") %>'">蒸汽系统</li>
+            <li class="buttonComm buttonRealTime">水系统</li>
+            <li class="buttonComm buttonStationDayReport">空压系统</li>
+            <li class="buttonComm buttonChartCompare">电系统</li>
+        </ul>
     </div>
 </asp:Content>

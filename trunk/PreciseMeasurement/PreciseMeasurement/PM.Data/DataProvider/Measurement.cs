@@ -58,11 +58,11 @@ namespace PM.Data
             measurement.DeviceNum = reader["DEVICENUM"].ToString();
             measurement.Inspector = reader["INSPECTOR"].ToString();
             measurement.Measuretime = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));
-            measurement.AiDensity = reader.GetDecimal(reader.GetOrdinal("AI_DENSITY"));
-            measurement.SwTemperature = reader.GetDecimal(reader.GetOrdinal("SW_TEMPERATURE"));
-            measurement.AfFlowinstant = reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT"));
-            measurement.SwPressure = reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE"));
-            measurement.AtFlow = reader.GetDecimal(reader.GetOrdinal("AT_FLOW"));
+            measurement.AiDensity = reader.IsDBNull(reader.GetOrdinal("AI_DENSITY")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AI_DENSITY"));
+            measurement.SwTemperature = reader.IsDBNull(reader.GetOrdinal("SW_TEMPERATURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_TEMPERATURE"));
+            measurement.AfFlowinstant = reader.IsDBNull(reader.GetOrdinal("AF_FLOWINSTANT")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT"));
+            measurement.SwPressure = reader.IsDBNull(reader.GetOrdinal("SW_PRESSURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE"));
+            measurement.AtFlow = reader.IsDBNull(reader.GetOrdinal("AT_FLOW")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AT_FLOW"));
             measurement.MV1 = reader.IsDBNull(reader.GetOrdinal("MV1")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV1"));
             measurement.MV2 = reader.IsDBNull(reader.GetOrdinal("MV2")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV2"));
             measurement.MV3 = reader.IsDBNull(reader.GetOrdinal("MV3")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV3"));
@@ -111,9 +111,31 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+        public static DataSet FindMeasurementByAllPoint(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
         {
-            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate, type, pageindex, pagesize);
+            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(pointnum,startdate, enddate, type, pageindex, pagesize);
         }
+
+        /// <summary>
+        /// 获取报表数据
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public static ReportDataInfo LoadReportDataInfo(IDataReader reader) {
+            ReportDataInfo reportDataInfo = new ReportDataInfo();
+
+            reportDataInfo.Pointnum = reader["POINTNUM"].ToString();
+            reportDataInfo.Description = reader["Description"].ToString();
+            reportDataInfo.Level = reader["Level"].ToString();
+            reportDataInfo.StartDate = reader["StartDate"].ToString();
+            reportDataInfo.EndDate = reader["EndDate"].ToString();
+            reportDataInfo.StartValue = reader.IsDBNull(reader.GetOrdinal("StartValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("StartValue"));
+            reportDataInfo.EndValue = reader.IsDBNull(reader.GetOrdinal("EndValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("EndValue"));
+            reportDataInfo.DiffValue = reader.IsDBNull(reader.GetOrdinal("DiffValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("DiffValue"));
+
+            return reportDataInfo;
+        }
+
+
     }
 }

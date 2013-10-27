@@ -30,6 +30,8 @@ namespace PM.Entity
         private decimal mv4;
         private string mv5;
 
+        private string time;
+
         public long Measurementid
         {
             get { return measurementid; }
@@ -127,6 +129,10 @@ namespace PM.Entity
             set { mv5 = value; }
         }
 
+
+        public string Time {
+            get { return Measuretime.ToString("yyyy-MM-dd hh:mm:ss"); }
+        }
 
     }
 }

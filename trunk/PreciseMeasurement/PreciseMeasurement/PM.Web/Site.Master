@@ -12,6 +12,7 @@
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/icon.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
     <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,7 +47,7 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" id="main-nav">
         <li>
-          <a href="<%=ResolveUrl("~/structure/default.aspx") %>">运行结构图</a>
+          <a href="<%=ResolveUrl("~/structure/default.aspx") %>">计量系统图</a>
         </li>
         <li>
           <a href="<%=ResolveUrl("~/realtime/default.aspx") %>">实时参数</a>
@@ -64,12 +65,12 @@
       <ul class="nav navbar-nav navbar-right">
             <li><a href="<%=ResolveUrl("~/admin/organizations/list.aspx") %>">系统管理</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">张无忌 <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Literal ID="ltUserName" runat="server"></asp:Literal> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">首选项</a></li>
                 <li><a href="<%=ResolveUrl("~/Account/ChangePassword.aspx") %>">修改密码</a></li>
                 <li class="divider"></li>
-                <li><a href="#">退出登陆</a></li>
+                <li><a href="<%=ResolveUrl("~/Account/Login.aspx?Action=Logout") %>">退出登陆</a></li>
               </ul>
             </li>
           </ul>

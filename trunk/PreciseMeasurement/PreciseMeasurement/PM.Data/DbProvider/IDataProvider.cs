@@ -433,13 +433,14 @@ namespace PM.Data
         /// <summary>
         /// 获取指定时间内所有计量器的读表数据
         /// </summary>
+        /// <param name="pointnum">测点编号</param>
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <param name="type">查询方式： ALL全部 DAY日报 WEEK周报 MONTH月报 </param>
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize); 
+        DataSet FindMeasurementByAllPoint(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize); 
 
 
 

@@ -4,6 +4,10 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using PM.Entity;
+using System.Web;
+using PM.Config;
+
 namespace PM.Business.Pages
 {
     public class BasePage : System.Web.UI.Page
@@ -36,6 +40,18 @@ namespace PM.Business.Pages
         protected internal string grouptitle;
 
         protected internal string ip;
+
+         public UserInfo AdminInfo {
+            get
+            {
+                return (UserInfo)Session["UserInfo"];
+            }
+            set
+            {
+                this.Session["UserInfo"] = value;
+            }
+        }
+
 
         /// <summary>
         /// 控件初始化时计算执行时间
@@ -75,9 +91,53 @@ namespace PM.Business.Pages
                 //this.RegisterAdminPageClientScriptBlock();
                 // ShowMessage(this.Page, MsgType.SUCCESS, "");
 
+               // Literal ltUserName = (Literal)Master.FindControl("ltUserName");
+                //ltUserName.Text = AdminInfo.Displayname;
             }
 
         }
+
+        #region 功能权限控制 2007－05－30
+        protected override void OnPreRender(EventArgs e)
+        {
+            //#region 如果是超级用户，则退出
+            //if (((UserInfo)Session["UserInfo"]).UserName == "admin")
+            //{
+            //    base.OnPreRender(e);
+            //    return;
+            //}
+            //#endregion
+
+            if (Session["UserInfo"] == null)
+            {
+                //取得出错页的当前绝对地址,用于错误页返回正确的登陆窗口
+                string strUrl = HttpContext.Current.Request.Url.AbsolutePath.ToString();
+                Response.Write("<script>window.open('" + BaseConfigs.GetSystemPath + "Error.aspx?url=" + strUrl + "','_top');</script>");
+                return;
+            }
+
+           
+            if (Master.FindControl("ltUserName") != null) {
+
+                Literal ltUserName = Master.FindControl("ltUserName") as Literal;
+                ltUserName.Text = AdminInfo.Displayname;
+            }
+
+            if (Master.Master!=null)
+            {
+                if (Master.Master.FindControl("ltUserName") != null)
+                {
+                    Literal ltUserName = Master.Master.FindControl("ltUserName") as Literal;
+                    ltUserName.Text = AdminInfo.Displayname;
+                }
+
+            }
+
+            
+
+            base.OnPreRender(e);
+        }
+        #endregion
 
 
 
@@ -100,6 +160,21 @@ namespace PM.Business.Pages
                 msgbox.Visible = true;
             }
           }
+
+        /// <summary>
+        /// 判断Session是否失效  false=失效 调用方法: if(!IsSessionInvalidation) return;
+        /// </summary>
+        /// <returns>false=失效</returns>
+        public bool IsSessionInvalidation()
+        {
+            if (Session["UserInfo"] == null)
+            {
+                string strUrl = HttpContext.Current.Request.Url.AbsolutePath.ToString();
+                Response.Write("<script>window.open('" + BaseConfigs.GetSystemPath + "Error.aspx?url=" + strUrl + "','_top');</script>");
+                return false;
+            }
+            return true;
+        }
     }
 
     /// <summary>

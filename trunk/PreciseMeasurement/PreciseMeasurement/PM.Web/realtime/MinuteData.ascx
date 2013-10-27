@@ -10,13 +10,10 @@
     <div class="panel-heading minute">
         起始时间：<input type="text" id="startdate" class="Wdate" />
         终止时间：<input type="text" class="Wdate" id="enddate" />
-        
         <input type="button" class="btn btn-info" id="btnMinuteQuery" value="查询" />
-        <asp:HiddenField ID="hdnPointnum" runat="server" />
-      
     </div>
     <div class="panel-body">
-        <asp:GridView ID="gvMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
+        <asp:GridView ID="gvMinuteMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
             EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="MEASURETIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
@@ -28,7 +25,7 @@
             </Columns>
         </asp:GridView>
         <br />
-        <div class="minutepager Pager">
+        <div id="minutepager" class="pager">
         </div>
     </div>
 </div>

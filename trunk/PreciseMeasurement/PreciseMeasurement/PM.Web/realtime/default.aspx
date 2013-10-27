@@ -12,6 +12,8 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/WdatePicker.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/highcharts/highcharts.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/realtime.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -56,6 +58,7 @@
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="realtime">
                         <uc2:RealtimeParams ID="RealtimeParams1" runat="server" />
+                        <input type="hidden" id="pointnum" value="<%=measurePointInfo.Pointnum %>" />
                     </div>
                     <div class="tab-pane fade" id="minute">
                         <uc3:MinuteData ID="MinuteData1" runat="server" />

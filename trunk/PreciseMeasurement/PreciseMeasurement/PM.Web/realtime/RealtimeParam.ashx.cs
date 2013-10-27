@@ -28,18 +28,28 @@ namespace PM.Web.realtime
             string type = context.Request["type"];
             int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
 
+            if (startdate == null || startdate == "")
+                startdate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd hh:mm:ss");
+            if (enddate == null || enddate == "")
+                enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            if (type == null || type == "")
+                type = "MINUTE";
 
-            PagerInfo pagerInfo = new PagerInfo();
-
-            List<MeasurementInfo> list = Business.Measurement.GetMeasurementByPointnum("S1", "2013-09-07 00:00", "2013-09-07 21:00", "DAY", pageindex, 15, out pagerInfo);
-
-            Pagination<MeasurementInfo> pagination = new Pagination<MeasurementInfo>();
-            pagination.List = list;
-            pagination.PagerInfo = pagerInfo;
 
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            string strMeasurements = javaScriptSerializer.Serialize(pagination);
-            context.Response.Write(strMeasurements);
+            string result = "";
+            if (type != "MINUTE")
+            {
+                Pagination<ReportDataInfo> reportdata = Business.Measurement.GetReportData(pointnum, startdate, enddate, type, pageindex, 12);
+                result = javaScriptSerializer.Serialize(reportdata);
+            }
+            else
+            {
+                Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
+                result = javaScriptSerializer.Serialize(pagination);
+            }
+            context.Response.Write(result);
+            
 
         }
 

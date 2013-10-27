@@ -10,7 +10,7 @@
 namespace PM.Web.Account {
     
     
-    public partial class Login1 {
+    public partial class Login {
         
         /// <summary>
         /// UserName 控件。
@@ -47,6 +47,15 @@ namespace PM.Web.Account {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator PasswordRequired;
+        
+        /// <summary>
+        /// ltMessage 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltMessage;
         
         /// <summary>
         /// LoginButton 控件。

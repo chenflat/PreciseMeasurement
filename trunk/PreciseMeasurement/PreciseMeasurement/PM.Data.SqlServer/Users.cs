@@ -50,9 +50,9 @@ namespace PM.Data.SqlServer
         public IDataReader GetUserInfoToReader(string userName)
         {
             DbParameter param = DbHelper.MakeInParam("@USERNAME", (DbType)SqlDbType.Text, 50, userName);
-            string commandText = string.Format("select {0} from [{1}USERS] WHERE  STATUS<>'DELETED' and [USERNAME]=@USERNAME",
+            string commandText = string.Format("select {0} from [{1}USERS] WHERE  STATUS<>'DELETED' and [USERNAME]='{2}'",
                                                 DbFields.USERS,
-                                                BaseConfigs.GetTablePrefix);
+                                                BaseConfigs.GetTablePrefix,userName);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
 

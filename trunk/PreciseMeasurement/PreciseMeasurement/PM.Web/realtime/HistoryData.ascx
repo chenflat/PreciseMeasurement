@@ -7,30 +7,23 @@
     <!-- Default panel contents -->
     <div class="panel-heading history">
         时间类型： 
-        <asp:RadioButtonList ID="rbDateType" runat="server" 
-            RepeatDirection="Horizontal" RepeatLayout="Flow">
-            <asp:ListItem Selected="True" Value="MINUTE">分钟</asp:ListItem>
-            <asp:ListItem Value="HOUR">小时</asp:ListItem>
-        </asp:RadioButtonList>
+         <label><input type="radio" name="datetype" checked="checked" value="MINUTE" />分钟</label>
+         <label><input type="radio" name="datetype" value="HOUR" />小时</label>
+
 
         &nbsp;&nbsp;&nbsp;&nbsp;
-        起始时间：<input type="text" id="startdate" class="Wdate" />
-        终止时间：<input type="text" class="Wdate" id="enddate" />
+        起始时间：<input type="text" id="startdate" class="Wdate startdate" />
+        终止时间：<input type="text" class="Wdate enddate" id="enddate" />
         
-        &nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBoxList 
-            ID="CheckBoxList1" runat="server" RepeatDirection="Horizontal" 
-            RepeatLayout="Flow">
-            <asp:ListItem Selected="True">温度</asp:ListItem>
-            <asp:ListItem Selected="True">压力</asp:ListItem>
-            <asp:ListItem Selected="True">流量</asp:ListItem>
-        </asp:CheckBoxList>
+        <label><input type="checkbox" name="dataitem" checked="checked" value="SW_TEMPERATURE" />温度</label>
+        <label><input type="checkbox" name="dataitem" checked="checked" value="SW_PRESSURE" />压力</label>
+        <label><input type="checkbox" name="dataitem" checked="checked" value="AF_FLOWINSTANT" />流量</label>
 
-        <asp:Button ID="Button1" runat="server"
-            Text="查询" CssClass="btn btn-info" />
+
+        <button type="button" class="btn btn-info" id="btnHistoryQuery">查询</button>
     </div>
     <div class="panel-body">
-        <br />
-        <div class="Pager">
-        </div>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+       
     </div>
 </div>
