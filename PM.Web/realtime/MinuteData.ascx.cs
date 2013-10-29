@@ -14,13 +14,22 @@ namespace PM.Web.realtime
 {
     public partial class MinuteData : RealtimeBaseControl
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnMinuteQuery.Click += new EventHandler(btnMinuteQuery_Click);
             if (!Page.IsPostBack)
             {
                 setMeasureMeasurePointInfo();
                 BindDummyRow();
             }
+        }
+
+
+
+        private void btnMinuteQuery_Click(object sender, EventArgs e)
+        {
+            BindData();
         }
 
         private void setMeasureMeasurePointInfo()
@@ -49,5 +58,26 @@ namespace PM.Web.realtime
             gvMinuteMeasurement.DataSource = dummy;
             gvMinuteMeasurement.DataBind();
         }
+
+
+        /// <summary>
+        /// 数据绑定
+        /// </summary>
+        private void BindData() {
+            if (!IsPostBack) PageControl1.PageSize = gvMinuteMeasurement.PageSize;
+            gvMinuteMeasurement.PageSize = PageControl1.PageSize;
+
+            
+
+            Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(PointInfo.Pointnum, txtStartDate.Text.Trim(), txtEndDate.Text.Trim(), "MINUTE", PageControl1.CurrentPageIndex, PageControl1.PageSize);
+
+            PageControl1.RecordCount = pagination.PagerInfo.RecordCount;
+            gvMinuteMeasurement.PageIndex = PageControl1.CurrentPageIndex - 1;
+            gvMinuteMeasurement.DataSource = pagination.List;
+            gvMinuteMeasurement.DataBind();
+            PageControl1.SetPageLabel(PageControl1.CurrentPageIndex);
+        }
+
+
     }
 }

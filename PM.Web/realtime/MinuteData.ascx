@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MinuteData.ascx.cs"
     Inherits="PM.Web.realtime.MinuteData" %>
+<%@ Register src="../controls/PageControl.ascx" tagname="PageControl" tagprefix="uc1" %>
 <ol class="breadcrumb">
     <li class="active">
         <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的分钟数据 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[查询区间限定为:24小时]
@@ -8,9 +9,11 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading minute">
-        起始时间：<input type="text" id="startdate" class="Wdate" />
-        终止时间：<input type="text" class="Wdate" id="enddate" />
-        <input type="button" class="btn btn-info" id="btnMinuteQuery" value="查询" />
+        起始时间： 
+        <asp:TextBox ID="txtStartDate" CssClass="startdate Wdate"  runat="server"></asp:TextBox>
+        终止时间：
+        <asp:TextBox ID="txtEndDate" CssClass="enddate Wdate" runat="server"></asp:TextBox>
+        <asp:Button ID="btnMinuteQuery" CssClass="btn btn-info" runat="server" Text="查询" />
     </div>
     <div class="panel-body">
         <asp:GridView ID="gvMinuteMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
@@ -25,7 +28,8 @@
             </Columns>
         </asp:GridView>
         <br />
-        <div id="minutepager" class="pager">
-        </div>
+       
+            <uc1:PageControl ID="PageControl1" runat="server" />
+        
     </div>
 </div>

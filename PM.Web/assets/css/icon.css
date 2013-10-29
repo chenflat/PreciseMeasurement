@@ -22,6 +22,19 @@
 {
     color: Blue;
    }
+   
+.btnSubSystem 
+{
+    background-image:url("../ico/subsystem.png");
+    background-repeat: no-repeat;
+  }
+  
+.btnSteam  
+{
+    background-position: 40px 20px;
+} 
+
+
 .buttonComm {
     background-image:url("../ico/icon.png");
     background-repeat: no-repeat;
