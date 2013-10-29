@@ -105,6 +105,7 @@
     <Content Include="assets\ico\favicon.png" />
     <Content Include="assets\ico\icon.png" />
     <Content Include="assets\ico\realtime.gif" />
+    <Content Include="assets\ico\subsystem.png" />
     <Content Include="assets\img\bg.png" />
     <Content Include="assets\img\systemrunchart.png" />
     <Content Include="assets\js\application.js" />
