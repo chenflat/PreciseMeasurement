@@ -9,12 +9,9 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading minute">
-        起始时间： 
-        <asp:TextBox ID="txtStartDate" CssClass="startdate Wdate"  runat="server"></asp:TextBox>
-        终止时间：
-        <asp:TextBox ID="txtEndDate" CssClass="enddate Wdate" runat="server"></asp:TextBox>
-        <asp:Button ID="btnMinuteQuery" CssClass="btn btn-info" runat="server" Text="查询" />
-        <asp:HiddenField ID="hdnPointNum" runat="server" />
+        起始时间： <input type="text" id="startdate" class="Wdate startdate" />
+        终止时间：<input type="text" class="Wdate enddate" id="enddate" />
+         <input type="button" class="btn btn-info" id="btnMinuteQuery" value="查询" />
     </div>
     <div class="panel-body">
         <asp:GridView ID="gvMinuteMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
@@ -29,8 +26,9 @@
             </Columns>
         </asp:GridView>
         <br />
-       
-            <uc1:PageControl ID="PageControl1" runat="server" />
+       <div id="minutepager" class="pager">
+        </div>
+            
         
     </div>
 </div>

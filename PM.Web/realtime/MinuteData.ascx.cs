@@ -17,7 +17,6 @@ namespace PM.Web.realtime
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnMinuteQuery.Click += new EventHandler(btnMinuteQuery_Click);
             if (!Page.IsPostBack)
             {
                 setMeasureMeasurePointInfo();
@@ -25,22 +24,11 @@ namespace PM.Web.realtime
             }
         }
 
-
-
-        private void btnMinuteQuery_Click(object sender, EventArgs e)
-        {
-            BindData();
-        }
-
         private void setMeasureMeasurePointInfo()
         {
             if (MeasurePointInfo == null)
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
-            hdnPointNum.Value = MeasurePointInfo.Pointnum;
-         
-           // gvMeasurement.DataSource = Business.Measurement.FindMeasurementByPointnum(MeasurePointInfo.Pointnum, "2013-09-07 00:00", "2013-09-07 23:59", "DAY", 1, 15).Tables["Measurement"];
-          //  gvMeasurement.DataBind();
 
         }
 
@@ -59,26 +47,6 @@ namespace PM.Web.realtime
             gvMinuteMeasurement.DataSource = dummy;
             gvMinuteMeasurement.DataBind();
         }
-
-
-        /// <summary>
-        /// 数据绑定
-        /// </summary>
-        private void BindData() {
-            if (!IsPostBack) PageControl1.PageSize = gvMinuteMeasurement.PageSize;
-            gvMinuteMeasurement.PageSize = PageControl1.PageSize;
-
-
-
-            Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(hdnPointNum.Value, txtStartDate.Text.Trim(), txtEndDate.Text.Trim(), "MINUTE", PageControl1.CurrentPageIndex, PageControl1.PageSize);
-
-            PageControl1.RecordCount = pagination.PagerInfo.RecordCount;
-            gvMinuteMeasurement.PageIndex = PageControl1.CurrentPageIndex - 1;
-            gvMinuteMeasurement.DataSource = pagination.List;
-            gvMinuteMeasurement.DataBind();
-            PageControl1.SetPageLabel(PageControl1.CurrentPageIndex);
-        }
-
 
     }
 }
