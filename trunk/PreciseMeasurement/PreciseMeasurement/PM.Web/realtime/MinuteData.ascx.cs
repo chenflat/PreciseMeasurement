@@ -37,6 +37,7 @@ namespace PM.Web.realtime
             if (MeasurePointInfo == null)
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
+            hdnPointNum.Value = MeasurePointInfo.Pointnum;
          
            // gvMeasurement.DataSource = Business.Measurement.FindMeasurementByPointnum(MeasurePointInfo.Pointnum, "2013-09-07 00:00", "2013-09-07 23:59", "DAY", 1, 15).Tables["Measurement"];
           //  gvMeasurement.DataBind();
@@ -67,9 +68,9 @@ namespace PM.Web.realtime
             if (!IsPostBack) PageControl1.PageSize = gvMinuteMeasurement.PageSize;
             gvMinuteMeasurement.PageSize = PageControl1.PageSize;
 
-            
 
-            Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(PointInfo.Pointnum, txtStartDate.Text.Trim(), txtEndDate.Text.Trim(), "MINUTE", PageControl1.CurrentPageIndex, PageControl1.PageSize);
+
+            Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(hdnPointNum.Value, txtStartDate.Text.Trim(), txtEndDate.Text.Trim(), "MINUTE", PageControl1.CurrentPageIndex, PageControl1.PageSize);
 
             PageControl1.RecordCount = pagination.PagerInfo.RecordCount;
             gvMinuteMeasurement.PageIndex = PageControl1.CurrentPageIndex - 1;

@@ -14,6 +14,7 @@
         终止时间：
         <asp:TextBox ID="txtEndDate" CssClass="enddate Wdate" runat="server"></asp:TextBox>
         <asp:Button ID="btnMinuteQuery" CssClass="btn btn-info" runat="server" Text="查询" />
+        <asp:HiddenField ID="hdnPointNum" runat="server" />
     </div>
     <div class="panel-body">
         <asp:GridView ID="gvMinuteMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
