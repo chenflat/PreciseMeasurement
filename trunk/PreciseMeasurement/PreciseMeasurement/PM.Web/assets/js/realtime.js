@@ -1,7 +1,7 @@
 ﻿$(function () {
 
-    $(".minute #startdate").val(Date.today().add(-1).toString("yyyy-MM-dd HH:ss"));
-    $(".minute #enddate").val(Date.today().toString("yyyy-MM-dd HH:ss"));
+    $(".minute #startdate").val(new Date().add(-1).day().toString("yyyy-MM-dd HH:mm"));
+    $(".minute #enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
 
     $(".minute #startdate").change(function () {
         var startdate = $(".minute #startdate").val();
@@ -20,7 +20,10 @@
 
     });
 
-    //小时
+    //小时数据
+    $(".hour #startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+    $(".hour #enddate").val(Date.today().toString("yyyy-MM-dd"));
+
     $(".hour #startdate").click(function () {
 
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d} 00:00' })
@@ -33,7 +36,10 @@
 
     });
 
-    //天
+    //每天数据
+
+    $(".day .startdate").val(Date.today().add(-8).day().toString("yyyy-MM-dd"));
+    $(".day .enddate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
 
     $(".day .startdate").click(function () {
 
@@ -49,6 +55,18 @@
 
     //历史
 
+    function initHistoryMinute() {
+        $(".history .startdate").val(new Date().addHours(-10).toString("yyyy-MM-dd HH:mm"));
+        $(".history .enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
+    }
+
+    function initHistoryHour() {
+        $(".history .startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+        $(".history .enddate").val(Date.today().toString("yyyy-MM-dd"));
+    }
+
+    initHistoryMinute();
+
 
     $(".history .startdate").click(function () {
 
@@ -62,6 +80,19 @@
 
     });
 
+    $('.history input[name="datetype"]:radio').change(function () {
+        var value = $(this).val();
+        if (value == "MINUTE") {
+            initHistoryMinute();
+        } else {
+            initHistoryHour();
+        }
+
+        console.log($(this).val());
+    });
+
+
+
 
 
     //每日数据
@@ -70,6 +101,16 @@
     });
 
     //分钟数据
+
+    function initMinuteData() {
+
+        var pointnum = $("#pointnum").val();
+        var startdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
+        var endate = new Date().toString("yyyy-MM-dd HH:mm");
+        GetMinuteData(pointnum, startdate, endate, 1)
+    }
+    initMinuteData();
+
     $("#btnMinuteQuery").click(function () {
         console.log("minute");
         var pointnum = $("#pointnum").val();
@@ -78,8 +119,7 @@
         GetMinuteData(pointnum, startdate, endate, 1)
     });
 
-    $("#minutepager .page").on("click", function () {
-        console.log("pager");
+    $("#minutepager").on("click", "a", function () {
         var pointnum = $("#pointnum").val();
         var startdate = $(".minute #startdate").val();
         var endate = $(".minute #enddate").val();
@@ -87,6 +127,16 @@
     });
 
     //小时数据
+    //初始小时数据
+    function initHourData() {
+        var pointnum = $("#pointnum").val();
+        var startdate = Date.today().add(-1).day().toString("yyyy-MM-dd");
+        var endate = Date.today().toString("yyyy-MM-dd");
+
+        GetHourData(pointnum, startdate, endate, 1)
+    }
+    initHourData();
+
     $("#btnHourQuery").click(function () {
 
         var pointnum = $("#pointnum").val();
@@ -96,15 +146,27 @@
         GetHourData(pointnum, startdate, endate, 1)
     });
 
-    $("#hourpager .page").on("click", function () {
-        console.log("pager");
+
+    $("#hourpager").on("click", "a", function () {
+        //console.log($(this));
         var pointnum = $("#pointnum").val();
         var startdate = $(".hour #startdate").val();
         var endate = $(".hour #enddate").val();
-        GetMinuteData(pointnum, startdate, endate, parseInt($(this).attr('page')))
+
+        console.log($(this).attr('page'));
+
+        GetHourData(pointnum, startdate, endate, parseInt($(this).attr('page')))
     });
 
-    //小时数据
+    //每日数据
+    function initDayData() {
+         var pointnum = $("#pointnum").val();
+        var startdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
+        var endate = Date.today().add(-1).day().toString("yyyy-MM-dd");
+        GetDayData(pointnum, startdate, endate, 1)
+    }
+    initDayData();
+
     $("#btnDayQuery").click(function () {
 
         var pointnum = $("#pointnum").val();
@@ -115,6 +177,9 @@
     });
 
     $("#daypager .page").on("click", function () {
+
+        console.log('aaaa');
+
         console.log("pager");
         var pointnum = $("#pointnum").val();
         var startdate = $(".day #startdate").val();
@@ -124,23 +189,18 @@
 
 
 
-
+    //历史数据
 
     $("#btnHistoryQuery").click(function () {
-
         var type = $('input:radio[name=datetype]:checked').val();
         var pointnum = $("#pointnum").val();
         var startdate = $(".history #startdate").val();
         var endate = $(".history #enddate").val();
         if (type == "MINUTE") {
-            GetMinuteChart(pointnum, startdate, endate, 1);
+            GetMinuteChart(pointnum, startdate, endate, 0);
+        } else {
+            GetHourChart(pointnum, startdate, endate, 0);
         }
-
-
-    });
-
-    $('input:radio[name=datetype]').click(function () {
-        var val = $('input:radio[name=datetype]:checked').val();
     });
 
 });
@@ -300,7 +360,7 @@ function OnSuccessForDay(response) {
 
 
 
-//获取每天数据
+//获取分钟历史数据
 function GetMinuteChart(pointnum, startdate, enddate, pageindex) {
 
     $.ajax({
@@ -315,6 +375,26 @@ function GetMinuteChart(pointnum, startdate, enddate, pageindex) {
 
     // return false;
 }
+
+//获取小时历史数据
+function GetHourChart(pointnum, startdate, enddate, pageindex) {
+
+    $.ajax({
+        type: "GET",
+        url: "RealtimeParam.ashx",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "HOUR" },
+        success: OnSuccessMinuteChart,
+        error: OnFail
+    });
+
+    // return false;
+}
+
+
+
+
 
 function OnSuccessMinuteChart(response) {
 

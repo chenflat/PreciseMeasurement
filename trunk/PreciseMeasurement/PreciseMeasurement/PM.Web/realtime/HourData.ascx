@@ -22,7 +22,7 @@
             </Columns>
         </asp:GridView>
         <br />
-        <div id="hourpager" class="Pager">
+        <div id="hourpager" class="pager">
         </div>
     </div>
 </div>

@@ -37,7 +37,10 @@ namespace PM.Web
             
             Server.ClearError();
             Application["error"] = error;
-            System.Web.HttpContext.Current.Response.Redirect("~/Error.aspx");
+
+            System.Web.HttpContext.Current.Response.Write(error);
+
+           // System.Web.HttpContext.Current.Response.Redirect("~/Error.aspx");
 
         }
 

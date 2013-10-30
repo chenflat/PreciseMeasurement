@@ -6,9 +6,8 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading day">
-        起始时间： 
-        <asp:TextBox ID="startdate" class="Wdate startdate" runat="server"></asp:TextBox> 
-        终止时间：<asp:TextBox ID="enddate" class="Wdate enddate" runat="server"></asp:TextBox>
+        起始时间： <input type="text" id="startdate" class="Wdate startdate" />
+        终止时间：<input type="text" class="Wdate enddate" id="enddate" />
           <button type="button" class="btn btn-info" id="btnDayQuery">查询</button>
     </div>
     <div class="panel-body">
