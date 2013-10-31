@@ -108,6 +108,7 @@
     <Content Include="assets\ico\subsystem.png" />
     <Content Include="assets\img\bg.png" />
     <Content Include="assets\img\systemrunchart.png" />
+    <Content Include="assets\js\analysis.js" />
     <Content Include="assets\js\application.js" />
     <Content Include="assets\js\ASPSnippets_Pager.min.js" />
     <Content Include="assets\js\bootstrap.js" />

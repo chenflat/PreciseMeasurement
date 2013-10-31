@@ -9,8 +9,6 @@
         时间类型： 
          <label><input type="radio" name="datetype" checked="checked" value="MINUTE" />分钟</label>
          <label><input type="radio" name="datetype" value="HOUR" />小时</label>
-
-
         &nbsp;&nbsp;&nbsp;&nbsp;
         起始时间：<input type="text" id="startdate" class="Wdate startdate" />
         终止时间：<input type="text" class="Wdate enddate" id="enddate" />
