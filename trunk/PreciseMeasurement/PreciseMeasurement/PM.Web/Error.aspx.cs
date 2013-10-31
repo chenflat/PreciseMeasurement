@@ -16,8 +16,12 @@ namespace PM.Web
             if (!IsPostBack)
             {
                 strBasePath = BaseConfigs.GetSystemPath;
-                lblErrmsg.Text = Application["error"].ToString();
-                Server.ClearError();
+                if (Application["error"] != null)
+                {
+                    lblErrmsg.Text = Application["error"].ToString();
+                    Server.ClearError();
+                }
+              
 
             }
         }
