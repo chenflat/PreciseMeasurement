@@ -128,5 +128,21 @@ namespace PM.Data.SqlServer
 
            return ds;
        }
+
+         /// <summary>
+        /// 获取指定时间内的的测量数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <returns></returns>
+       public IDataReader FindMeasurementByDate(string startdate, string enddate) {
+           DbParameter[] parms = {                                
+                                  DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
+                                  DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  };
+           string commandText = string.Format("SELECT * FROM [{0}MEASUREMENT] WHERE MEASURETIME BETWEEN @StartDate AND @EndDate ORDER BY MEASUREMENTID DESC", BaseConfigs.GetTablePrefix);
+
+           return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+       }
     }
 }
