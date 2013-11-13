@@ -100,19 +100,12 @@ namespace PM.Business.Pages
         #region 功能权限控制 2007－05－30
         protected override void OnPreRender(EventArgs e)
         {
-            //#region 如果是超级用户，则退出
-            //if (((UserInfo)Session["UserInfo"]).UserName == "admin")
-            //{
-            //    base.OnPreRender(e);
-            //    return;
-            //}
-            //#endregion
-
             if (Session["UserInfo"] == null)
             {
                 //取得出错页的当前绝对地址,用于错误页返回正确的登陆窗口
                 string strUrl = HttpContext.Current.Request.Url.AbsolutePath.ToString();
-                Response.Write("<script>window.open('" + BaseConfigs.GetSystemPath + "Error.aspx?url=" + strUrl + "','_top');</script>");
+                string strReturnUrl = string.Format("{0}Account/Login.aspx?url={1}", BaseConfigs.GetSystemPath, strUrl);
+                Response.Redirect(strReturnUrl);
                 return;
             }
 
