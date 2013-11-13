@@ -480,7 +480,9 @@
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="PM.config" />
+    <Content Include="PM.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="realtime\RealtimeParam.ashx" />
   </ItemGroup>
   <ItemGroup>
