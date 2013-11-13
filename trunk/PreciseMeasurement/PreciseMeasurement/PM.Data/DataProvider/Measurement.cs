@@ -151,43 +151,84 @@ namespace PM.Data
         /// 生成测试小时数据
         /// </summary>
         /// <param name="startdate">开始时间</param>
-        public int CreateMeasurementStatData(string startdate,string type) {
-
+        public int CreateMeasurementStatData(string startdate, ReportType type)
+        {
+            //开始时间
+            DateTime dtStarttime = DateTime.Parse(startdate);
             string enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+            //时间差
+            TimeSpan t3 = DateTime.Now.Subtract(dtStarttime);
+
+            double totalHours = t3.TotalHours;
+            double totalDays = t3.TotalDays;
+
+            //时间列表
+            List<MeasurementStatInfo> listStatInfo = new List<MeasurementStatInfo>();
+
+
+
             string dateformat = "";
-            if (type == ReportType.Hour.ToString()) {
-                dateformat = "yyyy-MM-dd hh";
+            if (type == ReportType.Hour) {
+                dateformat = "yyyy-MM-dd HH";
+                for (int h = 0; h < totalHours; h++) {
+                    DateTime dh = dtStarttime.AddHours(h);
+                    listStatInfo.Add(new MeasurementStatInfo(dh));
+                }
             }
-            else if (type == ReportType.Day.ToString())
+            else if (type == ReportType.Day)
             {
                 dateformat = "yyyy-MM-dd";
+                for (int d = 0; d < totalDays; d++) {
+                    DateTime dd = dtStarttime.AddDays(d);
+                    listStatInfo.Add(new MeasurementStatInfo(dd));
+                }
             }
-            else if (type == ReportType.Month.ToString()) {
+            else if (type == ReportType.Month) {
                 dateformat = "yyyy-MM";
             }
 
-            List<MeasurementInfo> list = new List<MeasurementInfo>();
-
+            //获取指定时间段内的测量数据
+            List<MeasurementInfo> measurements = new List<MeasurementInfo>();
             using (IDataReader reader = FindMeasurementByDate(startdate, enddate))
             {
                 while (reader.Read())
                 {
                     MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
-                   
-                    
-
-                    if (measurementInfo.Measuretime.ToString(dateformat)=="") { 
-
-                    }
-
-                     list.Add(measurementInfo);
-
-
+                    measurements.Add(measurementInfo);
                 }
                 reader.Close();
             }
 
-            return 0;
+
+            foreach (var item in listStatInfo)
+            {
+                List<MeasurementInfo> tempList = new List<MeasurementInfo>();
+
+                for (int i = 0; i < measurements.Count; i++)
+                {
+                    if (measurements[i].Measuretime.ToString(dateformat) == item.Measuretime.ToString(dateformat))
+                    {
+                        tempList.Add(measurements[i]);
+                        measurements.Remove(measurements[i]);
+                    }
+                }
+
+
+                if (tempList.Count > 0)
+                {
+                    MeasurementInfo lastMeasurement = tempList[tempList.Count - 1];
+                    item.LastValue = lastMeasurement.AtFlow;
+                    item.Pointnum = lastMeasurement.Pointnum;
+                    item.Measureunitid = "AT_Flow";
+                    item.Value = 0;
+                }
+            }
+
+
+
+
+            return listStatInfo.Count;
         }
 
 

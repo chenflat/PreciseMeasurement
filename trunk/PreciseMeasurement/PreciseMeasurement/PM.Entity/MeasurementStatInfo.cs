@@ -6,9 +6,9 @@ namespace PM.Entity
 {
     //报表类型
     public enum ReportType { 
-        Hour="HOUR",
-        Day="DAY",
-        Month="MONTH"
+        Hour,
+        Day,
+        Month
     }
 
 
@@ -20,7 +20,16 @@ namespace PM.Entity
         private string m_pointnum;
         private string m_measureunitid;
         private DateTime m_measuretime;
+        private decimal m_lastValue;
         private decimal m_value;
+
+        public MeasurementStatInfo() { 
+        
+        }
+
+        public MeasurementStatInfo(DateTime measuretime) {
+            this.m_measuretime = measuretime;
+        }
 
 
         public string Pointnum
@@ -39,6 +48,11 @@ namespace PM.Entity
         {
             get { return m_measuretime; }
             set { m_measuretime = value; }
+        }
+
+        public decimal LastValue {
+            get { return m_lastValue; }
+            set { m_lastValue = value; }
         }
 
         public decimal Value {
