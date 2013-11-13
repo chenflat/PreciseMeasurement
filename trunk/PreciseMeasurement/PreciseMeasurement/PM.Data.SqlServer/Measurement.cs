@@ -140,7 +140,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
                                   };
-           string commandText = string.Format("SELECT * FROM [{0}MEASUREMENT] WHERE MEASURETIME BETWEEN @StartDate AND @EndDate ORDER BY MEASUREMENTID DESC", BaseConfigs.GetTablePrefix);
+           string commandText = string.Format("SELECT * FROM [{0}MEASUREMENT] WHERE MEASURETIME BETWEEN @StartDate AND @EndDate ORDER BY MEASUREMENTID ASC", BaseConfigs.GetTablePrefix);
 
            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
        }

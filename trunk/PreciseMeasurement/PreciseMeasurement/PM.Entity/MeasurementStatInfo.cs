@@ -5,10 +5,10 @@ using System.Text;
 namespace PM.Entity
 {
     //报表类型
-    enum ReportType { 
-        Hour,
-        Day,
-        Month
+    public enum ReportType { 
+        Hour="HOUR",
+        Day="DAY",
+        Month="MONTH"
     }
 
 
