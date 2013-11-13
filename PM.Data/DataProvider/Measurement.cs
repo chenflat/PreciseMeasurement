@@ -146,7 +146,33 @@ namespace PM.Data
         public static IDataReader FindMeasurementByDate(string startdate, string enddate) {
             return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate);
         }
-        
+
+        /// <summary>
+        /// 生成测试小时数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        public int CreateMeasurementStatData(string startdate,string type) {
+
+            string enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+
+
+            using (IDataReader reader = FindMeasurementByDate(startdate, enddate))
+            {
+                while (reader.Read())
+                {
+                    MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
+
+
+
+                }
+                reader.Close();
+            }
+
+            return 0;
+        }
+
+
 
     }
 }
