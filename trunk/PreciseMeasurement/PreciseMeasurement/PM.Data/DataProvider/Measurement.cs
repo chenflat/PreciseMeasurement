@@ -137,5 +137,16 @@ namespace PM.Data
         }
 
 
+        /// <summary>
+        /// 获取指定时间内的的测量数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <returns></returns>
+        public static IDataReader FindMeasurementByDate(string startdate, string enddate) {
+            return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate);
+        }
+        
+
     }
 }
