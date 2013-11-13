@@ -154,15 +154,33 @@ namespace PM.Data
         public int CreateMeasurementStatData(string startdate,string type) {
 
             string enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            string dateformat = "";
+            if (type == ReportType.Hour.ToString()) {
+                dateformat = "yyyy-MM-dd hh";
+            }
+            else if (type == ReportType.Day.ToString())
+            {
+                dateformat = "yyyy-MM-dd";
+            }
+            else if (type == ReportType.Month.ToString()) {
+                dateformat = "yyyy-MM";
+            }
 
-
+            List<MeasurementInfo> list = new List<MeasurementInfo>();
 
             using (IDataReader reader = FindMeasurementByDate(startdate, enddate))
             {
                 while (reader.Read())
                 {
                     MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
+                   
+                    
 
+                    if (measurementInfo.Measuretime.ToString(dateformat)=="") { 
+
+                    }
+
+                     list.Add(measurementInfo);
 
 
                 }
