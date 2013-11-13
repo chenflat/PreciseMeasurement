@@ -24,21 +24,28 @@ namespace PM.Web.Account
             if (strAction == "Logout")
             {
                 //退出登陆状态
-                DoLogout();
+                doLogout();
             }
         }
 
         private string msg = "<div class=\"form-group\"><div class=\"col-lg-offset-4 col-lg-8\">{0}</div></div>";
 
-
+        /// <summary>
+        /// 用户登陆验证
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void LoginButton_Click(object sender, EventArgs e)
         {
+            //用户名和密码
             string m_username = UserName.Text.Trim();
             string m_password = Password.Text.Trim();
 
+            //验证用户是否存在
             UserInfo userinfo = Users.GetUserInfoByUserName(m_username);
             if (userinfo != null)
             {
+                //比较密码
                 if (!Utils.MD5(m_password).Equals(userinfo.Password))
                 {
                     ltMessage.Text = string.Format(msg, "密码错误");
@@ -51,7 +58,12 @@ namespace PM.Web.Account
                     HttpContext.Current.Response.AppendCookie(cookie);
 
                     Session["UserInfo"] = userinfo;
-                    Response.Redirect("../Default.aspx", true);
+
+                    string url = "../Default.aspx";
+                    if (PMRequest.GetQueryString("url") != "") {
+                        url = PMRequest.GetQueryString("url");
+                    }
+                    Response.Redirect(url, true);
                 }
             }
             else {
@@ -66,7 +78,7 @@ namespace PM.Web.Account
         /// <summary>
         /// 注销登陆账户
         /// </summary>
-        private void DoLogout()
+        private void doLogout()
         {
             //清除缓存
             Session.RemoveAll();
