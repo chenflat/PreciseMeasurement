@@ -135,14 +135,82 @@ namespace PM.Data.SqlServer
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-       public IDataReader FindMeasurementByDate(string startdate, string enddate) {
+       public IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType) {
            DbParameter[] parms = {                                
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
                                   };
-           string commandText = string.Format("SELECT * FROM [{0}MEASUREMENT] WHERE MEASURETIME BETWEEN @StartDate AND @EndDate ORDER BY MEASUREMENTID ASC", BaseConfigs.GetTablePrefix);
+           return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementByDate", parms);
+       }
 
-           return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+
+
+       public bool CreateMeasurementHourData(MeasurementStatInfo statInfo) {
+
+           DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, statInfo.Pointnum),
+                                  DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 20, statInfo.Measureunitid),
+                                  DbHelper.MakeInParam("@MEASURETIME", (DbType)SqlDbType.DateTime, 8, statInfo.Measuretime),
+                                  DbHelper.MakeInParam("@STARTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.StartValue),
+                                  DbHelper.MakeInParam("@LASTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.LastValue),
+                                  DbHelper.MakeInParam("@STARTTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Starttime),
+                                  DbHelper.MakeInParam("@ENDTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Endtime),
+                                  DbHelper.MakeInParam("@VALUE", (DbType)SqlDbType.Decimal, 4, statInfo.Value)
+                                  };
+
+           string commandText = string.Format("INSERT INTO [{0}MEASUREMENT_HOUR] ([POINTNUM],[MEASUREUNITID],[MEASURETIME],[STARTVALUE],[LASTVALUE],[STARTTIME],[ENDTIME],[VALUE])" +
+               "VALUES(@POINTNUM,@MEASUREUNITID,@MEASURETIME,@STARTVALUE,@LASTVALUE,@STARTTIME,@ENDTIME,@VALUE);", BaseConfigs.GetTablePrefix);
+
+           return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
+       }
+
+       /// <summary>
+       /// 创建测量每日数据
+       /// </summary>
+       /// <param name="statInfo"></param>
+       /// <returns></returns>
+       public bool CreateMeasurementDayData(MeasurementStatInfo statInfo)
+       {
+           DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, statInfo.Pointnum),
+                                  DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 20, statInfo.Measureunitid),
+                                  DbHelper.MakeInParam("@MEASURETIME", (DbType)SqlDbType.DateTime, 8, statInfo.Measuretime),
+                                  DbHelper.MakeInParam("@STARTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.StartValue),
+                                  DbHelper.MakeInParam("@LASTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.LastValue),
+                                  DbHelper.MakeInParam("@STARTTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Starttime),
+                                  DbHelper.MakeInParam("@ENDTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Endtime),
+                                  DbHelper.MakeInParam("@VALUE", (DbType)SqlDbType.Decimal, 4, statInfo.Value)
+                                  };
+
+           string commandText = string.Format("INSERT INTO [{0}MEASUREMENT_DAY] ([POINTNUM],[MEASUREUNITID],[MEASURETIME],[STARTVALUE],[LASTVALUE],[STARTTIME],[ENDTIME],[VALUE])" +
+               "VALUES(@POINTNUM,@MEASUREUNITID,@MEASURETIME,@STARTVALUE,@LASTVALUE,@STARTTIME,@ENDTIME,@VALUE);", BaseConfigs.GetTablePrefix);
+
+           return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
+       }
+
+       /// <summary>
+       /// 创建测量每月数据
+       /// </summary>
+       /// <param name="statInfo"></param>
+       /// <returns></returns>
+       public bool CreateMeasurementMonthData(MeasurementStatInfo statInfo)
+       {
+           DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, statInfo.Pointnum),
+                                  DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 20, statInfo.Measureunitid),
+                                  DbHelper.MakeInParam("@MEASURETIME", (DbType)SqlDbType.DateTime, 8, statInfo.Measuretime),
+                                  DbHelper.MakeInParam("@STARTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.StartValue),
+                                  DbHelper.MakeInParam("@LASTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.LastValue),
+                                  DbHelper.MakeInParam("@STARTTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Starttime),
+                                  DbHelper.MakeInParam("@ENDTIME", (DbType)SqlDbType.DateTime, 8, statInfo.Endtime),
+                                  DbHelper.MakeInParam("@VALUE", (DbType)SqlDbType.Decimal, 4, statInfo.Value)
+                                  };
+
+           string commandText = string.Format("INSERT INTO [{0}MEASUREMENT_MONTH] ([POINTNUM],[MEASUREUNITID],[MEASURETIME],[STARTVALUE],[LASTVALUE],[STARTTIME],[ENDTIME],[VALUE])" +
+               "VALUES(@POINTNUM,@MEASUREUNITID,@MEASURETIME,@STARTVALUE,@LASTVALUE,@MEASURETIME,@LASTVALUE,@VALUE);", BaseConfigs.GetTablePrefix);
+
+           return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
        }
     }
 }

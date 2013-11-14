@@ -230,6 +230,15 @@ namespace PM.Data
         bool UpdateMeasurePoint(MeasurePointInfo measurePointInfo);
 
         /// <summary>
+        /// 更新记量点最后更新日期
+        /// </summary>
+        /// <param name="pointnum">计量点</param>
+        /// <param name="lastsyntime">最后更新时间</param>
+        /// <returns></returns>
+        bool UpdateMeasurePointLastSynTime(string pointnum,DateTime lastsyntime);
+
+
+        /// <summary>
         /// 删除计量点信息
         /// </summary>
         /// <param name="idList"></param>
@@ -448,10 +457,27 @@ namespace PM.Data
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-        IDataReader FindMeasurementByDate(string startdate, string enddate);
+        IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType);
 
+        /// <summary>
+        /// 创建测量小时数据
+        /// </summary>
+        /// <param name="statInfo"></param>
+        /// <returns></returns>
+        bool CreateMeasurementHourData(MeasurementStatInfo statInfo);
 
+        /// <summary>
+        /// 创建测量每日数据
+        /// </summary>
+        /// <param name="statInfo"></param>
+        /// <returns></returns>
+        bool CreateMeasurementDayData(MeasurementStatInfo statInfo);
 
-
+        /// <summary>
+        /// 创建测量每月数据
+        /// </summary>
+        /// <param name="statInfo"></param>
+        /// <returns></returns>
+        bool CreateMeasurementMonthData(MeasurementStatInfo statInfo);
     }
 }

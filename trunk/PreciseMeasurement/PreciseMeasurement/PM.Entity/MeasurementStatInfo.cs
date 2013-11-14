@@ -17,11 +17,14 @@ namespace PM.Entity
     /// </summary>
     public class MeasurementStatInfo
     {
-        private string m_pointnum;
-        private string m_measureunitid;
+        private string m_pointnum = "";
+        private string m_measureunitid = "";
         private DateTime m_measuretime;
-        private decimal m_lastValue;
-        private decimal m_value;
+        private decimal m_startValue = 0;
+        private decimal m_lastValue = 0;
+        private DateTime m_starttime;
+        private DateTime m_endtime;
+        private decimal m_value = 0;
 
         public MeasurementStatInfo() { 
         
@@ -50,10 +53,29 @@ namespace PM.Entity
             set { m_measuretime = value; }
         }
 
+        public decimal StartValue
+        {
+            get { return m_startValue; }
+            set { m_startValue = value; }
+        }
+
         public decimal LastValue {
             get { return m_lastValue; }
             set { m_lastValue = value; }
         }
+
+        public DateTime Starttime
+        {
+            get { return m_starttime; }
+            set { m_starttime = value; }
+        }
+
+        public DateTime Endtime
+        {
+            get { return m_endtime; }
+            set { m_endtime = value; }
+        }
+
 
         public decimal Value {
             get { return m_value; }
