@@ -107,7 +107,7 @@
         var pointnum = $("#pointnum").val();
         var startdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
         var endate = new Date().toString("yyyy-MM-dd HH:mm");
-        GetMinuteData(pointnum, startdate, endate, 1)
+        //GetMinuteData(pointnum, startdate, endate, 1)
     }
     initMinuteData();
 
@@ -116,7 +116,7 @@
         var pointnum = $("#pointnum").val();
         var startdate = $(".minute #startdate").val();
         var endate = $(".minute #enddate").val();
-        GetMinuteData(pointnum, startdate, endate, 1)
+       // GetMinuteData(pointnum, startdate, endate, 1)
     });
 
     $("#minutepager").on("click", "a", function () {
@@ -197,9 +197,9 @@
         var startdate = $(".history #startdate").val();
         var endate = $(".history #enddate").val();
         if (type == "MINUTE") {
-            GetMinuteChart(pointnum, startdate, endate, 0);
+            GetMinuteChart(pointnum, startdate, endate);
         } else {
-            GetHourChart(pointnum, startdate, endate, 0);
+            GetHourChart(pointnum, startdate, endate);
         }
     });
 
@@ -283,8 +283,8 @@ function OnSuccessForHour(response) {
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
-        $("td", row).eq(0).html(obj.Pointnum); 
-      //  $("td", row).eq(1).html(Date.parse(obj.Measuretime).toString("yyyy-MM-dd HH:mm"));
+        $("td", row).eq(0).html(obj.Pointnum);
+        $("td", row).eq(1).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(2).html(obj.StartValue);
         $("td", row).eq(3).html(obj.LastValue);
         $("td", row).eq(4).html(obj.Value);
@@ -302,7 +302,6 @@ function OnSuccessForHour(response) {
         RecordCount: parseInt(pager.RecordCount)
     });
 };
-
 
 
 
@@ -335,7 +334,7 @@ function OnSuccessForDay(response) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html($.trim(obj.Level));
-        $("td", row).eq(2).html(Date.parse(obj.EndDate).toString("yyyy-MM-dd"));
+        $("td", row).eq(2).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(3).html(obj.StartValue);
         $("td", row).eq(4).html(obj.EndValue);
         $("td", row).eq(5).html(obj.DiffValue);
@@ -355,35 +354,29 @@ function OnSuccessForDay(response) {
 };
 
 
-
-
-
-
-//获取分钟历史数据
-function GetMinuteChart(pointnum, startdate, enddate, pageindex) {
+//获取分钟历史数据曲线
+function GetMinuteChart(pointnum, startdate, enddate) {
 
     $.ajax({
         type: "GET",
-        url: "RealtimeParam.ashx",
+        url: "MeasurementHistoryData.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "MINUTE" },
+        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "MINUTE" },
         success: OnSuccessMinuteChart,
         error: OnFail
     });
-
-    // return false;
 }
 
 //获取小时历史数据
-function GetHourChart(pointnum, startdate, enddate, pageindex) {
+function GetHourChart(pointnum, startdate, enddate) {
 
     $.ajax({
         type: "GET",
         url: "RealtimeParam.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "HOUR" },
+        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "HOUR" },
         success: OnSuccessMinuteChart,
         error: OnFail
     });

@@ -8,6 +8,7 @@ using PM.Common;
 using System.Text;
 using System.Web.Script.Serialization;
 using PM.Entity;
+using System.Text.RegularExpressions;
 
 namespace PM.Web.realtime
 {
@@ -47,6 +48,9 @@ namespace PM.Web.realtime
             {
                 Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
                 result = javaScriptSerializer.Serialize(pagination);
+
+                result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
+             
             }
             context.Response.Write(result);
             

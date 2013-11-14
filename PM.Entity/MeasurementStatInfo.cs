@@ -6,6 +6,7 @@ namespace PM.Entity
 {
     //报表类型
     public enum ReportType { 
+        Minute,
         Hour,
         Day,
         Month

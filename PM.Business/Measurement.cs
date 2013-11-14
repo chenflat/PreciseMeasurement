@@ -169,7 +169,29 @@ namespace PM.Business
 
         }
 
+        /// <summary>
+        /// 获取测量历史数据
+        /// </summary>
+        /// <param name="pointnum"></param>
+        /// <param name="startdate"></param>
+        /// <param name="enddate"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static List<MeasurementInfo> GetMeasurementHistoryData(string pointnum, string startdate, string enddate, ReportType type)
+        {
 
+            List<MeasurementInfo> measurements = new List<MeasurementInfo>();
+            using (IDataReader reader = Data.Measurement.FindMeasurementHistoryData(pointnum,startdate,enddate,type))
+            {
+                while (reader.Read())
+                {
+                    MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
+                    measurements.Add(measurementInfo);
+                }
+                reader.Close();
+            }
+            return measurements;
+        }
 
 
 
