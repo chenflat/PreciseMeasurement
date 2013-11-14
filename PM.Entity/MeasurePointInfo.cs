@@ -27,6 +27,10 @@ namespace PM.Entity
         private string phone;
         private string status;
         private int level;
+        /// <summary>
+        /// 最后同步时间
+        /// </summary>
+        private DateTime lastsyntime;
 
         public long Measurepointid
         {
@@ -128,5 +132,9 @@ namespace PM.Entity
             set { status = value; }
         }
 
+        public DateTime LastSynTime {
+            get { return lastsyntime; }
+            set { lastsyntime = value; }
+        }
     }
 }

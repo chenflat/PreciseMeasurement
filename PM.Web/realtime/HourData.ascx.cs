@@ -22,6 +22,7 @@ namespace PM.Web.realtime
                 setMeasureMeasurePointInfo();
                 BindDummyRow();
             }
+            
         }
 
         private void setMeasureMeasurePointInfo()
@@ -31,16 +32,16 @@ namespace PM.Web.realtime
             ltDescription.Text = MeasurePointInfo.Description;
         }
 
-
+      
         private void BindDummyRow()
         {
             DataTable dummy = new DataTable();
             dummy.Columns.Add("POINTNUM");
             dummy.Columns.Add("LEVEL");
-            dummy.Columns.Add("ENDDATE");
+            dummy.Columns.Add("MEASURETIME");
             dummy.Columns.Add("STARTVALUE");
-            dummy.Columns.Add("ENDVALUE");
-            dummy.Columns.Add("DIFFVALUE");
+            dummy.Columns.Add("LASTVALUE");
+            dummy.Columns.Add("VALUE");
             dummy.Rows.Add();
 
             gvHourMeasurement.DataSource = dummy;

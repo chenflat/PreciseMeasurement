@@ -14,11 +14,10 @@
             EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />
-                <asp:BoundField DataField="LEVEL" HeaderText="级别" />
-                <asp:BoundField DataField="ENDDATE" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
+                <asp:BoundField DataField="MEASURETIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
                 <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
-                <asp:BoundField DataField="ENDVALUE" HeaderText="终止表数(t)" />
-                <asp:BoundField DataField="DIFFVALUE" HeaderText="小时用量(t)" />
+                <asp:BoundField DataField="LASTVALUE" HeaderText="终止表数(t)" />
+                <asp:BoundField DataField="VALUE" HeaderText="小时用量(t)" />
             </Columns>
         </asp:GridView>
         <br />

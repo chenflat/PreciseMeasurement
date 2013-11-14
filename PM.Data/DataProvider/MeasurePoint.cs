@@ -225,5 +225,16 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindMeasurePointsByLevel(level, orgid, siteid);
         }
 
+
+        /// <summary>
+        /// 更新记量点最后更新日期
+        /// </summary>
+        /// <param name="pointnum">计量点</param>
+        /// <param name="lastsyntime">最后更新时间</param>
+        /// <returns></returns>
+        public static bool UpdateMeasurePointLastSynTime(string pointnum, DateTime lastsyntime) {
+            return DatabaseProvider.GetInstance().UpdateMeasurePointLastSynTime(pointnum, lastsyntime);
+        }
+
     }
 }

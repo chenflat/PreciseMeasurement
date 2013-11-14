@@ -133,7 +133,7 @@
         var startdate = Date.today().add(-1).day().toString("yyyy-MM-dd");
         var endate = Date.today().toString("yyyy-MM-dd");
 
-        GetHourData(pointnum, startdate, endate, 1)
+        //GetHourData(pointnum, startdate, endate, 1)
     }
     initHourData();
 
@@ -163,7 +163,7 @@
          var pointnum = $("#pointnum").val();
         var startdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
         var endate = Date.today().add(-1).day().toString("yyyy-MM-dd");
-        GetDayData(pointnum, startdate, endate, 1)
+       
     }
     initDayData();
 
@@ -283,12 +283,11 @@ function OnSuccessForHour(response) {
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
-        $("td", row).eq(0).html(obj.Description); 
-        $("td", row).eq(1).html($.trim(obj.Level));
-        $("td", row).eq(2).html(Date.parse(obj.EndDate).toString("yyyy-MM-dd HH:mm"));
-        $("td", row).eq(3).html(obj.StartValue);
-        $("td", row).eq(4).html(obj.EndValue);
-        $("td", row).eq(5).html(obj.DiffValue);
+        $("td", row).eq(0).html(obj.Pointnum); 
+      //  $("td", row).eq(1).html(Date.parse(obj.Measuretime).toString("yyyy-MM-dd HH:mm"));
+        $("td", row).eq(2).html(obj.StartValue);
+        $("td", row).eq(3).html(obj.LastValue);
+        $("td", row).eq(4).html(obj.Value);
 
         $("[id*=gvHourMeasurement]").append(row);
         row = $("[id*=gvHourMeasurement] tr:last-child").clone(true);

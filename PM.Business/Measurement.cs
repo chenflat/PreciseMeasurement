@@ -57,7 +57,18 @@ namespace PM.Business
             return Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
         }
 
-        public static Pagination<MeasurementInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+
+        /// <summary>
+        /// 获取分钟统计数据
+        /// </summary>
+        /// <param name="pointnum"></param>
+        /// <param name="startdate"></param>
+        /// <param name="enddate"></param>
+        /// <param name="type"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public static Pagination<MeasurementInfo> GetMinuteMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
         {
             Pagination<MeasurementInfo> pagination = new Pagination<MeasurementInfo>();
 
@@ -73,6 +84,47 @@ namespace PM.Business
                 {
                     MeasurementInfo measurementInfo = Data.Measurement.LoadMeasurementInfo(reader);
                     list.Add(measurementInfo);
+                }
+                reader.Close();
+            }
+
+            DataTable dtPager = ds.Tables["Pager"];
+
+            PagerInfo pagerInfo = Pager.GetPagerInfo(dtPager.CreateDataReader());
+
+            pagination.List = list;
+            pagination.PagerInfo = pagerInfo;
+
+            return pagination;
+
+        }
+
+        /// <summary>
+        /// 获取指定测点的计量数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始日期</param>
+        /// <param name="enddate">结束日期</param>
+        /// <param name="type">统计类型 HOUR|DAY|MONTH</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <returns></returns>
+        public static Pagination<MeasurementStatInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+        {
+            Pagination<MeasurementStatInfo> pagination = new Pagination<MeasurementStatInfo>();
+
+            DataSet ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
+
+            DataTable meassurement = ds.Tables["Measurement"];
+
+            List<MeasurementStatInfo> list = new List<MeasurementStatInfo>();
+
+            using (IDataReader reader = meassurement.CreateDataReader())
+            {
+                while (reader.Read())
+                {
+                    MeasurementStatInfo statInfo = Data.Measurement.LoadMeasurementStatInfo(reader);
+                    list.Add(statInfo);
                 }
                 reader.Close();
             }

@@ -38,14 +38,14 @@ namespace PM.Web.realtime
 
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = "";
-            if (type != "MINUTE")
+            if (type == "MINUTE")
             {
-                Pagination<ReportDataInfo> reportdata = Business.Measurement.GetReportData(pointnum, startdate, enddate, type, pageindex, 12);
-                result = javaScriptSerializer.Serialize(reportdata);
+                Pagination<MeasurementInfo> pagination = Business.Measurement.GetMinuteMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
+                result = javaScriptSerializer.Serialize(pagination);
             }
             else
             {
-                Pagination<MeasurementInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
+                Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
                 result = javaScriptSerializer.Serialize(pagination);
             }
             context.Response.Write(result);
