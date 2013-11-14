@@ -129,6 +129,27 @@ namespace PM.Data.SqlServer
            return ds;
        }
 
+
+    /// <summary>
+        /// 获取指定时间内的的测量数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+       public IDataReader FindMeasurementHistoryData(string pointnum, string startdate, string enddate, ReportType reportType)
+       {
+           DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@PointNum", (DbType)SqlDbType.VarChar, 30, pointnum), 
+                                  DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
+                                  DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, reportType.ToString())
+                                  };
+           return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementHistory", parms);
+       }
+
+
          /// <summary>
         /// 获取指定时间内的的测量数据
         /// </summary>

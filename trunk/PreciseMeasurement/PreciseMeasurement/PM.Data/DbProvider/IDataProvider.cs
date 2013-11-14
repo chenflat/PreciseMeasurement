@@ -460,6 +460,16 @@ namespace PM.Data
         IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType);
 
         /// <summary>
+        /// 获取指定时间内的的测量数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        IDataReader FindMeasurementHistoryData(string pointnum, string startdate, string enddate, ReportType reportType);
+
+        /// <summary>
         /// 创建测量小时数据
         /// </summary>
         /// <param name="statInfo"></param>

@@ -53,24 +53,28 @@ namespace PM.Data
         public static MeasurementInfo LoadMeasurementInfo(IDataReader reader)
         {
             MeasurementInfo measurement = new MeasurementInfo();
-            measurement.Measurementid = reader.GetInt64(reader.GetOrdinal("MEASUREMENTID"));
+
+            measurement.Measurementid = reader.GetSchemaTable().Columns["MEASUREMENTID"]==null ? 0 : reader.GetInt64(reader.GetOrdinal("MEASUREMENTID"));
             measurement.Pointnum = reader["POINTNUM"].ToString();
-            measurement.DeviceNum = reader["DEVICENUM"].ToString();
-            measurement.Inspector = reader["INSPECTOR"].ToString();
+            measurement.DeviceNum = reader.GetSchemaTable().Columns["DEVICENUM"] == null ? "" : reader["DEVICENUM"].ToString();
+            measurement.Inspector = reader.GetSchemaTable().Columns["INSPECTOR"] == null ? "" : reader["INSPECTOR"].ToString();
             measurement.Measuretime = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));
             measurement.AiDensity = reader.IsDBNull(reader.GetOrdinal("AI_DENSITY")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AI_DENSITY"));
             measurement.SwTemperature = reader.IsDBNull(reader.GetOrdinal("SW_TEMPERATURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_TEMPERATURE"));
             measurement.AfFlowinstant = reader.IsDBNull(reader.GetOrdinal("AF_FLOWINSTANT")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT"));
             measurement.SwPressure = reader.IsDBNull(reader.GetOrdinal("SW_PRESSURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE"));
             measurement.AtFlow = reader.IsDBNull(reader.GetOrdinal("AT_FLOW")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AT_FLOW"));
-            measurement.MV1 = reader.IsDBNull(reader.GetOrdinal("MV1")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV1"));
-            measurement.MV2 = reader.IsDBNull(reader.GetOrdinal("MV2")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV2"));
-            measurement.MV3 = reader.IsDBNull(reader.GetOrdinal("MV3")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV3"));
-            measurement.MV4 = reader.IsDBNull(reader.GetOrdinal("MV4")) ? 0 : reader.GetDecimal(reader.GetOrdinal("MV4"));
-            measurement.MV5 = reader.GetOrdinal("MV5").ToString();
+            measurement.MV1 = reader.GetSchemaTable().Columns["MV1"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV1"));
+            measurement.MV2 = reader.GetSchemaTable().Columns["MV2"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV2"));
+            measurement.MV3 = reader.GetSchemaTable().Columns["MV3"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV3"));
+            measurement.MV4 = reader.GetSchemaTable().Columns["MV4"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV4"));
+            measurement.MV5 = reader.GetSchemaTable().Columns["MV5"] == null ? "" : reader.GetOrdinal("MV5").ToString();
 
             return measurement;
         }
+
+
+
 
 
         public static MeasurementInfo LoadStatInfo(IDataReader reader)
@@ -116,6 +120,22 @@ namespace PM.Data
         {
             return DatabaseProvider.GetInstance().FindMeasurementByCondition(condition, type, pageindex, pagesize, out recordcount);
         }
+
+        /// <summary>
+        /// 获取指定时间内的的测量数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        public static IDataReader FindMeasurementHistoryData(string pointnum, string startdate, string enddate, ReportType reportType)
+        {
+            return DatabaseProvider.GetInstance().FindMeasurementHistoryData(pointnum, startdate, enddate, reportType);
+        }
+
+
+
 
         /// <summary>
         /// 获取指定测点的读表数据
