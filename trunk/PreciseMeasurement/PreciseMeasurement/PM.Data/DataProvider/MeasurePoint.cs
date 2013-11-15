@@ -100,10 +100,7 @@ namespace PM.Data
             measurePointInfo.Serverport = TypeConverter.ObjectToInt(reader["SERVERPORT"]);
             measurePointInfo.Metername = reader["METERNAME"].ToString();
             measurePointInfo.Orgid = reader["ORGID"].ToString();
-            if (Utils.ContainsField(reader, "ORGNAME"))
-            {
-                measurePointInfo.Orgname = reader["ORGNAME"].ToString();
-            }
+            measurePointInfo.Orgname = reader.GetSchemaTable().Columns["ORGNAME"] == null ? "" : reader["ORGNAME"].ToString();
             measurePointInfo.Siteid = reader["SITEID"].ToString();
             measurePointInfo.Location = reader["LOCATION"].ToString();
             measurePointInfo.Carrier = reader["CARRIER"].ToString();
