@@ -21,7 +21,8 @@
         <button type="button" class="btn btn-info" id="btnHistoryQuery">查询</button>
     </div>
     <div class="panel-body">
-        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-       
+        <div id="temperature" style="min-width: 310px; height: 400px; margin: 0 auto;display:none;"></div>
+        <div id="pressure" style="min-width: 310px; height: 400px; margin: 0 auto;display:none;"></div>
+        <div id="flowinstant" style="min-width: 310px; height: 400px; margin: 0 auto;display:none;"></div>
     </div>
 </div>

@@ -134,6 +134,16 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindMeasurementHistoryData(pointnum, startdate, enddate, reportType);
         }
 
+        /// <summary>
+        /// 获取指定时间内的测量数据报告
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        public static IDataReader GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
+            return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate, reportType);
+        }
 
 
 
@@ -162,9 +172,9 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static DataSet FindMeasurementByAllPoint(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
         {
-            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(pointnum,startdate, enddate, type, pageindex, pagesize);
+            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate, type, pageindex, pagesize);
         }
 
         /// <summary>
