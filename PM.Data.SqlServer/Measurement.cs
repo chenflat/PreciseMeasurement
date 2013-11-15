@@ -102,10 +102,10 @@ namespace PM.Data.SqlServer
        /// <param name="pageindex">当前页</param>
        /// <param name="pagesize">每页显示数</param>
        /// <returns></returns>
-       public DataSet FindMeasurementByAllPoint(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
+       public DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
        {
            DbParameter[] parms = { 
-                                  DbHelper.MakeInParam("@PointNum", (DbType)SqlDbType.VarChar, 30, pointnum), 
+                                 
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, type), 
@@ -123,7 +123,7 @@ namespace PM.Data.SqlServer
            dt.Rows.Add();
            dt.Rows[0]["PageIndex"] = pageindex;
            dt.Rows[0]["PageSize"] = pagesize;
-           dt.Rows[0]["RecordCount"] = TypeConverter.ObjectToInt(parms[6].Value);
+           dt.Rows[0]["RecordCount"] = TypeConverter.ObjectToInt(parms[5].Value);
            ds.Tables.Add(dt);
 
            return ds;
@@ -165,6 +165,21 @@ namespace PM.Data.SqlServer
            return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementByDate", parms);
        }
 
+        /// <summary>
+        /// 获取指定时间内的测量数据报告
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+       public IDataReader GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
+           DbParameter[] parms = {                                
+                                  DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
+                                  DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
+                                  };
+           return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementReport", parms);
+       }
 
 
        public bool CreateMeasurementHourData(MeasurementStatInfo statInfo) {

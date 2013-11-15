@@ -140,11 +140,11 @@ namespace PM.Business
 
         }
 
-        public static Pagination<ReportDataInfo> GetReportData(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize) {
+        public static Pagination<ReportDataInfo> GetReportData(string startdate, string enddate, string type, int pageindex, int pagesize) {
             
             Pagination<ReportDataInfo> pagination = new Pagination<ReportDataInfo>();
 
-            DataSet ds = Data.Measurement.FindMeasurementByAllPoint(pointnum, startdate, enddate, type, pageindex, pagesize);
+            DataSet ds = Data.Measurement.FindMeasurementByAllPoint( startdate, enddate, type, pageindex, pagesize);
 
             DataTable meassurement = ds.Tables["Measurement"];
 

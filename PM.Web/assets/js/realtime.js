@@ -54,7 +54,6 @@
     });
 
     //历史
-
     function initHistoryMinute() {
         $(".history .startdate").val(new Date().addHours(-10).toString("yyyy-MM-dd HH:mm"));
         $(".history .enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
@@ -79,6 +78,11 @@
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
 
     });
+	//更新历史开始结束日期
+	 $(".history .startdate").change(function(){
+		 console.log('change');
+		setEndDay();
+	 });
 
     $('.history input[name="datetype"]:radio').change(function () {
         var value = $(this).val();
@@ -90,6 +94,30 @@
 
         console.log($(this).val());
     });
+
+
+	function getDateType() {
+		return $('.history input[name="datetype"]:checked').val();
+	}
+
+	//设置开始日期
+	function setEndDay() {
+		var type = getDateType();
+		 if (type == "MINUTE") {
+			if($(".history .startdate").val().length>0) {
+				//Date startdate = Date.parse($(".history .startdate").val());
+				// $(".history .enddate").val();
+			}
+
+		 } else {
+			 console.log(type);
+			if($(".history .startdate").val().length>0) {
+				
+				 $(".history .enddate").val(new Date($(".history .startdate").val()).addDay(1));
+			}
+		 }
+
+	}
 
 
 
@@ -196,9 +224,17 @@
         var pointnum = $("#pointnum").val();
         var startdate = $(".history #startdate").val();
         var endate = $(".history #enddate").val();
+		
         if (type == "MINUTE") {
             GetMinuteChart(pointnum, startdate, endate);
         } else {
+			if(endate==startdate) {
+				enddate = enddate + " 23:59";
+			} else {
+				var dn = new Date(enddate);
+				enddate = dn.addDays(-1).toString('yyyy-MM-dd') + " 23:59";
+
+			}
             GetHourChart(pointnum, startdate, endate);
         }
     });
@@ -332,12 +368,12 @@ function OnSuccessForDay(response) {
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
-        $("td", row).eq(0).html(obj.Description);
+        $("td", row).eq(0).html(obj.Pointnum);
         $("td", row).eq(1).html($.trim(obj.Level));
         $("td", row).eq(2).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(3).html(obj.StartValue);
-        $("td", row).eq(4).html(obj.EndValue);
-        $("td", row).eq(5).html(obj.DiffValue);
+        $("td", row).eq(4).html(obj.LastValue);
+        $("td", row).eq(5).html(obj.Value);
 
         $("[id*=gvDayMeasurement]").append(row);
         row = $("[id*=gvDayMeasurement] tr:last-child").clone(true);
@@ -354,7 +390,13 @@ function OnSuccessForDay(response) {
 };
 
 
-//获取分钟历史数据曲线
+/**
+* 获取分钟历史数据曲线
+*
+* @param pointnum 测点编号
+* @param startdate 开始统计日期
+* @param enddate 结束统计日期
+*/
 function GetMinuteChart(pointnum, startdate, enddate) {
 
     $.ajax({
@@ -368,16 +410,22 @@ function GetMinuteChart(pointnum, startdate, enddate) {
     });
 }
 
-//获取小时历史数据
+/**
+* 获取小时历史数据曲线
+*
+* @param pointnum 测点编号
+* @param startdate 开始统计日期
+* @param enddate 结束统计日期
+*/
 function GetHourChart(pointnum, startdate, enddate) {
 
     $.ajax({
         type: "GET",
-        url: "RealtimeParam.ashx",
+        url: "MeasurementHistoryData.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "HOUR" },
-        success: OnSuccessMinuteChart,
+        success: OnSuccessHourChart,
         error: OnFail
     });
 
@@ -385,10 +433,11 @@ function GetHourChart(pointnum, startdate, enddate) {
 }
 
 
-
-
-
 function OnSuccessMinuteChart(response) {
+
+	var items = $("input[name='dataitem']:checked");
+
+
 
 
     $('#container').highcharts({
@@ -425,10 +474,187 @@ function OnSuccessMinuteChart(response) {
         series: [{
             name: 'Tokyo',
             data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
         }]
     });
+
+}
+
+/**
+*  获取图表X轴
+* @param starttime 开始时间
+* @param endtime 结束时间
+* @type 时间类型
+*/
+function getChartXAxis(datetype){
+	var startdate = $(".history #startdate").val();
+    var endate = $(".history #enddate").val();
+	
+	var dateZone = new Array();
+
+	var d1 = new Date(startdate); //"now"
+	var d2 = new Date(endate)  
+	if(datetype=="MINUTE") {
+		
+
+	} else {
+		var diff = Math.abs(d1-d2);
+		var days =  diff/1000/60/60/24;
+		for(var i=0;i<days;i++) {
+			dateZone.push(d1.addDays(i).toString("MM-dd"));
+		}
+	}
+	return dateZone;
+}
+
+
+function OnSuccessHourChart(response){
+
+	var dateZone = getChartXAxis("HOUR")
+
+	var charItems = [
+			{"name":"SW_TEMPERATURE","title":"温度曲线","unit":"°C"},
+			{"name":"SW_PRESSURE","title":"压力曲线","unit":"MPa"},
+			{"name":"AF_FLOWINSTANT","title":"瞬时流量曲线","unit":"t/h"}
+		];
+
+	var selected = new Array();
+	$("input[name='dataitem']:checked").each(function() {
+		 selected.push($(this).val());
+	});
+
+	var times = [];
+	var arrSwtemperature = [];
+	var arrSwpressure  = [];
+	var arrAfflowinstant  = [];
+	
+	for(var i=0;i<response.length;i++) {
+		times.push(response[i].Time);
+		arrSwtemperature.push(response[i].SwTemperature);
+		arrSwpressure.push(response[i].SwPressure);
+		arrAfflowinstant.push(response[i].AfFlowinstant);
+	}
+
+console.log( Math.abs(arrSwtemperature.length / dateZone.length));
+	 
+	for(var i=0;i<selected.length;i++) {
+		if(selected[i]=="SW_TEMPERATURE") {
+			$('#temperature').show();
+			$('#temperature').highcharts({
+				title: {
+					text: '温度曲线',
+					x: -20 //center
+				},
+				xAxis: {
+					labels : {
+						step : 1
+					},
+					categories: times
+				},
+				yAxis: {
+					title: {
+						text: 'Temperature (°C)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					valueSuffix: '°C'
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
+				series: [{
+					name: '温度',
+					data: arrSwtemperature
+				}]
+			});
+
+		} else if(selected[i]=="SW_PRESSURE") {
+			$('#pressure').show();
+			$('#pressure').highcharts({
+				title: {
+					text: '压力曲线',
+					x: -20 //center
+				},
+				xAxis: {
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				},
+				yAxis: {
+					title: {
+						text: 'Pressure (MPa)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					valueSuffix: 'MPa'
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
+				series: [{
+					name: '压力',
+					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+				}]
+			});			
+
+		} else if(selected[i]=="AF_FLOWINSTANT") {
+			$('#flowinstant').show();
+			$('#flowinstant').highcharts({
+				title: {
+					text: '瞬时流量曲线',
+					x: -20 //center
+				},
+				xAxis: {
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				},
+				yAxis: {
+					title: {
+						text: 'Flowinstant (t/h)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					valueSuffix: 't/h'
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
+				series: [{
+					name: '瞬时流量',
+					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+				}]
+			});			
+
+		}
+
+
+		
+	
+	}
+
+
+
+
+   
 
 }
