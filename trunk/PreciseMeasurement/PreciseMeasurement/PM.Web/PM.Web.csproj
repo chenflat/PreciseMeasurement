@@ -444,6 +444,9 @@
     <Compile Include="report\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="report\MeasurementReport.ashx.cs">
+      <DependentUpon>MeasurementReport.ashx</DependentUpon>
+    </Compile>
     <Compile Include="report\month.aspx.cs">
       <DependentUpon>month.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -496,6 +499,7 @@
     </Content>
     <Content Include="realtime\RealtimeParam.ashx" />
     <Content Include="realtime\MeasurementHistoryData.ashx" />
+    <Content Include="report\MeasurementReport.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

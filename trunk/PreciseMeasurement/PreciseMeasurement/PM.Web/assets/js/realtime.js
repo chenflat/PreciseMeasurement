@@ -60,7 +60,7 @@
     }
 
     function initHistoryHour() {
-        $(".history .startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+        $(".history .startdate").val(Date.today().add(-5).day().toString("yyyy-MM-dd"));
         $(".history .enddate").val(Date.today().toString("yyyy-MM-dd"));
     }
 
@@ -121,8 +121,6 @@
 
 
 
-
-
     //每日数据
     $(".day #btnQuery").click(function () {
         GetMeasurements(1);
@@ -135,7 +133,7 @@
         var pointnum = $("#pointnum").val();
         var startdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
         var endate = new Date().toString("yyyy-MM-dd HH:mm");
-        //GetMinuteData(pointnum, startdate, endate, 1)
+        GetMinuteData(pointnum, startdate, endate, 1)
     }
     initMinuteData();
 
@@ -144,7 +142,7 @@
         var pointnum = $("#pointnum").val();
         var startdate = $(".minute #startdate").val();
         var endate = $(".minute #enddate").val();
-       // GetMinuteData(pointnum, startdate, endate, 1)
+        GetMinuteData(pointnum, startdate, endate, 1)
     });
 
     $("#minutepager").on("click", "a", function () {
@@ -161,7 +159,7 @@
         var startdate = Date.today().add(-1).day().toString("yyyy-MM-dd");
         var endate = Date.today().toString("yyyy-MM-dd");
 
-        //GetHourData(pointnum, startdate, endate, 1)
+        GetHourData(pointnum, startdate, endate, 1)
     }
     initHourData();
 
@@ -191,7 +189,7 @@
          var pointnum = $("#pointnum").val();
         var startdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
         var endate = Date.today().add(-1).day().toString("yyyy-MM-dd");
-       
+        GetDayData(pointnum, startdate, endate, 1)
     }
     initDayData();
 
@@ -263,6 +261,8 @@ function OnSuccessForMinute(response) {
 
    // console.log(response);
     var measurements = response.List;
+    if (measurements.length == 0)
+        return;
 
     var row = $("[id*=gvMinuteMeasurement] tr:last-child").clone(true);
     $("[id*=gvMinuteMeasurement] tr").not($("[id*=gvMinuteMeasurement] tr:first-child")).remove();
@@ -312,6 +312,8 @@ function OnSuccessForHour(response) {
 
     console.log(response);
     var measurements = response.List;
+    if (measurements.length == 0)
+        return;
 
     var row = $("[id*=gvHourMeasurement] tr:last-child").clone(true);
     $("[id*=gvHourMeasurement] tr").not($("[id*=gvHourMeasurement] tr:first-child")).remove();
@@ -319,7 +321,7 @@ function OnSuccessForHour(response) {
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
-        $("td", row).eq(0).html(obj.Pointnum);
+        $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(2).html(obj.StartValue);
         $("td", row).eq(3).html(obj.LastValue);
@@ -361,6 +363,8 @@ function OnSuccessForDay(response) {
 
     console.log(response);
     var measurements = response.List;
+    if (measurements.length == 0)
+        return;
 
     var row = $("[id*=gvDayMeasurement] tr:last-child").clone(true);
     $("[id*=gvDayMeasurement] tr").not($("[id*=gvDayMeasurement] tr:first-child")).remove();
@@ -368,7 +372,7 @@ function OnSuccessForDay(response) {
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
-        $("td", row).eq(0).html(obj.Pointnum);
+        $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html($.trim(obj.Level));
         $("td", row).eq(2).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(3).html(obj.StartValue);
@@ -534,45 +538,59 @@ function OnSuccessHourChart(response){
 		arrAfflowinstant.push(response[i].AfFlowinstant);
 	}
 
-console.log( Math.abs(arrSwtemperature.length / dateZone.length));
+//console.log( Math.abs(arrSwtemperature.length / dateZone.length));
 	 
 	for(var i=0;i<selected.length;i++) {
 		if(selected[i]=="SW_TEMPERATURE") {
 			$('#temperature').show();
 			$('#temperature').highcharts({
-				title: {
-					text: '温度曲线',
-					x: -20 //center
-				},
-				xAxis: {
-					labels : {
-						step : 1
-					},
-					categories: times
-				},
-				yAxis: {
-					title: {
-						text: 'Temperature (°C)'
-					},
-					plotLines: [{
-						value: 0,
-						width: 1,
-						color: '#808080'
-					}]
-				},
-				tooltip: {
-					valueSuffix: '°C'
-				},
-				legend: {
-					layout: 'vertical',
-					align: 'right',
-					verticalAlign: 'middle',
-					borderWidth: 0
-				},
-				series: [{
-					name: '温度',
-					data: arrSwtemperature
-				}]
+			    title: {
+			        text: '温度曲线',
+			        x: -20 //center
+			    },
+			    xAxis: {
+			        labels: {
+			            staggerLines: 4,
+			            step: 24,
+			            formatter: function () {
+			                console.log(this.value);
+			                return this.value;
+			                //return new Date(this.value).toString("MM-dd");
+			            }
+			        },
+			        categories: times,
+
+			        gridLineWidth: 1//默认是0，即在图上没有纵轴间隔线
+			    },
+			    yAxis: {
+			        title: {
+			            text: 'Temperature (°C)'
+			        },
+			        plotLines: [{
+			            value: 0,
+			            width: 0,
+			            color: '#808080'
+			        }]
+			    },
+			    tooltip: {
+			        valueSuffix: '°C'
+			    },
+			    legend: {
+			        enabled: false
+			    },
+			    series: [{
+			        name: '温度',
+			        data: arrSwtemperature
+			    }],
+			    plotOptions: {
+			        marker: {
+			            radius: 0.1,
+                        lineWidth:0.1
+			        }
+			    },
+			    credits: {
+			        enabled: false
+			    }
 			});
 
 		} else if(selected[i]=="SW_PRESSURE") {
@@ -583,7 +601,16 @@ console.log( Math.abs(arrSwtemperature.length / dateZone.length));
 					x: -20 //center
 				},
 				xAxis: {
-					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				    labels: {
+				        staggerLines: 4,
+				        step: 24,
+				        formatter: function () {
+				            console.log(this.value);
+
+				            return new Date(this.value).toString("MM-dd");
+				        }
+				    },
+				    categories: times
 				},
 				yAxis: {
 					title: {
@@ -599,15 +626,15 @@ console.log( Math.abs(arrSwtemperature.length / dateZone.length));
 					valueSuffix: 'MPa'
 				},
 				legend: {
-					layout: 'vertical',
-					align: 'right',
-					verticalAlign: 'middle',
-					borderWidth: 0
+				    enabled: false
 				},
 				series: [{
 					name: '压力',
-					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-				}]
+					data: arrSwpressure
+				}],
+	            credits: {
+	                enabled: false
+	            }
 			});			
 
 		} else if(selected[i]=="AF_FLOWINSTANT") {
@@ -618,7 +645,16 @@ console.log( Math.abs(arrSwtemperature.length / dateZone.length));
 					x: -20 //center
 				},
 				xAxis: {
-					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				    labels: {
+				       
+				        step: 24,
+				        formatter: function () {
+				            console.log(this.value);
+
+				            return new Date(this.value).toString("MM-dd");
+				        }
+				    },
+				    categories: times
 				},
 				yAxis: {
 					title: {
@@ -634,15 +670,15 @@ console.log( Math.abs(arrSwtemperature.length / dateZone.length));
 					valueSuffix: 't/h'
 				},
 				legend: {
-					layout: 'vertical',
-					align: 'right',
-					verticalAlign: 'middle',
-					borderWidth: 0
+				    enabled: false
 				},
 				series: [{
 					name: '瞬时流量',
-					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-				}]
+					data: arrAfflowinstant
+				}],
+	            credits: {
+	                enabled: false
+	            }
 			});			
 
 		}

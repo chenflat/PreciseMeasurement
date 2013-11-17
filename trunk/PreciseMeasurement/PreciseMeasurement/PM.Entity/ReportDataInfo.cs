@@ -14,11 +14,13 @@ namespace PM.Entity
         private string m_Pointnum;
         private string m_description;
         private string m_level;
-        private string m_startdate;
-        private string m_enddate;
+        private DateTime m_measuretime;
+        private DateTime m_starttime;
+        private DateTime m_endtime;
+
         private decimal m_startvalue;
-        private decimal m_endvalue;
-        private decimal m_diffvalue;
+        private decimal m_lastvalue;
+        private decimal m_value;
 
         public int RowNumber {
             get { return m_RowNumber; }
@@ -40,16 +42,16 @@ namespace PM.Entity
             set { m_level = value; }
         }
 
-        public string StartDate
+        public DateTime Starttime
         {
-            get { return m_startdate; }
-            set { m_startdate = value; }
+            get { return m_starttime; }
+            set { m_starttime = value; }
         }
 
-        public string EndDate
+        public DateTime Endtime
         {
-            get { return m_enddate; }
-            set { m_enddate = value; }
+            get { return m_endtime; }
+            set { m_endtime = value; }
         }
 
         public decimal StartValue {
@@ -57,14 +59,14 @@ namespace PM.Entity
             set { m_startvalue = value; }
         }
 
-        public decimal EndValue {
-            get { return m_endvalue; }
-            set { m_endvalue = value; }
+        public decimal LastValue {
+            get { return m_lastvalue; }
+            set { m_lastvalue = value; }
         }
 
-        public decimal DiffValue {
-            get { return m_diffvalue; }
-            set { m_diffvalue = value; }
+        public decimal Value {
+            get { return m_value; }
+            set { m_value = value; }
         }
     }
 }

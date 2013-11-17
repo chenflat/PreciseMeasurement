@@ -15,6 +15,7 @@ namespace PM.Web
 {
     public partial class Test : System.Web.UI.Page
     {
+        private string startDate = "2013-09-01 00:00:00"; 
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,7 +23,7 @@ namespace PM.Web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string startDate = "2013-09-07 00:00:00";
+           
             string endDate = "";
             PM.Data.Measurement measurement = new Data.Measurement();
             measurement.CreateMeasurementStatData(startDate,endDate, ReportType.Hour);
@@ -30,7 +31,7 @@ namespace PM.Web
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            string startDate = "2013-09-07 00:00:00";
+            //string startDate = "2013-09-07 00:00:00";
             string endDate = "";
             PM.Data.Measurement measurement = new Data.Measurement();
             measurement.CreateMeasurementStatData(startDate, endDate, ReportType.Day);
@@ -38,7 +39,7 @@ namespace PM.Web
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            string startDate = "2013-09-01 00:00:00";
+           // string startDate = "2013-09-01 00:00:00";
             string endDate = "";
             PM.Data.Measurement measurement = new Data.Measurement();
             measurement.CreateMeasurementStatData(startDate, endDate, ReportType.Month);

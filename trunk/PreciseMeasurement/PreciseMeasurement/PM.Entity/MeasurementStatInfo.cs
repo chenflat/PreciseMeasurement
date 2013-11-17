@@ -9,6 +9,7 @@ namespace PM.Entity
         Minute,
         Hour,
         Day,
+        Week,
         Month
     }
 
@@ -26,6 +27,10 @@ namespace PM.Entity
         private DateTime m_starttime;
         private DateTime m_endtime;
         private decimal m_value = 0;
+        private string m_description = "";
+        private string m_level = "";
+
+
 
         public MeasurementStatInfo() { 
         
@@ -81,6 +86,16 @@ namespace PM.Entity
         public decimal Value {
             get { return m_value; }
             set { m_value = value; }
+        }
+
+        public string Description {
+            get { return m_description; }
+            set { m_description = value; }        
+        }
+
+        public string Level {
+            get { return m_level; }
+            set { m_level = value; }
         }
 
     }

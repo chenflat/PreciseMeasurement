@@ -476,7 +476,7 @@ namespace PM.Data
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        IDataReader GetMeasurementReport(string startdate, string enddate, ReportType reportType);
+        DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType);
 
 
 

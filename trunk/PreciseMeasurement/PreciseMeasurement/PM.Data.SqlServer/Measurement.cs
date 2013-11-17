@@ -172,13 +172,14 @@ namespace PM.Data.SqlServer
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-       public IDataReader GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
+       public DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType)
+       {
            DbParameter[] parms = {                                
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
                                   };
-           return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementReport", parms);
+           return DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementReport", parms).Tables[0];
        }
 
 
@@ -244,7 +245,7 @@ namespace PM.Data.SqlServer
                                   };
 
            string commandText = string.Format("INSERT INTO [{0}MEASUREMENT_MONTH] ([POINTNUM],[MEASUREUNITID],[MEASURETIME],[STARTVALUE],[LASTVALUE],[STARTTIME],[ENDTIME],[VALUE])" +
-               "VALUES(@POINTNUM,@MEASUREUNITID,@MEASURETIME,@STARTVALUE,@LASTVALUE,@MEASURETIME,@LASTVALUE,@VALUE);", BaseConfigs.GetTablePrefix);
+               "VALUES(@POINTNUM,@MEASUREUNITID,@MEASURETIME,@STARTVALUE,@LASTVALUE,@STARTTIME,@ENDTIME,@VALUE);", BaseConfigs.GetTablePrefix);
 
            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
        }

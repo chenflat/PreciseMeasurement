@@ -38,9 +38,9 @@ namespace PM.Web.report
                 measurements.Rows.Add();
                
             }
-           
-            gvReportMeasurement.DataSource = measurements;
-            gvReportMeasurement.DataBind();
+
+            gvMeasurementReport.DataSource = measurements;
+            gvMeasurementReport.DataBind();
          
         }
 

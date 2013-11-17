@@ -36,7 +36,7 @@ namespace PM.Web.realtime
         private void BindDummyRow()
         {
             DataTable dummy = new DataTable();
-            dummy.Columns.Add("POINTNUM");
+            dummy.Columns.Add("DESCRIPTION");
             dummy.Columns.Add("LEVEL");
             dummy.Columns.Add("ENDDATE");
             dummy.Columns.Add("STARTVALUE");
