@@ -102,6 +102,8 @@ namespace PM.Data
             statInfo.StartValue = reader.IsDBNull(reader.GetOrdinal("STARTVALUE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("STARTVALUE"));
             statInfo.LastValue = reader.IsDBNull(reader.GetOrdinal("LASTVALUE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("LASTVALUE"));
             statInfo.Value = reader.IsDBNull(reader.GetOrdinal("VALUE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("VALUE"));
+            statInfo.Description = PM.Common.Utils.ContainsField(reader,"DESCRIPTION") ? reader["DESCRIPTION"].ToString() : "";
+            statInfo.Level = PM.Common.Utils.ContainsField(reader,"LEVEL") ? reader["LEVEL"].ToString().Trim() : ""; 
             return statInfo;
         }
 
@@ -141,7 +143,7 @@ namespace PM.Data
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        public static IDataReader GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
+        public static DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
             return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate, reportType);
         }
 
@@ -188,11 +190,11 @@ namespace PM.Data
             reportDataInfo.Pointnum = reader["POINTNUM"].ToString();
             reportDataInfo.Description = reader["Description"].ToString();
             reportDataInfo.Level = reader["Level"].ToString();
-            reportDataInfo.StartDate = reader["StartDate"].ToString();
-            reportDataInfo.EndDate = reader["EndDate"].ToString();
+           // reportDataInfo.StartDate = reader["StartDate"].ToString();
+            //reportDataInfo.EndDate = reader["EndDate"].ToString();
             reportDataInfo.StartValue = reader.IsDBNull(reader.GetOrdinal("StartValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("StartValue"));
-            reportDataInfo.EndValue = reader.IsDBNull(reader.GetOrdinal("EndValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("EndValue"));
-            reportDataInfo.DiffValue = reader.IsDBNull(reader.GetOrdinal("DiffValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("DiffValue"));
+           // reportDataInfo.EndValue = reader.IsDBNull(reader.GetOrdinal("EndValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("EndValue"));
+          //  reportDataInfo.DiffValue = reader.IsDBNull(reader.GetOrdinal("DiffValue")) ? 0 : reader.GetDecimal(reader.GetOrdinal("DiffValue"));
 
             return reportDataInfo;
         }
@@ -255,7 +257,7 @@ namespace PM.Data
             }
             else if (type == ReportType.Month) {
                 dateformat = "yyyy-MM";
-                for (int m = 0; m < totalMonth; m++)
+                for (int m = 0; m <= totalMonth; m++)
                 {
                     DateTime dd = dtStarttime.AddMonths(m);
                     listStatInfo.Add(new MeasurementStatInfo(dd));

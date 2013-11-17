@@ -15,10 +15,16 @@ namespace PM.Web.realtime
 {
     public partial class HourData : RealtimeBaseControl
     {
+        private string m_startdate = "";
+        private string m_enddate = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                m_startdate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                m_enddate = DateTime.Now.ToString("yyyy-MM-dd");
+
                 setMeasureMeasurePointInfo();
                 BindDummyRow();
             }
@@ -30,7 +36,15 @@ namespace PM.Web.realtime
             if (MeasurePointInfo == null)
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
+
+            gvHourMeasurement.DataSource = Measurement.GetMeasurementByPointnum(MeasurePointInfo.Pointnum, m_startdate, m_enddate, "HOUR", 1, 12).List ;
+            gvHourMeasurement.DataBind();
+
         }
+
+     
+
+        
 
       
         private void BindDummyRow()

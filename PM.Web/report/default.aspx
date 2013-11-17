@@ -2,7 +2,7 @@
     CodeBehind="default.aspx.cs" Inherits="PM.Web.report._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/WdatePicker.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/Pager.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
@@ -19,25 +19,32 @@
                 级别：<asp:DropDownList ID="status" runat="server">
                     <asp:ListItem>全部</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;<asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn btn-info btnQuery" />
+                &nbsp;
+                <button type="button" class="btn btn-info" id="btnQuery">查询</button>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
+                <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>
+                <a href="week.aspx" class="btn btn-info" id="btnWeekQuery">周报</a>
+                <a href="month.aspx" class="btn btn-info" id="btnMonthQuery">月报</a>
             </div>
         </div>
     </div>
     <div class="row">
-    <asp:GridView ID="gvReportMeasurement" runat="server" AutoGenerateColumns="False" CssClass="table table-striped"  EnableModelValidation="True">
+    <asp:GridView ID="gvMeasurementReport" runat="server" AutoGenerateColumns="False" 
+            CssClass="table table-striped"  EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="DESCRIPTION" HeaderText="计量点" />
                 <asp:BoundField DataField="LEVEL" HeaderText="级别" />
-                <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="起始时间" />
+                <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="起始时间" />
                 <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
-                 <asp:BoundField DataField="ENDTIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="截止时间" />
+                 <asp:BoundField DataField="ENDTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="截止时间" />
                 <asp:BoundField DataField="LASTVALUE" HeaderText="终止表数(t)" />
-                <asp:BoundField DataField="VALUE" HeaderText="小时用量(t)" />
+                <asp:BoundField DataField="VALUE" HeaderText="日用量(t)" />
             
             </Columns>
         </asp:GridView>
-       
+        <br />
+        <div id="pager" class="pager">
+        </div>
     
     </div>
 </asp:Content>

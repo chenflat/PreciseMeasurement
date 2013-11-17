@@ -112,8 +112,16 @@ namespace PM.Business
         public static Pagination<MeasurementStatInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize)
         {
             Pagination<MeasurementStatInfo> pagination = new Pagination<MeasurementStatInfo>();
+            DataSet ds = null;
+            if (pointnum == "")
+            {
+                ds = Data.Measurement.FindMeasurementByAllPoint(startdate, enddate, type, pageindex, pagesize);
+            }
+            else {
+                ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
+            }
 
-            DataSet ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
+            
 
             DataTable meassurement = ds.Tables["Measurement"];
 
@@ -139,6 +147,26 @@ namespace PM.Business
             return pagination;
 
         }
+
+
+        /// <summary>
+        /// 获取指定测点的计量数据
+        /// </summary>
+        /// <param name="pointnum">测点编号</param>
+        /// <param name="startdate">开始日期</param>
+        /// <param name="enddate">结束日期</param>
+        /// <param name="type">统计类型 HOUR|DAY|MONTH</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <returns></returns>
+        public static Pagination<MeasurementStatInfo> GetMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+        {
+            return GetMeasurementByPointnum("", startdate, enddate, type, pageindex, pagesize);
+
+        }
+        
+
+
 
         public static Pagination<ReportDataInfo> GetReportData(string startdate, string enddate, string type, int pageindex, int pagesize) {
             
@@ -193,6 +221,8 @@ namespace PM.Business
             return measurements;
         }
 
+
+       
 
 
 
