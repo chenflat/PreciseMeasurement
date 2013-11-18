@@ -41,16 +41,84 @@ $(function () {
 
     //动态添加参数到列表
     $("#paramlist li").click(function () {
-        console.log($(this).attr("id") + ", " + $(this).text());
+        //  console.log($(this).attr("id") + ", " + $(this).text());
+        var text = $(this).text();
+        var li = "<li id='" + $(this).attr("id") + "'>" + text + "</li>";
+        if (!hasParamElement(text)) {
+            $("#container-params").append(li);
+        }
+    });
 
-        $("#container-params").append("<li></li>");
-
+    //动态添加计量点到列表
+    $(".measurepoint-list li").click(function () {
+        var text = $(this).text();
+        var id = $(this).attr("id");
+        var li = "<li id='" + id + "'>" + text + "</li>";
+        if (!hasPointElement(text)) {
+            $("#container-measurepoints").append(li);
+        }
     });
 
 
+    //判断是否存在参数元素
+    function hasParamElement(text) {
+        var ret = false;
+        $("#container-params li").each(function (index, obj) {
+            if ($(obj).text() == text) {
+                ret = true;
+            }
+        });
+        return ret;
+    }
 
-    //设置
+    //判断是否存在计量点元素
+    function hasPointElement(text) {
+        var ret = false;
+        $("#container-measurepoints li").each(function (index, obj) {
+            if ($(obj).text() == text) {
+                ret = true;
+            }
+        });
+        return ret;
+    }
+
+
+    //获取比较参数据
+    function getCompareParams() {
+        var params = new Array();
+        $("#container-params li").each(function (index, obj) {
+            params.push($(obj).attr("id"));
+        });
+        return params;
+    }
+
+    function getComparePoints() {
+        var points = new Array();
+        $("#container-measurepoints li").each(function (index, obj) {
+            params.push($(obj).attr("id"));
+        });
+        return params;
+    }
+
+
+    //保存设置
     $("#btnSetting").click(function () {
 
     });
+
+    //生成曲线
+    $("#btnQuery").click(function () {
+
+        //比较参数
+        var params = getCompareParams();
+
+        for (var i = 0; i < params.length; i++) { 
+            
+
+
+        }
+
+    });
+
+
 });
