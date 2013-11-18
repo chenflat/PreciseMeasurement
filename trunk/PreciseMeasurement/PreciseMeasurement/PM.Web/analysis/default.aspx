@@ -25,7 +25,7 @@
     </div>
     <!-- Button trigger modal -->
     <!-- Modal -->
-    <div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade bs-example-modal"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -44,7 +44,12 @@
                                         1、选择对比参量</h3>
                                 </div>
                                 <div class="panel-body">
-                                    Panel content
+                                    <ul style="margin:0px; list-style:none;" id="paramlist">
+                                        <li id="SW_Temperature"><a href="#">温度</a></li>
+                                        <li id="SW_Pressure"><a href="#">压力</a></li>
+                                        <li id="AF_FlowInstant"><a href="#">瞬时流量</a></li>
+                                        <li id="AI_Density"><a href="#">频率</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +59,27 @@
                                     <h3 class="panel-title">
                                         2、选择对比计量点</h3>
                                 </div>
-                                <div class="panel-body">
-                                    Panel content
+                                <div class="panel-body bs-sidebar">
+                                     <ul class="nav bs-sidenav" style="margin:0px;">
+                                    <%
+                                        foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
+                                        { 
+                                    %>
+                                    <li class="active"><a href="#">
+                                        <%= pair.Key %></a>
+                                        <ul class="nav">
+                                            <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
+                                               {%>
+                                            <li id="<%=point.Pointnum %>"><a href="#">
+                                                <%=point.Description%></a></li>
+                                            <% } %>
+                                        </ul>
+                                    </li>
+                                    <%
+                                    }
+                                    %>
+                   
+                                </ul>
                                 </div>
                             </div></div>
                         <div class="col-md-4">
@@ -65,9 +89,21 @@
                                         3、核对查询条件</h3>
                                 </div>
                                 <div class="panel-body">
-                                    Panel content
+                                   <div class="sel-params">
+                                    选择的参数
+                                    <ul id="container-params">
+                                    
+                                    </ul>
+                                   </div>
+                                    <div class="sel-points">
+                                    选择的计量点
+                                    <ul  id="container-measurepoints">
+                                    
+                                    </ul>
+                                    </div>
                                 </div>
-                            </div></div>
+                            </div>
+                           </div>
                     </div>
                 </div>
                 <div class="modal-footer">

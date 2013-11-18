@@ -39,8 +39,18 @@ $(function () {
     });
 
 
+    //动态添加参数到列表
+    $("#paramlist li").click(function () {
+        console.log($(this).attr("id") + ", " + $(this).text());
+
+        $("#container-params").append("<li></li>");
+
+    });
+
+
+
     //设置
-    $("#btnSetting").click(function () { 
-        
+    $("#btnSetting").click(function () {
+
     });
 });
