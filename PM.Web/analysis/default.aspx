@@ -19,7 +19,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; 起始时间：<input type="text" id="startdate" class="Wdate startdate" />
                 终止时间：<input type="text" class="Wdate enddate" id="enddate" />
                 &nbsp; <a data-toggle="modal" href="#myModal" class="btn btn-danger">设置计量器对比参量</a>
-                <input type="button" class="btn btn-danger" id="btnHourQuery" value="生成曲线" />
+                <input type="button" class="btn btn-danger" id="btnQuery" value="生成曲线" />
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
                                     %>
                                     <li class="active"><a href="#">
                                         <%= pair.Key %></a>
-                                        <ul class="nav">
+                                        <ul class="nav measurepoint-list">
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                                {%>
                                             <li id="<%=point.Pointnum %>"><a href="#">
