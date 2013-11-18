@@ -542,11 +542,11 @@ function OnSuccessHourChart(response){
 			$('#temperature').show();
 			$('#temperature').highcharts({
 			    title: {
-			        text: '温度曲线',
-			        
+			        text: '温度曲线'
 			    },
 			    xAxis: {
                     tickInterval:24,
+                    tickWidth: 0,
 			        labels: {
 			            formatter: function () {
 			                return Date.parse(this.value).toString("MM-dd");

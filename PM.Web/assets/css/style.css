@@ -767,7 +767,7 @@ h1[id] {
 
 /* Example modals */
 .bs-example-modal {
-  background-color: #f5f5f5;
+  
 }
 .bs-example-modal .modal {
   position: relative;
@@ -777,11 +777,13 @@ h1[id] {
   bottom: auto;
   z-index: 1;
   display: block;
+  width:650px;
 }
 .bs-example-modal .modal-dialog {
   left: auto;
   margin-left: auto;
   margin-right: auto;
+  width:900px;
 }
 
 /* Example dropdowns */
@@ -1198,3 +1200,4 @@ h1[id] {
         text-decoration: none;
     }
     
+
