@@ -59,6 +59,22 @@ $(function () {
         }
     });
 
+    //移除参数
+    $("#container-params li").click(function () {
+        console.log('here');
+
+        console.log($(this));
+
+       // $(this).remove();
+
+    });
+
+
+    //移除计量点
+    $("#container-measurepoints li").click(function () {
+        $(this).remove();
+    });
+
 
     //判断是否存在参数元素
     function hasParamElement(text) {
@@ -99,10 +115,10 @@ $(function () {
 
         var startdate = $(".startdate").val();
         var enddate = $(".enddate").val();
-
+        var datetype = $("input[name='datetype']:checked").val();
 
         for (var i = 0; i < params.length; i++) {
-            GetChart(points, params[i]);
+            GetChart(points, params[i], startdate, enddate, datetype);
         }
 
     });
@@ -123,9 +139,9 @@ function getCompareParams() {
 function getComparePoints() {
     var points = new Array();
     $("#container-measurepoints li").each(function (index, obj) {
-        params.push($(obj).attr("id"));
+        points.push($(obj).attr("id"));
     });
-    return params;
+    return points;
 }
 
 /**
@@ -135,20 +151,17 @@ function getComparePoints() {
 * @param startdate 开始统计日期
 * @param enddate 结束统计日期
 */
-function GetChart(pointnums, paramid, startdate, enddate) {
+function GetChart(pointnums, paramid, startdate, enddate, datetype) {
+        $.ajax({
+            type: "GET",
+            url: "MeasurementHistoryData.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { "pointnum": pointnums, "startdate": startdate, "enddate": enddate, "type": datetype },
+            success: OnSuccessChart,
+            error: OnFail
+        });
 
-
-    $.ajax({
-        type: "GET",
-        url: "MeasurementHistoryData.ashx",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: { "pointnum": pointnums, "startdate": startdate, "enddate": enddate, "type": "HOUR" },
-        success: OnSuccessHourChart,
-        error: OnFail
-    });
-
-    // return false;
 }
 
 function OnSuccessChart(response) {
