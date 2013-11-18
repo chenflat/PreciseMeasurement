@@ -442,8 +442,6 @@ function OnSuccessMinuteChart(response) {
 	var items = $("input[name='dataitem']:checked");
 
 
-
-
     $('#container').highcharts({
         title: {
             text: 'Monthly Average Temperature',
@@ -513,7 +511,7 @@ function getChartXAxis(datetype){
 
 function OnSuccessHourChart(response){
 
-	var dateZone = getChartXAxis("HOUR")
+	//var dateZone = getChartXAxis("HOUR")
 
 	var charItems = [
 			{"name":"SW_TEMPERATURE","title":"温度曲线","unit":"°C"},
@@ -538,27 +536,24 @@ function OnSuccessHourChart(response){
 		arrAfflowinstant.push(response[i].AfFlowinstant);
 	}
 
-//console.log( Math.abs(arrSwtemperature.length / dateZone.length));
-	 
+
 	for(var i=0;i<selected.length;i++) {
 		if(selected[i]=="SW_TEMPERATURE") {
 			$('#temperature').show();
 			$('#temperature').highcharts({
 			    title: {
 			        text: '温度曲线',
-			        x: -20 //center
+			        
 			    },
 			    xAxis: {
+                    tickInterval:24,
 			        labels: {
-			            staggerLines: 4,
-			            step: 24,
 			            formatter: function () {
 			                return Date.parse(this.value).toString("MM-dd");
 			            }
 			        },
 			        categories: times,
-
-			        gridLineWidth: 1//默认是0，即在图上没有纵轴间隔线
+			        gridLineWidth: 1
 			    },
 			    yAxis: {
 			        title: {
@@ -599,14 +594,16 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
+                    tickInterval:24,
 				    labels: {
-				        staggerLines: 4,
-				        step: 24,
+				        //staggerLines: 4,
+				        //step: 24,
 				        formatter: function () {
 				            return Date.parse(this.value).toString("MM-dd");
 				        }
 				    },
-				    categories: times
+				    categories: times,
+				    gridLineWidth: 1,
 				},
 				yAxis: {
 					title: {
@@ -641,14 +638,15 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
+                     tickInterval:24,
 				    labels: {
-				       
 				        step: 24,
 				        formatter: function () {
 				            return Date.parse(this.value).toString("MM-dd");
 				        }
 				    },
-				    categories: times
+				    categories: times,
+				    gridLineWidth: 1
 				},
 				yAxis: {
 					title: {
