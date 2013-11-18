@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProvider\AnalyzeSetting.cs" />
     <Compile Include="DataProvider\Locations.cs" />
     <Compile Include="DataProvider\Measurement.cs" />
     <Compile Include="DataProvider\MeasurePoint.cs" />
