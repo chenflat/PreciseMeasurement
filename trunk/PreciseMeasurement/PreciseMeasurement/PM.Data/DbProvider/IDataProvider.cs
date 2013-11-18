@@ -500,5 +500,36 @@ namespace PM.Data
         /// <param name="statInfo"></param>
         /// <returns></returns>
         bool CreateMeasurementMonthData(MeasurementStatInfo statInfo);
+
+
+        /// <summary>
+        /// 创建分析设置信息
+        /// </summary>
+        /// <param name="analyzeSettingInfo"></param>
+        /// <returns></returns>
+        bool CreateAnalyzeSettingInfo(AnalyzeSettingInfo analyzeSettingInfo);
+
+        /// <summary>
+        /// 更新分析设置信息
+        /// </summary>
+        /// <param name="analyzeSettingInfo"></param>
+        /// <returns></returns>
+        bool UpdateAnalyzeSettingInfo(AnalyzeSettingInfo analyzeSettingInfo);
+
+        /// <summary>
+        /// 删除分析设置信息
+        /// </summary>
+        /// <param name="analyzeSettingInfo"></param>
+        /// <returns></returns>
+        bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid, int orgid);
+
+        /// <summary>
+        /// 查找分析设置信息
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns>分析设置信息</returns>
+        IDataReader FindAnalyzeSettingInfo(int userid,int orgid);
+
     }
 }
