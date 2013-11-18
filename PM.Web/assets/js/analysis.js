@@ -83,22 +83,6 @@ $(function () {
     }
 
 
-    //获取比较参数据
-    function getCompareParams() {
-        var params = new Array();
-        $("#container-params li").each(function (index, obj) {
-            params.push($(obj).attr("id"));
-        });
-        return params;
-    }
-
-    function getComparePoints() {
-        var points = new Array();
-        $("#container-measurepoints li").each(function (index, obj) {
-            params.push($(obj).attr("id"));
-        });
-        return params;
-    }
 
 
     //保存设置
@@ -111,14 +95,62 @@ $(function () {
 
         //比较参数
         var params = getCompareParams();
+        var points = getComparePoints();
 
-        for (var i = 0; i < params.length; i++) { 
-            
+        var startdate = $(".startdate").val();
+        var enddate = $(".enddate").val();
 
 
+        for (var i = 0; i < params.length; i++) {
+            GetChart(points, params[i]);
         }
 
     });
 
 
 });
+
+
+//获取比较参数据
+function getCompareParams() {
+    var params = new Array();
+    $("#container-params li").each(function (index, obj) {
+        params.push($(obj).attr("id"));
+    });
+    return params;
+}
+//获取比较测点
+function getComparePoints() {
+    var points = new Array();
+    $("#container-measurepoints li").each(function (index, obj) {
+        params.push($(obj).attr("id"));
+    });
+    return params;
+}
+
+/**
+* 获取数据曲线
+*
+* @param pointnum 测点编号
+* @param startdate 开始统计日期
+* @param enddate 结束统计日期
+*/
+function GetChart(pointnums, paramid, startdate, enddate) {
+
+
+    $.ajax({
+        type: "GET",
+        url: "MeasurementHistoryData.ashx",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: { "pointnum": pointnums, "startdate": startdate, "enddate": enddate, "type": "HOUR" },
+        success: OnSuccessHourChart,
+        error: OnFail
+    });
+
+    // return false;
+}
+
+function OnSuccessChart(response) {
+    
+}
