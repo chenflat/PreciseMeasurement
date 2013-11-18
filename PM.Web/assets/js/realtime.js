@@ -553,9 +553,7 @@ function OnSuccessHourChart(response){
 			            staggerLines: 4,
 			            step: 24,
 			            formatter: function () {
-			                console.log(this.value);
-			                return this.value;
-			                //return new Date(this.value).toString("MM-dd");
+			                return Date.parse(this.value).toString("MM-dd");
 			            }
 			        },
 			        categories: times,
@@ -605,9 +603,7 @@ function OnSuccessHourChart(response){
 				        staggerLines: 4,
 				        step: 24,
 				        formatter: function () {
-				            console.log(this.value);
-
-				            return new Date(this.value).toString("MM-dd");
+				            return Date.parse(this.value).toString("MM-dd");
 				        }
 				    },
 				    categories: times
@@ -649,9 +645,7 @@ function OnSuccessHourChart(response){
 				       
 				        step: 24,
 				        formatter: function () {
-				            console.log(this.value);
-
-				            return new Date(this.value).toString("MM-dd");
+				            return Date.parse(this.value).toString("MM-dd");
 				        }
 				    },
 				    categories: times
