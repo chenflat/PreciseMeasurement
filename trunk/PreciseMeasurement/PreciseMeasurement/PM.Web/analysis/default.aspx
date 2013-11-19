@@ -28,6 +28,10 @@
             </div>
         </div>
     </div>
+    <div class="row" id="charts">
+    
+    </div>
+
     <!-- Button trigger modal -->
     <!-- Modal -->
     <div class="modal fade bs-example-modal"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -114,7 +118,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         关闭</button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="btnSaveSetting">
                         保存设置</button>
                 </div>
             </div>

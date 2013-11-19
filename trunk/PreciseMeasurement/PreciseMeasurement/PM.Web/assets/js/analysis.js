@@ -27,7 +27,7 @@ $(function () {
 
         AddEvent();
 
-       var value = $(this).val();
+        var value = $(this).val();
         if (value == "MINUTE") {
             initHistoryMinute();
         } else {
@@ -100,7 +100,7 @@ $(function () {
 
 
     //保存设置
-    $("#btnSetting").click(function () {
+    $("#btnSaveSetting").click(function () {
 
         var settings = new Array();
 
@@ -115,7 +115,17 @@ $(function () {
         });
 
 
-
+        $.ajax({
+            type: "GET",
+            url: "HandlerAnalyzeSetting.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { "settings": settings },
+            success: function (data) {
+                $('#myModal').modal('hide')
+            },
+            error: OnFail
+        });
     });
 
     //生成曲线
@@ -239,7 +249,72 @@ function GetChart(pointnums, paramid, startdate, enddate, datetype) {
 }
 
 function OnSuccessChart(response) {
+    console.log(response);
+    var times = [];
+    var arrSwtemperature = [];
+    var arrSwpressure = [];
+    var arrAfflowinstant = [];
+    var arrAIDensity = [];
 
+    for (var i = 0; i < response.length; i++) {
+        times.push(response[i].Time);
+        arrSwtemperature.push(response[i].SwTemperature);
+        arrSwpressure.push(response[i].SwPressure);
+        arrAfflowinstant.push(response[i].AfFlowinstant);
+        arrAIDensity.push(response[i].AiDensity);
+    }
+
+    $("#charts").append("<div id='template'></div>");
+
+    $('#template').highcharts({
+        title: {
+            text: '温度曲线'
+        },
+        xAxis: {
+            tickColor: '#FFFFFF',
+            tickInterval: 240,
+            tickWidth: 0,
+            labels: {
+                formatter: function () {
+                    return Date.parse(this.value).toString("MM-dd HH:00");
+                }
+            },
+            categories: times,
+            gridLineWidth: 1
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 0,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: '温度',
+            data: arrSwtemperature
+        }],
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 0,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
 }
 
 function OnFail(response) {
