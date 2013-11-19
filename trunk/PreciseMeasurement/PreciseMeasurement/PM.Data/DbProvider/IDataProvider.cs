@@ -521,7 +521,15 @@ namespace PM.Data
         /// </summary>
         /// <param name="analyzeSettingInfo"></param>
         /// <returns></returns>
-        bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid, int orgid);
+        bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid, string orgid);
+
+        /// <summary>
+        /// 删除用户设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid);
 
         /// <summary>
         /// 查找分析设置信息
@@ -529,7 +537,7 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        IDataReader FindAnalyzeSettingInfo(int userid,int orgid);
+        IDataReader FindAnalyzeSettingInfo(int userid,string orgid);
 
     }
 }

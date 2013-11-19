@@ -20,7 +20,7 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public string GetUserMeasureUnit(int userid,int orgid) {
+        public string GetUserMeasureUnit(int userid,string orgid) {
             StringBuilder sb = new StringBuilder();
             List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
             foreach (var item in list)
@@ -41,7 +41,7 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public string GetUserMeasurePoint(int userid, int orgid)
+        public string GetUserMeasurePoint(int userid, string orgid)
         {
             StringBuilder sb = new StringBuilder();
             List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
@@ -66,7 +66,7 @@ namespace PM.Business
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, int orgid)
+        public List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, string orgid)
         {
             if (userid <= 0) {
                 return new List<AnalyzeSettingInfo>();
@@ -85,5 +85,31 @@ namespace PM.Business
             return list;
         }
 
+
+        /// <summary>
+        /// 保存设置列表
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool SaveAnalyzeSettingList(List<AnalyzeSettingInfo> list)
+        {
+            //获取用户ID
+            int userid = 0;
+            string orgid = "";
+
+            if (list.Count > 0)
+            {
+                userid = list[0].UserId;
+                orgid = list[0].Orgid;
+            }
+            //删除该用户设置
+            bool ret = PM.Data.AnalyzeSetting.DeleteAnalyzeSettingInfoByUser(userid, orgid);
+            //重新保存设置
+            foreach (var item in list)
+            {
+                PM.Data.AnalyzeSetting.CreateAnalyzeSettingInfo(item);
+            }
+            return true;
+        }
     }
 }

@@ -62,18 +62,34 @@ namespace PM.Data.SqlServer
         /// </summary>
         /// <param name="analyzeSettingInfo"></param>
         /// <returns></returns>
-        public bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid,int orgid)
+        public bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid,string orgid)
         {
             DbParameter[] parms = { 
                                  
                                   DbHelper.MakeInParam("@TYPE", (DbType)SqlDbType.VarChar, 30, type.ToString()),
                                   DbHelper.MakeInParam("@SETTINGNAME", (DbType)SqlDbType.VarChar, 30, settingname),
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.Int, 4, orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
                                   };
             string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [TYPE]=@TYPE AND [SETTINGNAME]=@SETTINGNAME AND [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
+
+        /// <summary>
+        /// 删除用户设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid) {
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
+                                  };
+            string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
+        }
+
 
         /// <summary>
         /// 查找分析设置信息
@@ -81,11 +97,11 @@ namespace PM.Data.SqlServer
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        public IDataReader FindAnalyzeSettingInfo(int userid, int orgid)
+        public IDataReader FindAnalyzeSettingInfo(int userid, string orgid)
         {
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.Int, 4, orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
                                   };
             string commandText = string.Format("select * from [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);

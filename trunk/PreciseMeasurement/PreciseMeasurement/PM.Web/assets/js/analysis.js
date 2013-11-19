@@ -105,22 +105,24 @@ $(function () {
         var settings = new Array();
 
         $("#container-params li").each(function (index, obj) {
-            var item = { "type": "MEASUREUNIT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $(obj).text(), "USERID": USERID, "ORGID": ORGID };
+            var item = { "type": "MEASUREUNIT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "USERID": USERID, "ORGID": ORGID };
             settings.push(item);
         });
 
         $("#container-measurepoints li").each(function (index, obj) {
-            var item = { "type": "MEASUREPOINT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $(obj).text(), "USERID": USERID, "ORGID": ORGID };
+            var item = { "type": "MEASUREPOINT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "USERID": USERID, "ORGID": ORGID };
             settings.push(item);
         });
 
+        if (settings.length == 0)
+            return;
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "HandlerAnalyzeSetting.ashx",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: { "settings": settings },
+            data: JSON.stringify(settings),
             success: function (data) {
                 $('#myModal').modal('hide')
             },
