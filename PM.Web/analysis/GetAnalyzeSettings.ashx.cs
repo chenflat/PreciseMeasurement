@@ -6,7 +6,7 @@ using System.Web;
 namespace PM.Web.analysis
 {
     /// <summary>
-    /// GetAnalyzeSettings 的摘要说明
+    /// 获取分析设置
     /// </summary>
     public class GetAnalyzeSettings : IHttpHandler
     {
