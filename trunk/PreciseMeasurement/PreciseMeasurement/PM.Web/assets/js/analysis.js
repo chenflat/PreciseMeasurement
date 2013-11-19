@@ -282,11 +282,12 @@ function OnSuccessChart(response) {
     var arrAIDensity = [];
 
     for (var i = 0; i < response.length; i++) {
+        var time = Date.parse(response[i].Time).toString("MM-dd HH:00");
         times.push(response[i].Time);
-        arrSwtemperature.push(response[i].SwTemperature);
-        arrSwpressure.push(response[i].SwPressure);
-        arrAfflowinstant.push(response[i].AfFlowinstant);
-        arrAIDensity.push(response[i].AiDensity);
+        arrSwtemperature.push([time,response[i].SwTemperature]);
+        arrSwpressure.push([time,response[i].SwPressure]);
+        arrAfflowinstant.push([time,response[i].AfFlowinstant]);
+        arrAIDensity.push([time,response[i].AiDensity]);
     }
 
     $("#charts").append("<div id='template'></div>");
@@ -328,81 +329,22 @@ function OnSuccessChart(response) {
                 }],
 
                 series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: '温度',
-                    data: arrSwtemperature,
-                    dataGrouping: {
-                        units: groupingUnits
-                    }
+                    data: arrSwtemperature
+                   
                 }, {
-                    type: 'column',
+                    type: 'spline',
                     name: '压力',
                     data: arrSwpressure,
-                    yAxis: 1,
-                    dataGrouping: {
-                        units: groupingUnits
-                    }
-                }]
+                    yAxis: 1
+                   
+                }],
+                credits: {
+                    enabled: false
+                }
             });
  
-
-
-
-
-
-
-
-
-
-    $('#template').highcharts({
-        title: {
-            text: '温度曲线'
-        },
-        xAxis: {
-            tickColor: '#FFFFFF',
-            tickInterval: 240,
-            tickWidth: 0,
-            labels: {
-                formatter: function () {
-                    return Date.parse(this.value).toString("MM-dd HH:00");
-                }
-            },
-            categories: times,
-            gridLineWidth: 1
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 0,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            enabled: false
-        },
-        series: [{
-            name: '温度',
-            data: arrSwtemperature
-        }],
-        plotOptions: {
-            spline: {
-                marker: {
-                    radius: 0,
-                    lineColor: '#666666',
-                    lineWidth: 1
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        }
-    });
 }
 
 function OnFail(response) {
