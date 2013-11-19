@@ -53,6 +53,9 @@ namespace PM.Business.Pages
         }
 
 
+
+
+
         /// <summary>
         /// 控件初始化时计算执行时间
         /// </summary>
@@ -107,6 +110,11 @@ namespace PM.Business.Pages
                 string strReturnUrl = string.Format("{0}Account/Login.aspx?url={1}", BaseConfigs.GetSystemPath, strUrl);
                 Response.Redirect(strReturnUrl);
                 return;
+            }
+            else {
+                userid = AdminInfo.UserId;
+                orgid = AdminInfo.Orgid;
+                
             }
 
            

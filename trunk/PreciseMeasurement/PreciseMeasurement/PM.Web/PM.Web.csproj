@@ -329,6 +329,9 @@
     <Compile Include="analysis\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="analysis\MeasurementHistoryData.ashx.cs">
+      <DependentUpon>MeasurementHistoryData.ashx</DependentUpon>
+    </Compile>
     <Compile Include="controls\PageControl.ascx.cs">
       <DependentUpon>PageControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -491,6 +494,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Admin.master" />
+    <Content Include="analysis\MeasurementHistoryData.ashx" />
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
