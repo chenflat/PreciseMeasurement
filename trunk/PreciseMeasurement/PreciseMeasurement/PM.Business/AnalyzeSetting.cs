@@ -20,7 +20,7 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public string GetUserMeasureUnit(int userid,string orgid) {
+        public static string GetUserMeasureUnit(int userid,string orgid) {
             StringBuilder sb = new StringBuilder();
             List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
             foreach (var item in list)
@@ -41,7 +41,7 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public string GetUserMeasurePoint(int userid, string orgid)
+        public static string GetUserMeasurePoint(int userid, string orgid)
         {
             StringBuilder sb = new StringBuilder();
             List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
@@ -66,7 +66,7 @@ namespace PM.Business
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, string orgid)
+        public static List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, string orgid)
         {
             if (userid <= 0) {
                 return new List<AnalyzeSettingInfo>();
