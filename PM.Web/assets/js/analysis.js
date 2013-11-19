@@ -6,7 +6,7 @@ $(function () {
 
 
     AddEvent();
-
+    initSettings();
 
     //初始化分钟
     function initHistoryMinute() {
@@ -97,6 +97,29 @@ $(function () {
     }
 
 
+    /**
+    * 初始化设置
+    */
+    function initSettings() {
+
+        $.getJSON('GetAnalyzeSettings.ashx', { "userid": USERID, "orgid": ORGID }, function (data) {
+
+            var params = [];
+            var points = [];
+
+            $.each(data, function (index, obj) {
+                if (obj.Type == 0) {
+                    params.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
+                } else {
+                    points.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
+                }
+            });
+            $("#container-params").append(params.join(""));
+            $("#container-measurepoints").append(points.join(""));
+        });
+
+
+    }
 
 
     //保存设置
@@ -267,6 +290,69 @@ function OnSuccessChart(response) {
     }
 
     $("#charts").append("<div id='template'></div>");
+
+
+       // set the allowed units for data grouping
+        var groupingUnits = [[
+			'week',                         // unit name
+			[1]                             // allowed multiples
+		    ], [
+			'month',
+			[1, 2, 3, 4, 6]
+		    ]];
+
+            // create the chart
+        $('#charts').highcharts('StockChart', {
+                rangeSelector: {
+                    selected: 1
+                },
+
+                title: {
+                    text: 'title'
+                },
+
+                yAxis: [{
+                    title: {
+                        text: '温度'
+                    },
+                    height: 200,
+                    lineWidth: 2
+                }, {
+                    title: {
+                        text: '压力'
+                    },
+                    top: 300,
+                    height: 100,
+                    offset: 0,
+                    lineWidth: 2
+                }],
+
+                series: [{
+                    type: 'column',
+                    name: '温度',
+                    data: arrSwtemperature,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }, {
+                    type: 'column',
+                    name: '压力',
+                    data: arrSwpressure,
+                    yAxis: 1,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }]
+            });
+ 
+
+
+
+
+
+
+
+
 
     $('#template').highcharts({
         title: {

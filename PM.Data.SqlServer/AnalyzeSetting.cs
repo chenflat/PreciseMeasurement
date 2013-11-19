@@ -26,7 +26,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@DESCRIPTION", (DbType)SqlDbType.VarChar, 100, analyzeSettingInfo.Description),
                                   DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, analyzeSettingInfo.TableName),
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, analyzeSettingInfo.UserId),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.Int, 4, analyzeSettingInfo.Orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, analyzeSettingInfo.Orgid)
                                   };
             string commandText = string.Format("INSERT INTO [{0}ANALYZESETTING] ([TYPE],[SETTINGNAME],[DESCRIPTION],[TABLENAME],[USERID],[ORGID])" +
               "VALUES(@TYPE,@SETTINGNAME,@DESCRIPTION,@TABLENAME,@USERID,@ORGID);", BaseConfigs.GetTablePrefix);
@@ -48,7 +48,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@DESCRIPTION", (DbType)SqlDbType.VarChar, 100, analyzeSettingInfo.Description),
                                   DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, analyzeSettingInfo.TableName),
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, analyzeSettingInfo.UserId),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.Int, 4, analyzeSettingInfo.Orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, analyzeSettingInfo.Orgid)
                                   };
             string commandText = string.Format("UPDATE [{0}ANALYZESETTING]  SET [TYPE]=@TYPE,[SETTINGNAME]=@SETTINGNAME,"+
                 "[DESCRIPTION]=@DESCRIPTION,[TABLENAME]=@TABLENAME,[USERID]=@USERID,[ORGID]=@ORGID" +
