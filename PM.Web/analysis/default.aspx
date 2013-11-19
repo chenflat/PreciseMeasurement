@@ -8,6 +8,11 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/highcharts/highcharts.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/analysis.js") %>"></script>
+    <script>
+        var USERID = "<%=userid %>";
+        var ORGID = "<%=orgid %>";
+    
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
