@@ -156,28 +156,15 @@ $(function () {
     //生成曲线
     $("#btnQuery").click(function () {
 
-        //获取比较参数
-        var params = getCompareParams();
-        //获取要比较的计量点
-        var points = getComparePoints();
         //获取开始和结束日期，时间类型（分钟、小时）
         var startdate = $(".startdate").val();
         var enddate = $(".enddate").val();
         var datetype = $("input[name='datetype']:checked").val();
 
-        var p = "";
-        for (var j = 0; j < points.length; j++) {
-            if (p.length > 0) {
-                p += ",";
-            }
-            p += points[j];
-        }
-
-
         //分别对不同的参数分成图表
-        for (var i = 0; i < params.length; i++) {
-            GetChart(p, params[i], startdate, enddate, datetype);
-        }
+       // for (var i = 0; i < params.length; i++) {
+            GetChart(startdate, enddate, datetype);
+       // }
 
     });
 
@@ -260,90 +247,118 @@ function getComparePoints() {
 * @param startdate 开始统计日期
 * @param enddate 结束统计日期
 */
-function GetChart(pointnums, paramid, startdate, enddate, datetype) {
-        $.ajax({
-            type: "GET",
-            url: "MeasurementHistoryData.ashx",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: { "pointnum": pointnums, "startdate": startdate, "enddate": enddate, "type": datetype },
-            success: OnSuccessChart,
-            error: OnFail
+function GetChart(startdate, enddate, datetype) {
+
+
+    //获取比较参数
+    var params = getCompareParams();
+    //获取要比较的计量点
+    var points = getComparePoints();
+
+    var p = "";
+    for (var j = 0; j < points.length; j++) {
+        if (p.length > 0) {
+            p += ",";
+        }
+        p += points[j];
+    }
+
+    var request = $.ajax({
+        type: "GET",
+        url: "MeasurementHistoryData.ashx",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: { "pointnum": p, "startdate": startdate, "enddate": enddate, "type": datetype }
+    });
+
+    request.done(function (msg) {
+
+
+    });
+
+
+
+    var seriesOptions = [],
+		yAxisOptions = [],
+		seriesCounter = 0,
+		colors = Highcharts.getOptions().colors;
+
+    var path = "MeasurementHistoryData.ashx";
+    $.each(points, function (i, name) {
+
+        $.getJSON(path, { "pointnum": name, "startdate": startdate, "enddate": enddate, "type": datetype }, function (result) {
+            seriesOptions[i] = {
+                name: name,
+                data: result
+            };
+
+            // As we're loading the data asynchronously, we don't know what order it will arrive. So
+            // we keep a counter and create the chart when all the data is loaded.
+            seriesCounter++;
+
+            if (seriesCounter == points.length) {
+                createChart();
+            }
         });
+    });
+
+
+
+    // create the chart when all data is loaded
+    function createChart() {
+
+        $('#container').highcharts('StockChart', {
+            chart: {
+        },
+
+        rangeSelector: {
+            selected: 4
+        },
+
+        yAxis: {
+            labels: {
+                formatter: function () {
+                    return (this.value > 0 ? '+' : '') + this.value + '%';
+                }
+            },
+            plotLines: [{
+                value: 0,
+                width: 2,
+                color: 'silver'
+            }]
+        },
+
+        plotOptions: {
+            series: {
+                compare: 'percent'
+            }
+        },
+
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            valueDecimals: 2
+        },
+
+        series: seriesOptions
+    });
+}
 
 }
 
 function OnSuccessChart(response) {
     console.log(response);
-    var times = [];
-    var arrSwtemperature = [];
-    var arrSwpressure = [];
-    var arrAfflowinstant = [];
-    var arrAIDensity = [];
 
-    for (var i = 0; i < response.length; i++) {
-        var time = Date.parse(response[i].Time).toString("MM-dd HH:00");
-        times.push(response[i].Time);
-        arrSwtemperature.push([time,response[i].SwTemperature]);
-        arrSwpressure.push([time,response[i].SwPressure]);
-        arrAfflowinstant.push([time,response[i].AfFlowinstant]);
-        arrAIDensity.push([time,response[i].AiDensity]);
-    }
+    var seriesOptions = [],
+		yAxisOptions = [],
+		seriesCounter = 0,
+		names = ['MSFT', 'APPL', 'GOOG'],
+		colors = Highcharts.getOptions().colors;
+	
+
 
     $("#charts").append("<div id='template'></div>");
 
 
-       // set the allowed units for data grouping
-        var groupingUnits = [[
-			'week',                         // unit name
-			[1]                             // allowed multiples
-		    ], [
-			'month',
-			[1, 2, 3, 4, 6]
-		    ]];
-
-            // create the chart
-        $('#template').highcharts('StockChart', {
-                rangeSelector: {
-                    selected: 1
-                },
-
-                title: {
-                    text: 'title'
-                },
-
-                yAxis: [{
-                    title: {
-                        text: '温度'
-                    },
-                    height: 200,
-                    lineWidth: 2
-                }, {
-                    title: {
-                        text: '压力'
-                    },
-                    top: 300,
-                    height: 100,
-                    offset: 0,
-                    lineWidth: 2
-                }],
-
-                series: [{
-                    type: 'spline',
-                    name: '温度',
-                    data: arrSwtemperature
-                   
-                }, {
-                    type: 'spline',
-                    name: '压力',
-                    data: arrSwpressure,
-                    yAxis: 1
-                   
-                }],
-                credits: {
-                    enabled: false
-                }
-            });
  
 }
 
