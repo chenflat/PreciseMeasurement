@@ -25,13 +25,12 @@ namespace PM.Web.analysis
             var stream = sr.ReadToEnd();
 
             var javaScriptSerializer = new JavaScriptSerializer();
+            //反序列化
+            var list = javaScriptSerializer.Deserialize<List<AnalyzeSettingInfo>>(stream);
+            //保存设置
+            PM.Business.AnalyzeSetting.SaveAnalyzeSettingList(list);
 
-            var List = javaScriptSerializer.Deserialize<List<AnalyzeSettingInfo>>(stream);
-
-            string m_pointnum = context.Request["settings"];
-
-
-            context.Response.Write("");
+            context.Response.Write("true");
         }
 
         public bool IsReusable
