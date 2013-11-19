@@ -302,7 +302,7 @@ function OnSuccessChart(response) {
 		    ]];
 
             // create the chart
-        $('#charts').highcharts('StockChart', {
+        $('#template').highcharts('StockChart', {
                 rangeSelector: {
                     selected: 1
                 },
