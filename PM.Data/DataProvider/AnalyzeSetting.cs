@@ -13,6 +13,8 @@ namespace PM.Data
 {
     public class AnalyzeSetting
     {
+
+       
         /// <summary>
         /// 创建分析设置信息
         /// </summary>
@@ -36,9 +38,21 @@ namespace PM.Data
         /// </summary>
         /// <param name="analyzeSettingInfo"></param>
         /// <returns></returns>
-        public static bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid, int orgid) {
+        public static bool DeleteAnalyzeSettingInfoBySettingName(SettingType type, string settingname, int userid, string orgid) {
             return DatabaseProvider.GetInstance().DeleteAnalyzeSettingInfoBySettingName(type, settingname, userid, orgid);
         }
+
+        /// <summary>
+        /// 删除用户设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid)
+        {
+            return DatabaseProvider.GetInstance().DeleteAnalyzeSettingInfoByUser(userid, orgid);
+        }
+
 
         /// <summary>
         /// 查找分析设置信息
@@ -46,7 +60,7 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        public static IDataReader FindAnalyzeSettingInfo(int userid, int orgid) {
+        public static IDataReader FindAnalyzeSettingInfo(int userid, string orgid) {
             return DatabaseProvider.GetInstance().FindAnalyzeSettingInfo(userid, orgid);
         }
 
@@ -63,9 +77,11 @@ namespace PM.Data
             analyzeSettingInfo.Description = reader["DESCRIPTION"].ToString();
             analyzeSettingInfo.TableName = reader["TABLENAME"].ToString();
             analyzeSettingInfo.UserId = reader.GetInt32(reader.GetOrdinal("USERID"));
-            analyzeSettingInfo.Orgid = reader.GetInt32(reader.GetOrdinal("ORGID"));
+            analyzeSettingInfo.Orgid = reader["ORGID"].ToString();
             return analyzeSettingInfo;
         }
+
+
 
     }
 }

@@ -23,7 +23,7 @@ namespace PM.Entity
         private string m_description;
         private string m_tablename;
         private int m_userid;
-        private int m_orgid;
+        private string m_orgid;
 
         public int SettingId {
             get { return m_settingid; }
@@ -73,7 +73,8 @@ namespace PM.Entity
         /// <summary>
         /// 组织ID
         /// </summary>
-        public int Orgid {
+        public string Orgid
+        {
             get { return m_orgid; }
             set { m_orgid = value; }
         }
