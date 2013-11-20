@@ -7,8 +7,17 @@ $(function () {
 
     var startdate, enddate, status;
 
-    $(".btnQuery").click(function () {
+    $(".startdate").click(function () {
+        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
+    });
 
+    $(".enddate").click(function () {
+        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
+    });
+
+
+    $(".btnQuery").click(function () {
+        getAlarmlogs(1)
     });
 
     function getAlarmlogs(pageindex) {
@@ -24,10 +33,10 @@ $(function () {
 
         $.ajax({
             type: "GET",
-            url: "MeasurementReport.ashx",
+            url: "GetAlarmlogs.ashx",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "ALL" },
+            data: { "startdate": startdate, "enddate": enddate, "status": status, "orgid": ORGID, "pageindex": pageindex, "pagesize": 15 },
             success: OnSuccess,
             error: OnFail
         });

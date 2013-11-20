@@ -327,7 +327,7 @@
     <Compile Include="alarm\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="alarm\GetAlarmlogs.ashx.cs">
+    <Compile Include="services\GetAlarmlogs.ashx.cs">
       <DependentUpon>GetAlarmlogs.ashx</DependentUpon>
     </Compile>
     <Compile Include="analysis\default.aspx.cs">
@@ -511,7 +511,7 @@
     <Content Include="analysis\MeasurementHistoryData.ashx" />
     <Content Include="analysis\HandlerAnalyzeSetting.ashx" />
     <Content Include="analysis\GetAnalyzeSettings.ashx" />
-    <Content Include="alarm\GetAlarmlogs.ashx" />
+    <Content Include="services\GetAlarmlogs.ashx" />
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />

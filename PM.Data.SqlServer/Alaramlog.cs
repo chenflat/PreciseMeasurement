@@ -18,11 +18,12 @@ namespace PM.Data.SqlServer
         /// </summary>
         /// <param name="orgid">机构ID</param>
         /// <returns></returns>
-        public DataSet FindAlarmlogInfo(string startdate, string enddate, int status, string orgid, int pageindex, int pagesize)
+        public DataSet FindAlarmlogInfo(string startdate, string enddate,string pointnum, int status, string orgid, int pageindex, int pagesize)
         {
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate),
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate),
+                                  DbHelper.MakeInParam("@PointNum", (DbType)SqlDbType.VarChar, 30, pointnum),
                                   DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.Int, 4, status),
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
                                   DbHelper.MakeInParam("@PageIndex", (DbType)SqlDbType.Int, 4, pageindex),
@@ -30,7 +31,13 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeOutParam("@RecordCount",(DbType)SqlDbType.Int,4)
                                   };
            DataSet ds = new DataSet("Alarmlogs");
-           ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetAlarmLog", parms);
+           if (pointnum == "")
+           {
+               ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetAlarmLog", parms);
+           }
+           else {
+               ds = DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetAlarmLogByPointNum", parms);
+           }
            ds.Tables[0].TableName = "Alarmlog";
            DataTable dt = new DataTable("Pager");
            dt.Columns.Add("PageIndex");

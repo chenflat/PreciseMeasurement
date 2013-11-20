@@ -14,11 +14,11 @@ namespace PM.Business
     public class Alarmlog
     {
 
-        public static Pagination<AlarmlogInfo> FindAlarmlogInfo(string startdate, string enddate, int status, string orgid, int pageindex, int pagesize)
+        public static Pagination<AlarmlogInfo> FindAlarmlogInfo(string startdate, string enddate,string pointnum, int status, string orgid, int pageindex, int pagesize)
         {
             Pagination<AlarmlogInfo> pagination = new Pagination<AlarmlogInfo>();
 
-            DataSet ds = PM.Data.Alarmlog.FindAlarmlogInfo(startdate, enddate, status, orgid, pageindex, pagesize);
+            DataSet ds = PM.Data.Alarmlog.FindAlarmlogInfo(startdate, enddate,pointnum, status, orgid, pageindex, pagesize);
 
             DataTable alarmlogs = ds.Tables["Alarmlog"];
 

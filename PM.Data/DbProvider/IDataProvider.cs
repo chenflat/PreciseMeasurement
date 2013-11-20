@@ -544,6 +544,6 @@ namespace PM.Data
         /// </summary>
         /// <param name="orgid">机构ID</param>
         /// <returns></returns>
-        DataSet FindAlarmlogInfo(string startdate, string enddate, int status, string orgid, int pageindex, int pagesize);
+        DataSet FindAlarmlogInfo(string startdate, string enddate,string pointnum, int status, string orgid, int pageindex, int pagesize);
     }
 }

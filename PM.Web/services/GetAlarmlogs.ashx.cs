@@ -7,7 +7,7 @@ using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using PM.Common;
 
-namespace PM.Web.alarm
+namespace PM.Web.services
 {
     /// <summary>
     /// GetAlarmlogs 的摘要说明
@@ -25,7 +25,7 @@ namespace PM.Web.alarm
             int m_status = Utils.StrToInt(context.Request["status"],-1);
             string orgid = context.Request["orgid"];
             int m_pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
-            int m_pagesize = Utils.StrToInt(context.Request["pagesize"], 1);
+            int m_pagesize = Utils.StrToInt(context.Request["pagesize"], 15);
 
  
             if (m_enddate == null || m_enddate == "")
