@@ -25,6 +25,8 @@
                 <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>
                 <a href="week.aspx" class="btn btn-info" id="btnWeekQuery">周报</a>
                 <a href="month.aspx" class="btn btn-info" id="btnMonthQuery">月报</a>
+                <a href="custom.aspx" class="btn btn-danger" id="btnCustomReport">自定义报表</a>
+                
             </div>
         </div>
     </div>

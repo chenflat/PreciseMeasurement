@@ -205,7 +205,7 @@ function AddEvent() {
     else {
 
         $(".analysis .startdate").click(function () {
-            WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d - 2}' })
+            WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d}' })
         });
 
         $(".analysis .enddate").click(function () {
@@ -251,7 +251,7 @@ function GetChart(startdate, enddate, datetype) {
     var params = getCompareParams();
     //获取要比较的计量点
     var points = getComparePoints();
-
+    var datetype = getDateType();
     var seriesOptions_Temp = [],
         seriesOptions_Density = [],
         seriesOptions_FlowInstant = [],
@@ -338,79 +338,86 @@ function GetChart(startdate, enddate, datetype) {
         var id = obj.num;
         $('#' + id).highcharts('StockChart', {
             chart: {
-        },
-        title: {
-            text: obj.description + '曲线'
-        },
-        xAxis: {
-            tickPixelInterval: 240, //x轴上的间隔  
-            type: 'datetime', //定义x轴上日期的显示格式  
-            labels: {
-                formatter: function () {
-                    var vDate = new Date(this.value);
-                    return vDate.getFullYear() + "-" + (vDate.getMonth() + 1) + "-" + vDate.getDate();
-                },
-                align: 'center'
-            }
-        },  
+            },
+            title: {
+                text: obj.description + '曲线'
+            },
+            xAxis: {
+                tickPixelInterval: 240, //x轴上的间隔  
+                type: 'datetime', //定义x轴上日期的显示格式  
+                labels: {
+                    formatter: function () {
+                        var vDate = new Date(this.value);
+                        var ret = ""
+                        if (datetype == 'MINUTE') {
+                            ret = vDate.getFullYear() + "-" + (vDate.getMonth() + 1) + "-" + vDate.getDate() + " " + vDate.getHours() + ":" + vDate.getMinutes();
+                        } else {
+                            ret = vDate.getFullYear() + "-" + (vDate.getMonth() + 1) + "-" + vDate.getDate();
+                        }
 
-        yAxis: {
-           /* labels: {
-                formatter: function () {
-                    return (this.value > 0 ? '+' : '') + this.value + '%';
+                        return ret;
+                    },
+                    align: 'center'
                 }
-            }, */
-            plotLines: [{
-                value: 0,
-                width: 2,
-                color: 'silver'
-            }]
-        },
+            },
 
-        plotOptions: {
-           /* series: {
+            yAxis: {
+                /* labels: {
+                formatter: function () {
+                return (this.value > 0 ? '+' : '') + this.value + '%';
+                }
+                }, */
+                plotLines: [{
+                    value: 0,
+                    width: 2,
+                    color: 'silver'
+                }]
+            },
+
+            plotOptions: {
+                /* series: {
                 compare: 'percent'
-            } */
-        },
+                } */
+            },
 
-        tooltip: {
-            xDateFormat: '%Y-%m-%d %H:%M:%S',
-            pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-            valueDecimals: 2
-        },
-       
-        rangeSelector: {  
-            buttons: [{//定义一组buttons,下标从0开始  
-                type: 'week',  
-                count: 1,  
-                text: '1w'  
-            },{  
-                type: 'month',  
-                count: 1,  
-                text: '1m'  
-            }, {  
-                type: 'month',  
-                count: 3,  
-                text: '3m'  
-            }, {  
-                type: 'month',  
-                count: 6,  
-                text: '6m'  
-            }, {  
-                type: 'ytd',  
-                text: 'YTD'  
-            }, {  
-                type: 'year',  
-                count: 1,  
-                text: '1y'  
-            }, {  
-                type: 'all',  
-                text: 'All'  
-            }],  
-            selected: 0//表示以上定义button的index,从0开始  
-         },
-        series: series
-    });
+            tooltip: {
+                xDateFormat: '%Y-%m-%d %H:%M',
+                pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                valueDecimals: 2
+            },
+
+            rangeSelector: {
+                buttons: [{//定义一组buttons,下标从0开始  
+                    type: 'week',
+                    count: 1,
+                    text: '1w'
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: '1m'
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: '3m'
+                }, {
+                    type: 'month',
+                    count: 6,
+                    text: '6m'
+                }, {
+                    type: 'ytd',
+                    text: 'YTD'
+                }, {
+                    type: 'year',
+                    count: 1,
+                    text: '1y'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                selected: 0//表示以上定义button的index,从0开始  
+            },
+            series: series
+        });
 }
 
 }

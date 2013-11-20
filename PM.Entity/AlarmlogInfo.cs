@@ -16,9 +16,9 @@ namespace PM.Entity
     [Serializable()]
     public class AlarmlogInfo
     {
-        private int m_logid;
+        private long m_logid;
 
-        public int Logid
+        public long Logid
         {
             get { return m_logid; }
             set { m_logid = value; }

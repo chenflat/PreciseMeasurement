@@ -7,64 +7,37 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace PM.Web.alarm {
+namespace PM.Web.report {
     
     
-    public partial class _default {
+    public partial class custom {
         
         /// <summary>
-        /// ddlStatus 控件。
+        /// startdate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+        protected global::System.Web.UI.WebControls.TextBox startdate;
         
         /// <summary>
-        /// txtStartDate 控件。
+        /// enddate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartDate;
+        protected global::System.Web.UI.WebControls.TextBox enddate;
         
         /// <summary>
-        /// txtEndDate 控件。
+        /// status 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndDate;
-        
-        /// <summary>
-        /// btnAlarmQuery 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAlarmQuery;
-        
-        /// <summary>
-        /// btnTotal 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTotal;
-        
-        /// <summary>
-        /// btnPing 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPing;
+        protected global::System.Web.UI.WebControls.DropDownList status;
         
         /// <summary>
         /// btnExport 控件。
@@ -76,12 +49,12 @@ namespace PM.Web.alarm {
         protected global::System.Web.UI.WebControls.Button btnExport;
         
         /// <summary>
-        /// gvAlarmData 控件。
+        /// gvCustomReport 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAlarmData;
+        protected global::System.Web.UI.WebControls.GridView gvCustomReport;
     }
 }

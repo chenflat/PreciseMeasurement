@@ -39,7 +39,8 @@ namespace PM.Web.realtime
                     DayData1.MeasurePointInfo = measurePointInfo;
                     HistoryData1.MeasurePointInfo = measurePointInfo;
                     AlarmData1.MeasurePointInfo = measurePointInfo;
-
+                    AlarmData1.Orgid = orgid;
+                    
                 }
 
             }

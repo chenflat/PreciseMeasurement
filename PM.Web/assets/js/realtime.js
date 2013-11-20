@@ -28,11 +28,9 @@ $(function () {
             });
         }
     }
-
+    //每5秒自动更新实时数据
     setInterval(getRealtimeData,5000);
     getRealtimeData();
-
-
 
 
     $(".minute #startdate").val(new Date().add(-1).day().toString("yyyy-MM-dd HH:mm"));
@@ -102,15 +100,12 @@ $(function () {
     initHistoryMinute();
 
 
-    $(".history .startdate").click(function () {
-
-        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d} 00:00' })
-
+    $(".history .startdate").click(function () {   
+       AddEvent();
     });
 
     $(".history .enddate").click(function () {
-
-        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
+        AddEvent();
 
     });
 	//更新历史开始结束日期
@@ -120,20 +115,52 @@ $(function () {
 	 });
 
     $('.history input[name="datetype"]:radio').change(function () {
+        AddEvent();
         var value = $(this).val();
         if (value == "MINUTE") {
             initHistoryMinute();
         } else {
             initHistoryHour();
         }
-
-        console.log($(this).val());
     });
 
+    
+        /**
+         * 获取时间格式
+         */
+        function GetFormat() {
+            var type = getDateType();
+            if (type == "MINUTE") {
+                return 'yyyy-MM-dd HH:00';
+            }
+            else {
+                return 'yyyy-MM-dd';
+            }
+        }
+    function AddEvent() {
+        var type = getDateType();
 
-	function getDateType() {
-		return $('.history input[name="datetype"]:checked').val();
-	}
+        if (type == "Minute") {
+            $(".history .startdate").click(function () {
+                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d %H' })
+            });
+
+            $(".history .enddate").click(function () {
+                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d {%H + 12}' })
+            });
+        }
+        else {
+            $(".history .startdate").click(function () {
+                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d}' })
+            });
+
+            $(".history .enddate").click(function () {
+                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d + 1}' })
+            });
+        }
+}
+
+	
 
 	//设置开始日期
 	function setEndDay() {
@@ -270,6 +297,7 @@ $(function () {
         }
     });
 
+
 });
 
 function OnFail(result) {
@@ -343,7 +371,7 @@ function GetHourData(pointnum, startdate, enddate, pageindex) {
 
 function OnSuccessForHour(response) {
 
-    console.log(response);
+    //console.log(response);
     var measurements = response.List;
     if (measurements.length == 0)
         return;
@@ -394,7 +422,7 @@ function GetDayData(pointnum, startdate, enddate, pageindex) {
 
 function OnSuccessForDay(response) {
 
-    console.log(response);
+    //console.log(response);
     var measurements = response.List;
     if (measurements.length == 0)
         return;
@@ -442,7 +470,7 @@ function GetMinuteChart(pointnum, startdate, enddate) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "MINUTE" },
-        success: OnSuccessMinuteChart,
+        success: OnSuccessHourChart,
         error: OnFail
     });
 }
@@ -469,49 +497,8 @@ function GetHourChart(pointnum, startdate, enddate) {
     // return false;
 }
 
-
-function OnSuccessMinuteChart(response) {
-
-	var items = $("input[name='dataitem']:checked");
-
-
-    $('#container').highcharts({
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }]
-    });
-
+function getDateType() {
+    return $('.history input[name="datetype"]:checked').val();
 }
 
 /**
@@ -529,13 +516,17 @@ function getChartXAxis(datetype){
 	var d1 = new Date(startdate); //"now"
 	var d2 = new Date(endate)  
 	if(datetype=="MINUTE") {
-		
+		var diff = Math.abs(d1-d2);
+		var days =  diff/1000/60/60/24;
+		for(var i=0;i<days;i++) {
+			dateZone.push(d1.addDays(i).toString("MM-dd"));
+		}
 
 	} else {
 		var diff = Math.abs(d1-d2);
 		var days =  diff/1000/60/60/24;
 		for(var i=0;i<days;i++) {
-			dateZone.push(d1.addDays(i).toString("MM-dd"));
+			dateZone.push(d1.addDays(i).toString("MM-dd HH:00"));
 		}
 	}
 	return dateZone;
@@ -544,7 +535,15 @@ function getChartXAxis(datetype){
 
 function OnSuccessHourChart(response){
 
-	//var dateZone = getChartXAxis("HOUR")
+	var dateZone = getChartXAxis("HOUR")
+    var type = getDateType();
+    var dtformat = "MM-dd"
+    var step = 24;
+    if(type=="MINUTE") {
+        dtformat = "MM-dd HH:00";
+        step = 60;
+    }
+    
 
 	var charItems = [
 			{"name":"SW_TEMPERATURE","title":"温度曲线","unit":"°C"},
@@ -578,11 +577,11 @@ function OnSuccessHourChart(response){
 			        text: '温度曲线'
 			    },
 			    xAxis: {
-                    tickInterval:24,
+                    tickInterval:step,
                     tickWidth: 0,
 			        labels: {
 			            formatter: function () {
-			                return Date.parse(this.value).toString("MM-dd");
+			                return Date.parse(this.value).toString(dtformat);
 			            }
 			        },
 			        categories: times,
@@ -627,12 +626,12 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
-                    tickInterval:24,
+                    tickInterval:step,
 				    labels: {
 				        //staggerLines: 4,
 				        //step: 24,
 				        formatter: function () {
-				            return Date.parse(this.value).toString("MM-dd");
+				            return Date.parse(this.value).toString(dtformat);
 				        }
 				    },
 				    categories: times,
@@ -671,11 +670,11 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
-                     tickInterval:24,
+                     tickInterval:step,
 				    labels: {
 				        step: 24,
 				        formatter: function () {
-				            return Date.parse(this.value).toString("MM-dd");
+				            return Date.parse(this.value).toString(dtformat);
 				        }
 				    },
 				    categories: times,

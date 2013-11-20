@@ -27,6 +27,9 @@
     <script src="<%=ResolveUrl("~/assets/js/holder.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/lib/bootbox/bootbox.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
+    <script>
+        var CONTEXT_PATH = "<%=PM.Config.BaseConfigs.GetSystemPath %>"
+    </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>

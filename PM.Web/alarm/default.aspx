@@ -9,11 +9,16 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/alarm.js") %>"></script>
+    <script>
+        var USERID = "<%=userid %>";
+        var ORGID = "<%=orgid %>";
+    
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="bs-docs-section">
-            <div class="alert alert-warning">
+            <div class="alert alert-warning alarm">
                 报警状态：<asp:DropDownList ID="ddlStatus" CssClass="status" runat="server">
                     <asp:ListItem Value="0">未确认</asp:ListItem>
                     <asp:ListItem Value="1">已确认</asp:ListItem>
@@ -21,7 +26,7 @@
                 </asp:DropDownList>
                 起始时间：<asp:TextBox ID="txtStartDate" CssClass="startdate" runat="server"></asp:TextBox>
                 &nbsp;终止时间：<asp:TextBox ID="txtEndDate" CssClass="enddate" runat="server"></asp:TextBox>
-                &nbsp;<asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn btn-danger btnQuery" />
+                &nbsp;<asp:Button ID="btnAlarmQuery" runat="server" Text="查询" CssClass="btn btn-danger btnAlarmQuery" />
                 <asp:Button ID="btnTotal" runat="server" Text="统计" CssClass="btn btn-danger" />
                 <asp:Button ID="btnPing" runat="server" Text="通信状态" CssClass="btn btn-danger" />
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-danger" />
@@ -50,7 +55,7 @@
                 <PagerSettings Visible="False" />
             </asp:GridView>
             <br />
-            <div id="daypager" class="pager"></div>
+            <div id="alarmpager" class="pager"></div>
         </div>
     </div>
 </asp:Content>
