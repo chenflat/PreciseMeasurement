@@ -58,7 +58,6 @@
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="realtime">
                         <uc2:RealtimeParams ID="RealtimeParams1" runat="server" />
-                        <input type="hidden" id="pointnum" value="<%=measurePointInfo.Pointnum %>" />
                     </div>
                     <div class="tab-pane fade" id="minute">
                         <uc3:MinuteData ID="MinuteData1" runat="server" />
@@ -78,6 +77,9 @@
                     <div class="tab-pane fade" id="info">
                         <uc1:MeasurePointBaseInfo ID="MeasurePointBaseInfo" runat="server" />
                     </div>
+                    <input type="hidden" id="pointnum" value="<%=measurePointInfo.Pointnum %>" />
+                    <input type="hidden" id="devicenum" value="<%=measurePointInfo.Devicenum %>" />
+                    <input type="hidden" id="cardnum" value="<%=measurePointInfo.Cardnum %>" />
                 </div>
             </div>
         </div>
