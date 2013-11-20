@@ -4,6 +4,7 @@ using System.Text;
 
 namespace PM.Entity
 {
+    [Serializable]
     public enum AlarmType
     {
         LOWERWARNING = 1, LOWERACTION = 2, UPPERWARNING = 3, UPPERACTION = 4
@@ -22,6 +23,16 @@ namespace PM.Entity
             get { return m_logid; }
             set { m_logid = value; }
         }
+
+        private DateTime m_logtime;
+
+        public DateTime Logtime
+        {
+            get { return m_logtime; }
+            set { m_logtime = value; }
+        }
+
+
         private decimal m_measurevalue;
 
         public decimal Measurevalue
@@ -85,9 +96,9 @@ namespace PM.Entity
             get { return m_acktime; }
             set { m_acktime = value; }
         }
-        private string m_ackvalue;
+        private decimal m_ackvalue;
 
-        public string Ackvalue
+        public decimal Ackvalue
         {
             get { return m_ackvalue; }
             set { m_ackvalue = value; }
@@ -120,6 +131,15 @@ namespace PM.Entity
             get { return m_retoperatorname; }
             set { m_retoperatorname = value; }
         }
+
+        private DateTime m_reviewtime;
+
+        public DateTime Reviewtime
+        {
+            get { return m_reviewtime; }
+            set { m_reviewtime = value; }
+        }
+
         private string m_reviewcontent;
 
         public string Reviewcontent
@@ -134,7 +154,7 @@ namespace PM.Entity
             get { return m_reviewer; }
             set { m_reviewer = value; }
         }
-        private int m_status;
+        private int m_status = -1;
 
         public int Status
         {
@@ -142,6 +162,13 @@ namespace PM.Entity
             set { m_status = value; }
         }
 
+        private string m_orgid;
+
+        public string Orgid
+        {
+            get { return m_orgid; }
+            set { m_orgid = value; }
+        }
 
 
     }
