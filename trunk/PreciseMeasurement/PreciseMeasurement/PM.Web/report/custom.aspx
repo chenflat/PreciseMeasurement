@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
@@ -63,8 +63,7 @@
                                         <ul class="nav measurepoint-list">
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                                {%>
-                                            <li id="<%=point.Pointnum %>"><a href="#">
-                                                <%=point.Description%></a></li>
+                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;"><%=point.Description%></li>
                                             <% } %>
                                         </ul>
                                     </li>
@@ -75,23 +74,13 @@
                                 </ul>
                                 </div>
                             </div></div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">
-                                        2、选择对比参量</h3>
-                                </div>
-                                <div class="panel-body">
-                                    
-                                </div>
-                            </div>
-                        </div>
+                       
                         
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                              <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        3、核对查询条件</h3>
+                                        2、设置系数</h3>
                                 </div>
                                 <div class="panel-body">
                                    <div class="sel-params">
