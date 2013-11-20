@@ -33,7 +33,7 @@ $(function () {
 
         $.ajax({
             type: "GET",
-            url: "GetAlarmlogs.ashx",
+            url: "../services/GetAlarmlogs.ashx",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: { "startdate": startdate, "enddate": enddate, "status": status, "orgid": ORGID, "pageindex": pageindex, "pagesize": 15 },
