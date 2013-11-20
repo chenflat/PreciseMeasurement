@@ -539,5 +539,11 @@ namespace PM.Data
         /// <returns>分析设置信息</returns>
         IDataReader FindAnalyzeSettingInfo(int userid,string orgid);
 
+        /// <summary>
+        /// 查找报警信息
+        /// </summary>
+        /// <param name="orgid">机构ID</param>
+        /// <returns></returns>
+        DataSet FindAlarmlogInfo(string startdate, string enddate, int status, string orgid, int pageindex, int pagesize);
     }
 }

@@ -42,13 +42,13 @@
 
     var $reportrows = $("[id*=gvReport] tr");
     for (var i = 1; i < $reportrows.length; i++) {
-        $($reportrows[i]).find("td").eq(0).attr("width", "90px");
+        $($reportrows[i]).find("td").eq(0).attr("width", "100px");
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM-dd'));
     }
 
     var $reportrows = $("[id*=gvMonthReport] tr");
     for (var i = 1; i < $reportrows.length; i++) {
-        $($reportrows[i]).find("td").eq(0).attr("width", "80px");
+        $($reportrows[i]).find("td").eq(0).attr("width", "100px");
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM'));
     }
     

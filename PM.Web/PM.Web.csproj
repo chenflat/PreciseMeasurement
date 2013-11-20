@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ShareData">
+      <HintPath>D:\Dropbox\计量项目\03 系统开发\ShareData.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -108,6 +111,7 @@
     <Content Include="assets\ico\subsystem.png" />
     <Content Include="assets\img\bg.png" />
     <Content Include="assets\img\systemrunchart.png" />
+    <Content Include="assets\js\alarm.js" />
     <Content Include="assets\js\analysis.js" />
     <Content Include="assets\js\application.js" />
     <Content Include="assets\js\ASPSnippets_Pager.min.js" />
@@ -323,6 +327,9 @@
     <Compile Include="alarm\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="alarm\GetAlarmlogs.ashx.cs">
+      <DependentUpon>GetAlarmlogs.ashx</DependentUpon>
+    </Compile>
     <Compile Include="analysis\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -504,6 +511,7 @@
     <Content Include="analysis\MeasurementHistoryData.ashx" />
     <Content Include="analysis\HandlerAnalyzeSetting.ashx" />
     <Content Include="analysis\GetAnalyzeSettings.ashx" />
+    <Content Include="alarm\GetAlarmlogs.ashx" />
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />

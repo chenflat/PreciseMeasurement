@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alaramlog.cs" />
     <Compile Include="AnalyzeSetting.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Measurement.cs" />
