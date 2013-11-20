@@ -82,6 +82,7 @@
         【北京】 今日通告，天气阵雨，22度，风力2级
         </div>
        <form id="Form1" runat="server" class="form-horizontal" role="form">
+         <div id="processing" class="processing" style="display:none;">处理中...</div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </form>
     </div>
