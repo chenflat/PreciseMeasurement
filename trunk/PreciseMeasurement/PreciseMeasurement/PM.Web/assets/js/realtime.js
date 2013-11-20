@@ -1,4 +1,39 @@
-﻿$(function () {
+﻿
+
+$(function () {
+
+    /**
+    * 获取实时数据
+    */
+    function getRealtimeData() {
+        var $AiDensity = $("#AI_Density"),
+            $SWTemperature = $("#SW_Temperature"),
+            $AFFlowInstant = $("#AF_FlowInstant"),
+            $SWPressure = $("#SW_Pressure"),
+            $ATFlow = $("#AT_Flow")
+        //设置编号
+        var devicenum = $("#devicenum").val();
+        if(devicenum=="") {
+            devicenum = $("#cardnum").val();
+        }
+        if(devicenum!="" && typeof(devicenum)!='undefined') {
+            $.getJSON('../services/GetRealtimeMeasurement.ashx',{"devicenum":devicenum},function(data){
+                if(data!=null) {
+                    $AiDensity.text(data.AI_Density);
+                    $SWTemperature.text(data.SW_Temperature);
+                    $AFFlowInstant.text(data.AF_FlowInstant);
+                    $SWPressure.text(data.SW_Pressure);
+                    $ATFlow.text(data.AT_Flow);
+                }
+            });
+        }
+    }
+
+    setInterval(getRealtimeData,5000);
+    getRealtimeData();
+
+
+
 
     $(".minute #startdate").val(new Date().add(-1).day().toString("yyyy-MM-dd HH:mm"));
     $(".minute #enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));

@@ -38,7 +38,7 @@ namespace PM.Web.alarm
             string m_enddate = txtEndDate.Text.Trim();
 
             int m_status = Utils.StrToInt(ddlStatus.SelectedValue,-1);
-            DataTable dt = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate, 0, orgid, 1, 15).Tables[0];
+            DataTable dt = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate,"", -1, orgid, 1, 15).Tables[0];
             if (dt.Rows.Count == 0)
             {
                 dt.Rows.Add();
