@@ -26,9 +26,10 @@ namespace PM.Web.services
             context.Response.ContentType = "text/xml";
             context.Response.Charset = "UTF-8";
 
+            string devicenum = context.Request["devicenum"];
 
             Share share = new Share();
-            devvalue realvalue = share.GetRealData("");
+            devvalue realvalue = share.GetRealData(devicenum);
 
             //序列化数据
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();

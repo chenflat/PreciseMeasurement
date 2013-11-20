@@ -112,11 +112,9 @@
 		 } else {
 			 console.log(type);
 			if($(".history .startdate").val().length>0) {
-				
 				 $(".history .enddate").val(new Date($(".history .startdate").val()).addDay(1));
 			}
 		 }
-
 	}
 
 
