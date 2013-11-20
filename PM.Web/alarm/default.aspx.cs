@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 using PM.Common;
 using PM.Business.Pages;
@@ -36,8 +37,13 @@ namespace PM.Web.alarm
             string m_startdate = txtStartDate.Text.Trim();
             string m_enddate = txtEndDate.Text.Trim();
 
-            int m_status = Utils.StrToInt(ddlStatus.SelectedValue,0);
-            gvAlarmData.DataSource = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate, 0, orgid, 1, 15).Tables[0];
+            int m_status = Utils.StrToInt(ddlStatus.SelectedValue,-1);
+            DataTable dt = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate, 0, orgid, 1, 15).Tables[0];
+            if (dt.Rows.Count == 0)
+            {
+                dt.Rows.Add();
+            }
+            gvAlarmData.DataSource = dt;
             gvAlarmData.DataBind();
 
         }
