@@ -35,7 +35,7 @@
                 <Columns>
                     <asp:TemplateField HeaderText="报警类型">
                         <ItemTemplate>
-                            高类型
+                            低报警 
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="MEASUREVALUE" HeaderText="报警值" />
