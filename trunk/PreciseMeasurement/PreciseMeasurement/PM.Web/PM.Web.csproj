@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ShareData">
+    <Reference Include="ShareData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Dropbox\计量项目\03 系统开发\ShareData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -478,6 +479,9 @@
     <Compile Include="report\week.aspx.designer.cs">
       <DependentUpon>week.aspx</DependentUpon>
     </Compile>
+    <Compile Include="services\GetRealtimeMeasurement.ashx.cs">
+      <DependentUpon>GetRealtimeMeasurement.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -521,6 +525,7 @@
     <Content Include="realtime\RealtimeParam.ashx" />
     <Content Include="realtime\MeasurementHistoryData.ashx" />
     <Content Include="report\MeasurementReport.ashx" />
+    <Content Include="services\GetRealtimeMeasurement.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">
