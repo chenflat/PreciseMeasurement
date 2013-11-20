@@ -27,6 +27,14 @@ namespace PM.Business.Pages
             set { measurePointInfo = value; }
         }
 
+        private string m_orgid;
+        public string Orgid
+        {
+            get { return m_orgid; }
+            set { m_orgid = value; }
+        }
+
+
 
        
     }

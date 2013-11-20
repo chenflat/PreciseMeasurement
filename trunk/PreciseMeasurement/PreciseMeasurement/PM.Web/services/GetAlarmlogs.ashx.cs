@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using PM.Common;
 
+
 namespace PM.Web.services
 {
     /// <summary>
@@ -24,12 +25,12 @@ namespace PM.Web.services
             string m_enddate = context.Request["enddate"];
             string m_pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"];
 
-            int m_status = Utils.StrToInt(context.Request["status"],-1);
+            int m_status = Utils.StrToInt(context.Request["status"], -1);
             string orgid = context.Request["orgid"];
             int m_pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
             int m_pagesize = Utils.StrToInt(context.Request["pagesize"], 15);
 
- 
+
             if (m_enddate == null || m_enddate == "")
                 m_enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
@@ -37,9 +38,9 @@ namespace PM.Web.services
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = "";
 
-            Pagination<AlarmlogInfo> pagination = PM.Business.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate,m_pointnum, m_status, orgid, m_pageindex, m_pagesize);
+            Pagination<AlarmlogInfo> pagination = PM.Business.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate, m_pointnum, m_status, orgid, m_pageindex, m_pagesize);
             result = javaScriptSerializer.Serialize(pagination);
-           
+
             result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);
 

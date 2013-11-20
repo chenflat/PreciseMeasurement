@@ -34,9 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ShareData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Dropbox\计量项目\03 系统开发\ShareData.dll</HintPath>
+    <Reference Include="ShareData">
+      <HintPath>..\..\..\..\..\..\..\Dropbox\计量项目\03 系统开发\ShareData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -166,6 +165,7 @@
     <Content Include="realtime\MinuteData.ascx" />
     <Content Include="realtime\RealtimeParams.ascx" />
     <Content Include="report\compare.aspx" />
+    <Content Include="report\custom.aspx" />
     <Content Include="report\day.aspx" />
     <Content Include="report\default.aspx" />
     <Content Include="report\month.aspx" />
@@ -328,9 +328,6 @@
     <Compile Include="alarm\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="services\GetAlarmlogs.ashx.cs">
-      <DependentUpon>GetAlarmlogs.ashx</DependentUpon>
-    </Compile>
     <Compile Include="analysis\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +445,13 @@
     <Compile Include="report\compare.aspx.designer.cs">
       <DependentUpon>compare.aspx</DependentUpon>
     </Compile>
+    <Compile Include="report\custom.aspx.cs">
+      <DependentUpon>custom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report\custom.aspx.designer.cs">
+      <DependentUpon>custom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="report\day.aspx.cs">
       <DependentUpon>day.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -478,6 +482,9 @@
     </Compile>
     <Compile Include="report\week.aspx.designer.cs">
       <DependentUpon>week.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="services\GetAlarmlogs.ashx.cs">
+      <DependentUpon>GetAlarmlogs.ashx</DependentUpon>
     </Compile>
     <Compile Include="services\GetRealtimeMeasurement.ashx.cs">
       <DependentUpon>GetRealtimeMeasurement.ashx</DependentUpon>
@@ -515,7 +522,6 @@
     <Content Include="analysis\MeasurementHistoryData.ashx" />
     <Content Include="analysis\HandlerAnalyzeSetting.ashx" />
     <Content Include="analysis\GetAnalyzeSettings.ashx" />
-    <Content Include="services\GetAlarmlogs.ashx" />
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
@@ -526,6 +532,7 @@
     <Content Include="realtime\MeasurementHistoryData.ashx" />
     <Content Include="report\MeasurementReport.ashx" />
     <Content Include="services\GetRealtimeMeasurement.ashx" />
+    <Content Include="services\GetAlarmlogs.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">
