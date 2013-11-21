@@ -23,6 +23,25 @@ namespace PM.Business
             return Data.MeasurePoint.FindMeasurePointTableByLocation(location);
         }
 
+        /// <summary>
+        /// 获取计量点和位置信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<MeasurePointInfo> FindMeasurePointAndLocation() {
+            List<MeasurePointInfo> list = new List<MeasurePointInfo>();
+            using (IDataReader reader = PM.Data.MeasurePoint.FindMeasurePointAndLocation())
+            {
+                while (reader.Read())
+                {
+                    MeasurePointInfo measurePointInfo = PM.Data.MeasurePoint.LoadMeasurePointInfo(reader);
+                    list.Add(measurePointInfo);
+                }
+                reader.Close();
+            }
+
+            return list;
+        }
+
         public static int CreateMeasurePoint(MeasurePointInfo measurePointInfo)
         {
             if (measurePointInfo.Status==null || measurePointInfo.Status.Length == 0)

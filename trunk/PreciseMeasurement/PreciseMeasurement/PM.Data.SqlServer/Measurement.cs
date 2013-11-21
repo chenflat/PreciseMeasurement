@@ -183,10 +183,33 @@ namespace PM.Data.SqlServer
        }
 
 
+        /// <summary>
+        /// 获取指定时间内的测量数据报告
+        /// </summary>
+        /// <param name="pointnum">自定义测点,多测点用半角逗号隔开,如S1,S2,S3</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <param name="formula">计算公式</param>
+        /// <returns></returns>
+       public DataTable GetMeasurementCustomReport(string pointnum, string startdate, string enddate, ReportType reportType, string formula)
+       {
+           DbParameter[] parms = {
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 1000, pointnum),
+                                  DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
+                                  DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
+                                  DbHelper.MakeInParam("@Formula", (DbType)SqlDbType.VarChar, 1000, formula)
+                                  };
+           return DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementCustomReport", parms).Tables[0];
+       }
+
+
+
        public bool CreateMeasurementHourData(MeasurementStatInfo statInfo) {
 
            DbParameter[] parms = { 
-                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, statInfo.Pointnum),
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 1000, statInfo.Pointnum),
                                   DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 20, statInfo.Measureunitid),
                                   DbHelper.MakeInParam("@MEASURETIME", (DbType)SqlDbType.DateTime, 8, statInfo.Measuretime),
                                   DbHelper.MakeInParam("@STARTVALUE", (DbType)SqlDbType.Decimal, 4, statInfo.StartValue),

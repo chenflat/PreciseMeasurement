@@ -27,6 +27,9 @@ namespace PM.Entity
         private string phone;
         private string status;
         private int level;
+        private string x;
+        private string y;
+        private string z;
         /// <summary>
         /// 最后同步时间
         /// </summary>
@@ -135,6 +138,21 @@ namespace PM.Entity
         public DateTime LastSynTime {
             get { return lastsyntime; }
             set { lastsyntime = value; }
+        }
+
+        public string X {
+            get { return x; }
+            set { x = value; }
+        }
+
+        public string Y {
+            get { return y; }
+            set { y = value; }
+        }
+
+        public string Z {
+            get { return z; }
+            set { z = value; }
         }
     }
 }

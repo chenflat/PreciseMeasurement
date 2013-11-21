@@ -98,7 +98,7 @@
                                         3、核对查询条件</h3>
                                 </div>
                                 <div class="panel-body">
-                                   <div class="sel-params">
+                                    <div class="sel-params">
                                     选择的参数
                                     <ul id="container-params">
                                     

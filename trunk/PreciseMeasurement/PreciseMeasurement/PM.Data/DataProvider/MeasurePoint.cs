@@ -34,6 +34,16 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindMeasurePointTableByLocation(location);
         }
 
+        
+        /// <summary>
+        /// 获取计量点和位置信息
+        /// </summary>
+        /// <returns></returns>
+        public static IDataReader FindMeasurePointAndLocation()
+        {
+            return DatabaseProvider.GetInstance().FindMeasurePointAndLocation();
+        }
+
         /// <summary>
         /// 添加计量点
         /// </summary>
@@ -106,7 +116,9 @@ namespace PM.Data
             measurePointInfo.Carrier = reader["CARRIER"].ToString();
             measurePointInfo.Supervisor = reader["SUPERVISOR"].ToString();
             measurePointInfo.Phone = reader["PHONE"].ToString();
-
+            measurePointInfo.X = Utils.ContainsField(reader, "X") ? reader["X"].ToString() : "";
+            measurePointInfo.Y = Utils.ContainsField(reader, "Y") ? reader["Y"].ToString() : "";
+            measurePointInfo.Z = Utils.ContainsField(reader, "Z") ? reader["Z"].ToString() : "";
             return measurePointInfo;
         }
 
