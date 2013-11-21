@@ -310,16 +310,16 @@ function GetChart(startdate, enddate, datetype) {
                 $.each(params, function (index, obj) {
                     switch (obj.num) {
                         case "SW_Temperature":
-                            createChart(obj, seriesOptions_Temp);
+                            createChart(obj, seriesOptions_Temp, '温度(℃)');
                             break;
                         case "AI_Density":
-                            createChart(obj, seriesOptions_Density);
+                            createChart(obj, seriesOptions_Density, '频率(Hz)');
                             break;
                         case "AF_FlowInstant":
-                            createChart(obj, seriesOptions_FlowInstant);
+                            createChart(obj, seriesOptions_FlowInstant, '流量(t)');
                             break;
                         case "SW_Pressure":
-                            createChart(obj, seriesOptions_Pressure);
+                            createChart(obj, seriesOptions_Pressure, '压力(MPa)');
                             break;
                         default:
                             break;
@@ -331,7 +331,7 @@ function GetChart(startdate, enddate, datetype) {
     });
 
     // create the chart when all data is loaded
-    function createChart(obj,series) {
+    function createChart(obj,series,ytitle) {
 
         console.log(obj.description);
         $("#charts").append("<div id='"+ obj.num +"'></div>");
@@ -342,6 +342,7 @@ function GetChart(startdate, enddate, datetype) {
             title: {
                 text: obj.description + '曲线'
             },
+            
             xAxis: {
                 tickPixelInterval: 240, //x轴上的间隔  
                 type: 'datetime', //定义x轴上日期的显示格式  
@@ -367,6 +368,9 @@ function GetChart(startdate, enddate, datetype) {
                 return (this.value > 0 ? '+' : '') + this.value + '%';
                 }
                 }, */
+                title : {
+                    text: ytitle
+                },
                 plotLines: [{
                     value: 0,
                     width: 2,
@@ -379,7 +383,9 @@ function GetChart(startdate, enddate, datetype) {
                 compare: 'percent'
                 } */
             },
-
+             credits: {
+	                enabled: false
+	            },
             tooltip: {
                 xDateFormat: '%Y-%m-%d %H:%M',
                 pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> ({point.change}%)<br/>',

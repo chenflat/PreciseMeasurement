@@ -82,7 +82,7 @@
 </header>
     <div class="container">
         <div class="bs-old-docs">
-        【北京】 今日通告，天气阵雨，22度，风力2级
+       <iframe name="weather_inc" src="http://tianqi.xixik.com/cframe/1" width="330" height="35" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
         </div>
        <form id="Form1" runat="server" class="form-horizontal" role="form">
          <div id="processing" class="processing" style="display:none;">处理中...</div>
