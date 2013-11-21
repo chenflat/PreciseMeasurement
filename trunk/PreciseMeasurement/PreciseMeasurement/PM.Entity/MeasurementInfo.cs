@@ -12,6 +12,7 @@ namespace PM.Entity
     {
         private long measurementid;
         private string pointnum;
+        private string description;
         private string devicenum;
         private string orgid;
         private string siteid;
@@ -42,6 +43,12 @@ namespace PM.Entity
             get { return pointnum; }
             set { pointnum = value; }
         }
+
+        public string Description {
+            get { return description; }
+            set { description = value; }
+        }
+
         public string DeviceNum
         {
             get { return devicenum; }
