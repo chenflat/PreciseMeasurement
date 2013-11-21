@@ -28,12 +28,37 @@ namespace PM.Web.services
 
             string devicenum = context.Request["devicenum"];
 
-            Share share = new Share();
-            devvalue realvalue = share.GetRealData(devicenum);
-
             //序列化数据
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            string result = javaScriptSerializer.Serialize(realvalue);
+            string result = "";
+            if (devicenum!="")
+            {
+                Share share = new Share();
+                devvalue realvalue = share.GetRealData(devicenum);
+                result = javaScriptSerializer.Serialize(realvalue);
+            }
+            else { 
+                //获取所有测点的实时数据
+                List<MeasurePointInfo> points = PM.Business.MeasurePoint.FindMeasurePointAndLocation();
+                List<MeasurementInfo> measurements = new List<MeasurementInfo>();
+                foreach (var item in points)
+                {
+                    devicenum = item.Devicenum;
+                    if (devicenum == "") devicenum = item.Cardnum;
+                    //获取数据并写入测量值列表中
+                    Share share = new Share();
+                    devvalue realvalue = share.GetRealData(devicenum);
+
+                    MeasurementInfo measurementInfo = new MeasurementInfo();
+                    measurementInfo.Description = item.Description;
+                    measurementInfo.AfFlowinstant = Convert.ToDecimal(realvalue.AF_FlowInstant);
+                    measurementInfo.SwTemperature = Convert.ToDecimal(realvalue.SW_Temperature);
+
+
+
+                    measurements.Add(measurementInfo);
+                }
+            }
             result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);
         }

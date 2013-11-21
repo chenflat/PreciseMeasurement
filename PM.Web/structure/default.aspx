@@ -20,21 +20,33 @@
     <div id="S9" class="meter" style="left:165px;top:230px;"><div class="left">S9</div></div>
     <div id="S10" class="meter" style="left:165px;top:380px;"><div class="left">S10</div></div>--%>
 
-
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
-            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;"><div class="left"><%# Eval("Pointnum") %></div></div>
+            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" ><div class="left"><%# Eval("Pointnum") %></div></div>
         </ItemTemplate>
         </asp:Repeater>
 
 
     <img src="../assets/img/systemrunchart.png" width="1100" alt="" />
     </div>
-    <div class="swichbar pull-left" id="swichbar">
-    
-    </div>
-    <div class="pull-right">
+    <div class="swichbar pull-left" id="swichbar">>></div>
+    <div class="pull-right table-responsive" style="z-index:50; position:absolute;left:1000px;display:none;" id="realdata">
+        <table class="table table-bordered" id="gvRealtimeData">
+        <thead>
+            <tr>
+                <th>计量点</th>
+                <th>采集时间</th>
+                <th>压力(MPa)</th>
+                <th>温度(℃)</th>
+                <th>瞬时流量(t/h)</th>
+            </tr>
+        </thead>
+        <tbody>
         
+        </tbody>
+        </table>
+
+
     
     </div>
 </div>
