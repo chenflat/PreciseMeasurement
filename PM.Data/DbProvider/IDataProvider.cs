@@ -200,6 +200,13 @@ namespace PM.Data
         DataTable FindMeasurePointByCondition(string condition);
 
         /// <summary>
+        /// 获取计量点和位置信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        IDataReader FindMeasurePointAndLocation();
+
+        /// <summary>
         /// 获取指定的计量点
         /// </summary>
         /// <param name="id">计量点主键ID</param>
@@ -477,6 +484,18 @@ namespace PM.Data
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
         DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType);
+
+        /// <summary>
+        /// 获取指定时间内的测量数据自定义报告
+        /// </summary>
+        /// <param name="pointnum">自定义测点,多测点用半角逗号隔开,如S1,S2,S3</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <param name="formula">计算公式</param>
+        /// <returns></returns>
+        DataTable GetMeasurementCustomReport(string pointnum, string startdate, string enddate, ReportType reportType, string formula);
+
 
 
 

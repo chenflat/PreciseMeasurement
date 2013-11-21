@@ -147,6 +147,18 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate, reportType);
         }
 
+        /// <summary>
+        /// 获取指定时间内的测量数据自定义报告
+        /// </summary>
+        /// <param name="pointnum">自定义测点,多测点用半角逗号隔开,如S1,S2,S3</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="reportType">查询方式</param>
+        /// <param name="formula">计算公式</param>
+        /// <returns></returns>
+        public static DataTable GetMeasurementCustomReport(string pointnum, string startdate, string enddate, ReportType reportType, string formula) {
+            return DatabaseProvider.GetInstance().GetMeasurementCustomReport(pointnum, startdate, enddate, reportType, formula);
+        }
 
 
         /// <summary>

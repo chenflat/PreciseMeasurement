@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
+
 using PM.Entity;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
@@ -20,40 +22,55 @@ namespace PM.Web.report
             context.Response.ContentType = "text/xml";
             context.Response.Charset = "UTF-8";
 
+            string m_pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"];
+            string m_formula = context.Request["formula"] == null ? "" : context.Request["formula"];
             string m_startdate = context.Request["startdate"];
             string m_enddate = context.Request["enddate"];
             string m_type = context.Request["type"];
             int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
+            bool m_iscustom = context.Request["iscustom"] == null ? false : Utils.StrToBool(context.Request["iscustom"],false);
 
             ReportType type;
 
             if (m_enddate == null || m_enddate == "")
                 m_enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
-            if (m_type == "MINUTE")
-            {
-                type = ReportType.Minute;
-            }
-            else if (m_type == "HOUR")
-            {
-                type = ReportType.Hour;
-            }
-            else
-            {
-                type = ReportType.Minute;
-            }
+            type = (ReportType)Enum.Parse(typeof(ReportType), m_type);
 
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = "";
-            if (m_type == "ALL")
+
+            if (m_iscustom)
             {
-                Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_type, pageindex, 12);
-                result = javaScriptSerializer.Serialize(pagination);
+                DataTable dt = Data.Measurement.GetMeasurementCustomReport(m_pointnum, m_startdate, m_enddate, type, m_formula);
+                
+                System.Collections.ArrayList dic = new System.Collections.ArrayList();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    System.Collections.Generic.Dictionary<string, object> drow = new System.Collections.Generic.Dictionary<string, object>();
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        drow.Add(dc.ColumnName, dr[dc.ColumnName]);
+                    }
+                    dic.Add(drow);
+
+                }
+                result = javaScriptSerializer.Serialize(dic);
+              
             }
-            else { 
-                
-                
-            }         
+            else
+            {
+                if (m_type == "ALL")
+                {
+                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_type, pageindex, 12);
+                    result = javaScriptSerializer.Serialize(pagination);
+                }
+                else
+                {
+
+                }
+            }
+
             result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);
         }

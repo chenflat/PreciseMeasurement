@@ -42,6 +42,20 @@ namespace PM.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
+        
+        /// <summary>
+        /// 获取计量点和位置信息
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        public IDataReader FindMeasurePointAndLocation() {
+            string commandText = string.Format("SELECT P.*,LOC.X,LOC.Y,LOC.Z FROM [{0}MEASUREPOINT] P inner join LOCATIONS LOC on P.LOCATION=LOC.LOCATION WHERE P.STATUS='ACTIVE' order by P.DISPLAYSEQUENCE ASC",
+                                                BaseConfigs.GetTablePrefix
+                                                );
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+
+        }
+
         /// <summary>
         /// 获取指定层级的计量器列表
         /// </summary>

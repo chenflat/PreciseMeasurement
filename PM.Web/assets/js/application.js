@@ -32,16 +32,15 @@
                         var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
                         var navOuterHeight = $('.bs-docs-nav').height()
 
-                        console.log("offsetTop:" + offsetTop);
-                        console.log("sideBarMargin:" + sideBarMargin);
-                        console.log("navOuterHeight:" + navOuterHeight);
-                        console.log("aa:" + (offsetTop - navOuterHeight - sideBarMargin));
+                       // console.log("offsetTop:" + offsetTop);
+                      //  console.log("sideBarMargin:" + sideBarMargin);
+                       // console.log("navOuterHeight:" + navOuterHeight);
+                       // console.log("aa:" + (offsetTop - navOuterHeight - sideBarMargin));
 
                         return (this.top = offsetTop - navOuterHeight - sideBarMargin)
                     }
                     , bottom: function () {
-                        console.log("bb:" + $('.bs-footer').outerHeight(true));
-
+                      
                         return (this.bottom = $('.bs-footer').outerHeight(true))
                     }
                 }

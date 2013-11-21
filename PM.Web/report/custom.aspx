@@ -19,7 +19,7 @@
                 </asp:DropDownList>
                 &nbsp;
                 <a data-toggle="modal" href="#myModal" class="btn btn-danger">自定义设置</a>
-                <button type="button" class="btn btn-info" id="btnQuery">生成报表</button>
+                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>
                 
@@ -27,10 +27,14 @@
         </div>
     </div>
     <div class="row">
-      <asp:GridView ID="gvCustomReport" runat="server"  CssClass="table table-striped">
-        </asp:GridView>
-
-
+        <table id="gvCustomReport" class="table table-bordered table-hover">
+        <thead>
+            <tr></tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+        </table>
     </div>
 
     <!-- Modal -->
@@ -83,12 +87,7 @@
                                         2、设置系数</h3>
                                 </div>
                                 <div class="panel-body">
-                                   <div class="sel-params">
-                                    选择的参数
-                                    <ul id="container-params">
-                                    
-                                    </ul>
-                                   </div>
+                                   
                                     <div class="sel-points">
                                     选择的计量点
                                     <ul  id="container-measurepoints">

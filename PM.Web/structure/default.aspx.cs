@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using PM.Business;
 using PM.Business.Pages;
 
 namespace PM.Web.structure
@@ -12,7 +13,18 @@ namespace PM.Web.structure
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                BindData();
+            }
+        }
+
+        private void BindData() {
+
+            rptMeasurePoint.DataSource = MeasurePoint.FindMeasurePointAndLocation();
+            rptMeasurePoint.DataBind();
 
         }
+
     }
 }
