@@ -1239,5 +1239,6 @@ h1[id] {
 #structure .meter {z-index:100;position:absolute; background:url(../img/meter.png) no-repeat; width:32px;height:45px; cursor:pointer;}
 #structure .meter div {font-size:13px;margin-top:30px; text-align:center; }
 #structure .meter div.left {margin:5px 0 0 30px;}
+#refresh {z-index:100;position:absolute; top:10px;left:1100px;width:100px;background:#f0f0f0;padding:6px; font-size:12px;}
 
 #swichbar {width:20px;height:100%; min-height:750px;background:#D5E1F2;}

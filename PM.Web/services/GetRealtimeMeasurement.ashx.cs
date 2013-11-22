@@ -31,6 +31,7 @@ namespace PM.Web.services
             //序列化数据
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = "";
+            //如果设备编号不为空设置，返回指定设置的实时数据，否则返回所有计量点的实时数据
             if (devicenum!="")
             {
                 Share share = new Share();
@@ -50,14 +51,19 @@ namespace PM.Web.services
                     devvalue realvalue = share.GetRealData(devicenum);
 
                     MeasurementInfo measurementInfo = new MeasurementInfo();
+                    measurementInfo.Pointnum = item.Pointnum;
+                    measurementInfo.DeviceNum = item.Cardnum;
                     measurementInfo.Description = item.Description;
+                    measurementInfo.Measuretime = (realvalue.MEASURETIME=="" || realvalue.MEASURETIME==null) ? DateTime.Now : TypeConverter.ObjectToDateTime(realvalue.MEASURETIME, DateTime.Now);
                     measurementInfo.AfFlowinstant = Convert.ToDecimal(realvalue.AF_FlowInstant);
                     measurementInfo.SwTemperature = Convert.ToDecimal(realvalue.SW_Temperature);
-
-
+                    measurementInfo.AiDensity = Convert.ToDecimal(realvalue.AI_Density);
+                    measurementInfo.SwPressure = Convert.ToDecimal(realvalue.SW_Pressure);
 
                     measurements.Add(measurementInfo);
                 }
+
+                result = javaScriptSerializer.Serialize(measurements);
             }
             result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);
