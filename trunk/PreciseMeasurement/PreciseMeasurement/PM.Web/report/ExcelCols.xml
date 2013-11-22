@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <DataTable id="GetAllData" Caption="计量点读数">
+    <DataCol ColName="ROWNUMBER"  Caption="序号"></DataCol>
+    <DataCol ColName="MEASUREMENTID"  Caption="ID"></DataCol>
+    <DataCol ColName="POINTNUM"  Caption="计量编号"></DataCol>
+    <DataCol ColName="MEASUREUNITID"  Caption="参数编号"></DataCol>
+    <DataCol ColName="MEASURETIME"  Caption="计量时间"></DataCol>
+    <DataCol ColName="STARTVALUE"  Caption="起始表数"></DataCol>
+    <DataCol ColName="LASTVALUE"  Caption="终止表数"></DataCol>
+    <DataCol ColName="STARTTIME"  Caption="起始时间"></DataCol>
+    <DataCol ColName="ENDTIME"  Caption="截止时间"></DataCol>
+    <DataCol ColName="VALUE"  Caption="日用量"></DataCol>
+    <DataCol ColName="DESCRIPTION"  Caption="计量点名称"></DataCol>
+    <DataCol ColName="LEVEL"  Caption="级别"></DataCol>
+  </DataTable>
+</root>
