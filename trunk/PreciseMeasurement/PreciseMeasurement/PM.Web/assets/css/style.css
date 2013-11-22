@@ -1248,4 +1248,5 @@ h1[id] {
 /**刷新*/
 #refresh {z-index:100;position:absolute; top:10px;left:1100px;width:100px;background:#f0f0f0;padding:6px; font-size:12px;}
 /**开关条*/
-#swichbar {width:20px;height:100%; min-height:750px;background:#D5E1F2; cursor:pointer;}
+#swichbar {height:100%; min-height:750px;background:#D5E1F2; cursor:pointer;}
+#realdata td,#realdata th {word-break: keep-all;white-space:nowrap;}

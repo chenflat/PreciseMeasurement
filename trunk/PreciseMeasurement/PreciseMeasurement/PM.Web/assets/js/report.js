@@ -109,23 +109,23 @@ $(function () {
             alert("请选择计量点!");
             return;
         }
+
         if (typeof ($.cookie('points')) == 'undefined') {
             $.cookie("points", pointnum);
         } else {
-            $.removeCookie("points")
+            $.cookie("points",null);
             $.cookie("points", pointnum);
         }
-
 
         if (typeof ($.cookie('pointlist')) == 'undefined') {
             $.cookie("pointlist", getSelectPoints());
         } else {
-            $.removeCookie("pointlist")
-            $.cookie("pointlist", getSelectPoints);
+            $.cookie("pointlist",null);
+            $.cookie("pointlist", getSelectPoints());
         }
 
 
-        $('#myModal').modal('hide')
+        $('#myModal').modal('hide');
     });
 
     //获取已选择的测点

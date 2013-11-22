@@ -33,8 +33,10 @@ $(function () {
         $("#realdata").toggle(function () {
             if ($("#realdata").css("display") == 'none') {
                 $("#swichbar").text('>>');
+                $("#refresh").css({ left: 1100 });
             } else {
                 $("#swichbar").text('<<');
+                $("#refresh").css({ left: 1000 });
             }
         });
     });
