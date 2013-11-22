@@ -51,38 +51,43 @@ $(function () {
                 return content;
             }
         });
-
     }
 
     setInterval(getRealData, 60000);
     getRealData()
-
+    counter();
 
     function getRealData() {
         $("#gvRealtimeData tbody").html("");
-        //获取所有测点
-        $.getJSON('../services/GetMeasurePoints.ashx', function (data) {
+        var content = "";
+        //获取所有测点对应的实时数据
+        $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": "" }, function (data) {
             $.each(data, function (index, obj) {
-                var devicenum = obj.Devicenum;
-                if (devicenum == '')
-                    devicenum = obj.Cardnum;
-                var content = "<tr><td>" + obj.Description + "</td>"
-
-                //获取测点对应的实时数据
-                $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": devicenum }, function (data) {
-                    content += "<td>" + data.MEASURETIME + "</td>"
-                    content += "<td>" + data.SW_Pressure + "</td>"
-                    content += "<td>" + data.SW_Temperature + "</td>"
-                    content += "<td>" + data.AF_FlowInstant + "</td>"
-                });
-
+                content += "<tr><td>" + obj.Description + "</td>"
+                content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
+                content += "<td>" + obj.SwPressure + "</td>"
+                content += "<td>" + obj.SwTemperature + "</td>"
+                content += "<td>" + obj.AfFlowinstant + "</td>"
                 content += "</tr>";
-                $("#gvRealtimeData tbody").append(content);
-
             });
-        });
 
+            $("#gvRealtimeData tbody").append(content);
+        });
     }
 
+   
+    
 });
 
+/***
+ * 刷新时间计数器 
+ */
+var start = 60;
+var step = -1;
+function counter() {
+    $("#counter").text(start);
+    start += step;
+    if (start < 0)
+        start = 60;
+    setTimeout("counter()", 1000);
+}
