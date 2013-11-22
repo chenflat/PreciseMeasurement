@@ -65,8 +65,9 @@ namespace PM.Web.report
         private void btnExport_Click(object sender, EventArgs e)
         {
             DataTable table = GetDataTable(1, 10000);
-
-            ExcelHelper.CreateExcel(table);
+            DataTable dtMain = ExcelHelper.GetToExcelTable(table, "GetAllData", Server.MapPath("ExcelCols.xml"));
+            ExcelHelper.CreateExcel(dtMain, "计量点读数");
+            //ExcelHelper.GetExcelFileAndToResponse(dtMain, "计量点读数");
         }
 
     }

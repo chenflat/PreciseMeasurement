@@ -173,6 +173,7 @@
     <Content Include="report\custom.aspx" />
     <Content Include="report\day.aspx" />
     <Content Include="report\default.aspx" />
+    <Content Include="report\ExcelCols.xml" />
     <Content Include="report\month.aspx" />
     <Content Include="report\week.aspx" />
     <Content Include="structure\default.aspx" />
