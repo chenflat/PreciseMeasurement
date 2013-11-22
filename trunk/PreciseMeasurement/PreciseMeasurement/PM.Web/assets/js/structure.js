@@ -7,11 +7,11 @@
 $(function () {
 
     /**
-    *
+    * 点击记量点，动态显示当前数据的计量值
     */
     $("#structure div").click(function () {
         console.log($(this).attr("id"));
-        var pointnum, devicenum, description;
+        var pointnum, devicenum, description, contentId;
         if ($(this).attr("devicenum") != "") {
             devicenum = $(this).attr("devicenum");
         } else {
@@ -21,12 +21,17 @@ $(function () {
 
         pointnum = $(this).attr("id");
         description = $(this).attr("title");
+        contentId = pointnum + "_data";
 
-        $(this).popover({ content: getRealDataByPointNum(devicenum) });
+
+        $(this).popover({ html: true, content: $("#" + contentId).html() });
 
     });
 
 
+    /**
+    * 关闭或显示时间数据表格
+    */
     $("#swichbar").click(function () {
         $("#realdata").toggle(function () {
             if ($("#realdata").css("display") == 'none') {
@@ -37,6 +42,9 @@ $(function () {
         });
     });
 
+    /**
+    * 获取指定测点的实时数据
+    */
     function getRealDataByPointNum(devicenum) {
         var content = "";
         $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": devicenum }, function (data) {
@@ -53,15 +61,20 @@ $(function () {
         });
     }
 
+    //每60秒自动重新获取实时数据
     setInterval(getRealData, 60000);
     getRealData()
     counter();
 
+    /**
+    * 获取所有测点的实时数据
+    */
     function getRealData() {
         $("#gvRealtimeData tbody").html("");
         var content = "";
         //获取所有测点对应的实时数据
         $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": "" }, function (data) {
+            //设置计量点数值
             $.each(data, function (index, obj) {
                 content += "<tr><td>" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
@@ -69,14 +82,15 @@ $(function () {
                 content += "<td>" + obj.SwTemperature + "</td>"
                 content += "<td>" + obj.AfFlowinstant + "</td>"
                 content += "</tr>";
+
+                $("#" + obj.pointnum + "_data .SW_Temperature span").text(obj.SwTemperature);
+
+
             });
 
             $("#gvRealtimeData tbody").append(content);
         });
     }
-
-   
-    
 });
 
 /***
