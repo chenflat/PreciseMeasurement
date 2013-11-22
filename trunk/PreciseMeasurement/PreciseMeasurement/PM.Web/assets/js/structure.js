@@ -11,23 +11,20 @@ $(function () {
     */
     $("#structure div").click(function () {
         console.log($(this).attr("id"));
-        var pointnum, devicenum, description, contentId;
-        if ($(this).attr("devicenum") != "") {
-            devicenum = $(this).attr("devicenum");
-        } else {
-            devicenum = $(this).attr("cardnum");
-        }
-
 
         pointnum = $(this).attr("id");
         description = $(this).attr("title");
         contentId = pointnum + "_data";
 
+        var position = $("#" + pointnum).position();
+        // $(this).popover({ html: true, content: $("#" + contentId).html() });
 
-        $(this).popover({ html: true, content: $("#" + contentId).html() });
-
+        $("#" + contentId).css({ top: position.top + 30, left: position.left + 30 }).toggle();
     });
 
+    $("#structure .close").click(function () {
+        $(this).parent().hide();
+    });
 
     /**
     * 关闭或显示时间数据表格
@@ -83,8 +80,12 @@ $(function () {
                 content += "<td>" + obj.AfFlowinstant + "</td>"
                 content += "</tr>";
 
-                $("#" + obj.pointnum + "_data .SW_Temperature span").text(obj.SwTemperature);
-
+                $("#" + obj.Pointnum + "_data .SW_Temperature span").text(obj.SwTemperature);
+                $("#" + obj.Pointnum + "_data .SW_Pressure span").text(obj.SwPressure);
+                $("#" + obj.Pointnum + "_data .AF_FlowInstant span").text(obj.AfFlowinstant);
+                $("#" + obj.Pointnum + "_data .AT_Flow span").text(obj.AtFlow);
+                $("#" + obj.Pointnum + "_data .AI_Density span").text(obj.AiDensity);
+                $("#" + obj.Pointnum + "_data .MEASURETIME div").text(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:mm:ss"));
 
             });
 

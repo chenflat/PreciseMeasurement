@@ -13,31 +13,40 @@
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
             <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" ><div class="left"><%# Eval("Pointnum") %></div></div>
-            <div id="<%# Eval("Pointnum") %>_data" class="" style="display:none;">
+            <div id="<%# Eval("Pointnum") %>_data" class="popover meter_content" style="display:none;">
+            <div class="arrow"></div>
+            <button type="button" class="close">&times;</button>
+            <h3 class="popover-title"><%# Eval("Description") %>[<%# Eval("Pointnum") %>]</h3>
+                <div class="popover-content">
                 <div class="form-group">
-                    <div class="col-lg-7 text-right">温度:</div>
-                    <div class="col-lg-5 SW_Temperature"> <span>-</span>℃</div>
+                    <div class="col-lg-5 text-right">温度:</div>
+                    <div class="col-lg-7 SW_Temperature"> <span>-</span> ℃</div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-7 text-right">压力:</div>
-                    <div class="col-lg-5 SW_Pressure"><span>-</span>MPa</div>
+                    <div class="col-lg-5 text-right">压力:</div>
+                    <div class="col-lg-7 SW_Pressure"><span>-</span> MPa</div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-7 text-right">瞬时流量:</div>
-                    <div class="col-lg-5 AF_FlowInstant"><span>-</span>t/h</div>
+                    <div class="col-lg-5 text-right">瞬时流量:</div>
+                    <div class="col-lg-7 AF_FlowInstant"><span>-</span> t/h</div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-7 text-right">累积流量:</div>
-                    <div class="col-lg-5 AT_Flow"><span>-</span>t</div>
+                    <div class="col-lg-5 text-right">累积流量:</div>
+                    <div class="col-lg-7 AT_Flow"><span>-</span> t</div>
                 </div>
                  <div class="form-group">
-                    <div class="col-lg-7 text-right">频率:</div>
-                    <div class="col-lg-5 AI_Density"><span>-</span>Hz</div>
+                    <div class="col-lg-5 text-right">频率:</div>
+                    <div class="col-lg-7 AI_Density"><span>-</span> Hz</div>
                 </div>
                  <div class="form-group">
-                    <div class="col-lg-7 text-right">采集时间:</div>
-                    <div class="col-lg-5 MEASURETIME"> -</div>
+                    <div class="col-lg-5 text-right">采集时间:</div>
+                    <div class="col-lg-7 MEASURETIME"><div>-</div></div>
                 </div>
+               
+                <div class="detail text-center"><a href="../realtime/default.aspx?measurepointid=<%# Eval("Measurepointid") %>">查看详细</a></div>
+ 
+                </div>
+            
             </div>
        
         </ItemTemplate>
