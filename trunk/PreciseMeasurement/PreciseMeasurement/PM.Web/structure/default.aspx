@@ -57,7 +57,7 @@
     <td> <div class="swichbar" id="swichbar">>></div></td>
     <td>
     <div class="table-responsive" style="z-index:50; display:none;" id="realdata">
-        <table class="table table-bordered" id="gvRealtimeData">
+        <table class="table table-bordered table-striped" id="gvRealtimeData">
         <thead>
             <tr>
                 <th>计量点</th>
