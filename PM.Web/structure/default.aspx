@@ -4,8 +4,10 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="row structure-title">蒸汽计量系统图</div>
 <table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+    <td colspan="3" class="structure-title">蒸汽计量系统图</td>
+</tr>
 <tr style="vertical-align:top">
     <td>
      <div class="structure pull-left" id="structure">
