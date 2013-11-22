@@ -60,12 +60,12 @@ $(function () {
 
     //初始化设置
     function initSettings() {
-        if (typeof ($.cookie('pointlist')) == 'undefined') {
+        var pointlist = $.cookies.get('pointlist');
+        if (pointlist.length == 0)
             return;
-        }
         $("#container-measurepoints").html("")
         var points = [];
-        var pointlist = $.cookie('pointlist');
+       
         for (var i = 0; i < pointlist.length; i++) {
             points.push('<li id="' + pointlist[i].num + '">' + pointlist[i].description + '</li>');
         }
@@ -109,21 +109,8 @@ $(function () {
             alert("请选择计量点!");
             return;
         }
-
-        if (typeof ($.cookie('points')) == 'undefined') {
-            $.cookie("points", pointnum);
-        } else {
-            $.cookie("points",null);
-            $.cookie("points", pointnum);
-        }
-
-        if (typeof ($.cookie('pointlist')) == 'undefined') {
-            $.cookie("pointlist", getSelectPoints());
-        } else {
-            $.cookie("pointlist",null);
-            $.cookie("pointlist", getSelectPoints());
-        }
-
+        $.cookies.set("points", pointnum);
+        $.cookies.set("pointlist", getSelectPoints());
 
         $('#myModal').modal('hide');
     });
@@ -155,15 +142,8 @@ $(function () {
     * 生成自定义报表
     */
     $("#btnCustomQuery").click(function () {
-        var pointnum;
-        if ($.cookie('points') == 'undefined') {
-            pointnum = getSelectPointStrings();
-            $.cookie("points", pointnum);
-        } else {
-            pointnum = $.cookie("points");
-        }
 
-        //var pointnum = getSelectPointStrings();
+        var pointnum = getSelectPointStrings();
         if (pointnum == "")
             return;
 
@@ -209,7 +189,7 @@ $(function () {
             td += "<tr>"
             $.each(obj, function (key, val) {
                 if (key == "统计日期") {
-                    td += "<td>" + new Date(val).toString('yyyy-MM-dd') + "</td>";
+                    td += "<td>" + Data.parse(val).toString('yyyy-MM-dd') + "</td>";
                 } else {
                     td += "<td>" + val + "</td>";
                 }
