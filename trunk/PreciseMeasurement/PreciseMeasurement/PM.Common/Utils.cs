@@ -2492,6 +2492,56 @@ namespace PM.Common
             return sourceStr.Replace("\"", "\\\"");
         }
 
+        /// <summary>
+        /// 过滤字符串中的关键符号
+        /// </summary>
+        /// <param name="str">要过滤的字符串</param>
+        /// <returns></returns>
+        public static string FilterString(string str)
+        {
+            if (str.Trim() != "")
+            {
+                str = str.ToLower().Replace("\t", "");  //Tab键
+                str = str.ToLower().Replace("\n", "");  //换行
+                str = str.ToLower().Replace("\r", "");  //返回
+                str = str.ToLower().Replace("\b", "");  //退格
+                str = str.ToLower().Replace("\f", "");  //换页
+                //if (str.Trim().Length > 4 && str.Trim().Substring(4, 1).Equals("-") && str.IndexOf("-") == 1)
+                if (str.Trim().IndexOf("-") > 0 && str.Split('-').Length <= 3)
+                {   //对类似日期格式的字串的修改
+                    int i = 0;
+                    try
+                    {
+                        str = str.Trim();
+                        string ss = str.Substring(0, str.IndexOf("-"));
+                        i = Convert.ToInt32(ss.Trim());
+                    }
+                    catch (Exception ex)
+                    {
+                        i = -1;
+                    }
+                    if (i > 0 && str.Trim().IndexOf("-") < 5)
+                    {
+                        str = " " + str;
+                    }
+                }
+                if (str.Substring(0, 1) == "0")
+                {
+                    str = " " + str;
+                }
+            }
+            //try
+            //{
+            //    DateTime Dt = Convert.ToDateTime("1900-1-1");
+            //    DateTime dTemp = Dt.Date.AddDays(Convert.ToInt32(str) - 2);
+            //    str = dTemp.ToString("M-d");
+            //}
+            //catch
+            //{
+            //    //dr[j - 1] = str;
+            //}
+            return str.ToUpper();
+        }
 
         /// <summary>
         /// 合并字符

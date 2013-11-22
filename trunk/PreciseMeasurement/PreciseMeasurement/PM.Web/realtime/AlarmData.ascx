@@ -14,7 +14,7 @@
                 &nbsp;终止时间：<asp:TextBox ID="txtEndDate" CssClass="enddate" runat="server"></asp:TextBox>
                 &nbsp;
                 <button type="button" class="btn btn-danger btnAlarmQuery" id="btnAlarmQuery">查询</button>
-                <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-danger" />
+                
       </div>
      <div class="panel-body">
         <div class="bs-docs-section">

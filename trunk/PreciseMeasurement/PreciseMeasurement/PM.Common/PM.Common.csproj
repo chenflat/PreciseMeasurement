@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\..\..\..\..\..\..\Dropbox\计量项目\03 系统开发\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Design" />
@@ -42,6 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encrypt.cs" />
+    <Compile Include="ExcelUtils\CDataTable.cs" />
+    <Compile Include="ExcelUtils\Exception.cs" />
+    <Compile Include="ExcelUtils\Header.cs" />
+    <Compile Include="ExcelUtils\HeaderCollection.cs" />
+    <Compile Include="ExcelUtils\HeaderStyle.cs" />
+    <Compile Include="ExcelUtils\IoFndConst.cs" />
+    <Compile Include="ExcelUtils\OExcel.cs" />
+    <Compile Include="ExcelUtils\pString.cs" />
+    <Compile Include="ExcelUtils\pStringCollection.cs" />
+    <Compile Include="ExcelUtils\pStringSql.cs" />
+    <Compile Include="ExcelUtils\ExcelHelper.cs" />
     <Compile Include="FormEvent.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="PMException.cs" />
@@ -52,6 +67,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="Utils\TypeConverter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,11 +17,14 @@ namespace PM.Web.report
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
                 BindMeasurePointData();
             }
         }
+
+       
 
 
         /// <summary>
@@ -49,6 +52,12 @@ namespace PM.Web.report
 
             //层级计量点列表
             measurePointList = result;
+        }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

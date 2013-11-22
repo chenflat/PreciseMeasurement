@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Data;
 
 using PM.Business.Pages;
 using PM.Data;
+using PM.Common.ExcelUtils;
 
 namespace PM.Web.report
 {
@@ -14,6 +15,8 @@ namespace PM.Web.report
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
                 if (startdate.Text.Trim()=="")
@@ -30,12 +33,22 @@ namespace PM.Web.report
             }
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            string fileName = "计量日报表_" + DateTime.Now.ToString("yyyyMMdd");
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(), Entity.ReportType.Day);
+            ExcelHelper.CreateExcel(table, fileName);
+        }
+
         private void BindData() {
 
             gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(), Entity.ReportType.Day);
             gvReport.DataBind();
 
         }
+
+        
+
        
     }
 }

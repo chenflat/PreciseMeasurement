@@ -8,6 +8,7 @@ using System.Data;
 
 using PM.Business.Pages;
 using PM.Data;
+using PM.Common.ExcelUtils;
 
 namespace PM.Web.report
 {
@@ -15,23 +16,19 @@ namespace PM.Web.report
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
                 BindData();
             }
         }
 
-        private void BindData() {
-            string m_startdate = startdate.Text.Trim();
-            string m_enddate = enddate.Text.Trim();
-            if (m_startdate == "") {
-                m_startdate = DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd");
-            }
-            if (m_enddate == "") {
-                m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59";
-            }
+       
 
-            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate, "ALL", 1, 15).Tables[0];
+        private void BindData() {
+
+            DataTable measurements = GetDataTable(1, 15);
 
             if (measurements.Rows.Count == 0)
             {
@@ -42,6 +39,34 @@ namespace PM.Web.report
             gvMeasurementReport.DataSource = measurements;
             gvMeasurementReport.DataBind();
          
+        }
+
+
+        private DataTable GetDataTable(int pageindex,int pagesize) {
+            if (pageindex == 0) pageindex = 1;
+            if (pagesize == 0) pagesize = 15;
+
+            string m_startdate = startdate.Text.Trim();
+            string m_enddate = enddate.Text.Trim();
+            if (m_startdate == "")
+            {
+                m_startdate = DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd");
+            }
+            if (m_enddate == "")
+            {
+                m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59";
+            }
+
+            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate, "ALL", pageindex, pagesize).Tables[0];
+
+            return measurements;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            DataTable table = GetDataTable(1, 10000);
+
+            ExcelHelper.CreateExcel(table);
         }
 
     }

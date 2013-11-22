@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using PM.Common;
 
 using PM.Business.Pages;
 using PM.Data;
+using PM.Common.ExcelUtils;
 
 namespace PM.Web.report
 {
@@ -17,6 +19,7 @@ namespace PM.Web.report
         protected void Page_Load(object sender, EventArgs e)
         {
             btnWeekQuery.Click += new EventHandler(btnWeekQuery_Click);
+            btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
                 if (weekstartdate.Text.Trim()=="")
@@ -27,6 +30,8 @@ namespace PM.Web.report
             }
 
         }
+
+        
 
         private void btnWeekQuery_Click(object sender, EventArgs e)
         {
@@ -45,5 +50,17 @@ namespace PM.Web.report
             gvReport.DataBind();
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+             m_enddate = weekstartdate.Text.Trim();
+            int weeks = Utils.StrToInt(ddlWeeks.SelectedValue, 1);
+            int days = weeks * 7;
+            m_startdate = DateTime.Parse(m_enddate).AddDays(-days).ToString("yyyy-MM-dd");
+
+            string fileName = "计量周报表_" + DateTime.Now.ToString("yyyyMMdd");
+
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, Entity.ReportType.Week);
+            ExcelHelper.CreateExcel(table, fileName);
+        }
     }
 }
