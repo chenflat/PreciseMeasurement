@@ -139,6 +139,7 @@
     <Content Include="assets\lib\bootbox\bootbox.min.js" />
     <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\lib\cookies\jquery.cookie.js" />
     <Content Include="assets\lib\highcharts\highcharts.js" />
     <Content Include="assets\lib\highcharts\highstock.js" />
     <Content Include="assets\lib\My97DatePicker\calendar.js" />

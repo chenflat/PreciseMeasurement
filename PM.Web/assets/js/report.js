@@ -56,6 +56,23 @@ $(function () {
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM'));
     }
 
+    initSettings();
+
+    //初始化设置
+    function initSettings() {
+        if (typeof ($.cookie('pointlist')) == 'undefined') {
+            return;
+        }
+        $("#container-measurepoints").html("")
+        var points = [];
+        var pointlist = $.cookie('pointlist');
+        for (var i = 0; i < pointlist.length; i++) {
+            points.push('<li id="' + pointlist[i].num + '">' + pointlist[i].description + '</li>');
+        }
+
+        $("#container-measurepoints").append(points.join(""));
+    }
+
 
     //自定义报表
     //动态添加计量点到列表
@@ -85,13 +102,40 @@ $(function () {
         $(this).remove();
     });
 
-    //获取先择的测点
+    //保存设置
+    $("#btnSaveSetting").click(function () {
+        var pointnum = getSelectPointStrings();
+        if (pointnum == "") {
+            alert("请选择计量点!");
+            return;
+        }
+        if (typeof ($.cookie('points')) == 'undefined') {
+            $.cookie("points", pointnum);
+        } else {
+            $.removeCookie("points")
+            $.cookie("points", pointnum);
+        }
+
+
+        if (typeof ($.cookie('pointlist')) == 'undefined') {
+            $.cookie("pointlist", getSelectPoints());
+        } else {
+            $.removeCookie("pointlist")
+            $.cookie("pointlist", getSelectPoints);
+        }
+
+
+        $('#myModal').modal('hide')
+    });
+
+    //获取已选择的测点
     function getSelectPoints() {
         var points = new Array();
         $("#container-measurepoints li").each(function (index, obj) {
             var p = { "num": $(obj).attr("id"), "description": $(obj).text() };
             points.push(p);
         });
+
         return points;
     }
 
@@ -106,12 +150,20 @@ $(function () {
         return ret;
     }
 
+
     /**
-    * 分成自定义报表
+    * 生成自定义报表
     */
     $("#btnCustomQuery").click(function () {
+        var pointnum;
+        if ($.cookie('points') == 'undefined') {
+            pointnum = getSelectPointStrings();
+            $.cookie("points", pointnum);
+        } else {
+            pointnum = $.cookie("points");
+        }
 
-        var pointnum = getSelectPointStrings();
+        //var pointnum = getSelectPointStrings();
         if (pointnum == "")
             return;
 
