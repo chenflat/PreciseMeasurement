@@ -56,6 +56,7 @@ namespace PM.Web.services
                     measurementInfo.Description = item.Description;
                     measurementInfo.Measuretime = (realvalue.MEASURETIME=="" || realvalue.MEASURETIME==null) ? DateTime.Now : TypeConverter.ObjectToDateTime(realvalue.MEASURETIME, DateTime.Now);
                     measurementInfo.AfFlowinstant = Convert.ToDecimal(realvalue.AF_FlowInstant);
+                    measurementInfo.AtFlow = Convert.ToDecimal(realvalue.AT_Flow);
                     measurementInfo.SwTemperature = Convert.ToDecimal(realvalue.SW_Temperature);
                     measurementInfo.AiDensity = Convert.ToDecimal(realvalue.AI_Density);
                     measurementInfo.SwPressure = Convert.ToDecimal(realvalue.SW_Pressure);
