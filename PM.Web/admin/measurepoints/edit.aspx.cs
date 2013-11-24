@@ -33,7 +33,9 @@ namespace PM.Web.admin.measurepoints
                 }
             }
         }
-
+        /// <summary>
+        /// 绑定下拉框数据
+        /// </summary>
         private void BindDropDownList()
         {
             ddlOrgid.DataTextField = "Description";
@@ -41,15 +43,18 @@ namespace PM.Web.admin.measurepoints
             ddlOrgid.DataSource = Business.Organizations.GetOrganizationTreeList("-");
             ddlOrgid.DataBind();
 
-            location.DataTextField = "Description";
-            location.DataValueField = "Location";
-            location.DataSource = Business.Locations.GetLocationsTreeList("└");
-            location.DataBind();
-            location.Items.Insert(0, new ListItem("", ""));
+            //location.DataTextField = "Description";
+            //location.DataValueField = "Location";
+            //location.DataSource = Business.Locations.GetLocationsTreeList("└");
+            //location.DataBind();
+            //location.Items.Insert(0, new ListItem("", ""));
         }
 
 
-
+        /// <summary>
+        /// 载入指定计量点的数据
+        /// </summary>
+        /// <param name="id"></param>
         private void LoadMeasurePointInfo(long id)
         {
             if (id <= 0)
@@ -66,18 +71,26 @@ namespace PM.Web.admin.measurepoints
             supervisor.Text = pointInfo.Supervisor;
             phone.Text = pointInfo.Phone;
             ddlOrgid.SelectedValue = pointInfo.Orgid;
-            location.SelectedValue = pointInfo.Location;
+            ddlLevel.SelectedValue = pointInfo.Level.ToString();
+            //location.SelectedValue = pointInfo.Location;
             ipaddress.Text = pointInfo.Ipaddress;
             cardnum.Text = pointInfo.Cardnum;
             devicenum.Text = pointInfo.Devicenum;
             serverip.Text = pointInfo.Serverip;
             serverport.Text = pointInfo.Serverport.ToString();
             displaysequence.Text = pointInfo.Displaysequence.ToString();
+            tbX.Text = pointInfo.X;
+            tbY.Text = pointInfo.Y;
+            tbZ.Text = pointInfo.Z;
 
         }
 
 
-
+        /// <summary>
+        /// 保存计量点信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnSave_Click(object sender, EventArgs e)
         {
             if (this.IsValid)
@@ -93,13 +106,17 @@ namespace PM.Web.admin.measurepoints
                     pointInfo.Supervisor = supervisor.Text.Trim();
                     pointInfo.Phone = phone.Text.Trim();
                     pointInfo.Orgid = ddlOrgid.SelectedValue;
-                    pointInfo.Location = location.SelectedValue;
+                   // pointInfo.Location = location.SelectedValue;
+                    pointInfo.Level = Utils.StrToInt(ddlLevel.Text.Trim(), 0);
                     pointInfo.Ipaddress = ipaddress.Text.Trim();
                     pointInfo.Cardnum = cardnum.Text.Trim();
                     pointInfo.Devicenum = devicenum.Text.Trim();
                     pointInfo.Serverip = serverip.Text.Trim();
                     pointInfo.Serverport = Utils.StrToInt(serverport.Text.Trim(), -1);
                     pointInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
+                    pointInfo.X = tbX.Text.Trim();
+                    pointInfo.Y = tbY.Text.Trim();
+                    pointInfo.Z = tbZ.Text.Trim();
 
                     bool isSuccess = false;
                     if (pointInfo.Measurepointid > 0)

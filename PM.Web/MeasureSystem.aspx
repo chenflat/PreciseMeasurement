@@ -11,6 +11,8 @@
             <li class=" " onclick="window.location.href='<%=ResolveUrl("~/report/") %>'"><div class="buttonStationDayReport buttonInSquare buttonComm"> </div>统计报表</li>
             <li class=" " onclick="window.location.href='<%=ResolveUrl("~/analysis/") %>'"><div class="buttonChartCompare buttonInSquare buttonComm"> </div>曲线对比</li>
             <li class=" " onclick="window.location.href='<%=ResolveUrl("~/alarm/") %>'"><div class="buttonAlarmList buttonInSquare buttonComm"> </div>报警管理</li>
+            <li class=" " onclick="window.location.href='<%=ResolveUrl("~/alarm/") %>'"><div class="buttonAlarmList buttonInSquare buttonComm"> </div>疏水器</li>
+            <li class=" " onclick="window.location.href='<%=ResolveUrl("~/alarm/") %>'"><div class="buttonAlarmList buttonInSquare buttonComm"> </div>阀门</li>
         </ul>
     </div>
 

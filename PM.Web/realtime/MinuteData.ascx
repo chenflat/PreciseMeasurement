@@ -13,8 +13,9 @@
          <input type="button" class="btn btn-info" id="btnMinuteQuery" value="查询" />
     </div>
     <div class="panel-body">
-        <asp:GridView ID="gvMinuteMeasurement" runat="server" AutoGenerateColumns="False" CssClass="minutereport table table-striped"
-            EnableModelValidation="True">
+        <asp:GridView ID="gvMinuteMeasurement" runat="server" 
+            AutoGenerateColumns="False" CssClass="minutereport table table-striped table-hover"
+            EnableModelValidation="True" BorderStyle="None">
             <Columns>
                 <asp:BoundField DataField="MEASURETIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
                 <asp:BoundField DataField="SW_TEMPERATURE" HeaderText="温度(℃)" />

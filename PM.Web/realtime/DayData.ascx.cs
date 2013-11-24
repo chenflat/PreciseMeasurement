@@ -38,8 +38,9 @@ namespace PM.Web.realtime
             DataTable dummy = new DataTable();
             dummy.Columns.Add("DESCRIPTION");
             dummy.Columns.Add("LEVEL");
-            dummy.Columns.Add("ENDDATE");
+            dummy.Columns.Add("Starttime");
             dummy.Columns.Add("STARTVALUE");
+            dummy.Columns.Add("Endtime");
             dummy.Columns.Add("ENDVALUE");
             dummy.Columns.Add("DIFFVALUE");
             dummy.Rows.Add();
