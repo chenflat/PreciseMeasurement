@@ -140,6 +140,11 @@ namespace PM.Entity
             set { lastsyntime = value; }
         }
 
+        public int Level {
+            get { return level; }
+            set { level = value; }
+        }
+
         public string X {
             get { return x; }
             set { x = value; }
