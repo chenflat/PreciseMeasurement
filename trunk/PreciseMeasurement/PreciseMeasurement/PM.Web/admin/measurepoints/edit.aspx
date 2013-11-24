@@ -91,11 +91,16 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="<%=location.ClientID %>" class="col-lg-5 control-label">
-                    安装位置
+                <label for="<%=ddlLevel.ClientID %>" class="col-lg-5 control-label">
+                    级别
                 </label>
                 <div class="col-lg-7">
-                    <asp:DropDownList ID="location" CssClass="form-control" runat="server">
+                    <asp:DropDownList ID="ddlLevel" CssClass="form-control" runat="server">
+                        <asp:ListItem Value="1">1级</asp:ListItem>
+                        <asp:ListItem Value="2">2级</asp:ListItem>
+                        <asp:ListItem Value="3">3级</asp:ListItem>
+                        <asp:ListItem Value="4">4级</asp:ListItem>
+                        <asp:ListItem Value="5">5级</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
@@ -176,6 +181,38 @@
                     <asp:TextBox ID="displaysequence" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                     <asp:RegularExpressionValidator ID="revDisplaysequence" runat="server" ControlToValidate="displaysequence"
                         Display="Dynamic" ErrorMessage="数字格式无效" ValidationExpression="^[-]?[0-9]*[.]?[0-9]*$"></asp:RegularExpressionValidator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=tbX.ClientID %>" class="col-lg-5 control-label">
+                    X坐标
+                </label>
+                <div class="col-lg-7">
+                    <asp:TextBox ID="tbX" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=tbY.ClientID %>" class="col-lg-5 control-label">
+                    Y坐标
+                </label>
+                <div class="col-lg-7">
+                    <asp:TextBox ID="tbY" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=tbZ.ClientID %>" class="col-lg-5 control-label">
+                    Z坐标
+                </label>
+                <div class="col-lg-7">
+                    <asp:TextBox ID="tbZ" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>

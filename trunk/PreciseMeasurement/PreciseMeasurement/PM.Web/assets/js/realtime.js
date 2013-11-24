@@ -383,10 +383,12 @@ function OnSuccessForHour(response) {
     $.each(measurements, function (index, obj) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
-        $("td", row).eq(1).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
+        $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd HH:00"));
         $("td", row).eq(2).html(obj.StartValue);
-        $("td", row).eq(3).html(obj.LastValue);
-        $("td", row).eq(4).html(obj.Value);
+        $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd HH:00"));
+        $("td", row).eq(4).html(obj.LastValue);
+        $("td", row).eq(5).html(obj.Value);
+
 
         $("[id*=gvHourMeasurement]").append(row);
         row = $("[id*=gvHourMeasurement] tr:last-child").clone(true);
@@ -434,9 +436,9 @@ function OnSuccessForDay(response) {
     $.each(measurements, function (index, obj) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
-        $("td", row).eq(1).html($.trim(obj.Level));
-        $("td", row).eq(2).html(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:00"));
-        $("td", row).eq(3).html(obj.StartValue);
+        $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd"));
+        $("td", row).eq(2).html(obj.StartValue);
+        $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd"));
         $("td", row).eq(4).html(obj.LastValue);
         $("td", row).eq(5).html(obj.Value);
 
@@ -548,7 +550,8 @@ function OnSuccessHourChart(response){
 	var charItems = [
 			{"name":"SW_TEMPERATURE","title":"温度曲线","unit":"°C"},
 			{"name":"SW_PRESSURE","title":"压力曲线","unit":"MPa"},
-			{"name":"AF_FLOWINSTANT","title":"瞬时流量曲线","unit":"t/h"}
+			{"name":"AF_FLOWINSTANT","title":"瞬时流量曲线","unit":"t/h"},
+            {"name":"AI_Density","title":"频率","unit":"Hz"}
 		];
 
 	var selected = new Array();
@@ -560,12 +563,14 @@ function OnSuccessHourChart(response){
 	var arrSwtemperature = [];
 	var arrSwpressure  = [];
 	var arrAfflowinstant  = [];
+    var arrAiDensity = [];
 	
 	for(var i=0;i<response.length;i++) {
 		times.push(response[i].Time);
 		arrSwtemperature.push(response[i].SwTemperature);
 		arrSwpressure.push(response[i].SwPressure);
 		arrAfflowinstant.push(response[i].AfFlowinstant);
+        arrAiDensity.push(response[i].AiDensity);
 	}
 
 
@@ -574,7 +579,7 @@ function OnSuccessHourChart(response){
 			$('#temperature').show();
 			$('#temperature').highcharts({
 			    title: {
-			        text: '温度曲线'
+			        text: '温度曲线(°C)'
 			    },
 			    xAxis: {
                     tickInterval:step,
@@ -622,7 +627,7 @@ function OnSuccessHourChart(response){
 			$('#pressure').show();
 			$('#pressure').highcharts({
 				title: {
-					text: '压力曲线',
+					text: '压力曲线(MPa)',
 					x: -20 //center
 				},
 				xAxis: {
@@ -666,7 +671,7 @@ function OnSuccessHourChart(response){
 			$('#flowinstant').show();
 			$('#flowinstant').highcharts({
 				title: {
-					text: '瞬时流量曲线',
+					text: '瞬时流量曲线(t/h)',
 					x: -20 //center
 				},
 				xAxis: {
@@ -699,6 +704,49 @@ function OnSuccessHourChart(response){
 				series: [{
 					name: '瞬时流量',
 					data: arrAfflowinstant
+				}],
+	            credits: {
+	                enabled: false
+	            }
+			});			
+
+		} else if(selected[i]=="AI_Density") {
+			$('#aidensity').show();
+			$('#aidensity').highcharts({
+				title: {
+					text: '频率曲线(Hz)',
+					x: -20 //center
+				},
+				xAxis: {
+                     tickInterval:step,
+				    labels: {
+				        step: 24,
+				        formatter: function () {
+				            return Date.parse(this.value).toString(dtformat);
+				        }
+				    },
+				    categories: times,
+				    gridLineWidth: 1
+				},
+				yAxis: {
+					title: {
+						text: 'Density (Hz)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					valueSuffix: 'Hz'
+				},
+				legend: {
+				    enabled: false
+				},
+				series: [{
+					name: '频率',
+					data: arrAiDensity
 				}],
 	            credits: {
 	                enabled: false

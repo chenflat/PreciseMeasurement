@@ -52,8 +52,9 @@ namespace PM.Web.realtime
             DataTable dummy = new DataTable();
             dummy.Columns.Add("POINTNUM");
             dummy.Columns.Add("LEVEL");
-            dummy.Columns.Add("MEASURETIME");
+            dummy.Columns.Add("Starttime");
             dummy.Columns.Add("STARTVALUE");
+            dummy.Columns.Add("Endtime");
             dummy.Columns.Add("LASTVALUE");
             dummy.Columns.Add("VALUE");
             dummy.Rows.Add();
