@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="HourData.ascx.cs" Inherits="PM.Web.realtime.HourData" %>
 <ol class="breadcrumb">
-    <li class="active"><asp:Literal ID="ltDescription" runat="server"></asp:Literal>的小时数据 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[查询区间限定为:240小时]</li>
+    <li class="active"><asp:Literal ID="ltDescription" runat="server"></asp:Literal>的小时数据 </li>
 </ol>
 <div class="panel panel-default">
     <!-- Default panel contents -->

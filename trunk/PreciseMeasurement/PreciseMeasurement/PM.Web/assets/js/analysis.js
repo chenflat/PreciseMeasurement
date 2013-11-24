@@ -310,16 +310,16 @@ function GetChart(startdate, enddate, datetype) {
                 $.each(params, function (index, obj) {
                     switch (obj.num) {
                         case "SW_Temperature":
-                            createChart(obj, seriesOptions_Temp, '温度(℃)');
+                            createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)');
                             break;
                         case "AI_Density":
-                            createChart(obj, seriesOptions_Density, '频率(Hz)');
+                            createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)');
                             break;
                         case "AF_FlowInstant":
-                            createChart(obj, seriesOptions_FlowInstant, '流量(t)');
+                            createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)');
                             break;
                         case "SW_Pressure":
-                            createChart(obj, seriesOptions_Pressure, '压力(MPa)');
+                            createChart(obj, seriesOptions_Pressure, '压力(MPa)', 'MPa)');
                             break;
                         default:
                             break;
@@ -331,7 +331,7 @@ function GetChart(startdate, enddate, datetype) {
     });
 
     // create the chart when all data is loaded
-    function createChart(obj,series,ytitle) {
+    function createChart(obj,series,ytitle,unit) {
 
         console.log(obj.description);
         $("#charts").append("<div id='"+ obj.num +"'></div>");
@@ -340,7 +340,7 @@ function GetChart(startdate, enddate, datetype) {
             chart: {
             },
             title: {
-                text: obj.description + '曲线'
+                text: obj.description + '曲线' + unit
             },
             
             xAxis: {
