@@ -10,7 +10,8 @@ namespace PM.Entity
         Hour,
         Day,
         Week,
-        Month
+        Month,
+        All
     }
 
 

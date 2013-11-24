@@ -22,15 +22,6 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="<%=pointcode.ClientID %>" class="col-lg-5 control-label">
-                    测点简拼</label>
-                <div class="col-lg-7">
-                    <asp:TextBox ID="pointcode" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
                 <label for="<%=pointnum.ClientID %>" class="col-lg-5 control-label">
                     测点编号 *</label>
                 <div class="col-lg-7">
@@ -41,6 +32,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=pointcode.ClientID %>" class="col-lg-5 control-label">
+                    测点简拼</label>
+                <div class="col-lg-7">
+                    <asp:TextBox ID="pointcode" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -52,6 +53,7 @@
                     <asp:DropDownList ID="carrier" runat="server" CssClass="form-control">
                         <asp:ListItem>汽</asp:ListItem>
                         <asp:ListItem>水</asp:ListItem>
+                        <asp:ListItem>电</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>

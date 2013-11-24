@@ -56,8 +56,11 @@ $(function () {
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM'));
     }
 
-    initSettings();
-
+    var path = window.location.pathname;
+    if (path == '/report/custom.aspx') {
+        initSettings();
+    }
+    
     //初始化设置
     function initSettings() {
         var pointlist = $.cookies.get('pointlist');
@@ -65,7 +68,7 @@ $(function () {
             return;
         $("#container-measurepoints").html("")
         var points = [];
-       
+
         for (var i = 0; i < pointlist.length; i++) {
             points.push('<li id="' + pointlist[i].num + '">' + pointlist[i].description + '</li>');
         }
@@ -223,7 +226,7 @@ function getAllReportData(pageindex) {
         url: "MeasurementReport.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "ALL" },
+        data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "All" },
         success: OnSuccess,
         error: OnFail
     });
@@ -242,21 +245,21 @@ function OnSuccess(response) {
     if (measurements.length == 0)
         return;
 
-    var row = $("[id*=gvReportMeasurement] tr:last-child").clone(true);
-    $("[id*=gvReportMeasurement] tr").not($("[id*=gvReportMeasurement] tr:first-child")).remove();
+    var row = $("[id*=gvMeasurementReport] tr:last-child").clone(true);
+    $("[id*=gvMeasurementReport] tr").not($("[id*=gvMeasurementReport] tr:first-child")).remove();
 
     $.each(measurements, function (index, obj) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
-        $("td", row).eq(1).html($.trim(obj.Level));
+        $("td", row).eq(1).html(toRoman(obj.Level) + " 级");
         $("td", row).eq(2).html(new Date(obj.Starttime).toString("yyyy-MM-dd"));
         $("td", row).eq(3).html(obj.StartValue);
         $("td", row).eq(4).html(new Date(obj.Endtime).toString("yyyy-MM-dd"));
         $("td", row).eq(5).html(obj.LastValue);
         $("td", row).eq(6).html(obj.Value);
 
-        $("[id*=gvReportMeasurement]").append(row);
-        row = $("[id*=gvReportMeasurement] tr:last-child").clone(true);
+        $("[id*=gvMeasurementReport]").append(row);
+        row = $("[id*=gvMeasurementReport] tr:last-child").clone(true);
     });
 
     var pager = response.PagerInfo;
@@ -297,7 +300,7 @@ function getDayReportData() {
         url: "MeasurementReport.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "ALL" },
+        data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "All" },
         success: OnSuccess,
         error: OnFail
     });
@@ -307,6 +310,22 @@ function getWeekReportData() {
 
 }
 
-function getMonthReportData() { 
-    
+function getMonthReportData() {
+
+}
+
+
+function toRoman(num) {
+    if (isNaN(num)) return num;
+
+    var a = [["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+                          ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XCC"],
+                          ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]];
+    var roman = "";
+    var t = 0;
+    for (var m = 0, i = 1000; m < 3; m++, i /= 10) {
+        t = Math.floor((num % i) / (i / 10));
+        roman += a[2 - m][t];
+    }
+    return roman;
 }
