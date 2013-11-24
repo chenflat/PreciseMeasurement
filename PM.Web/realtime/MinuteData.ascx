@@ -3,8 +3,7 @@
 <%@ Register src="../controls/PageControl.ascx" tagname="PageControl" tagprefix="uc1" %>
 <ol class="breadcrumb">
     <li class="active">
-        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的分钟数据 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[查询区间限定为:24小时]
-    </li>
+        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的分钟数据  </li>
 </ol>
 <div class="panel panel-default">
     <!-- Default panel contents -->

@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DayData.ascx.cs" Inherits="PM.Web.realtime.DayData" %>
 <ol class="breadcrumb">
     <li class="active">
-        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的每日数据  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[查询区间限定为:180小时]</li>
+        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的每日数据</li>
 </ol>
 <div class="panel panel-default">
     <!-- Default panel contents -->

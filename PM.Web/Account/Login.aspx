@@ -12,7 +12,7 @@
 </head>
 <body class="login">
     <div class="header">
-        北京菲波安乐仪表有限公司</div>
+        </div>
     <div class="login-body">
         <div class="bg">
             <div class="loginformwrap">
