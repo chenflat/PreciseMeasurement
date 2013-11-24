@@ -5,6 +5,7 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/WdatePicker.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/Pager.min.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
 </asp:Content>
@@ -18,6 +19,10 @@
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
                 级别：<asp:DropDownList ID="status" runat="server">
                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem>1级</asp:ListItem>
+                     <asp:ListItem>2级</asp:ListItem>
+                     <asp:ListItem>3级</asp:ListItem>
+                     <asp:ListItem>4级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
                 <button type="button" class="btn btn-info" id="btnQuery">查询</button>
@@ -32,10 +37,14 @@
     </div>
     <div class="row">
     <asp:GridView ID="gvMeasurementReport" runat="server" AutoGenerateColumns="False" 
-            CssClass="table table-striped"  EnableModelValidation="True">
+            CssClass="table table-striped table-hover"  EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="DESCRIPTION" HeaderText="计量点" />
-                <asp:BoundField DataField="LEVEL" HeaderText="级别" />
+                <asp:TemplateField HeaderText="级别">
+                    <ItemTemplate>
+                        <%# PM.Common.Utils.ConvertToRoma(Convert.ToInt32(Eval("LEVEL")))%>级
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="起始时间" />
                 <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
                  <asp:BoundField DataField="ENDTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="截止时间" />

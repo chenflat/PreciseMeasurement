@@ -75,7 +75,9 @@
                     <a href="edit.aspx?id=<%#Eval("MEASUREPOINTID") %>">编辑</a>
                 </td>
                 <td>
-                    <a href="edit.aspx?id=<%#Eval("MEASUREPOINTID") %>">计量点详细浏览</a>
+                    <a target="_blank" href="../../realtime/default.aspx?measurepointid=<%#Eval("MEASUREPOINTID") %>">计量点详细浏览</a>
+
+                    
                 </td>
             </tr>
         </ItemTemplate>

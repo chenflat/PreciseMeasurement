@@ -2799,5 +2799,23 @@ namespace PM.Common
 
             return false;
         }
+
+
+        public static string ConvertToRoma(int num) {
+             string[,] a = new string[,]{
+                          {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+                          {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XCC"},
+                          {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
+                        };
+            var roman = "";
+            var t = 0;
+            for (int m = 0, i = 1000; m < 3; m++, i /= 10) {
+                t = (num % i) / (i / 10);
+                roman += a[2-m,t];
+            }
+            return roman;
+
+        }
+
     }
 }

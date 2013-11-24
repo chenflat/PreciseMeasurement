@@ -60,7 +60,7 @@ namespace PM.Web.report
             }
             else
             {
-                if (m_type == "ALL")
+                if (m_type == "All")
                 {
                     Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_type, pageindex, 12);
                     result = javaScriptSerializer.Serialize(pagination);

@@ -17,6 +17,7 @@ namespace PM.Web.report
         {
 
             btnExport.Click += new EventHandler(btnExport_Click);
+            btnDayQuery.Click += new EventHandler(btnDayQuery_Click);
             if (!IsPostBack)
             {
                 if (startdate.Text.Trim()=="")
@@ -31,6 +32,11 @@ namespace PM.Web.report
 
                 BindData();
             }
+        }
+
+        private void btnDayQuery_Click(object sender, EventArgs e)
+        {
+            BindData();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
