@@ -37,12 +37,13 @@
     </div>
     <div class="row">
     <asp:GridView ID="gvMeasurementReport" runat="server" AutoGenerateColumns="False" 
-            CssClass="table table-striped table-hover"  EnableModelValidation="True">
+            CssClass="table table-striped table-hover"  EnableModelValidation="True" 
+            BorderStyle="None" BorderWidth="0px">
             <Columns>
                 <asp:BoundField DataField="DESCRIPTION" HeaderText="计量点" />
                 <asp:TemplateField HeaderText="级别">
                     <ItemTemplate>
-                        <%# PM.Common.Utils.ConvertToRoma(Convert.ToInt32(Eval("LEVEL")))%>级
+                        <%# PM.Common.Utils.ConvertToRoma(Convert.ToInt32(Eval("LEVEL")))%> 级
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="起始时间" />

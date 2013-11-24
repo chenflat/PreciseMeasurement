@@ -192,7 +192,7 @@ $(function () {
             td += "<tr>"
             $.each(obj, function (key, val) {
                 if (key == "统计日期") {
-                    td += "<td>" + Data.parse(val).toString('yyyy-MM-dd') + "</td>";
+                    td += "<td>" + new Date(val).toString('yyyy-MM-dd') + "</td>";
                 } else {
                     td += "<td>" + val + "</td>";
                 }
