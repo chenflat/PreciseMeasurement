@@ -99,13 +99,18 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@CARRIER", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Carrier),
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
                                   DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
-                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status)
+                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status),
+                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 12, measurePointInfo.Level),
+                                  DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
+                                  DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
+                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
+
                                  };
 
             string commandText = string.Format("INSERT INTO [{0}MEASUREPOINT] ([POINTNUM],[POINTCODE],[DESCRIPTION],[DISPLAYSEQUENCE],[IPADDRESS],"
-                                + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS])"
+                                + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS],[LEVEL],[X],[Y],[Z])"
                                 + " VALUES(@POINTNUM, @POINTCODE, @DESCRIPTION, @DISPLAYSEQUENCE, @IPADDRESS, @CARDNUM, @DEVICENUM,@SERVERIP,@SERVERPORT,"
-                                + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS)", BaseConfigs.GetTablePrefix);
+                                + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS,@LEVEL,@X,@Y,@Z)", BaseConfigs.GetTablePrefix);
 
             //累计更新行
             int retRows = 0;
@@ -155,14 +160,19 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@CARRIER", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Carrier),
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
                                   DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
-                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status)
+                                  DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status),
+                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 12, measurePointInfo.Level),
+                                  DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
+                                  DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
+                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
                                  };
 
 
             string commandText = string.Format("UPDATE [{0}MEASUREPOINT] SET [POINTNUM]=@POINTNUM,[POINTCODE]=@POINTCODE,"
             + "[DESCRIPTION]=@DESCRIPTION,[DISPLAYSEQUENCE]=@DISPLAYSEQUENCE,[IPADDRESS]=@IPADDRESS,[CARDNUM]=@CARDNUM,"
             + "[DEVICENUM]=@DEVICENUM,[SERVERIP]=@SERVERIP,[SERVERPORT]=@SERVERPORT,[METERNAME]=@METERNAME,ORGID=@ORGID,"
-            + "[SITEID]=@SITEID,[LOCATION]=@LOCATION,[CARRIER]=@CARRIER,[SUPERVISOR]=@SUPERVISOR,[PHONE]=@PHONE,[STATUS]=@STATUS"
+            + "[SITEID]=@SITEID,[LOCATION]=@LOCATION,[CARRIER]=@CARRIER,[SUPERVISOR]=@SUPERVISOR,[PHONE]=@PHONE,[STATUS]=@STATUS,"
+            + "[LEVEL]=@LEVEL,[X]=@X,[Y]=@Y,[Z]=@Z"
             + " WHERE [MEASUREPOINTID]=@MEASUREPOINTID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
