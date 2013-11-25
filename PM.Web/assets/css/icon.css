@@ -189,3 +189,11 @@
 .buttonCompanyMonthReport{
     background-position: 0px -940px;
 }
+
+.buttonSteamTrap {
+    background:url("../ico/steam_trap.png") no-repeat top left;
+}
+   
+.buttonValve {
+    background:url("../ico/valve.png") no-repeat top left;
+}
