@@ -2,7 +2,7 @@
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.measurepoints.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/measurepoint.js") %>"></script>
 
     <div class="bs-docs-section">
         <div class="page-header">
@@ -16,7 +16,7 @@
                 <label for="<%=description.ClientID %>" class="col-lg-5 control-label">
                     测点名称*</label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="description" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="description" CssClass="form-control description" placeholder="" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvDescription" runat="server" Display="Dynamic"
                         ErrorMessage="必填字段" ControlToValidate="description" CssClass="help-inline"></asp:RequiredFieldValidator>
                 </div>
@@ -27,7 +27,7 @@
                 <label for="<%=pointnum.ClientID %>" class="col-lg-5 control-label">
                     测点编号 *</label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="pointnum" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="pointnum" CssClass="form-control pointnum" placeholder="" runat="server"></asp:TextBox>
                     <asp:HiddenField ID="measurepointid" runat="server" />
                     <asp:RequiredFieldValidator ID="rfvPointNum" runat="server" Display="Dynamic" ErrorMessage="必填字段"
                         ControlToValidate="pointnum" CssClass="help-inline"></asp:RequiredFieldValidator>
@@ -196,7 +196,7 @@
                     X坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbX" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbX" CssClass="form-control coordinate x" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@
                     Y坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbY" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbY" CssClass="form-control coordinate y" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
                     Z坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbZ" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbZ" CssClass="form-control coordinate z" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
