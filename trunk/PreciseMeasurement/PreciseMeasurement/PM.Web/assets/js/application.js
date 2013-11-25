@@ -89,7 +89,7 @@
             if (link == pathname) {
                 $(li).addClass("active");
             }
-            console.log(link);
+           // console.log(link);
         });
 
         $.each($("#main-nav li"), function (index, li) {

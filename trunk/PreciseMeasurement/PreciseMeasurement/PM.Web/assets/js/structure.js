@@ -121,12 +121,16 @@ $(window).load(function () {
     console.log(measurePoint);
     console.log(measurePoint.OpStatus);
     if (measurePoint.OpStatus == "edit") {
+        $(".structure-tools").show();
+
         $(".meter").draggable();
         $("#structure").droppable({
             deactivate: function (event, ui) {
                 console.log(ui);
+                console.log(ui.draggable);
 
-                alert(ui.position.left + "," + ui.position.top);
+                console.log("ID:" + ui.draggable.id + ",Left:" + ui.position.left + ",Top:" + ui.position.top);
+                //alert(ui.position.left + "," + ui.position.top);
 
             }
         });
