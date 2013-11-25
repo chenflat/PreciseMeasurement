@@ -1244,3 +1244,5 @@ h1[id] {
 /**¿ª¹ØÌõ*/
 #swichbar {height:100%; min-height:750px;background:#D5E1F2; cursor:pointer;}
 #realdata td,#realdata th {word-break: keep-all;white-space:nowrap;}
+
+.structure-tools {display:none;background:#f4f4f4;font-size:12px;padding:4px;}

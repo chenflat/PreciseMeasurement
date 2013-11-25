@@ -5,6 +5,7 @@
  */
 
 $(function () {
+    
 
     /**
     * 点击记量点，动态显示当前数据的计量值
@@ -108,3 +109,27 @@ function counter() {
         start = 60;
     setTimeout("counter()", 1000);
 }
+
+
+$(window).load(function () {
+
+    //计量点编辑
+    var measurePoint = window.dialogArguments;
+    if (measurePoint == null) {
+        return;
+    }
+    console.log(measurePoint);
+    console.log(measurePoint.OpStatus);
+    if (measurePoint.OpStatus == "edit") {
+        $(".meter").draggable();
+        $("#structure").droppable({
+            deactivate: function (event, ui) {
+                console.log(ui);
+
+                alert(ui.position.left + "," + ui.position.top);
+
+            }
+        });
+    }
+
+});

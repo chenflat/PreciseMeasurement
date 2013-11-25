@@ -8,6 +8,10 @@
 <tr>
     <td colspan="3" class="structure-title">蒸汽计量系统图</td>
 </tr>
+<tr>
+ <td colspan="3" id="tools" class="structure-tools"><span>拖动以确定位置，然后点击确定按钮。</span>
+             <input type="button" id="btnSave" value="确定" onclick="savePoint()" /></td>
+</tr>
 <tr style="vertical-align:top">
     <td>
      <div class="structure pull-left" id="structure">
