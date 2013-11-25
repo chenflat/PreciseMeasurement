@@ -108,7 +108,9 @@
     <Content Include="assets\ico\favicon.png" />
     <Content Include="assets\ico\icon.png" />
     <Content Include="assets\ico\realtime.gif" />
+    <Content Include="assets\ico\steam_trap.png" />
     <Content Include="assets\ico\subsystem.png" />
+    <Content Include="assets\ico\valve.png" />
     <Content Include="assets\img\bg.png" />
     <Content Include="assets\img\meter.png" />
     <Content Include="assets\img\refresh.png" />
@@ -129,6 +131,7 @@
     <Content Include="assets\js\jquery.ui.datepicker-zh-CN.js" />
     <Content Include="assets\js\jszip.js" />
     <Content Include="assets\js\less.js" />
+    <Content Include="assets\js\measurepoint.js" />
     <Content Include="assets\js\Pager.min.js" />
     <Content Include="assets\js\raw-files.js" />
     <Content Include="assets\js\realtime.js" />
@@ -176,8 +179,10 @@
     <Content Include="report\ExcelCols.xml" />
     <Content Include="report\month.aspx" />
     <Content Include="report\week.aspx" />
+    <Content Include="steamtrap\default.aspx" />
     <Content Include="structure\default.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="valve\default.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -505,6 +510,13 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="steamtrap\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="steamtrap\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="structure\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -518,6 +530,13 @@
     </Compile>
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="valve\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="valve\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

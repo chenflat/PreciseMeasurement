@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.Excel">
-      <HintPath>..\..\..\..\..\..\..\Dropbox\计量项目\03 系统开发\Interop.Excel.dll</HintPath>
+      <HintPath>D:\Dropbox\计量项目\03 系统开发\Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />

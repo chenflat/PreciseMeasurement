@@ -2,6 +2,8 @@
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.measurepoints.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+    
+
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
@@ -194,7 +196,7 @@
                     X坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbX" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbX" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -204,7 +206,7 @@
                     Y坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbY" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbY" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -214,7 +216,7 @@
                     Z坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbZ" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbZ" CssClass="form-control coordinate" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
