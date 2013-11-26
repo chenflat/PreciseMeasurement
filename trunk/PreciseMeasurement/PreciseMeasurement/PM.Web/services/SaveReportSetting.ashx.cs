@@ -26,9 +26,9 @@ namespace PM.Web.services {
             //反序列化
             var list = javaScriptSerializer.Deserialize<List<ReportSettingInfo>>(stream);
             //保存设置
-          //  bool ret = PM.Business.MeasurePoint.UpdateMeasurePointCoordinates(list);
+            bool ret = PM.Business.ReportSetting.SaveReportSetting(list);
 
-          //  context.Response.Write(ret);
+           context.Response.Write(ret);
         }
 
         public bool IsReusable {
