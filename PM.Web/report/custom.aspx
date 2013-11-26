@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="settingname">
-                                    设置名称<input type="text" id="SettingName" />
+                                    设置名称 <br /><input type="text" id="SettingName" />
                                     </div>
                                    
                                     <div class="sel-points">
