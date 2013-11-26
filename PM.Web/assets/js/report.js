@@ -137,8 +137,8 @@ $(function () {
 
     //保存设置
     $("#btnSaveSetting").click(function () {
-        var point = getSelectPoints();
-        if (point.length == 0) {
+        var settings = getSelectPoints();
+        if (settings.length == 0) {
             var message = "<div class=\"alert alert-warning alert-dismissable\">" +
                 "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>" +
                 "<strong>提示!</strong> 请选择计量点" +
@@ -148,13 +148,20 @@ $(function () {
             return;
         }
 
+        if (settings.length == 0)
+            return;
 
-
-
-
-
-        //  $.cookies.set("points", pointnum);
-        //  $.cookies.set("pointlist", getSelectPoints());
+        $.ajax({
+            type: "POST",
+            url: "../services/SaveReportSetting.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(settings),
+            success: function (data) {
+                $('#myModal').modal('hide')
+            },
+            error: OnFail
+        });
 
         $('#myModal').modal('hide');
     });
@@ -163,7 +170,7 @@ $(function () {
     function getSelectPoints() {
         var points = new Array();
         $("#container-measurepoints li").each(function (index, obj) {
-            var p = { "num": $(obj).attr("id"), "description": $(obj).text() };
+            var p = { "Pointnum": $(obj).attr("id"), "Description": $(obj).text() };
             points.push(p);
         });
 
