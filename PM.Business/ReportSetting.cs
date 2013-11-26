@@ -36,7 +36,29 @@ namespace PM.Business
             return list;
         }
 
+        /// <summary>
+        /// 保存报表设置
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool SaveReportSetting(List<ReportSettingInfo> list) {
 
+            //获取用户ID
+            int userid = 0;
+            string orgid = "";
+
+            if (list.Count > 0) {
+                userid = list[0].UserId;
+                orgid = list[0].Orgid;
+            }
+
+            //重新保存设置
+            bool ret = true;
+            foreach (var item in list) {
+                ret = PM.Data.ReportSetting.CreateReportSetting(item);
+            }
+            return ret;
+        }
 
 
     }
