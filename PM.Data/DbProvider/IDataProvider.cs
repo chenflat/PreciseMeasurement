@@ -237,6 +237,13 @@ namespace PM.Data
         bool UpdateMeasurePoint(MeasurePointInfo measurePointInfo);
 
         /// <summary>
+        /// 更新计量点坐标位置信息
+        /// </summary>
+        /// <param name="measurePointInfo">计量点信息</param>
+        /// <returns></returns>
+        int UpdateMeasurePointCoordinates(MeasurePointInfo measurePointInfo);
+
+        /// <summary>
         /// 更新记量点最后更新日期
         /// </summary>
         /// <param name="pointnum">计量点</param>

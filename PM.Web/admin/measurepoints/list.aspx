@@ -12,7 +12,7 @@
     </asp:DropDownList>
     <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />
     <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="导出" />
-    <asp:Button ID="btnClone" runat="server" CssClass="btn btn-primary" Text="复制" />
+    <%--<asp:Button ID="btnClone" runat="server" CssClass="btn btn-primary" Text="复制" />--%>
      <a href="edit.aspx" class="btn btn-primary">新增</a>
     </div>
     <asp:Repeater ID="rptMeasurePoint" runat="server">

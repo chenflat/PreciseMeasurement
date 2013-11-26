@@ -177,6 +177,26 @@ namespace PM.Data.SqlServer
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
+        /// <summary>
+        /// 更新计量点坐标位置信息
+        /// </summary>
+        /// <param name="measurePointInfo">计量点信息</param>
+        /// <returns></returns>
+        public int UpdateMeasurePointCoordinates(MeasurePointInfo measurePointInfo) {
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Pointnum),
+                                  DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
+                                  DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
+                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z),
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Orgid)
+                                 };
+
+
+            string commandText = string.Format("UPDATE [{0}MEASUREPOINT] SET [X]=@X,[Y]=@Y,[Z]=@Z"
+            + " WHERE [POINTNUM]=@POINTNUM AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
         public int DeleteMeasurePoint(string idList)
         {
             string commandText = string.Format("UPDATE [{0}MEASUREPOINT] SET [STATUS]='DELETED' WHERE [MEASUREPOINTID] IN ({1})",

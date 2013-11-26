@@ -196,7 +196,7 @@
                     X坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbX" CssClass="form-control coordinate x" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbX" ToolTip="双击编辑坐标信息" CssClass="form-control coordinate x" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@
                     Y坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbY" CssClass="form-control coordinate y" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbY" ToolTip="双击编辑坐标信息"  CssClass="form-control coordinate y" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
                     Z坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbZ" CssClass="form-control coordinate z" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbZ" ToolTip="双击编辑坐标信息"  CssClass="form-control coordinate z" placeholder="" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>

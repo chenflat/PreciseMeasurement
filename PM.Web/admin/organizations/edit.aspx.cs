@@ -21,6 +21,7 @@ namespace PM.Web.admin.organizations
 
             if (!Page.IsPostBack)
             {
+                BindDropDownList();
                 string keyId = PMRequest.GetString("id");
                 if (keyId == "")
                 {
@@ -35,6 +36,19 @@ namespace PM.Web.admin.organizations
 
             }
         }
+
+        /// <summary>
+        /// 绑定下拉框数据
+        /// </summary>
+        private void BindDropDownList()
+        {
+            parent.DataTextField = "Description";
+            parent.DataValueField = "ORGID";
+            parent.DataSource = Business.Organizations.GetOrganizationTreeList("-");
+            parent.DataBind();
+            parent.Items.Insert(0, new ListItem("",""));
+        }
+
 
         public void LoadOrganizationInfo(long id)
         {
