@@ -26,17 +26,17 @@
     <div class="row">
         <div class="col-md-2 col-xs-4">
             <div class="bs-sidebar hidden-print affix-top" role="complementary">
-                <ul class="nav bs-sidenav">
+                <ul class="nav nav-list bs-sidenav">
                     <%
                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                         { 
                     %>
-                    <li class="active"><a href="#">
+                    <li><a href="#">
                         <%= pair.Key %></a>
                         <ul class="nav">
                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                {%>
-                            <li><a href="?measurepointid=<%=point.Measurepointid %>">
+                            <li <%  if(measurepointid==point.Measurepointid) Response.Write("class='active'"); %>><a href="?measurepointid=<%=point.Measurepointid %>">
                                 <%=point.Description%></a></li>
                             <% } %>
                         </ul>
@@ -46,6 +46,7 @@
                     %>
                    
                 </ul>
+                
             </div>
         </div>
         <div class="col-md-10 col-xs-8" role="main">

@@ -60,29 +60,59 @@ $(function () {
     if (path == '/report/custom.aspx') {
         initSettings();
     }
-    
+
     //初始化设置
     function initSettings() {
-        var pointlist = $.cookies.get('pointlist');
-        if (pointlist.length == 0)
-            return;
+
+
+
+
         $("#container-measurepoints").html("")
-        var points = [];
 
-        for (var i = 0; i < pointlist.length; i++) {
-            points.push('<li id="' + pointlist[i].num + '">' + pointlist[i].description + '</li>');
-        }
 
-        $("#container-measurepoints").append(points.join(""));
+
+
+        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID }, function (data) {
+
+            var points = [];
+
+            $.each(data, function (index, obj) {
+                var pointnums = [], descs = [], formula = [];
+                if (obj.Pointnum.indexOf("|")) {
+                    pointnums = obj.Pointnum.split('|');
+                    descs = obj.Description.split('|');
+                } else {
+                    pointnums.push(obj.Pointnum);
+                    descs.push(obj.Description);
+                }
+                //分项公式
+                if (obj.IsItemFormula == true) {
+                    if (obj.Formula.indexOf("|")) {
+                        formula = obj.Formula.split('|');
+                    } else {
+                        formula.push(obj.Formula);
+                    }
+                } else {
+                    formula.push(obj.Formula);
+                }
+                for (var i = 0; i < pointnums.length; i++) {
+                    points.push('<li id="' + pointnums[i].Pointnum + '">' + descs[i].Description + '</li>');
+                }
+            });
+
+            $("#container-measurepoints").append(points.join(""));
+        });
+
     }
 
 
     //自定义报表
     //动态添加计量点到列表
     $(".measurepoint-list li").click(function () {
+        $("#message").empty();
         var text = $(this).text();
         var id = $(this).attr("id");
-        var li = "<li id='" + id + "'>" + text + "  </li>";
+        var li = "<li id='" + id + "'>" + text + "  <input type='hidden' value='' /> <i class='.glyphicon .glyphicon-remove'></i></li>";
         if (!hasPointElement(text)) {
             $("#container-measurepoints").append(li);
         }
@@ -107,13 +137,24 @@ $(function () {
 
     //保存设置
     $("#btnSaveSetting").click(function () {
-        var pointnum = getSelectPointStrings();
-        if (pointnum == "") {
-            alert("请选择计量点!");
+        var point = getSelectPoints();
+        if (point.length == 0) {
+            var message = "<div class=\"alert alert-warning alert-dismissable\">" +
+                "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>" +
+                "<strong>提示!</strong> 请选择计量点" +
+                "</div>";
+
+            $("#message").append(message);
             return;
         }
-        $.cookies.set("points", pointnum);
-        $.cookies.set("pointlist", getSelectPoints());
+
+
+
+
+
+
+        //  $.cookies.set("points", pointnum);
+        //  $.cookies.set("pointlist", getSelectPoints());
 
         $('#myModal').modal('hide');
     });

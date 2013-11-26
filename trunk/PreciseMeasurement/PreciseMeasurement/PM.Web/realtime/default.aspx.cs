@@ -20,7 +20,7 @@ namespace PM.Web.realtime
     {
         //层级计量点列表
         public Dictionary<string, List<MeasurePointInfo>> measurePointList = null;
-        private long measurepointid = -1;
+        public long measurepointid = -1;
         public MeasurePointInfo measurePointInfo = null;
 
         protected void Page_Load(object sender, EventArgs e)

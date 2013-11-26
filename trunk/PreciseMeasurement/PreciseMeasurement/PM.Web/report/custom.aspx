@@ -6,6 +6,10 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
+<script>
+    var USERID = "<%=userid %>";
+    var ORGID = "<%=orgid %>"; 
+ </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
  <div class="row">
@@ -19,7 +23,18 @@
                     <asp:ListItem>全部</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
-                <a data-toggle="modal" href="#myModal" class="btn btn-danger">自定义设置</a>
+                <div class="btn-group">
+                <button type="button" class="btn btn-danger" data-toggle="modal" href="#myModal">自定义设置</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                  <% foreach (var item in SettingList) {
+                        %>
+                        <li><a href="#"><%=item %></a></li>
+                        <% 
+                     } %>
+                </ul>
+              </div>
+                
                 <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>
@@ -50,6 +65,7 @@
                         设置计量点和公式系数</h4>
                 </div>
                 <div class="modal-body">
+                    <div id="message"></div>
                     <div class="row">
                     <div class="col-md-6">
                            <div class="panel panel-default">
@@ -85,16 +101,16 @@
                              <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        2、设置系数</h3>
+                                        2、设置参数</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="settingname">
-                                    设置名称 <br /><input type="text" id="SettingName" />
+                                    设置名称：<input type="text" id="SettingName" />
+                                    <input type="hidden" name="IsItemFormula" id="IsItemFormula" value="true" />
                                     </div>
-                                   
                                     <div class="sel-points">
                                     选择的计量点
-                                    <ul  id="container-measurepoints">
+                                    <ul id="container-measurepoints">
                                     
                                     </ul>
                                     </div>

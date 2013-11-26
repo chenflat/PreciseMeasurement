@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data;
 using PM.Entity;
+using System.Collections.Generic;
 
-namespace PM.Data.DataProvider
+namespace PM.Data
 {
     public class ReportSetting
     {
@@ -45,6 +46,33 @@ namespace PM.Data.DataProvider
         /// <returns></returns>
         public static IDataReader FindReportSettingByUserId(int userid, string orgid) {
             return DatabaseProvider.GetInstance().FindReportSettingByUserId(userid, orgid);
+        }
+
+        /// <summary>
+        /// 获取指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static IDataReader FindReportSettingByUserId(string settingname, int userid, string orgid) {
+            return DatabaseProvider.GetInstance().FindReportSettingByUserId(settingname,userid, orgid);
+        }
+
+        /// <summary>
+        /// 获取指定用户报表设置名称列表
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static List<String> GetReportSettingNameList(int userid, string orgid) {
+            List<String> settingNameList = new List<string>();
+            using (IDataReader reader =DatabaseProvider.GetInstance().GetReportSettingNameList(userid, orgid)) {
+                while (reader.Read()) {
+                    settingNameList.Add(reader["SETTINGNAME"].ToString());
+                }
+                reader.Close();
+            }
+             return settingNameList;
         }
 
         /// <summary>
