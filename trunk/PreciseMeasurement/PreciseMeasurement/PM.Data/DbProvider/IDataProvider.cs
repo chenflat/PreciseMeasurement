@@ -571,5 +571,38 @@ namespace PM.Data
         /// <param name="orgid">机构ID</param>
         /// <returns></returns>
         DataSet FindAlarmlogInfo(string startdate, string enddate,string pointnum, int status, string orgid, int pageindex, int pagesize);
+
+        /// <summary>
+        /// 创建报表设置
+        /// </summary>
+        /// <param name="reportSettingInfo"></param>
+        /// <returns></returns>
+        bool CreateReportSetting(ReportSettingInfo reportSettingInfo);
+
+        /// <summary>
+        /// 删除指定用户的报表设置
+        /// </summary>
+        /// <param name="settingname">设置名称</param>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        bool DeleteReportSettingByUserId(string settingname,int userid,string orgid);
+
+        /// <summary>
+        /// 删除指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        bool DeleteReportSettingByUserId(int userid, string orgid);
+
+        /// <summary>
+        /// 获取指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        IDataReader FindReportSettingByUserId(int userid, string orgid);
+
     }
 }
