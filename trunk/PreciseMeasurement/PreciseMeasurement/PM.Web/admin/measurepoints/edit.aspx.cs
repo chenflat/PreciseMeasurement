@@ -18,9 +18,9 @@ namespace PM.Web.admin.measurepoints
             if (!IsPostBack)
             {
                 string keyId = PMRequest.GetString("id");
+                BindDropDownList();
                 if (keyId != "" && Utils.IsNumeric(keyId))
                 {
-                    BindDropDownList();
                     btnDelte.Attributes.Add("onclick", "return confirm('删除数据不可恢复，确定要删除码');");
                     LoadMeasurePointInfo(PMRequest.GetInt("id", -1));
                     btnParams.Visible = true;

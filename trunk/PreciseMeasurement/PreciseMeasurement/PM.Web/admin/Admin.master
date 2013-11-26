@@ -12,7 +12,7 @@
                     <li><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">计量点管理</a> </li>
                     <li><a href="<%=ResolveUrl("~/admin/measureunits/list.aspx") %>">标准参量</a> </li>
                     <li><a href="<%=ResolveUrl("~/admin/measurereplace/list.aspx") %>">换表管理</a> </li>
-                    <li><a href="<%=ResolveUrl("~/admin/locations/list.aspx") %>">位置管理</a> </li>
+                    <%--<li><a href="<%=ResolveUrl("~/admin/locations/list.aspx") %>">位置管理</a> </li>--%>
                     <li><a href="<%=ResolveUrl("~/admin/users/list.aspx") %>">用户管理</a></li>
                     <li><a href="<%=ResolveUrl("~/admin/users/roles.aspx") %>">角色管理</a> </li>
                 </ul>

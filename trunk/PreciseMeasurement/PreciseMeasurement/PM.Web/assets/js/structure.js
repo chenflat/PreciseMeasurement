@@ -5,22 +5,23 @@
  */
 
 $(function () {
-    
+
 
     /**
     * 点击记量点，动态显示当前数据的计量值
     */
     $("#structure div").click(function () {
-        console.log($(this).attr("id"));
-
+        //编辑时不弹出计量点信息
+        if (window.dialogArguments) {
+            return;
+        }
         pointnum = $(this).attr("id");
         description = $(this).attr("title");
         contentId = pointnum + "_data";
 
         var position = $("#" + pointnum).position();
-        // $(this).popover({ html: true, content: $("#" + contentId).html() });
-
         $("#" + contentId).css({ top: position.top + 30, left: position.left + 30 }).toggle();
+
     });
 
     $("#structure .close").click(function () {
@@ -42,24 +43,6 @@ $(function () {
         });
     });
 
-    /**
-    * 获取指定测点的实时数据
-    */
-    function getRealDataByPointNum(devicenum) {
-        var content = "";
-        $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": devicenum }, function (data) {
-            if (data != null) {
-                content += "温度：" + data.SW_Temperature + "<br />";
-                content += "压力：" + data.SW_Pressure + "<br />";
-                content += "瞬时流量：" + data.AF_FlowInstant + "<br />";
-                content += "累积流量：" + data.AT_Flow + "<br />";
-                content += "频率：" + data.AI_Density + "<br />";
-                content += "采集时间：" + new Date(data.MEASURETIME).toString("yyyy-MM-dd HH:mm:ss");
-
-                return content;
-            }
-        });
-    }
 
     //每60秒自动重新获取实时数据
     setInterval(getRealData, 60000);
@@ -95,6 +78,42 @@ $(function () {
             $("#gvRealtimeData tbody").append(content);
         });
     }
+
+
+    /**
+    * 保存测点位置
+    */
+    $("#btnSave").click(function () {
+
+        var meters = $(".meter");
+        var coordinates = new Array();
+        $.each($(meters), function (index, obj) {
+
+            //获取测点结构图位置，并保存到数组中
+            coordinates.push({ "Pointnum": $(obj).attr("id"), "X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": ORGID });
+
+            //console.log($(obj).attr("id") + "," + $(obj).position().left + "," + $(obj).position().top);
+        });
+        if (coordinates.length == 0) {
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "../services/SaveMeasurePoint.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(coordinates),
+            success: function (data) {
+                console.log(data);
+                alert("计量点位置保存成功，请关闭窗口!");
+            },
+            error: function (data) {
+                //console.log(response);
+            }
+        });
+
+    });
+
 });
 
 /***
@@ -129,9 +148,10 @@ $(window).load(function () {
                 console.log(ui);
                 console.log(ui.draggable);
 
-                console.log("ID:" + ui.draggable.id + ",Left:" + ui.position.left + ",Top:" + ui.position.top);
-                //alert(ui.position.left + "," + ui.position.top);
+                var elementId = ui.draggable.attr("id");
 
+                //console.log("ID:" + elementId + ",Left:" + ui.position.left + ",Top:" + ui.position.top);
+              
             }
         });
     }

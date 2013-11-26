@@ -2,6 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure.js") %>"></script>
+<script>
+    var USERID = "<%=userid %>";
+    var ORGID = "<%=orgid %>";
+    
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <table width="100%" cellpadding="0" cellspacing="0">
@@ -10,7 +15,7 @@
 </tr>
 <tr>
  <td colspan="3" id="tools" class="structure-tools"><span>拖动以确定位置，然后点击确定按钮。</span>
-             <input type="button" id="btnSave" value="确定" onclick="savePoint()" /></td>
+             <input type="button" id="btnSave" value="确定" /></td>
 </tr>
 <tr style="vertical-align:top">
     <td>

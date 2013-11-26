@@ -56,6 +56,27 @@ namespace PM.Business
             return Data.MeasurePoint.UpdateMeasurePoint(measurePointInfo);
         }
 
+        /// <summary>
+        /// 更新计量点坐标位置信息
+        /// </summary>
+        /// <param name="measurePointInfos">计量点列表</param>
+        /// <returns></returns>
+        public static bool UpdateMeasurePointCoordinates(List<MeasurePointInfo> measurePointInfos) {
+            if (measurePointInfos.Count == 0)
+                return false;
+            int changes = 0;
+            for (int i = 0; i < measurePointInfos.Count; i++)
+            {
+                changes += Data.MeasurePoint.UpdateMeasurePointCoordinates(measurePointInfos[i]);
+            }
+            return changes > 0;
+        } 
+
+        /// <summary>
+        /// 删除计量点信息
+        /// </summary>
+        /// <param name="idList">ID列表</param>
+        /// <returns></returns>
         public static int DeleteMeasurePoint(string idList)
         {
             return Data.MeasurePoint.DeleteMeasurePoint(idList);

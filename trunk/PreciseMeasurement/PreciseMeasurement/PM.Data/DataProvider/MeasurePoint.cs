@@ -203,6 +203,15 @@ namespace PM.Data
         }
 
         /// <summary>
+        /// 更新计量点坐标位置信息
+        /// </summary>
+        /// <param name="measurePointInfo">计量点信息</param>
+        /// <returns></returns>
+        public static int UpdateMeasurePointCoordinates(MeasurePointInfo measurePointInfo) {
+            return DatabaseProvider.GetInstance().UpdateMeasurePointCoordinates(measurePointInfo);
+        }
+
+        /// <summary>
         /// 更新计量点参数信息
         /// </summary>
         /// <param name="paramInfo">计量点参数信息</param>

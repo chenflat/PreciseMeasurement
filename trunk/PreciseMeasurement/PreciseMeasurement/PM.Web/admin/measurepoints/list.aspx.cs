@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 using PM.Business.Pages;
 using PM.Business;
@@ -10,6 +11,7 @@ using PM.Data;
 using PM.Config;
 using PM.Common;
 using PM.Entity;
+using PM.Common.ExcelUtils;
 
 namespace PM.Web.admin.measurepoints
 {
@@ -19,12 +21,25 @@ namespace PM.Web.admin.measurepoints
         protected void Page_Load(object sender, EventArgs e)
         {
             btnQuery.Click += new EventHandler(btnQuery_Click);
+            btnExport.Click += new EventHandler(btnExport_Click);
 
             if (!IsPostBack)
             {
                 BindDropDownList();
                 BindData();
             }
+        }
+
+        /// <summary>
+        /// 导出数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            string fileName = "计量点信息_" + DateTime.Now.ToString("yyyyMMdd");
+            DataTable table = Business.MeasurePoint.FindMeasurePointByCondition(condition); ;
+            ExcelHelper.CreateExcel(table, fileName);
         }  
 
         /// <summary>
