@@ -24,9 +24,21 @@
                 </asp:DropDownList>
                 &nbsp;
                 <div class="btn-group">
-                <button type="button" class="btn btn-danger" data-toggle="modal" href="#myModal">自定义设置</button>
+                <button type="button" class="btn btn-danger" id="CreateSetting">自定义设置</button>
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" role="menu" id="SettingNameList">
+                  <% foreach (var item in SettingList) {
+                        %>
+                        <li><a href="#"><%=item %></a></li>
+                        <% 
+                     } %>
+                </ul>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" id="CreateSettingNameList">
                   <% foreach (var item in SettingList) {
                         %>
                         <li><a href="#"><%=item %></a></li>
@@ -35,7 +47,7 @@
                 </ul>
               </div>
                 
-                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
+                <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>
                 
@@ -73,7 +85,7 @@
                                     <h3 class="panel-title">
                                         1、选择对比计量点</h3>
                                 </div>
-                                <div class="panel-body bs-sidebar">
+                                <div class="panel-body ">
                                      <ul class="nav bs-sidenav" style="margin:0px;">
                                     <%
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)

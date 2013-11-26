@@ -20,11 +20,29 @@ namespace PM.Business
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
         public static List<ReportSettingInfo> GetReportSettingByUserId(int userid, string orgid) {
-            if (userid<=0) {
+            return GetReportSettingByUserId("", userid, orgid);
+        }
+
+
+        /// <summary>
+        /// 获取指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static List<ReportSettingInfo> GetReportSettingByUserId(string settingname, int userid, string orgid) {
+            if (userid <= 0) {
                 return null;
             }
             List<ReportSettingInfo> list = new List<ReportSettingInfo>();
-            using (IDataReader reader = PM.Data.ReportSetting.FindReportSettingByUserId(userid,orgid)) {
+            IDataReader dataReader = null;
+            if (settingname == "") {
+                dataReader = PM.Data.ReportSetting.FindReportSettingByUserId(userid, orgid);
+            }
+            else {
+                dataReader = PM.Data.ReportSetting.FindReportSettingByUserId(settingname,userid, orgid);
+            }
+            using (IDataReader reader = dataReader) {
 
                 while (reader.Read()) {
                     ReportSettingInfo reportSettingInfo = PM.Data.ReportSetting.LoadReportSettingInfo(reader);
@@ -35,6 +53,9 @@ namespace PM.Business
 
             return list;
         }
+
+
+
 
         /// <summary>
         /// 保存报表设置

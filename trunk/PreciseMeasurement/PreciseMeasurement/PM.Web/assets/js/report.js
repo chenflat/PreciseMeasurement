@@ -63,51 +63,54 @@ $(function () {
 
     //初始化设置
     function initSettings() {
+    }
 
+    /**
+    * 创建自定义设置
+    */
+    $("#CreateSetting").click(function () {
+        //清空设置名称，显示设置窗口
+        $("#SettingName").val("");
+        $('#myModal').modal('show');
+    });
 
-
+    /**
+    * 获取指定设置名称的设置定义项
+    * @param name 设置项名称
+    */
+    function GetReportSettingByName(name) {
 
         $("#container-measurepoints").html("")
 
+        //设置名称
+        $("#SettingName").val(name);
 
-
-
-        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID }, function (data) {
-
+        //获取设置数据
+        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID, "settingname": name }, function (data) {
             var points = [];
-
+            //遍历数组
             $.each(data, function (index, obj) {
-                var pointnums = [], descs = [], formula = [];
-                if (obj.Pointnum.indexOf("|")) {
-                    pointnums = obj.Pointnum.split('|');
-                    descs = obj.Description.split('|');
-                } else {
-                    pointnums.push(obj.Pointnum);
-                    descs.push(obj.Description);
-                }
-                //分项公式
-                if (obj.IsItemFormula == true) {
-                    if (obj.Formula.indexOf("|")) {
-                        formula = obj.Formula.split('|');
-                    } else {
-                        formula.push(obj.Formula);
-                    }
-                } else {
-                    formula.push(obj.Formula);
-                }
-                for (var i = 0; i < pointnums.length; i++) {
-                    points.push('<li id="' + pointnums[i].Pointnum + '">' + descs[i].Description + '</li>');
+                if ($.trim(obj.SettingName) == name) {
+                    points.push('<li id="' + obj.Pointnum + '">' + obj.Description + '</li>');
                 }
             });
 
             $("#container-measurepoints").append(points.join(""));
         });
-
     }
 
+    /**
+    * 编辑自定义设置
+    */
+    $("#SettingNameList li").click(function () {
+        GetReportSettingByName($(this).text());
+        $('#myModal').modal('show');
+    });
 
-    //自定义报表
-    //动态添加计量点到列表
+
+    /**
+    * 动态添加计量点到列表
+    */
     $(".measurepoint-list li").click(function () {
         $("#message").empty();
         var text = $(this).text();
@@ -137,11 +140,12 @@ $(function () {
 
     //保存设置
     $("#btnSaveSetting").click(function () {
+        var SettingName = $("#SettingName").val();
         var settings = getSelectPoints();
-        if (settings.length == 0) {
+        if (settings.length == 0 || SettingName.length == 0) {
             var message = "<div class=\"alert alert-warning alert-dismissable\">" +
                 "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>" +
-                "<strong>提示!</strong> 请选择计量点" +
+                "<strong>提示!</strong> 请选择计量点或填写设置名称" +
                 "</div>";
 
             $("#message").append(message);
@@ -158,6 +162,11 @@ $(function () {
             dataType: "json",
             data: JSON.stringify(settings),
             success: function (data) {
+                if (path == '/report/custom.aspx') {
+                    var li = "<li><a href=\"#\">" + $("#SettingName").val() + "</a></li>";
+                    $("#SettingNameList").append(li);
+                    $("#CreateSettingNameList").append(li);
+                }
                 $('#myModal').modal('hide')
             },
             error: OnFail
@@ -170,7 +179,7 @@ $(function () {
     function getSelectPoints() {
         var points = new Array();
         $("#container-measurepoints li").each(function (index, obj) {
-            var p = { "Pointnum": $(obj).attr("id"), "Description": $(obj).text(), "SettingName": $("#SettingName").val(), "Userid": USERID, "Orgid": ORGID };
+            var p = { "Pointnum": $(obj).attr("id"), "Description": $.trim($(obj).text()), "SettingName": $.trim($("#SettingName").val()), "Userid": USERID, "Orgid": ORGID };
             points.push(p);
         });
 
@@ -194,30 +203,71 @@ $(function () {
     */
     $("#btnCustomQuery").click(function () {
 
-        var pointnum = getSelectPointStrings();
-        if (pointnum == "")
-            return;
-
-        var startdate = $(".startdate").val();
-        var enddate = $(".enddate").val();
-
-        var ds = new Date(startdate);
-        var de = new Date(enddate);
-
-        startdate = ds.toString("yyyy-MM-dd");
-        enddate = de.toString("yyyy-MM-dd 23:59:59");
-
-        $.ajax({
-            type: "GET",
-            url: "MeasurementReport.ashx",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "Day", "formula": "", "iscustom": "true" },
-            success: OnSuccessCustomReport,
-            error: OnFail
+        //取第一个设置为默认值
+        var defSettingName = "";
+        $.each($("#CreateSettingNameList li"), function (index, obj) {
+            if (index == 0) {
+                defSettingName = $.trim($(this).text());
+                return;
+            }
         });
+        //创建自定义报表
+        CreateCustomReport(defSettingName);
 
     });
+
+    /**
+    * 选择设置创建报表
+    */
+    $("#CreateSettingNameList li").click(function () {
+        var settingName = $(this).text();
+        CreateCustomReport(settingName);
+    });
+
+    /**
+    * 创建自定义报表
+    * @param settingName 设置名称
+    */
+    function CreateCustomReport(settingName) {
+
+        //获取设置数据
+        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
+
+            var strPointnums = "";
+            $.each(data, function (index, obj) {
+                if (strPointnums.length > 0)
+                    strPointnums += ",";
+                strPointnums += obj.Pointnum;
+            });
+
+            if (strPointnums == "")
+                return;
+
+            var startdate = $(".startdate").val();
+            var enddate = $(".enddate").val();
+
+            var ds = new Date(startdate);
+            var de = new Date(enddate);
+
+            startdate = ds.toString("yyyy-MM-dd");
+            enddate = de.toString("yyyy-MM-dd 23:59:59");
+
+            $.ajax({
+                type: "GET",
+                url: "MeasurementReport.ashx",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { "pointnum": strPointnums, "startdate": startdate, "enddate": enddate, "type": "Day", "formula": "", "iscustom": "true" },
+                success: OnSuccessCustomReport,
+                error: OnFail
+            });
+
+        });
+
+
+    }
+
+
 
     function OnSuccessCustomReport(response) {
 

@@ -25,8 +25,9 @@ namespace PM.Web.services
 
             int m_userid = PM.Common.Utils.StrToInt(context.Request["userid"].ToString(), 0);
             string m_orgid = context.Request["orgid"].ToString();
+            string m_settingname = context.Request["settingname"].ToString();
 
-            List<ReportSettingInfo> list = PM.Business.ReportSetting.GetReportSettingByUserId(m_userid, m_orgid);
+            List<ReportSettingInfo> list = PM.Business.ReportSetting.GetReportSettingByUserId(m_settingname,m_userid, m_orgid);
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = "";
             result = javaScriptSerializer.Serialize(list);
