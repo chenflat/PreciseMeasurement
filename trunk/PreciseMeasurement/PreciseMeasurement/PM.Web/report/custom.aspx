@@ -88,6 +88,9 @@
                                         2、设置系数</h3>
                                 </div>
                                 <div class="panel-body">
+                                    <div class="settingname">
+                                    设置名称<input type="text" id="SettingName" />
+                                    </div>
                                    
                                     <div class="sel-points">
                                     选择的计量点
