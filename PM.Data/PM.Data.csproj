@@ -45,6 +45,7 @@
     <Compile Include="DataProvider\MeasureReplace.cs" />
     <Compile Include="DataProvider\MeasureUnit.cs" />
     <Compile Include="DataProvider\Organizations.cs" />
+    <Compile Include="DataProvider\ReportSetting.cs" />
     <Compile Include="DataProvider\Users.cs" />
     <Compile Include="DataReaderExtender.cs" />
     <Compile Include="DbException.cs" />
