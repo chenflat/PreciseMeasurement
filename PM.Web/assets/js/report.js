@@ -170,7 +170,7 @@ $(function () {
     function getSelectPoints() {
         var points = new Array();
         $("#container-measurepoints li").each(function (index, obj) {
-            var p = { "Pointnum": $(obj).attr("id"), "Description": $(obj).text() };
+            var p = { "Pointnum": $(obj).attr("id"), "Description": $(obj).text(), "SettingName": $("#SettingName").val(), "Userid": USERID, "Orgid": ORGID };
             points.push(p);
         });
 
