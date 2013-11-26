@@ -13,7 +13,7 @@ namespace PM.Data.DataProvider
         /// <param name="reportSettingInfo"></param>
         /// <returns></returns>
         public static bool CreateReportSetting(ReportSettingInfo reportSettingInfo) { 
-            return DatabaseProvider.GetInstance().CreateReportSetting(reportSettingInfo));
+            return DatabaseProvider.GetInstance().CreateReportSetting(reportSettingInfo);
         }
 
         /// <summary>
