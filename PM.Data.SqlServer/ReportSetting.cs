@@ -21,10 +21,10 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, reportSettingInfo.UserId),
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, reportSettingInfo.Orgid),
                                   DbHelper.MakeInParam("@SETTINGNAME", (DbType)SqlDbType.VarChar, 30, reportSettingInfo.SettingName),
-                                  DbHelper.MakeInParam("@DESCRIPTION", (DbType)SqlDbType.VarChar, 100, reportSettingInfo.Description),
-                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 200, reportSettingInfo.Pointnum),
+                                  DbHelper.MakeInParam("@DESCRIPTION", (DbType)SqlDbType.VarChar, 2000, reportSettingInfo.Description),
+                                  DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 2000, reportSettingInfo.Pointnum),
                                   DbHelper.MakeInParam("@ISITEMFORMULA", (DbType)SqlDbType.Int, 4, reportSettingInfo.IsItemFormula?1:0),
-                                  DbHelper.MakeInParam("@FORMULA", (DbType)SqlDbType.VarChar, 2000, reportSettingInfo.Formula)
+                                  DbHelper.MakeInParam("@FORMULA", (DbType)SqlDbType.VarChar, 200, reportSettingInfo.Formula)
                                   };
             string commandText = string.Format("INSERT INTO [{0}REPORTSETTING] ([USERID],[ORGID],[SETTINGNAME],[DESCRIPTION],[POINTNUM],[ISITEMFORMULA],[FORMULA])" +
               "VALUES(@USERID,@ORGID,@SETTINGNAME,@DESCRIPTION,@POINTNUM,@ISITEMFORMULA,@FORMULA);", BaseConfigs.GetTablePrefix);
@@ -77,6 +77,37 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
                                   };
             string commandText = string.Format("select * from [{0}REPORTSETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public IDataReader FindReportSettingByUserId(string settingname, int userid, string orgid) {
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@SETTINGNAME", (DbType)SqlDbType.VarChar, 30, settingname),
+                                  DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
+                                  };
+            string commandText = string.Format("select * from [{0}REPORTSETTING] WHERE [SETTINGNAME]=@SETTINGNAME and [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取指定用户报表设置名称列表
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public IDataReader GetReportSettingNameList(int userid, string orgid) {
+            DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
+                                  };
+            string commandText = string.Format("select distinct SETTINGNAME from [{0}REPORTSETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
     }

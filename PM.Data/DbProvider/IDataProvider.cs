@@ -604,5 +604,20 @@ namespace PM.Data
         /// <returns></returns>
         IDataReader FindReportSettingByUserId(int userid, string orgid);
 
+        /// <summary>
+        /// 获取指定用户的报表设置
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        IDataReader FindReportSettingByUserId(string settingname, int userid, string orgid);
+
+        /// <summary>
+        /// 获取指定用户报表设置名称列表
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        IDataReader GetReportSettingNameList(int userid, string orgid);
     }
 }

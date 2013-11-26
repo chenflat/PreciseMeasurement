@@ -336,6 +336,11 @@ function GetChart(startdate, enddate, datetype) {
         console.log(obj.description);
         $("#charts").append("<div id='"+ obj.num +"'></div>");
         var id = obj.num;
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
         $('#' + id).highcharts('StockChart', {
             chart: {
             },
@@ -388,7 +393,7 @@ function GetChart(startdate, enddate, datetype) {
 	            },
             tooltip: {
                 xDateFormat: '%Y-%m-%d %H:%M',
-                pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> <br/>',
                 valueDecimals: 2
             },
 

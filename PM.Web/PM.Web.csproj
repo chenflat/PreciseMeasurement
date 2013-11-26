@@ -503,8 +503,14 @@
     <Compile Include="services\GetRealtimeMeasurement.ashx.cs">
       <DependentUpon>GetRealtimeMeasurement.ashx</DependentUpon>
     </Compile>
+    <Compile Include="services\GetReportSetting.ashx.cs">
+      <DependentUpon>GetReportSetting.ashx</DependentUpon>
+    </Compile>
     <Compile Include="services\SaveMeasurePoint.ashx.cs">
       <DependentUpon>SaveMeasurePoint.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="services\SaveReportSetting.ashx.cs">
+      <DependentUpon>SaveReportSetting.ashx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -566,6 +572,8 @@
     <Content Include="services\GetAlarmlogs.ashx" />
     <Content Include="services\GetMeasurePoints.ashx" />
     <Content Include="services\SaveMeasurePoint.ashx" />
+    <Content Include="services\GetReportSetting.ashx" />
+    <Content Include="services\SaveReportSetting.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

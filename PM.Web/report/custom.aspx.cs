@@ -14,16 +14,21 @@ namespace PM.Web.report
 
         //层级计量点列表
         public Dictionary<string, List<MeasurePointInfo>> measurePointList = null;
+        public List<string> SettingList = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
+                SettingList = GetReportSettingNameListByUser();
                 BindMeasurePointData();
             }
         }
 
+        private List<string> GetReportSettingNameListByUser() {
+            return PM.Data.ReportSetting.GetReportSettingNameList(userid, orgid);
+        }
        
 
 
