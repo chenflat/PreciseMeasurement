@@ -31,7 +31,6 @@ namespace PM.Entity
         private decimal mv4;
         private string mv5;
 
-        private string time;
 
         public long Measurementid
         {

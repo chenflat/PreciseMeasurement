@@ -14,7 +14,7 @@ namespace PM.Entity
         private string m_Pointnum;
         private string m_description;
         private string m_level;
-        private DateTime m_measuretime;
+
         private DateTime m_starttime;
         private DateTime m_endtime;
 
