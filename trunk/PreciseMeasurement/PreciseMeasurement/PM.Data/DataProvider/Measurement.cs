@@ -222,6 +222,16 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate, reportType);
         }
 
+
+        /// <summary>
+        /// 生成统计数据
+        /// </summary>
+        /// <param name="type">报表类型</param>
+        /// <returns></returns>
+        public int CreateMeasurementStatData(ReportType type) {
+            return CreateMeasurementStatData("", "", type);
+        }
+
         /// <summary>
         /// 生成测试小时数据
         /// </summary>
