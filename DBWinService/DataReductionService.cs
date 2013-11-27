@@ -49,8 +49,9 @@ namespace DBWinService {
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
 
-            if (intHour == 15 && intMinute == 21 && intSecond == 00) ///定时设置,判断分时秒  
+            if (intHour == 15 && intMinute == 36) ///定时设置,判断分时秒  
             {
+                EventLog.WriteEntry("开始定时执行");
                 try {
                     System.Timers.Timer tt = (System.Timers.Timer)sender;
                     tt.Enabled = false;
@@ -69,7 +70,7 @@ namespace DBWinService {
      
                     tt.Enabled = true;
                 } catch (Exception err) {
-                    
+                    WriteLog(err.Message);
                 }
             } 
 
@@ -78,20 +79,24 @@ namespace DBWinService {
         private string startdate = "2013-11-19 00:00:00";
         private string endDate = "2013-11-23 00:00:00";
         private void DoMeasurementForHour() {
-           
+            WriteLog("整理小时数据开始");
             PM.Data.Measurement measurement = new PM.Data.Measurement();
             measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Hour);
-        
+            WriteLog("整理小时数据结束");
         }
 
         private void DoMeasurementForDay() {
+            WriteLog("整理每天数据开始");
             PM.Data.Measurement measurement = new PM.Data.Measurement();
             measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Day);
+            WriteLog("整理每天数据结束");
         }
 
         private void DoMeasurementForMonth() {
+            WriteLog("整理每月数据开始");
             PM.Data.Measurement measurement = new PM.Data.Measurement();
             measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Month);
+            WriteLog("整理每月数据结束");
         }
 
         public static void SetTimeout(double interval, Action action) {
