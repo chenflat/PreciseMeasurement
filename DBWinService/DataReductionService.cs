@@ -68,7 +68,7 @@ namespace DBWinService {
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
 
-            bool isExecute  = (intHour == 22 && intMinute == 36);
+            bool isExecute  = (intHour == 22 && intMinute == 46);
 
             //定时设置,判断分时秒,每天 定时执行
             if (isExecute)  
