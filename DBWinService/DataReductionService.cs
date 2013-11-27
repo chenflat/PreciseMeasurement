@@ -8,7 +8,6 @@ using System.ServiceProcess;
 using System.Text;
 using System.Timers;
 using System.IO;
-using PM.Data;
 using PM.Entity;
 using System.Threading;
 
