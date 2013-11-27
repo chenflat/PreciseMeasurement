@@ -240,11 +240,13 @@ namespace PM.Data
         {
             //开始时间
             DateTime dtStarttime = DateTime.Parse(startdate);
+
+            //结束时间，如果没有指定结束日期，则为当前日期(零点零分零秒)
             DateTime dtEndtime;
             if (enddate == "" || enddate == null)
             {
-                enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-                dtEndtime = DateTime.Now;
+                enddate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+                dtEndtime = DateTime.Parse(enddate);
             }
             else {
                 dtEndtime = DateTime.Parse(enddate);
@@ -253,12 +255,13 @@ namespace PM.Data
             //时间差
             TimeSpan t3 = dtEndtime.Subtract(dtStarttime);
 
+            //计算TimeSpan差值
             double totalHours = t3.TotalHours;
             double totalDays = t3.TotalDays;
             double totalMonth = dtEndtime.Month - dtStarttime.Month;
 
 
-            //时间列表
+            //根据不同的报表类型分别创建时间列表
             List<MeasurementStatInfo> listStatInfo = new List<MeasurementStatInfo>();
 
             string dateformat = "";
@@ -364,9 +367,6 @@ namespace PM.Data
             {
                 throw e;
             }
-           
-
-
 
             return listStatInfo.Count;
         }
