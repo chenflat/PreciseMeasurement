@@ -156,13 +156,30 @@ namespace PM.Data.SqlServer
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-       public IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType) {
+       public IDataReader FindMeasurementByDate(string startdate, string enddate, string pointNum, ReportType reportType) {
            DbParameter[] parms = {                                
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@PointNum", (DbType)SqlDbType.VarChar, 20, pointNum), 
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
                                   };
            return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetMeasurementByDate", parms);
+       }
+
+       /// <summary>
+       /// 获取指定测点的最后计量时间
+       /// </summary>
+       /// <param name="pointnum">计量点编号</param>
+       /// <param name="reportType">查询方式</param>
+       /// <returns></returns>
+       public IDataReader GetLastMeasurtimeByPointNum(string pointnum, ReportType reportType) {
+
+           DbParameter param = DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, pointnum);
+           string commandText = string.Format("SELECT TOP 1 * FROM [{0}MEASUREMENT_{1}] WHERE POINTNUM=@POINTNUM ORDER BY MEASUREMENTID DESC", 
+               BaseConfigs.GetTablePrefix,
+               reportType.ToString().ToUpper());
+
+           return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
        }
 
         /// <summary>

@@ -471,7 +471,15 @@ namespace PM.Data
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-        IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType);
+        IDataReader FindMeasurementByDate(string startdate, string enddate,string pointNum,ReportType reportType);
+
+        /// <summary>
+        /// 获取指定测点的最后计量时间
+        /// </summary>
+        /// <param name="pointnum">计量点编号</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        IDataReader GetLastMeasurtimeByPointNum(string pointnum, ReportType reportType);
 
         /// <summary>
         /// 获取指定时间内的的测量数据

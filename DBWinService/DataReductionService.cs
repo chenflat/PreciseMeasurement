@@ -99,27 +99,34 @@ namespace DBWinService {
 
         }
 
-        private string startdate = "2013-11-19 00:00:00";
-        private string endDate = "2013-11-23 00:00:00";
         private void DoMeasurementForHour() {
+
             WriteLog("整理小时数据开始");
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Hour);
+
+            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
+ 
             WriteLog("整理小时数据结束");
+
         }
 
         private void DoMeasurementForDay() {
+
             WriteLog("整理每天数据开始");
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Day);
+
+            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Day);
+
             WriteLog("整理每天数据结束");
+
         }
 
         private void DoMeasurementForMonth() {
+
             WriteLog("整理每月数据开始");
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Month);
+
+            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Month);
+
             WriteLog("整理每月数据结束");
+
         }
 
 
