@@ -23,19 +23,15 @@
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
-            this.eventLog1 = new System.Diagnostics.EventLog();
-            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             // 
             // DataReductionService
             // 
             this.ServiceName = "DataReductionService";
-            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
 
         }
 
         #endregion
 
-        private System.Diagnostics.EventLog eventLog1;
- 
+
     }
 }
