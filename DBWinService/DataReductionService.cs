@@ -9,6 +9,8 @@ using System.Text;
 using System.Timers;
 using System.IO;
 using System.Threading;
+using PM.Data;
+using PM.Entity;
 
 namespace DBWinService {
     public partial class DataReductionService : ServiceBase {    
@@ -47,7 +49,7 @@ namespace DBWinService {
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
 
-            if (intHour == 14 && intMinute == 06 && intSecond == 00) ///定时设置,判断分时秒  
+            if (intHour == 15 && intMinute == 21 && intSecond == 00) ///定时设置,判断分时秒  
             {
                 try {
                     System.Timers.Timer tt = (System.Timers.Timer)sender;
@@ -73,25 +75,23 @@ namespace DBWinService {
 
         }
 
-
+        private string startdate = "2013-11-19 00:00:00";
+        private string endDate = "2013-11-23 00:00:00";
         private void DoMeasurementForHour() {
-            string endDate = "";
-           // PM.Data.Measurement measurement = new PM.Data.Measurement();
-          //  measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Hour);
+           
+            PM.Data.Measurement measurement = new PM.Data.Measurement();
+            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Hour);
         
         }
 
         private void DoMeasurementForDay() {
-            //string startDate = "2013-09-07 00:00:00";
-            string endDate = "";
-           // PM.Data.Measurement measurement = new PM.Data.Measurement();
-           // measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Day);
+            PM.Data.Measurement measurement = new PM.Data.Measurement();
+            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Day);
         }
 
         private void DoMeasurementForMonth() {
-            string endDate = "";
-          //  PM.Data.Measurement measurement = new PM.Data.Measurement();
-          //  measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Month);
+            PM.Data.Measurement measurement = new PM.Data.Measurement();
+            measurement.CreateMeasurementStatData(startdate, endDate, ReportType.Month);
         }
 
         public static void SetTimeout(double interval, Action action) {
@@ -106,10 +106,15 @@ namespace DBWinService {
         public void WriteLog(string content) {
             //debug==================================================  
             //StreamWriter dout = new StreamWriter(@"c:/" + System.DateTime.Now.ToString("yyyMMddHHmmss") + ".txt");  
-            StreamWriter dout = new StreamWriter(@"c:/" + "MeasureSystemWindowServiceLog.txt", true);
-            dout.Write("/r/n事件：" + content + "/r/n操作时间：" + System.DateTime.Now.ToString("yyy-MM-dd HH:mm:ss"));
+            string filename = "ServiceLog.txt";
+            if (!File.Exists(filename)) {
+                File.Create(filename);
+            }
+
+            StreamWriter sw = new StreamWriter(filename, true, Encoding.Unicode);
+            sw.WriteLine("事件：" + content + ",操作时间：" + System.DateTime.Now.ToString("yyy-MM-dd HH:mm:ss"));
             //debug==================================================  
-            dout.Close();
+            sw.Close();
         }  
 
     }
