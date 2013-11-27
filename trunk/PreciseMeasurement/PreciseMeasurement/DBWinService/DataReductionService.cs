@@ -49,7 +49,7 @@ namespace DBWinService {
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
 
-            if (intHour == 15 && intMinute == 36) ///定时设置,判断分时秒  
+            if (intHour == 15 && intMinute == 39) ///定时设置,判断分时秒  
             {
                 EventLog.WriteEntry("开始定时执行");
                 try {
