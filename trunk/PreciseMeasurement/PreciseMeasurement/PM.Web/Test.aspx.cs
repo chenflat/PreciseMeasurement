@@ -23,26 +23,17 @@ namespace PM.Web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-           
-            string endDate = "";
-            PM.Data.Measurement measurement = new Data.Measurement();
-            measurement.CreateMeasurementStatData(startDate,endDate, ReportType.Hour);
+            Measurement.CreateMeasurementStatData(ReportType.Hour);
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            //string startDate = "2013-09-07 00:00:00";
-            string endDate = "";
-            PM.Data.Measurement measurement = new Data.Measurement();
-            measurement.CreateMeasurementStatData(startDate, endDate, ReportType.Day);
+            Measurement.CreateMeasurementStatData(ReportType.Day);
         }
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-           // string startDate = "2013-09-01 00:00:00";
-            string endDate = "";
-            PM.Data.Measurement measurement = new Data.Measurement();
-            measurement.CreateMeasurementStatData(startDate, endDate, ReportType.Month);
+            Measurement.CreateMeasurementStatData(ReportType.Month);
         }
     }
 }

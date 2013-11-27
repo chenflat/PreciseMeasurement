@@ -70,7 +70,7 @@ namespace DBWinService {
             int intMinute = e.SignalTime.Minute;
 
             //每天 定时执行
-            if (intHour == 15 && intMinute == 39) ///定时设置,判断分时秒  
+            if (intHour == 21 && intMinute == 38) ///定时设置,判断分时秒  
             {
                 EventLog.WriteEntry("开始定时执行");
 
@@ -81,7 +81,7 @@ namespace DBWinService {
 
                     DoMeasurementForHour();
 
-                    Thread.Sleep(10000);
+                    Thread.Sleep(2*60*1000);
 
                     DoMeasurementForDay();
 
