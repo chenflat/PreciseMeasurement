@@ -9,7 +9,6 @@ using System.Text;
 using System.Timers;
 using System.IO;
 using System.Threading;
-using PM.Data;
 using PM.Entity;
 
 namespace DBWinService {
@@ -69,8 +68,10 @@ namespace DBWinService {
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
 
-            //每天 定时执行
-            if (intHour == 21 && intMinute == 42) ///定时设置,判断分时秒  
+            bool isExecute  = (intHour == 21 && intMinute == 52);
+
+            //定时设置,判断分时秒,每天 定时执行
+            if (isExecute)  
             {
                 EventLog.WriteEntry("开始定时执行");
 
@@ -93,7 +94,7 @@ namespace DBWinService {
      
                     tt.Enabled = true;
                 } catch (Exception err) {
-                    WriteLog(err.Message);
+                    WriteLog(err.ToString());
                 }
             } 
 
