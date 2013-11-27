@@ -74,9 +74,6 @@ namespace PM.Data
         }
 
 
-
-
-
         public static MeasurementInfo LoadStatInfo(IDataReader reader)
         {
             MeasurementInfo measurement = new MeasurementInfo();
@@ -218,160 +215,37 @@ namespace PM.Data
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-        public static IDataReader FindMeasurementByDate(string startdate, string enddate,ReportType reportType) {
-            return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate, reportType);
-        }
-
-
-        /// <summary>
-        /// 生成统计数据
-        /// </summary>
-        /// <param name="type">报表类型</param>
-        /// <returns></returns>
-        public int CreateMeasurementStatData(ReportType type) {
-            return CreateMeasurementStatData("", "", type);
+        public static IDataReader FindMeasurementByDate(string startdate, string enddate,string pointNum,ReportType reportType) {
+            return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate,pointNum, reportType);
         }
 
         /// <summary>
-        /// 生成测试小时数据
+        /// 获取指定时间内的的测量数据
         /// </summary>
         /// <param name="startdate">开始时间</param>
-        public int CreateMeasurementStatData(string startdate,string enddate, ReportType type)
-        {
-            //开始时间
-            DateTime dtStarttime = DateTime.Parse(startdate);
-
-            //结束时间，如果没有指定结束日期，则为当前日期(零点零分零秒)
-            DateTime dtEndtime;
-            if (enddate == "" || enddate == null)
-            {
-                enddate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
-                dtEndtime = DateTime.Parse(enddate);
-            }
-            else {
-                dtEndtime = DateTime.Parse(enddate);
-            }
-
-            //时间差
-            TimeSpan t3 = dtEndtime.Subtract(dtStarttime);
-
-            //计算TimeSpan差值
-            double totalHours = t3.TotalHours;
-            double totalDays = t3.TotalDays;
-            double totalMonth = dtEndtime.Month - dtStarttime.Month;
-
-
-            //根据不同的报表类型分别创建时间列表
-            List<MeasurementStatInfo> listStatInfo = new List<MeasurementStatInfo>();
-
-            string dateformat = "";
-            if (type == ReportType.Hour) {
-                dateformat = "yyyy-MM-dd HH";
-                for (int h = 0; h < totalHours; h++) {
-                    DateTime dh = dtStarttime.AddHours(h);
-                    listStatInfo.Add(new MeasurementStatInfo(dh));
-                }
-            }
-            else if (type == ReportType.Day)
-            {
-                dateformat = "yyyy-MM-dd";
-                for (int d = 0; d < totalDays; d++) {
-                    DateTime dd = dtStarttime.AddDays(d);
-                    listStatInfo.Add(new MeasurementStatInfo(dd));
-                }
-            }
-            else if (type == ReportType.Month) {
-                dateformat = "yyyy-MM";
-                for (int m = 0; m <= totalMonth; m++)
-                {
-                    DateTime dd = dtStarttime.AddMonths(m);
-                    listStatInfo.Add(new MeasurementStatInfo(dd));
-                }
-            }
-
-            //获取指定时间段内的测量数据
-            List<MeasurementInfo> measurements = new List<MeasurementInfo>();
-            using (IDataReader reader = FindMeasurementByDate(startdate, enddate, type))
-            {
-                while (reader.Read())
-                {
-                    MeasurementInfo measurementInfo = Data.Measurement.LoadStatInfo(reader);
-                    measurements.Add(measurementInfo);
-                }
-                reader.Close();
-            }
-
-            //比较时间
-            foreach (var item in listStatInfo)
-            {
-                List<MeasurementInfo> tempList = new List<MeasurementInfo>();
-
-                for (int i = 0; i < measurements.Count; i++)
-                {
-                    if (measurements[i].Measuretime.ToString(dateformat) == item.Measuretime.ToString(dateformat))
-                    {
-                        tempList.Add(measurements[i]);
-                        measurements.Remove(measurements[i]);
-                    }
-                }
-
-                //获取最后一条记录
-                if (tempList.Count > 0)
-                {
-                    MeasurementInfo lastMeasurement = tempList[tempList.Count - 1];
-                    item.LastValue = lastMeasurement.AtFlow;
-                    item.Pointnum = lastMeasurement.Pointnum;
-                    item.Measureunitid = "AT_Flow";
-                    item.Value = 0;
-                }
-            }
-     
-            bool ret;
-            try
-            {
-                //计算用量差值
-                for (int i = 0; i < listStatInfo.Count; i++)
-                {
-                    string pointnum = listStatInfo[i].Pointnum;
-                 
-                    if (i + 1 < listStatInfo.Count)
-                    {
-                        listStatInfo[i + 1].Value = listStatInfo[i + 1].LastValue - listStatInfo[i].LastValue;
-
-                        MeasurementStatInfo statInfo = listStatInfo[i + 1];
-                        statInfo.Starttime = listStatInfo[i].Measuretime;
-                        statInfo.StartValue = listStatInfo[i].LastValue;
-                        statInfo.Endtime = statInfo.Measuretime;
-                        if (statInfo.Pointnum.Length > 0) {
-                            if (type==ReportType.Hour)
-                            {
-                                ret = DatabaseProvider.GetInstance().CreateMeasurementHourData(statInfo);
-                            }
-                            else if (type==ReportType.Day)
-                            {
-                                ret = DatabaseProvider.GetInstance().CreateMeasurementDayData(statInfo);                                
-                            }
-                            else if (type == ReportType.Month)
-                            {
-                                ret = DatabaseProvider.GetInstance().CreateMeasurementMonthData(statInfo);
-                            }
-
-                        } 
-                        PM.Data.MeasurePoint.UpdateMeasurePointLastSynTime(pointnum, statInfo.Measuretime);
-                    }
-                }
-
-             // 
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return listStatInfo.Count;
+        /// <param name="enddate">结束时间</param>
+        /// <returns></returns>
+        public static IDataReader FindMeasurementByDate(string startdate, string enddate, ReportType reportType) {
+            return DatabaseProvider.GetInstance().FindMeasurementByDate(startdate, enddate, "", reportType);
         }
 
 
+        /// <summary>
+        /// 获取指定测点的最后计量时间
+        /// </summary>
+        /// <param name="pointnum">计量点编号</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        public static DateTime GetLastMeasurtimeByPointNum(string pointnum, ReportType reportType) {
+           
+            IDataReader reader = DatabaseProvider.GetInstance().GetLastMeasurtimeByPointNum(pointnum,reportType);
+            DateTime time = new DateTime();
+            if (reader.Read()) {
+                time = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));
+                reader.Close();
+            }
+            return time;
+        }
 
     }
 }

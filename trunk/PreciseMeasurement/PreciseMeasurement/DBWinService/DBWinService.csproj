@@ -74,6 +74,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PM.Business\PM.Business.csproj">
+      <Project>{34C31EC1-10E7-4FEC-A346-AB1DE515B914}</Project>
+      <Name>PM.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PM.Data.SqlServer\PM.Data.SqlServer.csproj">
       <Project>{F1A79257-1179-45FD-8D90-4EB6AE4A16D0}</Project>
       <Name>PM.Data.SqlServer</Name>

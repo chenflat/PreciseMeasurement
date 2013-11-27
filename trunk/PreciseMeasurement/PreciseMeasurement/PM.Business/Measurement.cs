@@ -222,7 +222,153 @@ namespace PM.Business
         }
 
 
-       
+        /// <summary>
+        /// 生成统计数据
+        /// </summary>
+        /// <param name="type">报表类型</param>
+        /// <returns></returns>
+        public static void CreateMeasurementStatData(ReportType type) {
+            CreateMeasurementStatData("", "", type);
+        }
+
+        /// <summary>
+        /// 生成测试数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="type">时间类型</param>
+        public static void CreateMeasurementStatData(string startdate, string enddate, ReportType type) {
+
+
+            //由于每个计量点的采集时间有可能不一致，所有这里分别针对每个计量点进行统计
+            List<MeasurePointInfo> measurepoints = MeasurePoint.FindMeasurePointAndLocation();
+            foreach (var measurepoint in measurepoints) {
+                string curPointnum = measurepoint.Pointnum;
+                //开始时间，如果没有指定开始时间，则取记录的最后一条统计时间为开始时间
+                DateTime dtStarttime;
+                if (startdate == "") {
+                    dtStarttime = Data.Measurement.GetLastMeasurtimeByPointNum(curPointnum, type);
+                }
+                else {
+                    dtStarttime = DateTime.Parse(startdate);
+                }
+
+                //结束时间，如果没有指定结束日期，则为当前日期(零点零分零秒)
+                DateTime dtEndtime;
+                if (enddate == "" || enddate == null) {
+                    enddate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+                    dtEndtime = DateTime.Parse(enddate);
+                }
+                else {
+                    dtEndtime = DateTime.Parse(enddate);
+                }
+
+                //时间差
+                TimeSpan t3 = dtEndtime.Subtract(dtStarttime);
+
+                //计算TimeSpan差值
+                double totalHours = t3.TotalHours;
+                double totalDays = t3.TotalDays;
+                double totalMonth = dtEndtime.Month - dtStarttime.Month;
+
+
+                //根据不同的报表类型分别构造时间列表
+                List<MeasurementStatInfo> listStatInfo = new List<MeasurementStatInfo>();
+
+                string dateformat = "";
+                if (type == ReportType.Hour) {
+                    dateformat = "yyyy-MM-dd HH";
+                    for (int h = 0; h < totalHours; h++) {
+                        DateTime dh = dtStarttime.AddHours(h);
+                        listStatInfo.Add(new MeasurementStatInfo(dh));
+                    }
+                }
+                else if (type == ReportType.Day) {
+                    dateformat = "yyyy-MM-dd";
+                    for (int d = 0; d < totalDays; d++) {
+                        DateTime dd = dtStarttime.AddDays(d);
+                        listStatInfo.Add(new MeasurementStatInfo(dd));
+                    }
+                }
+                else if (type == ReportType.Month) {
+                    dateformat = "yyyy-MM";
+                    for (int m = 0; m <= totalMonth; m++) {
+                        DateTime dd = dtStarttime.AddMonths(m);
+                        listStatInfo.Add(new MeasurementStatInfo(dd));
+                    }
+                }
+
+                //获取测点在指定时间段内的测量数据列表
+                List<MeasurementInfo> measurements = new List<MeasurementInfo>();
+                using (IDataReader reader = Data.Measurement.FindMeasurementByDate(startdate, enddate,curPointnum, type)) {
+                    while (reader.Read()) {
+                        MeasurementInfo measurementInfo = Data.Measurement.LoadStatInfo(reader);
+                        measurements.Add(measurementInfo);
+                    }
+                    reader.Close();
+                }
+
+                //比较时间,构造起始时间、终止时间、起始值、终止值列表
+                foreach (var item in listStatInfo) {
+                    List<MeasurementInfo> tempList = new List<MeasurementInfo>();
+
+                    for (int i = 0; i < measurements.Count; i++) {
+                        if (measurements[i].Measuretime.ToString(dateformat) == item.Measuretime.ToString(dateformat)) {
+                            tempList.Add(measurements[i]);
+                            measurements.Remove(measurements[i]);
+                        }
+                    }
+
+                    //获取最后一条记录
+                    if (tempList.Count > 0) {
+                        MeasurementInfo lastMeasurement = tempList[tempList.Count - 1];
+                        item.LastValue = lastMeasurement.AtFlow;
+                        item.Pointnum = lastMeasurement.Pointnum;
+                        item.Measureunitid = "AT_Flow";
+                        item.Value = 0;
+                    }
+                }
+
+                bool ret;
+                try {
+                    //计算用量差值
+                    for (int i = 0; i < listStatInfo.Count; i++) {
+                        string pointnum = listStatInfo[i].Pointnum;
+
+                        if (i + 1 < listStatInfo.Count) {
+                            listStatInfo[i + 1].Value = listStatInfo[i + 1].LastValue - listStatInfo[i].LastValue;
+
+                            MeasurementStatInfo statInfo = listStatInfo[i + 1];
+                            statInfo.Starttime = listStatInfo[i].Measuretime;
+                            statInfo.StartValue = listStatInfo[i].LastValue;
+                            statInfo.Endtime = statInfo.Measuretime;
+                            if (statInfo.Pointnum.Length > 0) {
+                                if (type == ReportType.Hour) {
+                                    ret = DatabaseProvider.GetInstance().CreateMeasurementHourData(statInfo);
+                                }
+                                else if (type == ReportType.Day) {
+                                    ret = DatabaseProvider.GetInstance().CreateMeasurementDayData(statInfo);
+                                }
+                                else if (type == ReportType.Month) {
+                                    ret = DatabaseProvider.GetInstance().CreateMeasurementMonthData(statInfo);
+                                }
+
+                            }
+                            PM.Data.MeasurePoint.UpdateMeasurePointLastSynTime(pointnum, statInfo.Measuretime);
+                        }
+                    }
+
+                    // 
+                }
+                catch (Exception e) {
+                    throw e;
+                }
+
+
+            }
+
+        }
+
 
 
 
