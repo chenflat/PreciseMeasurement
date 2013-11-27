@@ -75,6 +75,10 @@
       <Project>{9BD3666B-7BE9-42C1-B316-BCD3CE52192C}</Project>
       <Name>PM.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PM.Entity\PM.Entity.csproj">
+      <Project>{FFAC468F-9EDD-4BE0-B49F-7520E29E6261}</Project>
+      <Name>PM.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
