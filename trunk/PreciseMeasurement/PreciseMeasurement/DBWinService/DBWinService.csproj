@@ -36,12 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
@@ -75,14 +71,13 @@
       <Project>{A4CDBF26-2EED-4F4E-B23E-229E42AE590B}</Project>
       <Name>PM.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PM.Data\PM.Data.csproj">
-      <Project>{9BD3666B-7BE9-42C1-B316-BCD3CE52192C}</Project>
-      <Name>PM.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PM.Entity\PM.Entity.csproj">
       <Project>{FFAC468F-9EDD-4BE0-B49F-7520E29E6261}</Project>
       <Name>PM.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
