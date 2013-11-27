@@ -68,34 +68,33 @@ namespace DBWinService {
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
 
-            bool isExecute  = (intHour == 21 && intMinute == 52);
+            bool isExecute  = (intHour == 22 && intMinute == 36);
 
             //定时设置,判断分时秒,每天 定时执行
             if (isExecute)  
             {
+                //System.Timers.Timer tt = (System.Timers.Timer)sender;
+                timer1.Enabled = false;
                 EventLog.WriteEntry("开始定时执行");
 
                 //执行内容
                 try {
-                    System.Timers.Timer tt = (System.Timers.Timer)sender;
-                    tt.Enabled = false;
 
                     DoMeasurementForHour();
 
-                    Thread.Sleep(2*60*1000);
+                   // Thread.Sleep(2*60*1000);
 
                     DoMeasurementForDay();
 
-                    Thread.Sleep(10000);
-
                     DoMeasurementForMonth();
 
-                    Thread.Sleep(10000);
-     
-                    tt.Enabled = true;
+
+                   
                 } catch (Exception err) {
                     WriteLog(err.ToString());
                 }
+
+                timer1.Enabled = true;
             } 
 
         }
