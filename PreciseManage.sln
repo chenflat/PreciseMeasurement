@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Control", "PM.Control\PM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Cache", "PM.Cache\PM.Cache.csproj", "{A4E1E6F2-9A73-4C03-91CE-C27521FE924C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBService", "DBService\DBService.csproj", "{267AE6EA-ECAB-4263-BE64-A9A3820819F9}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -125,16 +123,6 @@ Global
 		{A4E1E6F2-9A73-4C03-91CE-C27521FE924C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A4E1E6F2-9A73-4C03-91CE-C27521FE924C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A4E1E6F2-9A73-4C03-91CE-C27521FE924C}.Release|x86.ActiveCfg = Release|Any CPU
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Debug|x86.ActiveCfg = Debug|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Debug|x86.Build.0 = Debug|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Release|Any CPU.ActiveCfg = Release|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Release|Mixed Platforms.Build.0 = Release|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Release|x86.ActiveCfg = Release|x86
-		{267AE6EA-ECAB-4263-BE64-A9A3820819F9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
