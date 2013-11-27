@@ -8,13 +8,12 @@ using System.ServiceProcess;
 using System.Text;
 using System.Timers;
 using System.IO;
-using PM.Entity;
 using System.Threading;
 
 namespace DBWinService {
-    public partial class DataReductionService : ServiceBase {    //declaration
+    public partial class DataReductionService : ServiceBase {    
 
-        private System.Timers.Timer timer1 = null;    //declaration
+        private System.Timers.Timer timer1 = null;    
 
         public DataReductionService() {
             InitializeComponent();
