@@ -77,22 +77,22 @@ namespace DBWinService {
 
         private void DoMeasurementForHour() {
             string endDate = "";
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Hour);
+           // PM.Data.Measurement measurement = new PM.Data.Measurement();
+          //  measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Hour);
         
         }
 
         private void DoMeasurementForDay() {
             //string startDate = "2013-09-07 00:00:00";
             string endDate = "";
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Day);
+           // PM.Data.Measurement measurement = new PM.Data.Measurement();
+           // measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Day);
         }
 
         private void DoMeasurementForMonth() {
             string endDate = "";
-            PM.Data.Measurement measurement = new PM.Data.Measurement();
-            measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Month);
+          //  PM.Data.Measurement measurement = new PM.Data.Measurement();
+          //  measurement.CreateMeasurementStatData("2013-11-24 00:00:00", endDate, ReportType.Month);
         }
 
         public static void SetTimeout(double interval, Action action) {

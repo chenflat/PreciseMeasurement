@@ -67,10 +67,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PM.Common\PM.Common.csproj">
-      <Project>{A4CDBF26-2EED-4F4E-B23E-229E42AE590B}</Project>
-      <Name>PM.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PM.Entity\PM.Entity.csproj">
       <Project>{FFAC468F-9EDD-4BE0-B49F-7520E29E6261}</Project>
       <Name>PM.Entity</Name>
