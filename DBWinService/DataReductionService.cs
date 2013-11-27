@@ -43,7 +43,7 @@ namespace DBWinService {
             EventLog.WriteEntry("Start MeasureSystem Data Service");
             WriteLog("Start MeasureSystem Data Service");
             timer1 = new System.Timers.Timer();
-            this.timer1.Interval = Convert.ToDouble(3*1000); 
+            this.timer1.Interval = Convert.ToDouble(3000); 
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             timer1.AutoReset = true;
             timer1.Enabled = true;
@@ -70,7 +70,7 @@ namespace DBWinService {
             int intMinute = e.SignalTime.Minute;
 
             //每天 定时执行
-            if (intHour == 21 && intMinute == 38) ///定时设置,判断分时秒  
+            if (intHour == 21 && intMinute == 42) ///定时设置,判断分时秒  
             {
                 EventLog.WriteEntry("开始定时执行");
 
