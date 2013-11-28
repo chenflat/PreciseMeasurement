@@ -15,7 +15,7 @@ namespace PM.Web
 {
     public partial class Test : System.Web.UI.Page
     {
-        private string startDate = "2013-11-17 00:00:00"; 
+       // private string startDate = "2013-11-17 00:00:00"; 
         protected void Page_Load(object sender, EventArgs e)
         {
 

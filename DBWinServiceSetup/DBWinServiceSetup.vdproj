@@ -290,7 +290,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
                 }
@@ -654,7 +654,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DBWinServiceSetup"
         "ProductCode" = "8:{789B3217-9A7A-4AF0-A7E1-69A7E55181E5}"
-        "PackageCode" = "8:{7D03876D-5B61-4342-B2C6-9FA1A597D067}"
+        "PackageCode" = "8:{F9A0CF89-E6FE-4D2C-9864-DBB30D8D44E9}"
         "UpgradeCode" = "8:{E6E1CA4E-0442-439F-AE6C-8E64D9AABF73}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

@@ -55,8 +55,8 @@ namespace PM.Web.admin.organizations
             OrganizationInfo orginfo = Organizations.GetOrganizationInfo(id);
             if (orginfo == null)
                 return;
-            orgid.Attributes.Add("readonly", "readonly");
-            orgid.Text = orginfo.Orgid;
+            tbOrgid.Attributes.Add("readonly", "readonly");
+            tbOrgid.Text = orginfo.Orgid;
             description.Text = orginfo.Description;
             orgtype.SelectedValue = orginfo.Orgtype;
             parent.SelectedValue = orginfo.Parent;
@@ -74,7 +74,7 @@ namespace PM.Web.admin.organizations
             {
                 OrganizationInfo orgInfo = new OrganizationInfo();
                 orgInfo.Organizationid = Utils.StrToInt(organizationid.Value, 0);
-                orgInfo.Orgid = orgid.Text.Trim();
+                orgInfo.Orgid = tbOrgid.Text.Trim();
                 orgInfo.Description = description.Text.Trim();
                 orgInfo.Orgtype = orgtype.SelectedValue;
                 orgInfo.Parent = parent.SelectedValue;

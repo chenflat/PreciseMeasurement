@@ -131,10 +131,9 @@ namespace PM.Web.admin.measurepoints
                     {
                         Response.Redirect("list.aspx");
                     }
-                }
-                catch (Exception ex)
+                } catch (Exception ex)
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }

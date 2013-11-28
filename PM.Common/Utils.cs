@@ -2516,7 +2516,7 @@ namespace PM.Common
                         string ss = str.Substring(0, str.IndexOf("-"));
                         i = Convert.ToInt32(ss.Trim());
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         i = -1;
                     }

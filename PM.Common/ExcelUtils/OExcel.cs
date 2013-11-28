@@ -277,7 +277,7 @@ namespace PM.Common.ExcelUtils
                 //System.Runtime.InteropServices.Marshal.ReleaseComObject(apptemp);
                 //apptemp = null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 try
                 {
@@ -2198,7 +2198,7 @@ namespace PM.Common.ExcelUtils
         /// <returns></returns>
         public DataTable GetSelectedByIndex(int isheetIndex)
         {
-            int icols = 0;
+            
             try
             {
                 DataTable dt = new DataTable();
@@ -2239,10 +2239,10 @@ namespace PM.Common.ExcelUtils
                 dt.AcceptChanges();
                 return dt;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
-                string a = ex.Message;
+                //throw;
+              //  string a = ex.Message;
                 return null;
             }
         }
@@ -2253,7 +2253,7 @@ namespace PM.Common.ExcelUtils
         /// <returns></returns>
         public DataTable GetSelectedTableCloneByIndex(int isheetIndex)
         {
-            int icols = 0;
+            //int icols = 0;
             try
             {
                 DataTable dt = new DataTable();
@@ -2287,9 +2287,9 @@ namespace PM.Common.ExcelUtils
             }
             catch (Exception ex)
             {
-                throw;
-                string a = ex.Message;
-                return null;
+                throw ex;
+               // string a = ex.Message;
+              //  return null;
             }
         }
         /// <summary>
