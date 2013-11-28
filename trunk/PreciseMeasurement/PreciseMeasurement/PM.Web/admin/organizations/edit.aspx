@@ -8,10 +8,10 @@
         </div>
         
         <div class="form-group">
-            <label for="<%=orgid.ClientID %>" class="col-lg-2">
+            <label for="<%=tbOrgid.ClientID %>" class="col-lg-2">
                 机构代码</label>
             <div class="col-lg-6">
-                <asp:TextBox ID="orgid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
+                <asp:TextBox ID="tbOrgid" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
                 <asp:HiddenField ID="organizationid" runat="server" />
             </div>
         </div>

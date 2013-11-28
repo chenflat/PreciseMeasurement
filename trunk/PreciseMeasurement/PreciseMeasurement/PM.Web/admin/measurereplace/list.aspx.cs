@@ -18,7 +18,6 @@ namespace PM.Web.admin.measurereplace
     public partial class list : BasePage
     {
         private int PageIndex = 0;
-        private string m_condition = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             btnExport.Click += new EventHandler(btnExport_Click);

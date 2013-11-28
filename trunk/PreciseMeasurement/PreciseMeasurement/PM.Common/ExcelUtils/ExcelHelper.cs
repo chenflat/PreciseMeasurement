@@ -149,7 +149,7 @@ namespace PM.Common.ExcelUtils
                     }
                     for (int j = 0; j < oNode.ChildNodes.Count; j++)
                     {
-                        string sCaption = "";
+                       // string sCaption = "";
                         if (oNode.ChildNodes[j].Attributes["id"].Value.ToLower().Equals(sFinderName.ToLower())) //判断是否是过滤的信息
                         {  //确定
                             XmlNodeList nodeList = oNode.ChildNodes[j].ChildNodes;
@@ -180,9 +180,9 @@ namespace PM.Common.ExcelUtils
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+               // throw;
                 return null;
             }
             return dt;
