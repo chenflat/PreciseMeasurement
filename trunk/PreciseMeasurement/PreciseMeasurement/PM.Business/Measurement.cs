@@ -245,6 +245,7 @@ namespace PM.Business
             foreach (var measurepoint in measurepoints) {
 
                 string curPointnum = measurepoint.Pointnum;
+                int curPointLevel = measurepoint.Level;
 
                 //开始时间，如果没有指定开始时间，则取记录的最后一条统计时间为开始时间
                 DateTime dtStarttime;
@@ -359,6 +360,7 @@ namespace PM.Business
                             statInfo.Starttime = listStatInfo[i].Measuretime;
                             statInfo.StartValue = listStatInfo[i].LastValue;
                             statInfo.Endtime = statInfo.Measuretime;
+                            statInfo.Level = curPointLevel.ToString();
                             if (statInfo.Pointnum.Length > 0) {
                                 if (type == ReportType.Hour) {
                                     ret = DatabaseProvider.GetInstance().CreateMeasurementHourData(statInfo);

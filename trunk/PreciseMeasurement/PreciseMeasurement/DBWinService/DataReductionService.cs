@@ -9,7 +9,7 @@ using System.Text;
 using System.Timers;
 using System.IO;
 using System.Threading;
-using PM.Entity;
+
 using System.Configuration;
 
 namespace DBWinService {
@@ -40,9 +40,10 @@ namespace DBWinService {
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args) {
+
             EventLog.WriteEntry("启动计量器监测系统数据整理服务");
             timer1 = new System.Timers.Timer();
-            this.timer1.Interval = Convert.ToDouble(2000);
+            this.timer1.Interval = Convert.ToDouble(3000);
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             timer1.AutoReset = true;
             timer1.Enabled = true;
@@ -53,8 +54,8 @@ namespace DBWinService {
         /// </summary>
         protected override void OnStop() {
 
-            EventLog.WriteEntry("停止计量器监测系统数据整理服务");
-            timer1.Stop();
+           EventLog.WriteEntry("停止计量器监测系统数据整理服务");
+           timer1.Stop();
         }
 
         /// <summary>
@@ -64,9 +65,6 @@ namespace DBWinService {
         /// <param name="e"></param>
         private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e) {
 
-            //int intHour = e.SignalTime.Hour;
-            //int intMinute = e.SignalTime.Minute;
-            //bool isExecute = (intHour == 10 && intMinute == 0);
 
             //从配置文件中读取更新日期
             var updateTime = ConfigurationManager.AppSettings["UpdateTime"].ToString();
@@ -98,8 +96,7 @@ namespace DBWinService {
                     tt.Enabled = true;
 
                 } catch (Exception err) {
-                    EventLog.WriteEntry("执行计量器监测数据整理服务异常：" + err);
-                    WriteLog(err.ToString());
+                   EventLog.WriteEntry("执行计量器监测数据整理服务异常：" + err);
                 }
             }
 
@@ -111,7 +108,7 @@ namespace DBWinService {
 
                 EventLog.WriteEntry("整理小时数据开始");
 
-                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
+                PM.Business.Measurement.CreateMeasurementStatData(PM.Entity.ReportType.Hour);
 
                 System.Threading.Thread.Sleep(3000);
 
@@ -131,7 +128,7 @@ namespace DBWinService {
 
                 EventLog.WriteEntry("整理每天数据开始");
 
-                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Day);
+                PM.Business.Measurement.CreateMeasurementStatData(PM.Entity.ReportType.Day);
 
                 System.Threading.Thread.Sleep(3000);
 
@@ -152,7 +149,7 @@ namespace DBWinService {
 
                 EventLog.WriteEntry("整理每月数据开始");
 
-                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Month);
+                PM.Business.Measurement.CreateMeasurementStatData(PM.Entity.ReportType.Month);
 
                 System.Threading.Thread.Sleep(1000 * 2);
 
@@ -165,23 +162,6 @@ namespace DBWinService {
 
           
 
-        }
-
-
-        /// <summary>
-        /// 写入操作日志
-        /// </summary>
-        /// <param name="content">日志内容</param>
-        public void WriteLog(string content) {
-
-            //日志文件保存在安装目录
-            string filename = "ServiceLog.txt";
-            if (!File.Exists(filename)) {
-                File.Create(filename);
-            }
-            //StreamWriter sw = new StreamWriter(filename, true, Encoding.Unicode);
-            //sw.WriteLine("事件：" + content + ",操作时间：" + System.DateTime.Now.ToString("yyy-MM-dd HH:mm:ss"));
-            //sw.Close();
         }
 
     }
