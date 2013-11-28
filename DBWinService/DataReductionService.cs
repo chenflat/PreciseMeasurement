@@ -19,7 +19,7 @@ namespace DBWinService {
     /// </summary>
     public partial class DataReductionService : ServiceBase {
 
-        private System.Timers.Timer timer1 = null;
+        private System.Timers.Timer timer = null;
 
         /// <summary>
         /// 构造类
@@ -40,13 +40,36 @@ namespace DBWinService {
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args) {
+            EventLog.WriteEntry("启动数据整理服务");
 
-            EventLog.WriteEntry("启动计量器监测系统数据整理服务");
-            timer1 = new System.Timers.Timer();
-            this.timer1.Interval = Convert.ToDouble(3000);
-            this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
-            timer1.AutoReset = true;
-            timer1.Enabled = true;
+            Thread t = new Thread(new ThreadStart(this.InitTimer));
+            t.Start();
+
+
+            //try {
+
+            //    EventLog.WriteEntry("启动计量器监测系统数据整理服务");
+            //    timer1 = new System.Timers.Timer();
+            //    this.timer1.Interval = Convert.ToDouble(1000);
+            //    //this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
+            //    timer1.AutoReset = true;
+            //    timer1.Enabled = true;
+
+            //} catch (Exception ex) {
+
+            //    EventLog.WriteEntry("启动计量器监测系统数据整理服务异常："+ ex);
+            //    throw;
+            //}   
+        }
+
+
+        private void InitTimer() {
+
+            timer = new System.Timers.Timer();
+            timer.Elapsed += new ElapsedEventHandler(timer_Tick);
+            double timeInSeconds = 5.0;
+            timer.Interval = (timeInSeconds * 1000);
+            timer.Enabled = true;
         }
 
         /// <summary>
@@ -55,7 +78,8 @@ namespace DBWinService {
         protected override void OnStop() {
 
            EventLog.WriteEntry("停止计量器监测系统数据整理服务");
-           timer1.Stop();
+           timer.Enabled = false;
+           timer.Stop();
         }
 
         /// <summary>
@@ -63,7 +87,7 @@ namespace DBWinService {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e) {
+        private void timer_Tick(object sender, System.Timers.ElapsedEventArgs e) {
 
 
             //从配置文件中读取更新日期
@@ -84,7 +108,7 @@ namespace DBWinService {
                 try {
                     System.Timers.Timer tt = (System.Timers.Timer)sender;
                     tt.Enabled = false;
-                    EventLog.WriteEntry("开始定时执行计量器监测系统数据整理服务");
+                    EventLog.WriteEntry("开始定时执行数据整理服务");
                    
                     DoMeasurementForHour();
 
@@ -96,7 +120,7 @@ namespace DBWinService {
                     tt.Enabled = true;
 
                 } catch (Exception err) {
-                   EventLog.WriteEntry("执行计量器监测数据整理服务异常：" + err);
+                    EventLog.WriteEntry("执行数据整理服务异常：" + err, EventLogEntryType.Error);
                 }
             }
 
@@ -115,7 +139,7 @@ namespace DBWinService {
                 EventLog.WriteEntry("整理小时数据结束");
 
             } catch (Exception err) {
-                EventLog.WriteEntry("整理小时数据异常：" + err);
+                EventLog.WriteEntry("整理小时数据异常：" + err, EventLogEntryType.Error);
 
             }
            
@@ -136,7 +160,7 @@ namespace DBWinService {
 
             } catch (Exception err) {
 
-                EventLog.WriteEntry("整理每天数据开始：" + err);
+                EventLog.WriteEntry("整理每天数据开始：" + err, EventLogEntryType.Error);
 
             }
            
