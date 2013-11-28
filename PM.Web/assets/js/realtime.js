@@ -239,7 +239,7 @@ $(function () {
         var startdate = $(".hour #startdate").val();
         var endate = $(".hour #enddate").val();
 
-        console.log($(this).attr('page'));
+       // console.log($(this).attr('page'));
 
         GetHourData(pointnum, startdate, endate, parseInt($(this).attr('page')))
     });
@@ -262,18 +262,16 @@ $(function () {
         GetDayData(pointnum, startdate, endate, 1)
     });
 
-    $("#daypager .page").on("click", function () {
 
-        console.log('aaaa');
-
-        console.log("pager");
+   $("#daypager").on("click", "a", function () {
         var pointnum = $("#pointnum").val();
         var startdate = $(".day #startdate").val();
         var endate = $(".day #enddate").val();
-        GetMinuteData(pointnum, startdate, endate, parseInt($(this).attr('page')))
+
+         console.log($(this).attr('page'));
+
+        GetDayData(pointnum, startdate, endate, parseInt($(this).attr('page')))
     });
-
-
 
     //历史数据
 
@@ -455,6 +453,9 @@ function OnSuccessForDay(response) {
         RecordCount: parseInt(pager.RecordCount)
     });
 };
+
+
+
 
 
 /**

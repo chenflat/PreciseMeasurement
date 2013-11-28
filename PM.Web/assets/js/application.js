@@ -21,6 +21,10 @@
             e.preventDefault()
         })
 
+
+
+
+
         // back to top
         setTimeout(function () {
             var $sideBar = $('.bs-sidebar')
@@ -32,15 +36,15 @@
                         var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
                         var navOuterHeight = $('.bs-docs-nav').height()
 
-                       // console.log("offsetTop:" + offsetTop);
-                      //  console.log("sideBarMargin:" + sideBarMargin);
-                       // console.log("navOuterHeight:" + navOuterHeight);
-                       // console.log("aa:" + (offsetTop - navOuterHeight - sideBarMargin));
+                        // console.log("offsetTop:" + offsetTop);
+                        //  console.log("sideBarMargin:" + sideBarMargin);
+                        // console.log("navOuterHeight:" + navOuterHeight);
+                        // console.log("aa:" + (offsetTop - navOuterHeight - sideBarMargin));
 
                         return (this.top = offsetTop - navOuterHeight - sideBarMargin)
                     }
                     , bottom: function () {
-                      
+
                         return (this.bottom = $('.bs-footer').outerHeight(true))
                     }
                 }
@@ -48,7 +52,7 @@
         }, 100)
 
         setTimeout(function () {
-           // $('.bs-top').affix()
+            // $('.bs-top').affix()
         }, 100)
 
         // tooltip demo
@@ -79,8 +83,6 @@
           }, 3000)
       })
 
-        // carousel demo
-        $('.bs-docs-carousel-example').carousel()
 
         var pathname = window.location.pathname;
 
@@ -89,8 +91,17 @@
             if (link == pathname) {
                 $(li).addClass("active");
             }
-           // console.log(link);
+            // console.log(link);
         });
+
+
+        //main-nav
+
+        console.log(pathname);
+        if (pathname == "/" || pathname.toLowerCase() == "/default.aspx") {
+            $("#main-nav").hide();
+        }
+
 
         $.each($("#main-nav li"), function (index, li) {
             var link = $(li).find('a').attr('href');
