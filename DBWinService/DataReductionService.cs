@@ -112,6 +112,7 @@ namespace DBWinService {
                 EventLog.WriteEntry("整理小时数据开始");
 
                 PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
+
                 System.Threading.Thread.Sleep(3000);
 
                 EventLog.WriteEntry("整理小时数据结束");
