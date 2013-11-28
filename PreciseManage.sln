@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Cache", "PM.Cache\PM.Cac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBWinService", "DBWinService\DBWinService.csproj", "{713946EA-7BED-40AD-AB5F-83397CBEA8F9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DBWinServiceSetup", "DBWinServiceSetup\DBWinServiceSetup.vdproj", "{F3457AF1-0F92-43F4-8961-1F59215A032D}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -135,6 +137,12 @@ Global
 		{713946EA-7BED-40AD-AB5F-83397CBEA8F9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{713946EA-7BED-40AD-AB5F-83397CBEA8F9}.Release|x86.ActiveCfg = Release|x86
 		{713946EA-7BED-40AD-AB5F-83397CBEA8F9}.Release|x86.Build.0 = Release|x86
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Debug|Any CPU.ActiveCfg = Debug
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Debug|x86.ActiveCfg = Debug
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Release|Any CPU.ActiveCfg = Release
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Release|Mixed Platforms.ActiveCfg = Release
+		{F3457AF1-0F92-43F4-8961-1F59215A032D}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
