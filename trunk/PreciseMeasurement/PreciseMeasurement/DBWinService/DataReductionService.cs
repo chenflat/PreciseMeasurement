@@ -12,13 +12,13 @@ using System.Threading;
 using PM.Entity;
 
 namespace DBWinService {
-    
+
     /// <summary>
     /// 数据整理服务
     /// </summary>
-    public partial class DataReductionService : ServiceBase {    
+    public partial class DataReductionService : ServiceBase {
 
-        private System.Timers.Timer timer1 = null;    
+        private System.Timers.Timer timer1 = null;
 
         /// <summary>
         /// 构造类
@@ -31,7 +31,7 @@ namespace DBWinService {
         /// DEBUG调用
         /// </summary>
         public void OnDebug() {
-            OnStart(null);  
+            OnStart(null);
         }
 
         /// <summary>
@@ -39,10 +39,10 @@ namespace DBWinService {
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args) {
-            EventLog.WriteEntry("Start MeasureSystem Data Service");
-            WriteLog("Start MeasureSystem Data Service");
+            EventLog.WriteEntry("启动监测系统数据整理服务");
+            WriteLog("启动监测系统数据整理服务");
             timer1 = new System.Timers.Timer();
-            this.timer1.Interval = Convert.ToDouble(3000); 
+            this.timer1.Interval = Convert.ToDouble(2000);
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             timer1.AutoReset = true;
             timer1.Enabled = true;
@@ -53,8 +53,8 @@ namespace DBWinService {
         /// </summary>
         protected override void OnStop() {
 
-            EventLog.WriteEntry("Stop MeasureSystem Data Service");
-            WriteLog("Stop MeasureSystem Data Service");  
+            EventLog.WriteEntry("停止监测系统数据整理服务");
+            WriteLog("停止监测系统数据整理服务");
             timer1.Stop();
         }
 
@@ -68,64 +68,91 @@ namespace DBWinService {
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
 
-            bool isExecute  = (intHour == 22 && intMinute == 46);
+            bool isExecute = (intHour == 9 && intMinute == 55);
 
             //定时设置,判断分时秒,每天 定时执行
-            if (isExecute)  
-            {
-                //System.Timers.Timer tt = (System.Timers.Timer)sender;
-                timer1.Enabled = false;
-                EventLog.WriteEntry("开始定时执行");
-
+            if (isExecute) {
                 //执行内容
                 try {
-
+                    System.Timers.Timer tt = (System.Timers.Timer)sender;
+                    tt.Enabled = false;
+                    EventLog.WriteEntry("开始定时执行数据整理服务");
+                   
                     DoMeasurementForHour();
-
-                   // Thread.Sleep(2*60*1000);
 
                     DoMeasurementForDay();
 
                     DoMeasurementForMonth();
 
+                    System.Threading.Thread.Sleep(3000);
+                    tt.Enabled = true;
 
-                   
                 } catch (Exception err) {
+                    EventLog.WriteEntry("数据整理服务异常："+ err);
                     WriteLog(err.ToString());
                 }
-
-                timer1.Enabled = true;
-            } 
+            }
 
         }
 
         private void DoMeasurementForHour() {
 
-            WriteLog("整理小时数据开始");
+            try {
 
-            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
- 
-            WriteLog("整理小时数据结束");
+                WriteLog("整理小时数据开始");
+
+                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
+                System.Threading.Thread.Sleep(2000);
+
+                WriteLog("整理小时数据结束");
+
+            } catch (Exception err) {
+                EventLog.WriteEntry("整理小时数据异常：" + err);
+
+            }
+           
 
         }
 
         private void DoMeasurementForDay() {
 
-            WriteLog("整理每天数据开始");
+            try {
 
-            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Day);
+                WriteLog("整理每天数据开始");
 
-            WriteLog("整理每天数据结束");
+                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Day);
+
+                System.Threading.Thread.Sleep(2000);
+
+                WriteLog("整理每天数据结束");
+
+            } catch (Exception err) {
+
+                EventLog.WriteEntry("整理每天数据开始：" + err);
+
+            }
+           
 
         }
 
         private void DoMeasurementForMonth() {
 
-            WriteLog("整理每月数据开始");
+            try {
 
-            PM.Business.Measurement.CreateMeasurementStatData(ReportType.Month);
+                WriteLog("整理每月数据开始");
 
-            WriteLog("整理每月数据结束");
+                PM.Business.Measurement.CreateMeasurementStatData(ReportType.Month);
+
+                System.Threading.Thread.Sleep(1000 * 2);
+
+                WriteLog("整理每月数据结束");
+
+            } catch (Exception err) {
+
+                EventLog.WriteEntry("整理每月数据结束：" + err);
+            }
+
+          
 
         }
 
@@ -141,10 +168,10 @@ namespace DBWinService {
             if (!File.Exists(filename)) {
                 File.Create(filename);
             }
-            StreamWriter sw = new StreamWriter(filename, true, Encoding.Unicode);
-            sw.WriteLine("事件：" + content + ",操作时间：" + System.DateTime.Now.ToString("yyy-MM-dd HH:mm:ss"));
-            sw.Close();
-        }  
+            //StreamWriter sw = new StreamWriter(filename, true, Encoding.Unicode);
+            //sw.WriteLine("事件：" + content + ",操作时间：" + System.DateTime.Now.ToString("yyy-MM-dd HH:mm:ss"));
+            //sw.Close();
+        }
 
     }
 }

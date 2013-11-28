@@ -29,6 +29,21 @@ namespace PM.Data.SqlServer
            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
 
+       /// <summary>
+       /// 获取指定计量器的第一条记录值
+       /// </summary>
+       /// <param name="pointnum">记录器编号</param>
+       /// <returns></returns>
+       public IDataReader FindFirstMeasurement(string pointnum) {
+
+           DbParameter param = DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, pointnum);
+
+           string commandText = string.Format("SELECT TOP 1 * FROM [{0}MEASUREMENT] WHERE POINTNUM=@POINTNUM ORDER BY MEASUREMENTID ASC", BaseConfigs.GetTablePrefix);
+
+           return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+       }
+
+
 
         /// <summary>
         /// 获取指定查询条件的读表数据

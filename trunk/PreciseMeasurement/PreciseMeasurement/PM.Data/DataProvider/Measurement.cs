@@ -46,6 +46,34 @@ namespace PM.Data
         }
 
         /// <summary>
+        /// 获取指定计量器的第一条记录值
+        /// </summary>
+        /// <param name="pointnum">记录器编号</param>
+        /// <returns></returns>
+        public static IDataReader FindFirstMeasurement(string pointnum) {
+            return DatabaseProvider.GetInstance().FindFirstMeasurement(pointnum);
+        }
+
+        /// <summary>
+        /// 获取指定计量器的第一条记录对象
+        /// </summary>
+        /// <param name="pointnum">计量器编号</param>
+        /// <returns></returns>
+        public static MeasurementInfo GetFirstMeasurement(string pointnum) {
+
+            MeasurementInfo measurement = new MeasurementInfo();
+            IDataReader reader = FindFirstMeasurement(pointnum);
+            if (reader.Read()) {
+                measurement = LoadMeasurementInfo(reader);
+                reader.Close();
+            }
+            return measurement;
+
+        }
+
+
+
+        /// <summary>
         /// 加载读数对象
         /// </summary>
         /// <param name="reader"></param>
