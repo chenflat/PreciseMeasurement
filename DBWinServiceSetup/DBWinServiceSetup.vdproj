@@ -53,6 +53,118 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_138958EBFCEF4B0C9060DDBB8AFA6207"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_6DC72210_6A3C_4D93_8B2D_2D115FE93955"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2020D41C595C40D687AC9C8880F7C154"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_70A79062_F411_46D7_ADFD_FAEF234407C2"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2352C828ACDE4B4EA8CEA6036748DE26"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_387FAA86_541C_44BC_A64A_EB3994FA86B9"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2787E81829B54FB4AB047AEF426374FC"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_E9173A75_1703_46DA_A48F_AC318A379BCF"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_28A2BE4870A64A6387F172D3AE9FA7E4"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_AC205CC7_65E5_4067_910C_F72CB75D3D2E"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_40F7E69AC14246CCAB54D5A508CE1C42"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C6576DB1_3492_4227_A513_588DC66E85E3"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_82D871968BC348C1B7D36BA05CF2583F"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_ED78BCF0_D4A6_4D56_8B66_186C9223A222"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_9DB44B02CC194B2DB59EFE0356C31F18"
+            {
+            "Name" = "8:主输出来自DBWinService(活动)"
+            "Condition" = "8:"
+            "Object" = "8:"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_3FF9CDA8_4C07_4428_8901_84FD471DAB9A"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -64,6 +176,14 @@
         {
             "LaunchCondition"
             {
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_841E066989EB49399E53FC3BE015029E"
+                {
+                "Name" = "8:.NET Framework"
+                "Message" = "8:[VSDNETMSG]"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
+                }
             }
         }
         "File"
