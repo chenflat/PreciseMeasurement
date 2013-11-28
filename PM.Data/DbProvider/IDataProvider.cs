@@ -430,6 +430,14 @@ namespace PM.Data
         /// <returns></returns>
         IDataReader FindLastMeasurement(string pointnum);
 
+
+        /// <summary>
+        /// 获取指定计量器的第一条记录值
+        /// </summary>
+        /// <param name="pointnum">记录器编号</param>
+        /// <returns></returns>
+        IDataReader FindFirstMeasurement(string pointnum);
+
         /// <summary>
         /// 获取指定查询条件的读表数据
         /// </summary>

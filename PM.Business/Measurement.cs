@@ -243,7 +243,9 @@ namespace PM.Business
             //由于每个计量点的采集时间有可能不一致，所有这里分别针对每个计量点进行统计
             List<MeasurePointInfo> measurepoints = MeasurePoint.FindMeasurePointAndLocation();
             foreach (var measurepoint in measurepoints) {
+
                 string curPointnum = measurepoint.Pointnum;
+
                 //开始时间，如果没有指定开始时间，则取记录的最后一条统计时间为开始时间
                 DateTime dtStarttime;
                 if (startdate == "") {
@@ -252,6 +254,17 @@ namespace PM.Business
                 else {
                     dtStarttime = DateTime.Parse(startdate);
                 }
+
+                //判断开始日期，如果没有开始日期，则在原始记录表中查询
+                if (dtStarttime == DateTime.MinValue) {
+                    dtStarttime = Data.Measurement.GetFirstMeasurement(curPointnum).Measuretime;
+                }
+
+                //如果原始记录表没有未找开始日期，则跳过此计量点，继续执行下一条记录
+                if (dtStarttime == DateTime.MinValue) {
+                    continue;
+                }
+
 
                 //结束时间，如果没有指定结束日期，则为当前日期(零点零分零秒)
                 DateTime dtEndtime;
@@ -262,6 +275,10 @@ namespace PM.Business
                 else {
                     dtEndtime = DateTime.Parse(enddate);
                 }
+
+                //如果未能取到结束日期，则跳过此计量点，继续执行下一条记录
+                if (dtEndtime == DateTime.MinValue)
+                    continue;
 
                 //时间差
                 TimeSpan t3 = dtEndtime.Subtract(dtStarttime);
