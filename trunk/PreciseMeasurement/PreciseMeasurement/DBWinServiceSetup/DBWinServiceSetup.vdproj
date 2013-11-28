@@ -652,9 +652,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:DBWinServiceSetup"
+        "ProductName" = "8:DBWinService"
         "ProductCode" = "8:{789B3217-9A7A-4AF0-A7E1-69A7E55181E5}"
-        "PackageCode" = "8:{F9A0CF89-E6FE-4D2C-9864-DBB30D8D44E9}"
+        "PackageCode" = "8:{C5E0DED2-7ECB-4643-BAE6-8CA7E336F5ED}"
         "UpgradeCode" = "8:{E6E1CA4E-0442-439F-AE6C-8E64D9AABF73}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
