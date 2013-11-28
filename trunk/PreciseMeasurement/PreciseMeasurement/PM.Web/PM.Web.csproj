@@ -140,8 +140,10 @@
     <Content Include="assets\js\realtime.js" />
     <Content Include="assets\js\report.js" />
     <Content Include="assets\js\respond.min.js" />
+    <Content Include="assets\js\steamtrap.js" />
     <Content Include="assets\js\structure.js" />
     <Content Include="assets\js\uglify.js" />
+    <Content Include="assets\js\valve.js" />
     <Content Include="assets\lib\bootbox\bootbox.min.js" />
     <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
