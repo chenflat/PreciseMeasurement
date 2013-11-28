@@ -10,6 +10,7 @@ using System.Timers;
 using System.IO;
 using System.Threading;
 using PM.Entity;
+using System.Configuration;
 
 namespace DBWinService {
 
@@ -39,8 +40,7 @@ namespace DBWinService {
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args) {
-            EventLog.WriteEntry("启动监测系统数据整理服务");
-            WriteLog("启动监测系统数据整理服务");
+            EventLog.WriteEntry("启动计量器监测系统数据整理服务");
             timer1 = new System.Timers.Timer();
             this.timer1.Interval = Convert.ToDouble(2000);
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
@@ -53,8 +53,7 @@ namespace DBWinService {
         /// </summary>
         protected override void OnStop() {
 
-            EventLog.WriteEntry("停止监测系统数据整理服务");
-            WriteLog("停止监测系统数据整理服务");
+            EventLog.WriteEntry("停止计量器监测系统数据整理服务");
             timer1.Stop();
         }
 
@@ -65,10 +64,21 @@ namespace DBWinService {
         /// <param name="e"></param>
         private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e) {
 
-            int intHour = e.SignalTime.Hour;
-            int intMinute = e.SignalTime.Minute;
+            //int intHour = e.SignalTime.Hour;
+            //int intMinute = e.SignalTime.Minute;
+            //bool isExecute = (intHour == 10 && intMinute == 0);
 
-            bool isExecute = (intHour == 9 && intMinute == 55);
+            //从配置文件中读取更新日期
+            var updateTime = ConfigurationManager.AppSettings["UpdateTime"].ToString();
+            if (updateTime == null || updateTime == "") {
+                updateTime = "02:00";
+            }
+            //当前时间
+            string currentTime = e.SignalTime.ToString("HH:mm");
+
+            //比较时间，如果时间相等，则开始定时执行
+            bool isExecute = (updateTime == currentTime);
+        
 
             //定时设置,判断分时秒,每天 定时执行
             if (isExecute) {
@@ -76,7 +86,7 @@ namespace DBWinService {
                 try {
                     System.Timers.Timer tt = (System.Timers.Timer)sender;
                     tt.Enabled = false;
-                    EventLog.WriteEntry("开始定时执行数据整理服务");
+                    EventLog.WriteEntry("开始定时执行计量器监测系统数据整理服务");
                    
                     DoMeasurementForHour();
 
@@ -88,7 +98,7 @@ namespace DBWinService {
                     tt.Enabled = true;
 
                 } catch (Exception err) {
-                    EventLog.WriteEntry("数据整理服务异常："+ err);
+                    EventLog.WriteEntry("执行计量器监测数据整理服务异常：" + err);
                     WriteLog(err.ToString());
                 }
             }
@@ -99,12 +109,12 @@ namespace DBWinService {
 
             try {
 
-                WriteLog("整理小时数据开始");
+                EventLog.WriteEntry("整理小时数据开始");
 
                 PM.Business.Measurement.CreateMeasurementStatData(ReportType.Hour);
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(3000);
 
-                WriteLog("整理小时数据结束");
+                EventLog.WriteEntry("整理小时数据结束");
 
             } catch (Exception err) {
                 EventLog.WriteEntry("整理小时数据异常：" + err);
@@ -118,13 +128,13 @@ namespace DBWinService {
 
             try {
 
-                WriteLog("整理每天数据开始");
+                EventLog.WriteEntry("整理每天数据开始");
 
                 PM.Business.Measurement.CreateMeasurementStatData(ReportType.Day);
 
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(3000);
 
-                WriteLog("整理每天数据结束");
+                EventLog.WriteEntry("整理每天数据结束");
 
             } catch (Exception err) {
 
@@ -139,13 +149,13 @@ namespace DBWinService {
 
             try {
 
-                WriteLog("整理每月数据开始");
+                EventLog.WriteEntry("整理每月数据开始");
 
                 PM.Business.Measurement.CreateMeasurementStatData(ReportType.Month);
 
                 System.Threading.Thread.Sleep(1000 * 2);
 
-                WriteLog("整理每月数据结束");
+                EventLog.WriteEntry("整理每月数据结束");
 
             } catch (Exception err) {
 
