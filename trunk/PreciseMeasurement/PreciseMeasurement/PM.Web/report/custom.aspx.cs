@@ -40,7 +40,7 @@ namespace PM.Web.report
         private void BindMeasurePointData()
         {
             //获取所有层级
-            Dictionary<int, string> levels = Business.Locations.GetLevels(orgid, siteid);
+            Dictionary<int, string> levels = Business.Locations.GetLevels(AdminInfo.Orgid, siteid);
 
             //获取层级对应的计量点数据
             Dictionary<string, List<MeasurePointInfo>> result = new Dictionary<string, List<MeasurePointInfo>>();
@@ -51,7 +51,7 @@ namespace PM.Web.report
                 int level = pair.Key;
                 string key = pair.Value;
 
-                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, orgid, siteid);
+                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, AdminInfo.Orgid, siteid);
 
                 result.Add(key, listByLevel);
                 i++;
@@ -69,7 +69,9 @@ namespace PM.Web.report
             string settingname = hdnSettingName.Value;
             if (settingname == "")
                 return;
-            List<ReportSettingInfo> listInfos = PM.Business.ReportSetting.GetReportSettingByUserId(settingname, userid, orgid);
+            List<ReportSettingInfo> listInfos = PM.Business.ReportSetting.GetReportSettingByUserId(settingname, AdminInfo.UserId, AdminInfo.Orgid);
+            if (listInfos == null)
+                return;
             foreach (var info in listInfos) {
                 if (sb.Length > 0)
                     sb.Append(",");
