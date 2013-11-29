@@ -36,6 +36,7 @@
               </div>
 
               <div class="btn-group">
+                  <asp:HiddenField ID="hdnSettingName" runat="server" />
                 <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" id="CreateSettingNameList">

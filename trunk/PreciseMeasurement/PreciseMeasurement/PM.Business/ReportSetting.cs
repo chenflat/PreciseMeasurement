@@ -66,14 +66,20 @@ namespace PM.Business
 
             //获取用户ID
             int userid = 0;
-            string orgid = "";
+            string orgid = "",settingname = "";
 
             if (list.Count > 0) {
                 userid = list[0].UserId;
                 orgid = list[0].Orgid;
+                settingname = list[0].SettingName;
             }
+            //查找设置，判断是否存在，如果已经存在则删除该设置。
+           IDataReader reader = PM.Data.ReportSetting.FindReportSettingByUserId(settingname, userid, orgid);
+           if (reader.Read()) {
+               PM.Data.ReportSetting.DeleteReportSettingByUserId(settingname, userid, orgid);
+           }
 
-            //重新保存设置
+            //保存报表设置
             bool ret = true;
             foreach (var item in list) {
                 ret = PM.Data.ReportSetting.CreateReportSetting(item);
