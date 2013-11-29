@@ -208,6 +208,8 @@ $(function () {
         $.each($("#CreateSettingNameList li"), function (index, obj) {
             if (index == 0) {
                 defSettingName = $.trim($(this).text());
+                //给隐藏域赋值：
+                $('[id$=hdnSettingName]').val(defSettingName);
                 return;
             }
         });
@@ -221,6 +223,7 @@ $(function () {
     */
     $("#CreateSettingNameList li").click(function () {
         var settingName = $(this).text();
+        $('[id$=hdnSettingName]').val(settingName);
         CreateCustomReport(settingName);
     });
 
