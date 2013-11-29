@@ -59,7 +59,7 @@ $(function () {
         initSettings();
     } else if (path == '/report/month.aspx') {
         $reportrows = $("[id*=gvMonthReport] tr");
-        for (var j = 1; i < $reportrows.length; j++) {
+        for (var j = 1; j < $reportrows.length; j++) {
             $($reportrows[j]).find("td").eq(0).attr("width", "100px");
             $($reportrows[j]).find("td").eq(0).text(new Date($($reportrows[j]).find("td").eq(0).text()).toString('yyyy-MM'));
         }
