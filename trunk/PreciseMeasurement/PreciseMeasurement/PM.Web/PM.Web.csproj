@@ -126,6 +126,7 @@
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\customizer.js" />
     <Content Include="assets\js\date.js" />
+    <Content Include="assets\js\editParamters.js" />
     <Content Include="assets\js\filesaver.js" />
     <Content Include="assets\js\holder.js" />
     <Content Include="assets\js\html5shiv.js" />
@@ -273,6 +274,9 @@
     </Compile>
     <Compile Include="admin\measurepoints\paramters.aspx.designer.cs">
       <DependentUpon>paramters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\measurepoints\SaveMeasurePointParamInfo.ashx.cs">
+      <DependentUpon>SaveMeasurePointParamInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="admin\measurereplace\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
@@ -564,6 +568,7 @@
     <Content Include="analysis\MeasurementHistoryData.ashx" />
     <Content Include="analysis\HandlerAnalyzeSetting.ashx" />
     <Content Include="analysis\GetAnalyzeSettings.ashx" />
+    <Content Include="admin\measurepoints\SaveMeasurePointParamInfo.ashx" />
     <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
