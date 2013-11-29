@@ -27,15 +27,29 @@ namespace PM.Web.admin.measurepoints
                 }
                 BindData(pointnum);
 
-                btnBack.NavigateUrl = "edit.aspx?id="+ keyId;
+               // btnBack.NavigateUrl = "edit.aspx?id="+ keyId;
             }
         }
 
         private void SetPointDescrption(long id) {
             if (id <= 0)
                 return;
+            //绑定计量点数据源
+            ddlPointNum.DataSource = MeasurePoint.FindMeasurePointAndLocation();
+            ddlPointNum.DataTextField = "description";
+            ddlPointNum.DataValueField = "pointnum";
+            ddlPointNum.DataBind();
+
+            //绑定参量数据
+            ddlMeasureUnitId.DataSource = MeasureUnit.FindAllMeasureUnitListDataTable();
+            ddlMeasureUnitId.DataTextField = "description";
+            ddlMeasureUnitId.DataValueField = "measureunitid";
+            ddlMeasureUnitId.DataBind();
+
             MeasurePointInfo pointInfo = MeasurePoint.GetMeasurePointInfo(id);
             ltPointName.Text = pointInfo.Description;
+            //设置当前选择的计量点
+            ddlPointNum.SelectedValue = pointInfo.Pointnum;
         }
 
         private void BindData(string pointnum)
