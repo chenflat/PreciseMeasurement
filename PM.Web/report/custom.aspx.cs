@@ -77,12 +77,15 @@ namespace PM.Web.report
                     sb.Append(",");
                 sb.Append(info.Pointnum);
             }
+            //获取开始和结束日期
             string m_startdate, m_enddate;
             m_startdate = startdate.Text.Trim();
             m_enddate = enddate.Text.Trim();
             
+            //获取结果集
             DataTable table = Data.Measurement.GetMeasurementCustomReport(sb.ToString(), m_startdate, m_enddate, ReportType.Day, "");
 
+            //定义导出文件名称和创建Excel文件
             string fileName = "自定义报表_" + DateTime.Now.ToString("yyyyMMdd");
             ExcelHelper.CreateExcel(table, fileName);
 
