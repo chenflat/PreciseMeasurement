@@ -50,17 +50,19 @@ $(function () {
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM-dd'));
     }
 
-    var $reportrows2 = $("[id*=gvMonthReport] tr");
-    for (var j = 1; i < $reportrows.length; j++) {
-        $($reportrows2[j]).find("td").eq(0).attr("width", "100px");
-        $($reportrows2[j]).find("td").eq(0).text(new Date($($reportrows2[j]).find("td").eq(0).text()).toString('yyyy-MM'));
-    }
+   
 
     var path = window.location.pathname;
     if (path == '/report/custom.aspx') {
         $('[id$=btnExport]').attr({"disabled":true})
 
         initSettings();
+    } else if (path == '/report/month.aspx') {
+        $reportrows = $("[id*=gvMonthReport] tr");
+        for (var j = 1; i < $reportrows.length; j++) {
+            $($reportrows[j]).find("td").eq(0).attr("width", "100px");
+            $($reportrows[j]).find("td").eq(0).text(new Date($($reportrows[j]).find("td").eq(0).text()).toString('yyyy-MM'));
+        }
     }
 
     //初始化设置
