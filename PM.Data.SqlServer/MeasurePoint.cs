@@ -267,10 +267,10 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@UPPERACTION", (DbType)SqlDbType.VarChar, 8, paramInfo.Upperaction),
                                   DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum)
                                  };
-            string commandText = string.Format("UPDATE [{0}MEASUREPOINTPARAM] SET [POINTNUM]=@POINTNUM,"
-                                + "[MEASUREUNITID]=@MEASUREUNITID,LOWERWARNING=@LOWERWARNING,[LOWERACTION]=@LOWERACTION,"
+            string commandText = string.Format("UPDATE [{0}MEASUREPOINTPARAM] SET "
+                                + "LOWERWARNING=@LOWERWARNING,[LOWERACTION]=@LOWERACTION,"
                                 + "[LLPMNUM]=@LLPMNUM,[LLPRIORITY]=@LLPRIORITY,[UPPERWARNING]=@UPPERWARNING,"
-                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM", BaseConfigs.GetTablePrefix);
+                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM where MEASUREPOINTPARAMUID=@MEASUREPOINTPARAMUID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
 
         }
