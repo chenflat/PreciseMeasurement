@@ -49,7 +49,7 @@
               </div>
                 
                 <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
-                <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
+                <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>
                 
             </div>

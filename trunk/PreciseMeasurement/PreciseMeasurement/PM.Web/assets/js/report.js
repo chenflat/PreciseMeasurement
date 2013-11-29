@@ -58,11 +58,14 @@ $(function () {
 
     var path = window.location.pathname;
     if (path == '/report/custom.aspx') {
+        $('[id$=btnExport]').attr({"disabled":true})
+
         initSettings();
     }
 
     //初始化设置
     function initSettings() {
+
     }
 
     /**
@@ -224,6 +227,8 @@ $(function () {
     $("#CreateSettingNameList li").click(function () {
         var settingName = $(this).text();
         $('[id$=hdnSettingName]').val(settingName);
+        $('[id$=btnExport]').attr("disabled", false);
+
         CreateCustomReport(settingName);
     });
 
