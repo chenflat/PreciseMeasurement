@@ -42,6 +42,8 @@ namespace PM.Web
            // object share = PM.Business.RealtimeDataProvider.GetShareInstance();
             //share.GetRealData("");
 
+            ltMessage.Text = "";
+
             object data = RealtimeData.GetRealtimeData("13912345670");
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string ret = javaScriptSerializer.Serialize(data);

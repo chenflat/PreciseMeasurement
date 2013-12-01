@@ -19,11 +19,11 @@ $(function () {
         if(devicenum!="" && typeof(devicenum)!='undefined') {
             $.getJSON('../services/GetRealtimeMeasurement.ashx',{"devicenum":devicenum},function(data){
                 if(data!=null) {
-                    $AiDensity.text(data.AI_Density);
-                    $SWTemperature.text(data.SW_Temperature);
-                    $AFFlowInstant.text(data.AF_FlowInstant);
-                    $SWPressure.text(data.SW_Pressure);
-                    $ATFlow.text(data.AT_Flow);
+                    $AiDensity.text(isNaN(data.AI_Density)?data.AI_Density.substr(0,data.AI_Density.indexOf(".")+2) : data.AI_Density);  
+                    $SWTemperature.text(isNaN(data.SW_Temperature)?data.SW_Temperature.substr(0,data.SW_Temperature.indexOf(".")+2) : data.SW_Temperature);
+                    $AFFlowInstant.text(isNaN(data.AF_FlowInstant)?data.AF_FlowInstant.substr(0,data.AF_FlowInstant.indexOf(".")+2) : data.AF_FlowInstant);
+                    $SWPressure.text(isNaN(data.SW_Pressure)?data.SW_Pressure.substr(0,data.SW_Pressure.indexOf(".")+2) : data.SW_Pressure);
+                    $ATFlow.text(isNaN(data.AT_Flow)?data.AT_Flow.substr(0,data.AT_Flow.indexOf(".")+2) : data.AT_Flow);
                 }
             });
         }

@@ -57,20 +57,35 @@ namespace PM.Web.realtime
             //获取层级对应的计量点数据
             Dictionary<string, List<MeasurePointInfo>> result = new Dictionary<string, List<MeasurePointInfo>>();
 
-            int i = 0;
-            foreach (KeyValuePair<int, string> pair in levels)
-            {
-                int level = pair.Key;
-                string key = pair.Value;
-
+            for (int i = 1; i < 6; i++) {
+                int level = i;
                 List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, orgid, siteid);
-                if (i == 0 && measurepointid<0)
-                {
+
+                //默认第一条
+                if (i == 1 && measurepointid < 0) {
                     measurepointid = listByLevel.Count > 0 ? listByLevel[0].Measurepointid : -1;
                 }
-                result.Add(key, listByLevel);
-                i++;
+
+                if (listByLevel.Count > 0) {
+                    result.Add(level.ToString() + "级", listByLevel);
+                }
             }
+
+
+            
+            //foreach (KeyValuePair<int, string> pair in levels)
+            //{
+            //    int level = pair.Key;
+            //    string key = pair.Value;
+
+            //    List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, orgid, siteid);
+            //    if (i == 0 && measurepointid<0)
+            //    {
+            //        measurepointid = listByLevel.Count > 0 ? listByLevel[0].Measurepointid : -1;
+            //    }
+            //    result.Add(key, listByLevel);
+            //    i++;
+            //}
 
             //层级计量点列表
             measurePointList = result;

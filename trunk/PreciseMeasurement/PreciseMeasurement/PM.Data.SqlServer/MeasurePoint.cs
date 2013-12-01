@@ -72,8 +72,7 @@ namespace PM.Data.SqlServer
                                     };
 
 
-            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] LEFT OUTER JOIN [{0}LOCHIERARCHY] " +
-                " ON [{0}MEASUREPOINT].LOCATION=[{0}LOCHIERARCHY].LOCATION WHERE [{0}LOCHIERARCHY].LEVEL=@LEVEL " +
+            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] WHERE LEVEL=@LEVEL " +
                 " and isnull([{0}MEASUREPOINT].orgid,'')=@ORGID and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
                 BaseConfigs.GetTablePrefix);
 
@@ -100,7 +99,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
                                   DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
                                   DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status),
-                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 12, measurePointInfo.Level),
+                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, measurePointInfo.Level),
                                   DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
                                   DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
                                   DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
@@ -161,7 +160,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@SUPERVISOR", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Supervisor),
                                   DbHelper.MakeInParam("@PHONE", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Phone),
                                   DbHelper.MakeInParam("@STATUS", (DbType)SqlDbType.VarChar, 12, measurePointInfo.Status),
-                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 12, measurePointInfo.Level),
+                                  DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, measurePointInfo.Level),
                                   DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
                                   DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
                                   DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
