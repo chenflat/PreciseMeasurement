@@ -9,6 +9,7 @@ using PM.Common;
 using PM.Business;
 using PM.Entity;
 using PM.Business.Pages;
+using System.Web.Script.Serialization;
 
 namespace PM.Web
 {
@@ -33,6 +34,27 @@ namespace PM.Web
         protected void Button3_Click(object sender, EventArgs e)
         {
             Measurement.CreateMeasurementStatData(ReportType.Month);
+        }
+
+        protected void Button4_Click(object sender, EventArgs e) {
+           // RealtimeData.LoadDll();
+
+           // object share = PM.Business.RealtimeDataProvider.GetShareInstance();
+            //share.GetRealData("");
+
+            object data = RealtimeData.GetRealtimeData("13912345670");
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string ret = javaScriptSerializer.Serialize(data);
+            Console.Write(ret);
+
+            ltMessage.Text = ret;
+
+
+            object data1 = RealtimeData.GetRealtimeData("13912095330");
+
+            string ret1 = javaScriptSerializer.Serialize(data1);
+            Console.Write(ret1);
+            ltMessage.Text += ret1;
         }
     }
 }

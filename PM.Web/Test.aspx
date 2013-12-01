@@ -16,6 +16,9 @@
         <asp:Button ID="Button3" runat="server"  Text="MONTH DATA" 
             onclick="Button3_Click" />
     
+        <asp:Button ID="Button4" runat="server" onclick="Button4_Click" 
+            Text="RealtimeData" />
+        <asp:Literal ID="ltMessage" runat="server"></asp:Literal>
     </div>
     </form>
 </body>

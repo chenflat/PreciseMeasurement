@@ -33,9 +33,8 @@ namespace PM.Web.services
             //如果设备编号不为空设置，返回指定设置的实时数据，否则返回所有计量点的实时数据
             if (devicenum!="")
             {
-                Share share = new Share();
-                devvalue realvalue = share.GetRealData(devicenum);
-                result = javaScriptSerializer.Serialize(realvalue);
+                object data = PM.Business.RealtimeData.GetRealtimeData(devicenum);
+                result = javaScriptSerializer.Serialize(data);
             }
             else { 
                 //获取所有测点的实时数据
