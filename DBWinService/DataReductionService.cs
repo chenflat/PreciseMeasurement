@@ -45,21 +45,6 @@ namespace DBWinService {
             Thread t = new Thread(new ThreadStart(this.InitTimer));
             t.Start();
 
-
-            //try {
-
-            //    EventLog.WriteEntry("启动计量器监测系统数据整理服务");
-            //    timer1 = new System.Timers.Timer();
-            //    this.timer1.Interval = Convert.ToDouble(1000);
-            //    //this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
-            //    timer1.AutoReset = true;
-            //    timer1.Enabled = true;
-
-            //} catch (Exception ex) {
-
-            //    EventLog.WriteEntry("启动计量器监测系统数据整理服务异常："+ ex);
-            //    throw;
-            //}   
         }
 
 
@@ -67,8 +52,9 @@ namespace DBWinService {
 
             timer = new System.Timers.Timer();
             timer.Elapsed += new ElapsedEventHandler(timer_Tick);
-            double timeInSeconds = 5.0;
-            timer.Interval = (timeInSeconds * 1000);
+           // double timeInSeconds = 5.0;
+            //每30分钟整理一次
+            timer.Interval = (30 * 60 * 1000);
             timer.Enabled = true;
         }
 
@@ -91,19 +77,19 @@ namespace DBWinService {
 
 
             //从配置文件中读取更新日期
-            var updateTime = ConfigurationManager.AppSettings["UpdateTime"].ToString();
-            if (updateTime == null || updateTime == "") {
-                updateTime = "02:00";
-            }
+           // var updateTime = ConfigurationManager.AppSettings["UpdateTime"].ToString();
+          //  if (updateTime == null || updateTime == "") {
+            //    updateTime = "02:00";
+            //}
             //当前时间
-            string currentTime = e.SignalTime.ToString("HH:mm");
+           // string currentTime = e.SignalTime.ToString("HH:mm");
 
             //比较时间，如果时间相等，则开始定时执行
-            bool isExecute = (updateTime == currentTime);
+            //bool isExecute = (updateTime == currentTime);
         
 
             //定时设置,判断分时秒,每天 定时执行
-            if (isExecute) {
+           // if (isExecute) {
                 //执行内容
                 try {
                     System.Timers.Timer tt = (System.Timers.Timer)sender;
@@ -122,7 +108,7 @@ namespace DBWinService {
                 } catch (Exception err) {
                     EventLog.WriteEntry("执行数据整理服务异常：" + err, EventLogEntryType.Error);
                 }
-            }
+            //}
 
         }
 
