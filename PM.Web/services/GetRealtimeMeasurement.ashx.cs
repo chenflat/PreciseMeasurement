@@ -7,12 +7,18 @@ using System.Text.RegularExpressions;
 using PM.Common;
 using System.Reflection;
 
+using log4net;
+using log4net.Config;
 
 namespace PM.Web.services {
     /// <summary>
     /// 获取实时计量数据
     /// </summary>
     public class GetRealtimeMeasurement : IHttpHandler {
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(GetRealtimeMeasurement));
+
+
         /// <summary>
         /// 处理请求
         /// </summary>
@@ -28,7 +34,14 @@ namespace PM.Web.services {
             string result = "";
             //如果设备编号不为空设置，返回指定设置的实时数据，否则返回所有计量点的实时数据
             if (devicenum != "") {
-                object data = PM.Business.RealtimeData.GetRealtimeData(devicenum);
+                object data = null;
+                try {
+                    data = PM.Business.RealtimeData.GetRealtimeData(devicenum);
+                }
+                catch (Exception ex) {
+                    log.Error(ex);
+                }
+               
                 result = javaScriptSerializer.Serialize(data);
             }
             else {
