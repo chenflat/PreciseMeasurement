@@ -28,6 +28,12 @@ $(function () {
         $(this).parent().hide();
     });
 
+    //刷新数据
+    $("#refreshData").click(function () {
+
+        getRealData();
+    });
+
     /**
     * 关闭或显示时间数据表格
     */

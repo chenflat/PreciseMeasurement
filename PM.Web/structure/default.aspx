@@ -20,7 +20,7 @@
 <tr style="vertical-align:top">
     <td>
      <div class="structure pull-left" id="structure">
-        <div id="refresh"> <img src="../assets/img/refresh.png" /> <span id="counter">60</span>秒后刷新</div>
+        <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
             <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" ><div class="left"><%# Eval("Pointnum") %></div></div>
