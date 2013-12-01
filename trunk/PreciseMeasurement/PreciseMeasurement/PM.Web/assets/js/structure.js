@@ -65,6 +65,7 @@ $(function () {
         $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": "" }, function (data) {
             //设置计量点数值
             $.each(data, function (index, obj) {
+
                 content += "<tr><td>" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
                 content += "<td>" + obj.SwPressure + "</td>"
