@@ -116,6 +116,7 @@ namespace PM.Data
             measurePointInfo.Carrier = reader["CARRIER"].ToString();
             measurePointInfo.Supervisor = reader["SUPERVISOR"].ToString();
             measurePointInfo.Phone = reader["PHONE"].ToString();
+            measurePointInfo.Level = TypeConverter.ObjectToInt(reader["LEVEL"]);
             measurePointInfo.X = Utils.ContainsField(reader, "X") ? reader["X"].ToString() : "";
             measurePointInfo.Y = Utils.ContainsField(reader, "Y") ? reader["Y"].ToString() : "";
             measurePointInfo.Z = Utils.ContainsField(reader, "Z") ? reader["Z"].ToString() : "";
