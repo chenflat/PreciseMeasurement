@@ -9,6 +9,8 @@ using PM.Business.Pages;
 using PM.Business;
 using PM.Config;
 
+using log4net;
+
 namespace PM.Web
 {
     public class Global : System.Web.HttpApplication
@@ -28,13 +30,18 @@ namespace PM.Web
 
         void Application_Error(object sender, EventArgs e)
         {
+
+            log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
             // 在出现未处理的错误时运行的代码
             Exception objErr = Server.GetLastError().GetBaseException();
             string error = "<br />发生异常页: " + System.Web.HttpContext.Current.Request.Url.ToString() + "<br />";
             error += "异常信息: " + objErr.Message + "<br />";
             //写入错误到日志文件
             BasePage bg = new BasePage();
-            
+
+            logger.Error(objErr.Message, objErr);
+
             Server.ClearError();
             Application["error"] = error;
 

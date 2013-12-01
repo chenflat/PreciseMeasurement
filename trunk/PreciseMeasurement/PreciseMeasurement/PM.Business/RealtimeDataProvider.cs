@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
+using log4net;
+using log4net.Config;
+
 namespace PM.Business {
     public class RealtimeDataProvider {
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(RealtimeDataProvider));
 
         private static object  _share = null;
         private static object _devvalue = null;
@@ -39,9 +44,9 @@ namespace PM.Business {
                     }
                 }
             }
-            catch (Exception) {
-
-                throw;
+            catch (Exception ex) {
+                log.Error(ex);
+                throw ex;
             }
            
         }
