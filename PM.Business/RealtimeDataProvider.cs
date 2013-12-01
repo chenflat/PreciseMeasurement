@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
-using ShareData;
 
 namespace PM.Business {
     public class RealtimeDataProvider {
