@@ -14,17 +14,17 @@ namespace DBWinService {
 
             try {
 
-//#if (!DEBUG)
+#if (!DEBUG)
                 ServiceBase[] ServicesToRun;
                 ServicesToRun = new ServiceBase[] { 
 				     new DataReductionService() 
                 };
                 ServiceBase.Run(ServicesToRun);
-//#else
-                //DataReductionService myservice = new DataReductionService();
-                //myservice.OnDebug();
-               // System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-//#endif
+#else
+                DataReductionService myservice = new DataReductionService();
+                myservice.OnDebug();
+                System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+#endif
 
 
             } catch (Exception ex) {

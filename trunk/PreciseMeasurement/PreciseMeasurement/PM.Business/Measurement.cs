@@ -258,7 +258,7 @@ namespace PM.Business
 
                 //判断开始日期，如果没有开始日期，则在原始记录表中查询
                 if (dtStarttime == DateTime.MinValue) {
-                    dtStarttime = Data.Measurement.GetFirstMeasurement(curPointnum).Measuretime;
+                    dtStarttime = Data.Measurement.GetFirstMeasurtimeByPointNum(curPointnum);
                 }
 
                 //如果原始记录表没有未找开始日期，则跳过此计量点，继续执行下一条记录
@@ -270,7 +270,7 @@ namespace PM.Business
                 //结束时间，如果没有指定结束日期，则为当前日期(零点零分零秒)
                 DateTime dtEndtime;
                 if (enddate == "" || enddate == null) {
-                    enddate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+                    enddate = DateTime.Now.ToString("yyyy-MM-dd HH:00:00");
                     dtEndtime = DateTime.Parse(enddate);
                 }
                 else {

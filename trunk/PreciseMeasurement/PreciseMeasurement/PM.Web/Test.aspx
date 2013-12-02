@@ -20,6 +20,8 @@
             Text="RealtimeData" />
         <asp:Literal ID="ltMessage" runat="server"></asp:Literal>
     </div>
+    <asp:Button ID="Button5" runat="server" onclick="Button5_Click" 
+        Text="FindFirstMeasurement" />
     </form>
 </body>
 </html>

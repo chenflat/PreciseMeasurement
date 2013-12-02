@@ -58,5 +58,9 @@ namespace PM.Web
             Console.Write(ret1);
             ltMessage.Text += ret1;
         }
+
+        protected void Button5_Click(object sender, EventArgs e) {
+          MeasurementInfo info =  Data.Measurement.GetFirstMeasurement("S3");
+        }
     }
 }
