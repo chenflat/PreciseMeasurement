@@ -385,10 +385,10 @@ function initQueryDate () {
     var $enddate = $(".enddate");
 
     if ($startdate.val() == '') {
-        $enddate.val(Date.today().addDays(-1).toString("yyyy-MM-dd"));
+        $enddate.val(Date.today().toString("yyyy-MM-dd"));
         $startdate.val(Date.today().addDays(-8).toString("yyyy-MM-dd"));
     }
-
+    getAllReportData(1);
 }
 
 /**

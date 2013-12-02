@@ -72,7 +72,7 @@ $(function () {
     //每天数据
 
     $(".day .startdate").val(Date.today().add(-8).day().toString("yyyy-MM-dd"));
-    $(".day .enddate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+    $(".day .enddate").val(Date.today().toString("yyyy-MM-dd"));
 
     $(".day .startdate").click(function () {
 
@@ -248,7 +248,7 @@ $(function () {
     function initDayData() {
          var pointnum = $("#pointnum").val();
         var startdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
-        var endate = Date.today().add(-1).day().toString("yyyy-MM-dd");
+        var endate = Date.today().toString("yyyy-MM-dd");
         GetDayData(pointnum, startdate, endate, 1)
     }
     initDayData();
@@ -353,7 +353,7 @@ function OnSuccessForMinute(response) {
 
 //获取小时数据
 function GetHourData(pointnum, startdate, enddate, pageindex) {
-
+    enddate = enddate + " 23:59";
     $.ajax({
         type: "GET",
         url: "RealtimeParam.ashx",
@@ -406,7 +406,7 @@ function OnSuccessForHour(response) {
 
 //获取每天数据
 function GetDayData(pointnum, startdate, enddate, pageindex) {
-
+    enddate = new Date(enddate).add(1).day().toString();
     $.ajax({
         type: "GET",
         url: "RealtimeParam.ashx",
