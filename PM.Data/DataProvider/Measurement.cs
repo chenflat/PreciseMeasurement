@@ -35,11 +35,11 @@ namespace PM.Data
         {
 
             MeasurementInfo measurement = new MeasurementInfo();
-            IDataReader reader = FindLastMeasurement(pointnum);
-            if (reader.Read())
-            {
-                measurement = LoadMeasurementInfo(reader);
-                reader.Close();
+            using (IDataReader reader = FindLastMeasurement(pointnum)) {
+                if (reader.Read()) {
+                    measurement = LoadMeasurementInfo(reader);
+                    reader.Close();
+                }
             }
             return measurement;
 
@@ -62,10 +62,11 @@ namespace PM.Data
         public static MeasurementInfo GetFirstMeasurement(string pointnum) {
 
             MeasurementInfo measurement = new MeasurementInfo();
-            IDataReader reader = FindFirstMeasurement(pointnum);
-            if (reader.Read()) {
-                measurement = LoadMeasurementInfo(reader);
-                reader.Close();
+            using (IDataReader reader = FindFirstMeasurement(pointnum)) {
+                if (reader.Read()) {
+                    measurement = LoadMeasurementInfo(reader);
+                    reader.Close();
+                }
             }
             return measurement;
 
@@ -275,5 +276,23 @@ namespace PM.Data
             return time;
         }
 
+
+
+        /// <summary>
+        /// 获取指定测点的最后计量时间
+        /// </summary>
+        /// <param name="pointnum">计量点编号</param>
+        /// <param name="reportType">查询方式</param>
+        /// <returns></returns>
+        public static DateTime GetFirstMeasurtimeByPointNum(string pointnum) {
+
+            IDataReader reader = DatabaseProvider.GetInstance().FindFirstMeasurement(pointnum);
+            DateTime time = new DateTime();
+            if (reader.Read()) {
+                time = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));
+                reader.Close();
+            }
+            return time;
+        }
     }
 }

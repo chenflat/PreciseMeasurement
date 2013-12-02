@@ -36,11 +36,9 @@ namespace PM.Data.SqlServer
        /// <returns></returns>
        public IDataReader FindFirstMeasurement(string pointnum) {
 
-           DbParameter param = DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, pointnum);
+           string commandText = string.Format("SELECT TOP 1 * FROM [{0}MEASUREMENT] WHERE POINTNUM='{1}' ORDER BY MEASUREMENTID ASC", BaseConfigs.GetTablePrefix, pointnum);
 
-           string commandText = string.Format("SELECT TOP 1 * FROM [{0}MEASUREMENT] WHERE POINTNUM=@POINTNUM ORDER BY MEASUREMENTID ASC", BaseConfigs.GetTablePrefix);
-
-           return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+           return DbHelper.ExecuteReader(CommandType.Text, commandText);
        }
 
 
