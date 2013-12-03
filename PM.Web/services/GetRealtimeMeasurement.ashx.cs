@@ -50,14 +50,19 @@ namespace PM.Web.services {
                 List<MeasurementInfo> measurements = new List<MeasurementInfo>();
                 foreach (var item in points) {
                     devicenum = item.Devicenum;
-                    if (devicenum == "") devicenum = item.Cardnum;
+                    
                     //获取数据并写入测量值列表中
-
                     MeasurementInfo measurementInfo = new MeasurementInfo();
                     measurementInfo.Pointnum = item.Pointnum;
-                    measurementInfo.DeviceNum = item.Cardnum;
+                    measurementInfo.DeviceNum = item.Devicenum;
                     measurementInfo.Description = item.Description;
 
+                    //如果未设置设备编号，则继续下一条
+                    if (devicenum == "") {
+                        measurementInfo.Measuretime = DateTime.Now;
+                        measurements.Add(measurementInfo);
+                        continue;
+                    }
 
                     try {
                         object obj = PM.Business.RealtimeData.GetRealtimeData(devicenum);

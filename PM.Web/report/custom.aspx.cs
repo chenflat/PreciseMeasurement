@@ -40,23 +40,19 @@ namespace PM.Web.report
         private void BindMeasurePointData()
         {
             //获取所有层级
-            Dictionary<int, string> levels = Business.Locations.GetLevels(AdminInfo.Orgid, siteid);
+            Dictionary<int, string> levels = Business.Locations.GetLevels(orgid, siteid);
 
             //获取层级对应的计量点数据
             Dictionary<string, List<MeasurePointInfo>> result = new Dictionary<string, List<MeasurePointInfo>>();
 
-            int i = 0;
-            foreach (KeyValuePair<int, string> pair in levels)
-            {
-                int level = pair.Key;
-                string key = pair.Value;
+            for (int i = 1; i < 6; i++) {
+                int level = i;
+                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, orgid, siteid);
 
-                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, AdminInfo.Orgid, siteid);
-
-                result.Add(key, listByLevel);
-                i++;
+                if (listByLevel.Count > 0) {
+                    result.Add(level.ToString() + "级", listByLevel);
+                }
             }
-
             //层级计量点列表
             measurePointList = result;
         }
