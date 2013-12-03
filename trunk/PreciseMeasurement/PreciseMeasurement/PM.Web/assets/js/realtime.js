@@ -374,8 +374,8 @@ function OnSuccessForHour(response) {
     if (measurements.length == 0)
         return;
 
-    var row = $("[id*=gvHourMeasurement] tr:last-child").clone(true);
-    $("[id*=gvHourMeasurement] tr").not($("[id*=gvHourMeasurement] tr:first-child")).remove();
+    var row = $("[id*=gvHourMeasurement] tbody tr:last-child").clone(true);
+    $("[id*=gvHourMeasurement] tbody tr").not($("[id*=gvHourMeasurement] tr:first-child")).remove();
 
 
     $.each(measurements, function (index, obj) {
