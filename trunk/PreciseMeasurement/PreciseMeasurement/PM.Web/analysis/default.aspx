@@ -70,6 +70,7 @@
                                 </div>
                                 <div class="panel-body bs-sidebar">
                                      <ul class="nav bs-sidenav" style="margin:0px;">
+    
                                     <%
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                                         { 

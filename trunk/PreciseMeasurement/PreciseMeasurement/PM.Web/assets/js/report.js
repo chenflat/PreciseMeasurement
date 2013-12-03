@@ -348,7 +348,7 @@ function OnFail(result) {
  * 处理报表数据
  */
 function OnSuccess(response) {
-    console.log(response);
+   // console.log(response);
     var measurements = response.List;
     if (measurements.length == 0)
         return;
