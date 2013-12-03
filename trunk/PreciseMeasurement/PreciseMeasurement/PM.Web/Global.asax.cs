@@ -36,7 +36,7 @@ namespace PM.Web
             // 在出现未处理的错误时运行的代码
             Exception objErr = Server.GetLastError().GetBaseException();
             string error = "<br />发生异常页: " + System.Web.HttpContext.Current.Request.Url.ToString() + "<br />";
-            error += "异常信息: " + objErr.Message + "<br />";
+            error += "异常信息: " + objErr.Message + "<br />或者您的登陆已过期，请重新登陆";
             //写入错误到日志文件
             BasePage bg = new BasePage();
 
