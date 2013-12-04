@@ -36,7 +36,7 @@
     <div class="row">
         <div class="bs-docs-section">
             <asp:GridView ID="gvAlarmData" runat="server" AllowPaging="True" 
-                AutoGenerateColumns="False" EnableModelValidation="True" CssClass="table table-striped">
+                AutoGenerateColumns="False" EnableModelValidation="True" CssClass="table table-bordered table-striped">
                 <Columns>
                     <asp:TemplateField HeaderText="报警类型">
                         <ItemTemplate>
