@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-      <asp:GridView ID="gvMonthReport" runat="server"  CssClass="table table-striped table-hover">
+      <asp:GridView ID="gvMonthReport" runat="server"  CssClass="table table-bordered table-striped table-hover">
         </asp:GridView>
 
 

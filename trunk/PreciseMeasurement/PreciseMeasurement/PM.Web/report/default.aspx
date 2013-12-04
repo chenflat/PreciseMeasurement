@@ -37,7 +37,7 @@
     </div>
     <div class="row">
     <asp:GridView ID="gvMeasurementReport" runat="server" AutoGenerateColumns="False" 
-            CssClass="table table-striped table-hover"  EnableModelValidation="True" 
+            CssClass="table table-bordered table-striped table-hover"  EnableModelValidation="True" 
             BorderStyle="None" BorderWidth="0px">
             <Columns>
                 <asp:BoundField DataField="DESCRIPTION" HeaderText="计量点" />
