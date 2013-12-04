@@ -10,7 +10,7 @@
          <input type="button" class="btn btn-info" id="btnHourQuery" value="查询" />
     </div>
     <div class="panel-body">
-        <asp:GridView ID="gvHourMeasurement" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover"
+        <asp:GridView ID="gvHourMeasurement" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover"
             EnableModelValidation="True" BorderStyle="None">
             <Columns>
                 <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />

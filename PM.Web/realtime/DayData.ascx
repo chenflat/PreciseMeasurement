@@ -11,7 +11,7 @@
           <button type="button" class="btn btn-info" id="btnDayQuery">查询</button>
     </div>
     <div class="panel-body">
-        <asp:GridView ID="gvDayMeasurement" runat="server" AutoGenerateColumns="False" CssClass="dayreport table table-striped table-hover"
+        <asp:GridView ID="gvDayMeasurement" runat="server" AutoGenerateColumns="False" CssClass="dayreport table table-bordered table-striped table-hover"
             EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="DESCRIPTION" HeaderText="计量点" />

@@ -14,7 +14,7 @@
     </div>
     <div class="panel-body">
         <asp:GridView ID="gvMinuteMeasurement" runat="server" 
-            AutoGenerateColumns="False" CssClass="minutereport table table-striped table-hover"
+            AutoGenerateColumns="False" CssClass="minutereport table table-bordered table-striped table-hover"
             EnableModelValidation="True" BorderStyle="None">
             <Columns>
                 <asp:BoundField DataField="MEASURETIME" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="采集时间" />
