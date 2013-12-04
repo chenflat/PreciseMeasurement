@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <asp:GridView ID="gvReport" runat="server" EnableModelValidation="True"  CssClass="table table-striped table-hover">
+        <asp:GridView ID="gvReport" runat="server" EnableModelValidation="True"  CssClass="table table-bordered table-striped table-hover">
         </asp:GridView>
 
     </div>
