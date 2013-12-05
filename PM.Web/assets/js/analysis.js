@@ -347,7 +347,13 @@ function GetChart(startdate, enddate, datetype) {
             title: {
                 text: obj.description + '曲线' + unit
             },
-            
+            legend: {
+                enabled:true,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
             xAxis: {
                 tickPixelInterval: 240, //x轴上的间隔  
                 type: 'datetime', //定义x轴上日期的显示格式  

@@ -47,29 +47,32 @@ $(function () {
         }
     });
 
+
+   
+    $(".bs-sidenav").empty();
+    
+    
+    var firstli = "";
+    var secondli = "";
      //第二次迭代,设置层级数据
-//     for(var j = 0;j<arrLevel;j++) {
-//        var arrLevel[j] = new Array();
-
-
-//     }
-
-
     $.each(arrLevel,function(j,level){
-        console.log(level);
-        level = new Array();
-//        $.each(data,function(i,obj){
-//            if(obj.level==level) {
-//                
-//            }
+        firstli += "<li class=\"\"><label class=\"tree-toggler nav-header\"><a href=\"#\">" +
+            level + "级</a></label>" +
+            "<ul class=\"nav tree\">";
+            var secondli = "";
+        $.each(data,function(i,obj){
+            if(obj.Level==level) {
+                //arrLevel[j].push(obj);
+                secondli +="<li><a href='?measurepointid='"+ obj.Measurepointid +">"+ obj.Description +"</a></li>";
 
-//        });
-//        
+            }
 
+        });
+        firstli +=secondli + "</ul></li>";
 
     });
 
-
+    $(".bs-sidenav").append(firstli);
    }
 
 
