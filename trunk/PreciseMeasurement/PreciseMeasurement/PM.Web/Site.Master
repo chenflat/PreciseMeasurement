@@ -66,7 +66,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-            <li><a href="<%=ResolveUrl("~/admin/organizations/list.aspx") %>">系统管理</a></li>
+            <li><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">系统管理</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Literal ID="ltUserName" runat="server"></asp:Literal> <b class="caret"></b></a>
               <ul class="dropdown-menu">

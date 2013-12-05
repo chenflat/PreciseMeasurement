@@ -174,9 +174,16 @@ namespace PM.Business
         /// <param name="orgid"></param>
         /// <param name="siteid"></param>
         /// <returns></returns>
-        public static List<MeasurePointInfo> FindMeasurePointByCarrier(string carrier, string orgid, string siteid) {
+        public static List<MeasurePointInfo> GetMeasurePointByType(string carrier,string pointnum, string orgid, string siteid) {
             //设置查询条件
-            string condition = string.Format(" and [MEASUREPOINT].[CARRIER]='{0}' and ISNULL([MEASUREPOINT].[ORGID],'')='{1}' AND ISNULL([MEASUREPOINT].[siteid],'')='{2}'", carrier, orgid, siteid);
+
+            string condition = string.Format(" and ISNULL([MEASUREPOINT].[ORGID],'')='{0}' AND ISNULL([MEASUREPOINT].[siteid],'')='{1}'", orgid, siteid);
+            if (!string.IsNullOrEmpty(carrier)) {
+                condition += string.Format(" and [MEASUREPOINT].[CARRIER]='{0}'",carrier);
+            }
+            if (!string.IsNullOrEmpty(pointnum)) {
+                condition += string.Format(" and ([MEASUREPOINT].[POINTNUM] like '%{0}%' or [MEASUREPOINT].[POINTCODE] like '%{0}%')", pointnum);
+            }
             DataTable table = Data.MeasurePoint.FindMeasurePointByCondition(condition);
             List<MeasurePointInfo> list = new List<MeasurePointInfo>();
 

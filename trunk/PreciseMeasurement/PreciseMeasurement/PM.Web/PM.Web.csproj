@@ -37,6 +37,9 @@
     <Reference Include="log4net">
       <HintPath>D:\Dropbox\项目共享文件\组件\log4net-1.2.13\bin\net\3.5\release\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:\Dropbox\计量项目\03 系统开发\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -512,6 +515,9 @@
     <Compile Include="report\week.aspx.designer.cs">
       <DependentUpon>week.aspx</DependentUpon>
     </Compile>
+    <Compile Include="services\GetAjaxData.ashx.cs">
+      <DependentUpon>GetAjaxData.ashx</DependentUpon>
+    </Compile>
     <Compile Include="services\GetAlarmlogs.ashx.cs">
       <DependentUpon>GetAlarmlogs.ashx</DependentUpon>
     </Compile>
@@ -593,6 +599,7 @@
     <Content Include="services\SaveMeasurePoint.ashx" />
     <Content Include="services\GetReportSetting.ashx" />
     <Content Include="services\SaveReportSetting.ashx" />
+    <Content Include="services\GetAjaxData.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

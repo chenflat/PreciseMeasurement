@@ -2,6 +2,79 @@
 
 $(function () {
 
+   $('label.tree-toggler').click(function () {
+		$(this).parent().children('ul.tree').toggle(300);
+   });
+
+   //获取设置类型
+   function GetType() {
+      var type = $("input[name='carrier']:checked").val();
+        if (type == '') { type = "汽"; }
+        return type;
+   }
+
+   //切换类型
+   $('input[name="carrier"]:radio').change(function () {
+        GetMeasurePointList($(this).val());
+   });
+
+   /**
+   * 获取测量点列表
+   * @param type 测点类型
+   */
+   function GetMeasurePointList(type) {
+       // console.log(type);
+
+        var url = "../services/GetAjaxData.ashx";
+        var params = {"funname":"GetMeasurePointList", "type" : type, "orgid" : ORGID};
+
+        $.getJSON(url,params,function(data){
+           // console.log(data);
+            CreateMeasurePointTreeList(data);
+        });
+   }
+
+
+   function CreateMeasurePointTreeList(data) {
+    
+    var arrLevel = [];
+
+    //第一次迭代,创建层级
+    $.each(data,function(i,obj){
+        var isExist = $.inArray(obj.Level, arrLevel) > -1;
+        if(!isExist) {
+            arrLevel.push(obj.Level);
+        }
+    });
+
+     //第二次迭代,设置层级数据
+//     for(var j = 0;j<arrLevel;j++) {
+//        var arrLevel[j] = new Array();
+
+
+//     }
+
+
+    $.each(arrLevel,function(j,level){
+        console.log(level);
+        level = new Array();
+//        $.each(data,function(i,obj){
+//            if(obj.level==level) {
+//                
+//            }
+
+//        });
+//        
+
+
+    });
+
+
+   }
+
+
+
+
     /**
     * 获取实时数据
     */
