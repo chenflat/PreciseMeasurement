@@ -20,7 +20,7 @@ namespace PM.Web.admin.organizations
             {
                // organizationInfoList = Organizations.GetOrganizationTreeList("");
 
-                rptOrganizations.DataSource = Organizations.GetOrganizationsList();
+                rptOrganizations.DataSource = Organizations.GetOrganizationTreeList("");
                 rptOrganizations.DataBind();
             }
         }

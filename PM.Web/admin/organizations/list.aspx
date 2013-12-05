@@ -33,7 +33,7 @@
     </HeaderTemplate>
     <ItemTemplate>
          
-        <tr class="treegrid-<%# Eval("ORGID")%> <%# (Eval("Parent").ToString()=="") ? "" : "treegrid-parent-"+ Eval("Parent") %>" >
+        <tr class="treegrid-<%# Eval("ORGID").ToString().ToLower()%> <%# (Eval("Parent").ToString()=="") ? "" : "treegrid-parent-"+ Eval("Parent").ToString().ToLower() %>" >
             <td><%# Eval("Description")%></td>
             <td><%# Eval("Orgtype")%></td>
             <td><%# Eval("Level")%></td>
