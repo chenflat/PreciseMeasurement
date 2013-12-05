@@ -330,11 +330,11 @@ function OnSuccessForMinute(response) {
     $.each(measurements, function (index, obj) {
        // console.log(obj);
         $("td", row).eq(0).html(Date.parse(obj.Time).toString("yyyy-MM-dd HH:mm"));
-        $("td", row).eq(1).html(obj.SwTemperature);
-        $("td", row).eq(2).html(obj.SwPressure);
-        $("td", row).eq(3).html(obj.AfFlowinstant);
-        $("td", row).eq(4).html(obj.AtFlow);
-        $("td", row).eq(5).html(obj.AiDensity);
+        $("td", row).eq(1).html((obj.SwTemperature).toFixed(1));
+        $("td", row).eq(2).html((obj.SwPressure).toFixed(3));
+        $("td", row).eq(3).html((obj.AfFlowinstant).toFixed(3));
+        $("td", row).eq(4).html((obj.AtFlow).toFixed(0));
+        $("td", row).eq(5).html((obj.AiDensity).toFixed(1));
 
         $("[id*=gvMinuteMeasurement]").append(row);
         row = $("[id*=gvMinuteMeasurement] tr:last-child").clone(true);
@@ -382,10 +382,10 @@ function OnSuccessForHour(response) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd HH:00"));
-        $("td", row).eq(2).html(obj.StartValue);
+        $("td", row).eq(2).html((obj.StartValue).toFixed(0));
         $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd HH:00"));
-        $("td", row).eq(4).html(obj.LastValue);
-        $("td", row).eq(5).html(obj.Value);
+        $("td", row).eq(4).html((obj.LastValue).toFixed(0));
+        $("td", row).eq(5).html((obj.Value).toFixed(0));
 
 
         $("[id*=gvHourMeasurement]").append(row);
@@ -435,10 +435,10 @@ function OnSuccessForDay(response) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd"));
-        $("td", row).eq(2).html(obj.StartValue);
+        $("td", row).eq(2).html((obj.StartValue).toFixed(0));
         $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd"));
-        $("td", row).eq(4).html(obj.LastValue);
-        $("td", row).eq(5).html(obj.Value);
+        $("td", row).eq(4).html((obj.LastValue).toFixed(0));
+        $("td", row).eq(5).html((obj.Value).toFixed(0));
 
         $("[id*=gvDayMeasurement]").append(row);
         row = $("[id*=gvDayMeasurement] tr:last-child").clone(true);
@@ -604,7 +604,8 @@ function OnSuccessHourChart(response){
 			        }]
 			    },
 			    tooltip: {
-			        valueSuffix: '°C'
+			        valueSuffix: '°C',
+                    valueDecimals : 1
 			    },
 			    legend: {
 			        enabled: false
@@ -614,10 +615,11 @@ function OnSuccessHourChart(response){
 			        data: arrSwtemperature
 			    }],
 			    plotOptions: {
-			        marker: {
-			            radius: 0.1,
-                        lineWidth:0.1
-			        }
+                    line: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
 			    },
 			    credits: {
 			        enabled: false
@@ -654,7 +656,8 @@ function OnSuccessHourChart(response){
 					}]
 				},
 				tooltip: {
-					valueSuffix: 'MPa'
+					valueSuffix: 'MPa',
+                    valueDecimals : 3
 				},
 				legend: {
 				    enabled: false
@@ -663,6 +666,13 @@ function OnSuccessHourChart(response){
 					name: '压力',
 					data: arrSwpressure
 				}],
+                plotOptions: {
+                    line: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+			    },
 	            credits: {
 	                enabled: false
 	            }
@@ -697,7 +707,8 @@ function OnSuccessHourChart(response){
 					}]
 				},
 				tooltip: {
-					valueSuffix: 't/h'
+					valueSuffix: 't/h',
+                    valueDecimals : 3
 				},
 				legend: {
 				    enabled: false
@@ -706,6 +717,13 @@ function OnSuccessHourChart(response){
 					name: '瞬时流量',
 					data: arrAfflowinstant
 				}],
+                plotOptions: {
+                    line: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+			    },
 	            credits: {
 	                enabled: false
 	            }
@@ -740,7 +758,8 @@ function OnSuccessHourChart(response){
 					}]
 				},
 				tooltip: {
-					valueSuffix: 'Hz'
+					valueSuffix: 'Hz',
+                    valueDecimals : 1
 				},
 				legend: {
 				    enabled: false
@@ -749,6 +768,13 @@ function OnSuccessHourChart(response){
 					name: '频率',
 					data: arrAiDensity
 				}],
+                plotOptions: {
+                    line: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+			    },
 	            credits: {
 	                enabled: false
 	            }
