@@ -162,7 +162,16 @@
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="assets\lib\My97DatePicker\WdatePicker.js" />
+    <Content Include="assets\lib\treegrid\css\jquery.treegrid.css" />
+    <Content Include="assets\lib\treegrid\img\collapse.png" />
+    <Content Include="assets\lib\treegrid\img\expand.png" />
+    <Content Include="assets\lib\treegrid\img\file.png" />
+    <Content Include="assets\lib\treegrid\img\folder.png" />
     <Content Include="assets\lib\treegrid\jquery.treegrid.js" />
+    <Content Include="assets\lib\treegrid\js\jquery.cookie.js" />
+    <Content Include="assets\lib\treegrid\js\jquery.treegrid.bootstrap2.js" />
+    <Content Include="assets\lib\treegrid\js\jquery.treegrid.bootstrap3.js" />
+    <Content Include="assets\lib\treegrid\js\jquery.treegrid.js" />
     <Content Include="controls\PageControl.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
