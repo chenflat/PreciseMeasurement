@@ -21,6 +21,7 @@ namespace PM.Entity
         private string phone;
         private string address;
         private string parent;
+        private long parentid;
 
         public long Organizationid
         {
@@ -78,6 +79,10 @@ namespace PM.Entity
             set { parent = value; }
         }
 
+        public long ParentId {
+            get { return parentid; }
+            set { parentid = value; }
+        }
 
         public bool isnew {
             get {

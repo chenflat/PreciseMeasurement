@@ -71,11 +71,10 @@ namespace PM.Business
             if (treeList == null) {
                 treeList = new List<OrganizationInfo>();
                 List<OrganizationInfo> listAll = GetOrganizationsList();
-                foreach (OrganizationInfo orginfo in listAll)
-                {
+                foreach (OrganizationInfo orginfo in listAll) {
                     if (orginfo.Parent.Equals("")) {
                         treeList.Add(orginfo);
-                        CreateOrganizationTree(listAll,orginfo.Orgid, prefix);
+                        CreateOrganizationTree(listAll, orginfo.Orgid, prefix);
                     }
                 }
                 

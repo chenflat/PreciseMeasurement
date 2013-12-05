@@ -2,10 +2,49 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.organizations.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+<link rel="stylesheet" href="<%=ResolveUrl("~/assets/lib/treegrid/jquery.treegrid.css") %>">
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/treegrid/jquery.treegrid.js") %>"></script>
         <div class="toolbar bs-callout-danger">
                 <a href="edit.aspx" class="btn btn-primary">新增</a>
         </div>
-        <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
+    <asp:Repeater ID="rptOrganizations" runat="server">
+    <HeaderTemplate>
+    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="tree table table-striped">
+            <tr>
+                <th width="20%">
+                    机构名称
+                </th>
+                <th width="20%">
+                    类型
+                </th>
+                <th width="20%">
+                    层级
+                </th>
+                <th width="20%">
+                    备注
+                </th>
+                <th width="20%">
+                    编辑
+                </th>
+            </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+         
+        <tr class="treegrid-<%# Eval("ORGID")%> <%# (Eval("Parent").ToString()=="") ? "" : "treegrid-parent-"+ Eval("Parent") %>" >
+            <td><%# Eval("Description")%></td>
+            <td><%# Eval("Orgtype")%></td>
+            <td><%# Eval("Level")%></td>
+            <td><%# Eval("Comments")%></td>
+            <td><a href="edit.aspx?id=<%# Eval("Organizationid") %>">编辑</a></td>
+        </tr>
+    </ItemTemplate>
+    <FooterTemplate>
+    </table>
+    </FooterTemplate>
+    </asp:Repeater>
+
+
+        <%--<table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
             <tr>
                 <th width="20%">
                     机构名称
@@ -55,5 +94,10 @@
                     </tr>
                     <%} %>
        
-        </table>
+        </table>--%>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.tree').treegrid();
+            });
+    </script>
 </asp:Content>
