@@ -38,7 +38,7 @@
       <HintPath>D:\Dropbox\项目共享文件\组件\log4net-1.2.13\bin\net\3.5\release\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>D:\Dropbox\计量项目\03 系统开发\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Dropbox\计量项目\03 系统开发\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -613,6 +613,10 @@
     <ProjectReference Include="..\PM.Config\PM.Config.csproj">
       <Project>{F0BAAC8E-982C-4EFE-88F9-9E1FE09BD73B}</Project>
       <Name>PM.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PM.Data.SqlServer\PM.Data.SqlServer.csproj">
+      <Project>{F1A79257-1179-45FD-8D90-4EB6AE4A16D0}</Project>
+      <Name>PM.Data.SqlServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PM.Data\PM.Data.csproj">
       <Project>{9BD3666B-7BE9-42C1-B316-BCD3CE52192C}</Project>
