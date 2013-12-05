@@ -2,14 +2,15 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.organizations.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-<link rel="stylesheet" href="<%=ResolveUrl("~/assets/lib/treegrid/jquery.treegrid.css") %>">
-<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/treegrid/jquery.treegrid.js") %>"></script>
+<link rel="stylesheet" href="<%=ResolveUrl("~/assets/lib/treegrid/css/jquery.treegrid.css") %>">
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/treegrid/js/jquery.treegrid.js") %>"></script>
         <div class="toolbar bs-callout-danger">
                 <a href="edit.aspx" class="btn btn-primary">新增</a>
         </div>
     <asp:Repeater ID="rptOrganizations" runat="server">
     <HeaderTemplate>
-    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="tree table table-striped">
+    <table width="100%" border="0" id="organizationtable" cellpadding="4" cellspacing="1" class="table table-striped">
+           <thead>
             <tr>
                 <th width="20%">
                     机构名称
@@ -27,6 +28,8 @@
                     编辑
                 </th>
             </tr>
+            </thead> 
+            <tbody>
     </HeaderTemplate>
     <ItemTemplate>
          
@@ -39,65 +42,13 @@
         </tr>
     </ItemTemplate>
     <FooterTemplate>
+    </tbody>
     </table>
     </FooterTemplate>
     </asp:Repeater>
-
-
-        <%--<table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
-            <tr>
-                <th width="20%">
-                    机构名称
-                </th>
-                <th width="20%">
-                    类型
-                </th>
-                <th width="20%">
-                    层级
-                </th>
-                <th width="20%">
-                    备注
-                </th>
-                <th width="20%">
-                    编辑
-                </th>
-            </tr>
-            <%if (organizationInfoList != null)
-                      {
-                          foreach (PM.Entity.OrganizationInfo item in organizationInfoList)
-                          {
-                              string kg = "";
-                              for (int i = 1; i < item.Level; i++) {
-                                  kg += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-                              }
-                              
-                    %>
-        <tr onmouseover="this.className='tdbgmouseover'; " onmouseout="this.className='tdbg'" class="tdbg">
-                        <td align="left">
-                           <%=kg %>
-                            <a href="edit.aspx?id=<%=item.Organizationid%>" ><%=item.Description%></a>
-                        </td>
-                        <td><%=item.Orgtype%></td>
-                         <td><%=item.Level%></td>
-                        <td align="left"><%=item.Comments%>
-                           </td>
-                        <td align="center">
-                            <a href="edit.aspx?id=<%=item.Organizationid%>">编辑</a>
-                        </td>
-                    </tr>
-                        <%}%>
-                    <%}
-                      else
-                      {%>
-                    <tr>
-                        <td>没有数据</td>
-                    </tr>
-                    <%} %>
-       
-        </table>--%>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('.tree').treegrid();
+                $('#organizationtable').treegrid();
             });
     </script>
 </asp:Content>
