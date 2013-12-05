@@ -26,6 +26,17 @@
     <div class="row">
         <div class="col-md-2 col-xs-4">
             <div class="bs-sidebar hidden-print affix-top" role="complementary">
+            <header class="bs-sidenav-header">
+                            <label>计量点</label>
+                            <input id="searchstationinput" class="radiuscorner" type="text" style="width: 80px;">
+                            <span id="spanType1" style="overflow: hidden;">
+                                <input id="radSteam1" type="radio" value="steam" name="stype1" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked" onchange="InitPage()">
+                                <label for="radSteam1" style="cursor: pointer;">汽</label>
+                                <input id="radWater1" type="radio" value="water" name="stype1" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" onchange="InitPage()">
+                                <label for="radWater1" style="cursor: pointer;">水</label>
+                            </span>
+                        
+                    </header>
                 <ul class="nav nav-list bs-sidenav">
                     <%
                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
