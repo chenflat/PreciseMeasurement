@@ -30,9 +30,9 @@
                             <label>计量点</label>
                             <input id="searchstationinput" class="radiuscorner" type="text" style="width: 80px;">
                             <span id="spanType1" style="overflow: hidden;">
-                                <input id="radSteam1" type="radio" value="steam" name="stype1" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked" onchange="InitPage()">
+                                <input id="radSteam1" type="radio" value="汽" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
                                 <label for="radSteam1" style="cursor: pointer;">汽</label>
-                                <input id="radWater1" type="radio" value="water" name="stype1" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" onchange="InitPage()">
+                                <input id="radWater1" type="radio" value="水" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radWater1" style="cursor: pointer;">水</label>
                             </span>
                         
@@ -42,9 +42,9 @@
                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                         { 
                     %>
-                    <li><a href="#">
-                        <%= pair.Key %></a>
-                        <ul class="nav">
+                    <li><label class="tree-toggler nav-header"><a href="#">
+                        <%= pair.Key %></a></label>
+                        <ul class="nav tree">
                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                {%>
                             <li <%  if(measurepointid==point.Measurepointid) Response.Write("class='active'"); %>><a href="?measurepointid=<%=point.Measurepointid %>">

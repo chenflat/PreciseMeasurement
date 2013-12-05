@@ -30,6 +30,9 @@ namespace PM.Web
 
         void Application_Error(object sender, EventArgs e)
         {
+            if(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType==typeof(PM.Web.Global)) {
+                return;
+            }
 
             log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

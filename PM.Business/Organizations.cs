@@ -16,7 +16,6 @@ namespace PM.Business
         private static List<OrganizationInfo> treeList = null;
 
 
-
         /// <summary>
         /// 获取所有机构
         /// </summary>
@@ -74,6 +73,8 @@ namespace PM.Business
                 foreach (OrganizationInfo orginfo in listAll) {
                     if (orginfo.Parent.Equals("")) {
                         treeList.Add(orginfo);
+                        if (orginfo.Orgid == "")
+                            continue;
                         CreateOrganizationTree(listAll, orginfo.Orgid, prefix);
                     }
                 }
@@ -90,15 +91,19 @@ namespace PM.Business
         /// <param name="orgid"></param>
         /// <param name="prefix"></param>
         public static void CreateOrganizationTree(List<OrganizationInfo> list,string orgid,string prefix) {
-            foreach (OrganizationInfo orginfo in list)
-            {
-                if (orginfo.Parent.Equals(orgid))
-                {
-                    orginfo.Description = prefix + orginfo.Description;
+
+            for (int i = 0; i < list.Count; i++) {
+                OrganizationInfo orginfo = list[i];
+                if (orginfo.Parent.Equals(orgid)) {
+                    string description = prefix + orginfo.Description;
+                    orginfo.Description = description;
                     treeList.Add(orginfo);
-                    CreateOrganizationTree(list, orginfo.Orgid, HttpUtility.HtmlDecode("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;") + prefix);
+                    string strPrefix = "";
+                    if (prefix.Length > 0) {
+                        strPrefix = HttpUtility.HtmlDecode("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;") + prefix;
+                    }
+                    CreateOrganizationTree(list, orginfo.Orgid, strPrefix);
                 }
-                
             }
         }
 
