@@ -18,7 +18,10 @@ namespace PM.Web.admin.organizations
         {
             if (!Page.IsPostBack)
             {
-                organizationInfoList = Organizations.GetOrganizationTreeList("");
+               // organizationInfoList = Organizations.GetOrganizationTreeList("");
+
+                rptOrganizations.DataSource = Organizations.GetOrganizationsList();
+                rptOrganizations.DataBind();
             }
         }
     }

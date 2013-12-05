@@ -166,5 +166,32 @@ namespace PM.Business
             }
             return list;
         }
+
+        /// <summary>
+        /// 获取指定类型的测点
+        /// </summary>
+        /// <param name="type">类型名称，如：汽，水</param>
+        /// <param name="orgid"></param>
+        /// <param name="siteid"></param>
+        /// <returns></returns>
+        public static List<MeasurePointInfo> FindMeasurePointByCarrier(string carrier, string orgid, string siteid) {
+            //设置查询条件
+            string condition = string.Format(" and [MEASUREPOINT].[CARRIER]='{0}' and ISNULL([MEASUREPOINT].[ORGID],'')='{1}' AND ISNULL([MEASUREPOINT].[siteid],'')='{2}'", carrier, orgid, siteid);
+            DataTable table = Data.MeasurePoint.FindMeasurePointByCondition(condition);
+            List<MeasurePointInfo> list = new List<MeasurePointInfo>();
+
+            //迭代数据
+            using (IDataReader reader = table.CreateDataReader()) {
+                while (reader.Read()) {
+
+                    MeasurePointInfo measurePointInfo = PM.Data.MeasurePoint.LoadMeasurePointInfo(reader);
+                    list.Add(measurePointInfo);
+                }
+                reader.Close();
+            }
+
+
+            return list;
+        }
     }
 }

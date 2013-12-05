@@ -162,6 +162,7 @@
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="assets\lib\My97DatePicker\WdatePicker.js" />
+    <Content Include="assets\lib\treegrid\jquery.treegrid.js" />
     <Content Include="controls\PageControl.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
