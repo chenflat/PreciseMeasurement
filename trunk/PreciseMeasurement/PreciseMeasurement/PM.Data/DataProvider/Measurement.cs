@@ -213,9 +213,9 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize)
         {
-            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate, type, pageindex, pagesize);
+            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate,level, type, pageindex, pagesize);
         }
 
         /// <summary>

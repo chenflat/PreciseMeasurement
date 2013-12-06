@@ -37,7 +37,7 @@ namespace PM.Web.realtime
                 return;
             ltDescription.Text = MeasurePointInfo.Description;
 
-            gvHourMeasurement.DataSource = Measurement.GetMeasurementByPointnum(MeasurePointInfo.Pointnum, m_startdate, m_enddate, "HOUR", 1, 12).List ;
+            gvHourMeasurement.DataSource = Measurement.GetMeasurementByPointnum(MeasurePointInfo.Pointnum, m_startdate, m_enddate,"", "HOUR", 1, 12).List ;
             gvHourMeasurement.DataBind();
 
         }

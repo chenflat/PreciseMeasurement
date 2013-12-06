@@ -471,7 +471,7 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize);
+        DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize);
 
         /// <summary>
         /// 获取指定时间内的的测量数据

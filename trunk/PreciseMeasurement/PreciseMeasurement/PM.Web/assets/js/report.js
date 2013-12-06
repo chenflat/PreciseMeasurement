@@ -323,6 +323,7 @@ $(function () {
 function getAllReportData(pageindex) {
     var startdate = $(".startdate").val();
     var enddate = $(".enddate").val();
+    var level = $(".level").val();
 
     var ds = new Date(startdate);
     var de = new Date(enddate);
@@ -334,7 +335,7 @@ function getAllReportData(pageindex) {
         url: "MeasurementReport.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "All" },
+        data: { "startdate": startdate, "enddate": enddate, "level": level, "pageindex": pageindex, "type": "All" },
         success: OnSuccess,
         error: OnFail
     });

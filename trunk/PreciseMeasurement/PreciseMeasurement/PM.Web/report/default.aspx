@@ -21,7 +21,7 @@
                 <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
-                级别：<asp:DropDownList ID="ddlLevel" runat="server">
+                级别：<asp:DropDownList ID="ddlLevel" runat="server" CssClass="level">
                      <asp:ListItem Value="">全部</asp:ListItem>
                      <asp:ListItem Value="1">一级</asp:ListItem>
                      <asp:ListItem Value="2">二级</asp:ListItem>
