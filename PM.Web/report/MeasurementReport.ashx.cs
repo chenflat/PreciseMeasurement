@@ -24,6 +24,7 @@ namespace PM.Web.report
             string m_pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"];
             string m_formula = context.Request["formula"] == null ? "" : context.Request["formula"];
             string m_startdate = context.Request["startdate"];
+            string m_level = context.Request["level"] == null ? "" : context.Request["level"];
             string m_enddate = context.Request["enddate"];
             string m_type = context.Request["type"];
             int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
@@ -61,7 +62,7 @@ namespace PM.Web.report
             {
                 if (m_type == "All")
                 {
-                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_type, pageindex, 12);
+                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate,m_level, m_type, pageindex, 12);
                     result = javaScriptSerializer.Serialize(pagination);
                 }
                 else

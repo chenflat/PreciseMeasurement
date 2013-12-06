@@ -115,12 +115,13 @@ namespace PM.Data.SqlServer
        /// <param name="pageindex">当前页</param>
        /// <param name="pagesize">每页显示数</param>
        /// <returns></returns>
-       public DataSet FindMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+       public DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize)
        {
            DbParameter[] parms = { 
                                  
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Level", (DbType)SqlDbType.VarChar, 30, level),
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, type), 
                                   DbHelper.MakeInParam("@PageIndex",(DbType)SqlDbType.Int,4,pageindex),
                                   DbHelper.MakeInParam("@PageSize",(DbType)SqlDbType.Int,4,pagesize),

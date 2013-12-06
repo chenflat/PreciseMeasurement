@@ -46,6 +46,7 @@ namespace PM.Web.report
 
             string m_startdate = startdate.Text.Trim();
             string m_enddate = enddate.Text.Trim();
+            string m_level = ddlLevel.SelectedValue;
             if (m_startdate == "")
             {
                 m_startdate = DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd");
@@ -55,7 +56,7 @@ namespace PM.Web.report
                 m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59";
             }
 
-            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate, "ALL", pageindex, pagesize).Tables[0];
+            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate,m_level, "ALL", pageindex, pagesize).Tables[0];
 
             return measurements;
         }
