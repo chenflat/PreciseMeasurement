@@ -115,13 +115,11 @@ namespace PM.Business
             DataSet ds = null;
             if (pointnum == "")
             {
-                ds = Data.Measurement.FindMeasurementByAllPoint(startdate, enddate,"", type, pageindex, pagesize);
+                ds = Data.Measurement.FindMeasurementByAllPoint(startdate, enddate,level, type, pageindex, pagesize);
             }
             else {
                 ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
             }
-
-            
 
             DataTable meassurement = ds.Tables["Measurement"];
 
