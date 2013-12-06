@@ -8,6 +8,10 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
+    <script language="javascript">
+        var USERID = "<%=userid %>";
+        var ORGID = "<%=orgid %>"; 
+     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
@@ -25,6 +29,13 @@
                     </asp:DropDownList>
                 </label>
                 &nbsp;
+                 级别：<asp:DropDownList ID="ddlLevel" runat="server">
+                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem Value="1">一级</asp:ListItem>
+                     <asp:ListItem Value="2">二级</asp:ListItem>
+                     <asp:ListItem Value="3">三级</asp:ListItem>
+                     <asp:ListItem Value="4">四级</asp:ListItem>
+                </asp:DropDownList>&nbsp;
                      <asp:Button ID="btnWeekQuery" runat="server" CssClass="btn btn-info" Text="周报查询" />
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>

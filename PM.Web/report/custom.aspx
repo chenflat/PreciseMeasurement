@@ -6,7 +6,7 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
-<script>
+<script language="javascript">
     var USERID = "<%=userid %>";
     var ORGID = "<%=orgid %>"; 
  </script>
@@ -19,8 +19,12 @@
                 <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
-                级别：<asp:DropDownList ID="status" runat="server">
-                    <asp:ListItem>全部</asp:ListItem>
+                级别：<asp:DropDownList ID="ddlLevel" runat="server">
+                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem Value="1">一级</asp:ListItem>
+                     <asp:ListItem Value="2">二级</asp:ListItem>
+                     <asp:ListItem Value="3">三级</asp:ListItem>
+                     <asp:ListItem Value="4">四级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
                 <div class="btn-group">
