@@ -426,9 +426,11 @@ body {
   position: static;
 }
 
+.tree-toggler {padding-left:10px;}
+
 .bs-sidenav-header {
     margin-top:30px;
-    padding:10px 0;
+    padding:10px;
     font-size:12px;
     font-weight:normal;   
     color: #999;    
@@ -483,7 +485,7 @@ body {
 .bs-sidebar .nav .nav > li > a {
   padding-top:    3px;
   padding-bottom: 3px;
-  padding-left: 30px;
+  padding-left: 20px;
   font-size: 90%;
 }
 
@@ -495,7 +497,7 @@ body {
   /* Widen the fixed sidebar */
   .bs-sidebar.affix,
   .bs-sidebar.affix-bottom {
-    width: 202px;
+    width: 222px;
   }
   .bs-sidebar.affix {
     position: fixed; /* Undo the static from mobile first approach */
