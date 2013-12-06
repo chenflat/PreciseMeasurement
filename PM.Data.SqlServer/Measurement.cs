@@ -202,11 +202,12 @@ namespace PM.Data.SqlServer
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-       public DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType)
+       public DataTable GetMeasurementReport(string startdate, string enddate,string level, ReportType reportType)
        {
            DbParameter[] parms = {                                
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
+                                  DbHelper.MakeInParam("@Level", (DbType)SqlDbType.VarChar, 30, level), 
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
                                   };
            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementReport", parms).Tables[0];

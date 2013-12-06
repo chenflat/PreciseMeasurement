@@ -36,7 +36,7 @@ namespace PM.Web.report
             m_enddate = txtYear.Text.Trim() + "-12-31";
 
             string fileName = "计量月报表_" + DateTime.Now.ToString("yyyyMM");
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, Entity.ReportType.Month);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Month);
             ExcelHelper.CreateExcel(table, fileName);
         }
 
@@ -51,7 +51,7 @@ namespace PM.Web.report
             m_enddate = txtYear.Text.Trim() + "-12-31";
 
 
-            gvMonthReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, Entity.ReportType.Month);
+            gvMonthReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Month);
             gvMonthReport.DataBind();
 
         }

@@ -42,13 +42,13 @@ namespace PM.Web.report
         private void btnExport_Click(object sender, EventArgs e)
         {
             string fileName = "计量日报表_" + DateTime.Now.ToString("yyyyMMdd");
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(), Entity.ReportType.Day);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
             ExcelHelper.CreateExcel(table, fileName);
         }
 
         private void BindData() {
 
-            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(), Entity.ReportType.Day);
+            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
             gvReport.DataBind();
 
         }
