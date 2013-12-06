@@ -8,6 +8,10 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
+<script language="javascript">
+    var USERID = "<%=userid %>";
+    var ORGID = "<%=orgid %>"; 
+ </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
@@ -17,12 +21,12 @@
                 <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
-                级别：<asp:DropDownList ID="status" runat="server">
-                    <asp:ListItem>全部</asp:ListItem>
-                     <asp:ListItem>1级</asp:ListItem>
-                     <asp:ListItem>2级</asp:ListItem>
-                     <asp:ListItem>3级</asp:ListItem>
-                     <asp:ListItem>4级</asp:ListItem>
+                级别：<asp:DropDownList ID="ddlLevel" runat="server">
+                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem Value="1">一级</asp:ListItem>
+                     <asp:ListItem Value="2">二级</asp:ListItem>
+                     <asp:ListItem Value="3">三级</asp:ListItem>
+                     <asp:ListItem Value="4">四级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
                 <button type="button" class="btn btn-info" id="btnQuery">查询</button>

@@ -6,6 +6,10 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
+<script language="javascript">
+    var USERID = "<%=userid %>";
+    var ORGID = "<%=orgid %>"; 
+ </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
@@ -14,8 +18,12 @@
                 年：
                 <asp:TextBox ID="txtYear" CssClass="Wdate year" runat="server"></asp:TextBox>
               
-                级别：<asp:DropDownList ID="status" runat="server">
-                    <asp:ListItem>全部</asp:ListItem>
+                级别：<asp:DropDownList ID="ddlLevel" runat="server">
+                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem Value="1">一级</asp:ListItem>
+                     <asp:ListItem Value="2">二级</asp:ListItem>
+                     <asp:ListItem Value="3">三级</asp:ListItem>
+                     <asp:ListItem Value="4">四级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
                 

@@ -22,13 +22,13 @@ namespace PM.Web.report {
         protected global::System.Web.UI.WebControls.TextBox txtYear;
         
         /// <summary>
-        /// status 控件。
+        /// ddlLevel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList status;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLevel;
         
         /// <summary>
         /// btnMonthQuery 控件。
