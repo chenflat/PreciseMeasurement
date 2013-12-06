@@ -62,5 +62,9 @@ namespace PM.Web
         protected void Button5_Click(object sender, EventArgs e) {
           MeasurementInfo info =  Data.Measurement.GetFirstMeasurement("S3");
         }
+
+        protected void Button6_Click(object sender, EventArgs e) {
+           System.IntPtr ptr = PM.Business.RealtimeDataInvoke.GetRealData("00000000004");
+        }
     }
 }

@@ -22,6 +22,8 @@
     </div>
     <asp:Button ID="Button5" runat="server" onclick="Button5_Click" 
         Text="FindFirstMeasurement" />
+    <asp:Button ID="Button6" runat="server" onclick="Button6_Click" 
+        Text="Invoke Share Data" />
     </form>
 </body>
 </html>
