@@ -169,9 +169,10 @@ namespace PM.Data
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        public static DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType) {
-            return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate, reportType);
+        public static DataTable GetMeasurementReport(string startdate, string enddate,string level,ReportType reportType) {
+            return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate,level, reportType);
         }
+
 
         /// <summary>
         /// 获取指定时间内的测量数据自定义报告

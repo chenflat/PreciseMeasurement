@@ -46,7 +46,7 @@ namespace PM.Web.report
             int days = weeks * 7;
             m_startdate = DateTime.Parse(m_enddate).AddDays(-days).ToString("yyyy-MM-dd");
 
-            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, Entity.ReportType.Week);
+            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Week);
             gvReport.DataBind();
         }
 
@@ -59,7 +59,7 @@ namespace PM.Web.report
 
             string fileName = "计量周报表_" + DateTime.Now.ToString("yyyyMMdd");
 
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, Entity.ReportType.Week);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Week);
             ExcelHelper.CreateExcel(table, fileName);
         }
     }

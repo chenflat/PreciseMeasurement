@@ -504,9 +504,11 @@ namespace PM.Data
         /// </summary>
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
+        /// <param name="level">等级</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        DataTable GetMeasurementReport(string startdate, string enddate, ReportType reportType);
+        DataTable GetMeasurementReport(string startdate, string enddate,string level, ReportType reportType);
+
 
         /// <summary>
         /// 获取指定时间内的测量数据自定义报告
