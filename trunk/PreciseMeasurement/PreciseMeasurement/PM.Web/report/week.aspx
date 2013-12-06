@@ -30,7 +30,7 @@
                 </label>
                 &nbsp;
                  级别：<asp:DropDownList ID="ddlLevel" runat="server">
-                     <asp:ListItem>全部</asp:ListItem>
+                     <asp:ListItem Value="">全部</asp:ListItem>
                      <asp:ListItem Value="1">一级</asp:ListItem>
                      <asp:ListItem Value="2">二级</asp:ListItem>
                      <asp:ListItem Value="3">三级</asp:ListItem>
