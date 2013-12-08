@@ -89,9 +89,6 @@ $(function () {
             $ATFlow = $("#AT_Flow")
         //设置编号
         var devicenum = $("#devicenum").val();
-        if(devicenum=="") {
-            devicenum = $("#cardnum").val();
-        }
         if(devicenum!="" && typeof(devicenum)!='undefined') {
             $.getJSON('../services/GetRealtimeMeasurement.ashx',{"devicenum":devicenum},function(data){
                 if(data!=null) {
@@ -105,7 +102,7 @@ $(function () {
         }
     }
     //每5秒自动更新实时数据
-    setInterval(getRealtimeData,5000);
+    setInterval(getRealtimeData,10000);
     getRealtimeData();
 
 

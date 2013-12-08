@@ -9,6 +9,7 @@ using System.Reflection;
 
 using log4net;
 using log4net.Config;
+using Newtonsoft.Json;
 
 namespace PM.Web.services {
     /// <summary>
@@ -41,8 +42,12 @@ namespace PM.Web.services {
                 catch (Exception ex) {
                     log.Error(ex);
                 }
-               
-                result = javaScriptSerializer.Serialize(data);
+
+                result = JsonConvert.SerializeObject(data);
+                if (log.IsDebugEnabled) {
+                    log.Debug("GetRealtimeData:" + devicenum);
+                    log.Debug(data);
+                }
             }
             else {
                 //获取所有测点的实时数据
@@ -89,13 +94,21 @@ namespace PM.Web.services {
                     }
                     catch (Exception ex) {
                         //throw ex;
+                        log.Error(ex);
                     }
 
                     
                     measurements.Add(measurementInfo);
+
+
+                    if (log.IsDebugEnabled) {
+                        log.Debug("GetRealtimeData:" + devicenum);
+                        log.Debug(JsonConvert.SerializeObject(measurementInfo));
+                    }
+
                 }
 
-                result = javaScriptSerializer.Serialize(measurements);
+                result = JsonConvert.SerializeObject(measurements);
             }
             result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);

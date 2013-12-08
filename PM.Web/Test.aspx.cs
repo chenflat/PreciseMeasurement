@@ -10,6 +10,7 @@ using PM.Business;
 using PM.Entity;
 using PM.Business.Pages;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace PM.Web
 {
@@ -42,21 +43,21 @@ namespace PM.Web
            // object share = PM.Business.RealtimeDataProvider.GetShareInstance();
             //share.GetRealData("");
 
+            string devicenum = txtDeviceNum.Text.Trim();
+            if (devicenum == "") {
+                devicenum = "00000000004";
+                txtDeviceNum.Text = devicenum;
+            }
+
             ltMessage.Text = "";
 
-            object data = RealtimeData.GetRealtimeData("13912345670");
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            string ret = javaScriptSerializer.Serialize(data);
+            object data = RealtimeData.GetRealtimeData(devicenum);
+
+            string ret = JsonConvert.SerializeObject(data);
             Console.Write(ret);
 
-            ltMessage.Text = ret;
+            ltMessage.Text += ret;
 
-
-            object data1 = RealtimeData.GetRealtimeData("13912095330");
-
-            string ret1 = javaScriptSerializer.Serialize(data1);
-            Console.Write(ret1);
-            ltMessage.Text += ret1;
         }
 
         protected void Button5_Click(object sender, EventArgs e) {

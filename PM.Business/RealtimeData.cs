@@ -13,7 +13,9 @@ namespace PM.Business {
         private static readonly ILog log = LogManager.GetLogger(typeof(RealtimeData));
 
         public static object GetRealtimeData(string devicenum) {
-            log.Debug("GetRealtimeData - devicenum:" + devicenum);
+            if (log.IsDebugEnabled) {
+                log.Debug("GetRealtimeData - devicenum:" + devicenum);
+            }
             object data = null;
             try {
                 Object share = RealtimeDataProvider.GetShareInstance();
