@@ -65,7 +65,24 @@ namespace PM.Web
         }
 
         protected void Button6_Click(object sender, EventArgs e) {
-           System.IntPtr ptr = PM.Business.RealtimeDataInvoke.GetRealData("00000000004");
+         //  System.IntPtr ptr = PM.Business.RealtimeDataInvoke.GetRealData("00000000004");
+        }
+
+        protected void Button7_Click(object sender, EventArgs e) {
+
+            string devicenum = txtDeviceNum.Text.Trim();
+            if (devicenum == "") {
+                devicenum = "00000000004";
+                txtDeviceNum.Text = devicenum;
+            }
+
+
+            Share share = new Share();
+            devvalue data = share.GetRealData(devicenum);
+            string ret = JsonConvert.SerializeObject(data);
+            Console.Write(ret);
+
+            ltMessage.Text += ret;
         }
     }
 }

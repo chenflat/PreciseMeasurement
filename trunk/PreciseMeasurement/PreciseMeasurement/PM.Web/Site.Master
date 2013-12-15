@@ -10,11 +10,13 @@
     <link rel="shortcut icon" href="~/assets/ico/favicon.png" />
     <title>生产监测系统</title>
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"
+        type="text/css" />
     <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/icon.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
-    <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="<%=ResolveUrl("~/assets/js/html5shiv.js") %>"></script>
@@ -65,8 +67,8 @@
           <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-            <li><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">系统管理</a></li>
+      <ul class="nav navbar-nav navbar-right user-nav">
+            <li id="sysmanage"><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">系统管理</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><asp:Literal ID="ltUserName" runat="server"></asp:Literal> <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -76,16 +78,24 @@
                 <li><a href="<%=ResolveUrl("~/Account/Login.aspx?Action=Logout") %>">退出登陆</a></li>
               </ul>
             </li>
+            <li class="clock">
+            <div class="pull-left"><div class="time"> <%=DateTime.Now.ToShortTimeString() %></div></div>
+            <div class="pull-right"><div class="week"><%=System.Globalization.DateTimeFormatInfo.CurrentInfo.DayNames[(byte)DateTime.Now.DayOfWeek]%></div>
+             <div class="date"><%=DateTime.Now.ToShortDateString() %></div></div>
+            
+            </li>
           </ul>
     </nav>
   </div>
 </header>
     <div class="container">
         <div class="bs-old-docs">
-       <iframe name="weather_inc" src="http://tianqi.xixik.com/cframe/1" width="330" height="35" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            <iframe name="weather_inc" src="http://tianqi.xixik.com/cframe/1" width="330" height="35"
+                frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
         </div>
-       <form id="Form1" runat="server" class="form-horizontal" role="form">
-         <div id="processing" class="processing" style="display:none;">处理中...</div>
+        <form id="Form1" runat="server" class="form-horizontal" role="form">
+        <div id="processing" class="processing" style="display: none;">
+            处理中...</div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </form>
     </div>
@@ -96,12 +106,9 @@
       <div class="container">
         <p>公司地址：北京市朝阳区德外北沙滩一号</p>
         <p>电话：64881202 传真：（北京）64881200 （北京）648815134 Email:fp@fipor.com.cn</p>
-        <p>Copyright &copy;2015-2015 北京菲波安乐仪表有限公司</p>
+        <p>Copyright &copy;2015-2015 北京菲波安乐仪表有限公司 Version:3.0</p>
       </div>
     </footer>
     <!-- Placed at the end of the document so the pages load faster -->
-   
-
-
 </body>
 </html>

@@ -68,6 +68,9 @@ $(function () {
     //初始化设置
     function initSettings() {
 
+        $(".bs-sidenav .active").on('click', function () {
+            $(this).children('ul').toggle(300);
+        });
     }
 
     /**

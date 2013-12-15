@@ -111,6 +111,16 @@
             //console.log(link);
         });
 
+        if (pathname.indexOf("admin") > -1) {
+            $("#sysmanage").addClass("active");
+        } else {
+            $("#sysmanage").removeClass("active");
+        }
+
+
+
+
+
         $('.datepicker').datepicker({
             inline: true
         });

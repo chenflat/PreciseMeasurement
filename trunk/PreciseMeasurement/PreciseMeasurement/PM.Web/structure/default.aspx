@@ -23,7 +23,10 @@
         <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
-            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" ><div class="left"><%# Eval("Pointnum") %></div></div>
+            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" >
+            <span class="text"><%# Eval("Pointnum") %></span>
+            <span class="icon"></span>
+            </div>
             <div id="<%# Eval("Pointnum") %>_data" class="popover meter_content" style="display:none;">
             <div class="arrow"></div>
             <button type="button" class="close">&times;</button>
@@ -68,6 +71,20 @@
     <td> <div class="swichbar" id="swichbar">>></div></td>
     <td>
     <div class="table-responsive" style="z-index:50; display:none;" id="realdata">
+
+            <div class="alert alert-info">
+            <span id="spanType1" style="overflow: hidden;">
+                                <input id="radSteam1" type="radio" value="汽" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
+                                <label for="radSteam1" style="cursor: pointer;">汽</label>
+                                <input id="radWater1" type="radio" value="水" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                <label for="radWater1" style="cursor: pointer;">水</label>
+                                 <input id="radAll" type="radio" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                <label for="radAll" style="cursor: pointer;">全部</label>
+                            </span>
+                        
+            
+            </div>
+          
         <table class="table table-bordered table-striped" id="gvRealtimeData">
         <thead>
             <tr>

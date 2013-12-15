@@ -23,7 +23,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row">
+    <div class="row" id="realtime_wrap">
         <div class="col-md-2 col-xs-4">
             <div class="bs-sidebar hidden-print affix-top" role="complementary">
             <header class="bs-sidenav-header">

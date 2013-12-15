@@ -60,20 +60,34 @@ namespace PM.Web.services {
 
                 ret = JsonConvert.SerializeObject(list);
 
-                //JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-                //ret = javaScriptSerializer.Serialize(list);
-                //ret = Regex.Replace(ret, @"\""\\/Date\((\d+)\)\\/\""", "$1");
-
             } catch (Exception ex) {
                 throw ex;
             }
-
-
-            return ret;
-            
+            return ret;   
         }
 
+        /// <summary>
+        /// 获取实时测量值
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetRealtimeMeasureValue(HttpContext context) {
+            string ret = "";
+            try {
+                //计量点载体名称
+                string carrier = context.Request["carrier"] == null ? "" : context.Request["carrier"].Trim();
+               
+                List<MeasurementInfo> list = PM.Data.Measurement.GetLastMeasureValueList(carrier);
+                
+                ret = JsonConvert.SerializeObject(list);
 
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+
+            return ret;
+        }
 
 
 
@@ -82,7 +96,6 @@ namespace PM.Web.services {
             try {
                 try {
                     context.Response.Clear();
-                   // context.Response.ContentType = "text/xml";
                     context.Response.Charset = "UTF-8";
                     context.Response.ContentEncoding = Encoding.UTF8;
                     context.Response.Expires = 0;
