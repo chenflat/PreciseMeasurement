@@ -4,25 +4,59 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row col-md-12">
-        <div class="col-md-2">
+    <div class="row col-md-12" style="padding: 0px;">
+        <div class="col-md-2" style="padding: 0px;">
             <div class="bs-sidebar hidden-print" role="complementary">
+                <header class="bs-sidenav-header">
+                <span  class="dropdown-header"></span>
+                </header>
                 <ul class="nav bs-sidenav" id="admin-nav">
-                    <li><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">计量点管理</a> </li>
-                    <li><a href="<%=ResolveUrl("~/admin/measureunits/list.aspx") %>">标准参量</a> </li>
-                    <li><a href="<%=ResolveUrl("~/admin/measurereplace/list.aspx") %>">换表管理</a> </li>
-                    <%--<li><a href="<%=ResolveUrl("~/admin/locations/list.aspx") %>">位置管理</a> </li>--%>
-                     <li><a href="<%=ResolveUrl("~/admin/organizations/list.aspx") %>">机构管理</a> </li>
-                    <li><a href="<%=ResolveUrl("~/admin/users/list.aspx") %>">用户管理</a></li>
-                    <li><a href="<%=ResolveUrl("~/admin/users/roles.aspx") %>">角色管理</a> </li>
+                    <li class="submenu">
+                    <a class='dropdown' onclick='return false;' href='#' data-original-title='计量点'>
+                        <i class='fa fa-book'></i><span class='hidden-minibar'>计量点</span></a>
+                           <ul>
+                            <li class=''><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>" data-original-title='计量点管理'><i class='fa fa-calendar'></i><span class='hidden-minibar'>计量点管理</span></a> </li>
+                            <li class=''><a href="<%=ResolveUrl("~/admin/measureunits/list.aspx") %>" data-original-title='标准参量'><i class='fa fa-calendar'></i><span class='hidden-minibar'>标准参量</span></a> </li>
+                            <li class=''><a href="<%=ResolveUrl("~/admin/measurereplace/list.aspx") %>" data-original-title='换表管理'><i class='fa fa-calendar'></i><span class='hidden-minibar'>换表管理</span></a> </li>
+
+                           
+                           </ul>
+                    </li>
+                    <li class="submenu">
+                    <a class='dropdown' onclick='return false;' href='#' data-original-title='资产管理'>
+                        <i class='fa fa-book'></i><span class='hidden-minibar'>资产</span></a>
+                           <ul>
+                           <li class=''><a href='<%=ResolveUrl("~/admin/Asset/AssetList.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>资产管理</span></a></li>
+                           <li class=''><a href='<%=ResolveUrl("~/admin/Meter/MeterGroupList.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>计量器组</span></a></li>
+
+                           </ul>
+                    </li>
+
+
+                    <li class="submenu"><a class='dropdown' onclick='return false;' href='#' data-original-title='系统管理'>
+                        <i class='fa fa-book'></i><span class='hidden-minibar'>系统</span></a>
+                           <ul>
+                           <li class=''><a href='<%=ResolveUrl("~/admin/organizations/list.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>组织机构</span></a></li>
+                           <li class=''><a href='<%=ResolveUrl("~/admin/Class/ClassStructureList.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>资产分类</span></a></li>
+                           </ul>
+                    </li>
+                    <li class="submenu">
+                    <a class='dropdown' onclick='return false;' href='#' data-original-title='Pages'>
+                        <i class='fa fa-book'></i><span class='hidden-minibar'>安全性</span> </a>
+                           <ul>
+                           <li class=''><a href='<%=ResolveUrl("~/admin/users/list.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>用户管理</span></a></li>
+                            <li class=''><a href='<%=ResolveUrl("~/admin/users/roles.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>角色管理</span></a></li>
+
+                           </ul>
+                    </li>
+                   
                 </ul>
             </div>
         </div>
-        <div class="col-md-10" role="main">
+        <div class="col-md-10" role="main" style="padding: 0px;">
             <div class="bs-docs-section">
-                
                 <asp:PlaceHolder ID="msgPlaceHolder" runat="server" Visible="False">
-                 <div style="margin-top:40px;" class="alert alert-<asp:Literal ID="ltMsgType" runat="server"></asp:Literal> fade in">
+                    <div style="margin-top:40px;" class="alert alert-<asp:Literal ID="ltMsgType" runat="server"></asp:Literal> fade in">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                             ×</button>
                         <asp:Literal ID="message" runat="server"></asp:Literal>
@@ -33,4 +67,5 @@
             </div>
         </div>
     </div>
+</span>
 </asp:Content>
