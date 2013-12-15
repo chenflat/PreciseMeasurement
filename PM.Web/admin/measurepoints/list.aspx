@@ -1,14 +1,17 @@
 ﻿<%@ Page Title="计量点管理" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true" CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measurepoints.list" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
 
-<div class="toolbar bs-callout-danger">
+<div class="toolbar bs-callout-info">
         所属组织：<asp:DropDownList ID="ddlOrgId" runat="server">
     </asp:DropDownList>
     计量点名称：<asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
         
         携能载体：<asp:DropDownList ID="ddlCarrier" runat="server">
-            <asp:ListItem Value="汽">汽</asp:ListItem>
+            <asp:ListItem Value="">全部</asp:ListItem>
+            <asp:ListItem>汽</asp:ListItem>
             <asp:ListItem>水</asp:ListItem>
+             <asp:ListItem>电</asp:ListItem>
+            <asp:ListItem>空气</asp:ListItem>
     </asp:DropDownList>
     <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />
     <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="导出" />
@@ -19,16 +22,16 @@
         <HeaderTemplate>
             <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
                 <tr>
-                    <th width="120">
+                    <th width="8%">
                         计量编号
                     </th>
                     <th width="18%">
                         计量点名称
                     </th>
-                    <th width="60">
+                    <th width="5%">
                         序号
                     </th>
-                    <th width="10%">
+                    <th width="15%">
                         所属公司
                     </th>
                     <th width="10%">

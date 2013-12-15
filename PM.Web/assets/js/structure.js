@@ -55,18 +55,37 @@ $(function () {
     getRealData()
     counter();
 
+    //获取设置类型
+    function GetType() {
+        var type = $("input[name='carrier']:checked").val();
+        if (type == '') { type = "汽"; }
+        return type;
+    }
+
+    //切换类型
+    $('input[name="carrier"]:radio').change(function () {
+        getRealData();
+    });
+
     /**
     * 获取所有测点的实时数据
     */
     function getRealData() {
+        var carrier = GetType();
+
         $("#gvRealtimeData tbody").html("");
         var content = "";
         //获取所有测点对应的实时数据
-        $.getJSON('../services/GetRealtimeMeasurement.ashx', { "devicenum": "" }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetRealtimeMeasureValue", "carrier": carrier }, function (data) {
             //设置计量点数值
             $.each(data, function (index, obj) {
-
-                content += "<tr><td>" + obj.Description + "</td>"
+                var mstyle = "";
+               
+                if ((new Date(obj.Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
+                    mstyle = " style='color:red;'";
+                }
+                console.log(mstyle);
+                content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
                 content += "<td>" + obj.SwPressure + "</td>"
                 content += "<td>" + obj.SwTemperature + "</td>"

@@ -2,9 +2,14 @@
 
 $(function () {
 
-   $('label.tree-toggler').click(function () {
-		$(this).parent().children('ul.tree').toggle(300);
+
+   $("label.tree-toggler").on('click',function(){
+        $(this).parent().children('ul.tree').toggle(300);
+   
    });
+
+
+
 
    //获取设置类型
    function GetType() {
@@ -647,6 +652,10 @@ function OnSuccessHourChart(response){
         arrAiDensity.push(response[i].AiDensity);
 	}
 
+    $('#temperature').hide();
+    $('#pressure').hide();
+    $('#flowinstant').hide();
+    $('#aidensity').hide();
 
 	for(var i=0;i<selected.length;i++) {
 		if(selected[i]=="SW_TEMPERATURE") {

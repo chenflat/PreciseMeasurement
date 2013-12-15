@@ -60,6 +60,10 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="admin\Asset\AssetForm.aspx" />
+    <Content Include="admin\Asset\AssetList.aspx" />
+    <Content Include="admin\Class\ClassificationList.aspx" />
+    <Content Include="admin\Class\ClassStructureList.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
     <Content Include="admin\measurepoints\edit.aspx" />
@@ -69,6 +73,7 @@
     <Content Include="admin\measurereplace\list.aspx" />
     <Content Include="admin\measureunits\edit.aspx" />
     <Content Include="admin\measureunits\list.aspx" />
+    <Content Include="admin\Meter\MeterGroupList.aspx" />
     <Content Include="admin\organizations\edit.aspx" />
     <Content Include="admin\organizations\list.aspx" />
     <Content Include="admin\users\edit.aspx" />
@@ -102,6 +107,7 @@
     <Content Include="assets\css\style.css" />
     <Content Include="assets\css\pygments-manni.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\Roboto-Thin-webfont.svg" />
     <Content Include="assets\ico\alarminfo.gif" />
     <Content Include="assets\ico\apple-touch-icon-114-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-144-precomposed.png" />
@@ -252,6 +258,34 @@
     <Compile Include="admin\Admin.master.designer.cs">
       <DependentUpon>Admin.master</DependentUpon>
     </Compile>
+    <Compile Include="admin\Asset\AssetForm.aspx.cs">
+      <DependentUpon>AssetForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Asset\AssetForm.aspx.designer.cs">
+      <DependentUpon>AssetForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Asset\AssetList.aspx.cs">
+      <DependentUpon>AssetList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Asset\AssetList.aspx.designer.cs">
+      <DependentUpon>AssetList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Class\ClassificationList.aspx.cs">
+      <DependentUpon>ClassificationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Class\ClassificationList.aspx.designer.cs">
+      <DependentUpon>ClassificationList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Class\ClassStructureList.aspx.cs">
+      <DependentUpon>ClassStructureList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Class\ClassStructureList.aspx.designer.cs">
+      <DependentUpon>ClassStructureList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\locations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,6 +351,13 @@
     </Compile>
     <Compile Include="admin\measureunits\list.aspx.designer.cs">
       <DependentUpon>list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Meter\MeterGroupList.aspx.cs">
+      <DependentUpon>MeterGroupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Meter\MeterGroupList.aspx.designer.cs">
+      <DependentUpon>MeterGroupList.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\organizations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
@@ -600,6 +641,9 @@
     <Content Include="services\GetReportSetting.ashx" />
     <Content Include="services\SaveReportSetting.ashx" />
     <Content Include="services\GetAjaxData.ashx" />
+    <None Include="assets\fonts\Roboto-Thin-webfont.eot" />
+    <None Include="assets\fonts\Roboto-Thin-webfont.ttf" />
+    <None Include="assets\fonts\Roboto-Thin-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

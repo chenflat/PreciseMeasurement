@@ -70,7 +70,7 @@ namespace PM.Web.admin.measurepoints
         /// <param name="e"></param>
         void btnQuery_Click(object sender, EventArgs e)
         {
-
+            condition = "";
             if (ddlOrgId.SelectedValue.Length>0)
             {
                 condition += string.Format(" and {0}MEASUREPOINT.ORGID='{1}'", 
@@ -81,16 +81,14 @@ namespace PM.Web.admin.measurepoints
                 condition += string.Format(" and {0}MEASUREPOINT.DESCRIPTION like '%{1}%'",
                     BaseConfigs.GetTablePrefix, txtDescription.Text.Trim());
             }
-            if (ddlCarrier.SelectedValue.Length > 0)
+            if (ddlCarrier.SelectedValue.Length > 0 && ddlCarrier.SelectedValue!="")
             {
                 condition += string.Format(" and {0}MEASUREPOINT.CARRIER='{1}'",
                     BaseConfigs.GetTablePrefix, ddlCarrier.SelectedValue);
             }
 
-            if (condition.Length>0)
-            {
-                BindData();
-            }
+            BindData();
+            
         }
 
 

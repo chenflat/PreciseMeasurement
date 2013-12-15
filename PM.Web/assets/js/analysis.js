@@ -4,6 +4,11 @@
 **/
 $(function () {
 
+    $(".bs-sidenav .active").on('click', function () {
+            $(this).children('ul').toggle(300);
+        });
+
+
 
     AddEvent();
     initSettings();
@@ -319,7 +324,7 @@ function GetChart(startdate, enddate, datetype) {
                             createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)');
                             break;
                         case "SW_Pressure":
-                            createChart(obj, seriesOptions_Pressure, '压力(MPa)', 'MPa)');
+                            createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)');
                             break;
                         default:
                             break;

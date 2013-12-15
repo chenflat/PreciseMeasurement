@@ -24,6 +24,9 @@
         Text="FindFirstMeasurement" />
     <asp:Button ID="Button6" runat="server" onclick="Button6_Click" 
         Text="Invoke Share Data" />
+    <asp:Button ID="Button7" runat="server" Text="ShareData" 
+        onclick="Button7_Click" />
+
     </form>
 </body>
 </html>

@@ -88,9 +88,9 @@
                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        1、选择对比计量点</h3>
+                                        1、选择计量点</h3>
                                 </div>
-                                <div class="panel-body ">
+                                <div class="panel-body bs-sidebar">
                                      <ul class="nav bs-sidenav" style="margin:0px;">
                                     <%
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
