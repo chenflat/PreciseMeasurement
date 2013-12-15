@@ -46,6 +46,32 @@ namespace PM.Data
         }
 
         /// <summary>
+        /// 获取所有测点的最后测量值
+        /// </summary>
+        /// <param name="carrier">携能载体</param>
+        /// <returns></returns>
+        public static IDataReader GetLastMeasureValueByAllPoint(string carrier) {
+            return DatabaseProvider.GetInstance().GetLastMeasureValueByAllPoint(carrier);
+        }
+
+        /// <summary>
+        /// 获取所有测点的最后测量值
+        /// </summary>
+        /// <param name="carrier"></param>
+        /// <returns></returns>
+        public static List<MeasurementInfo> GetLastMeasureValueList(string carrier) {
+            List<MeasurementInfo> list = new List<MeasurementInfo>();
+            using (IDataReader reader = GetLastMeasureValueByAllPoint(carrier)) {
+                while (reader.Read()) {
+                    MeasurementInfo measurementInfo = LoadMeasurementInfo(reader);
+                    list.Add(measurementInfo);
+                }
+                reader.Close();
+            }
+            return list;
+        }
+
+        /// <summary>
         /// 获取指定计量器的第一条记录值
         /// </summary>
         /// <param name="pointnum">记录器编号</param>
@@ -85,6 +111,7 @@ namespace PM.Data
 
             measurement.Measurementid = reader.GetSchemaTable().Columns["MEASUREMENTID"]==null ? 0 : reader.GetInt64(reader.GetOrdinal("MEASUREMENTID"));
             measurement.Pointnum = reader["POINTNUM"].ToString();
+            measurement.Description = Utils.ContainsField(reader, "DESCRIPTION") ? reader["DESCRIPTION"].ToString() : "";
             measurement.DeviceNum = reader.GetSchemaTable().Columns["DEVICENUM"] == null ? "" : reader["DEVICENUM"].ToString();
             measurement.Inspector = reader.GetSchemaTable().Columns["INSPECTOR"] == null ? "" : reader["INSPECTOR"].ToString();
             measurement.Measuretime = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));

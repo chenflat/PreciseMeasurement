@@ -30,6 +30,18 @@ namespace PM.Data.SqlServer
         }
 
        /// <summary>
+       /// 获取所有测点的最后计量值
+       /// </summary>
+       /// <param name="carrier">携能载体</param>
+       /// <returns></returns>
+       public IDataReader GetLastMeasureValueByAllPoint(string carrier) {
+          
+           DbParameter param = DbHelper.MakeInParam("@Carrier", (DbType)SqlDbType.VarChar, 30, carrier);
+
+           return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetLastMeasureValueByAllPoint", param);;
+       }
+
+       /// <summary>
        /// 获取指定计量器的第一条记录值
        /// </summary>
        /// <param name="pointnum">记录器编号</param>
