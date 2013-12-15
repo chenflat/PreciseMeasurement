@@ -430,6 +430,14 @@ namespace PM.Data
         /// <returns></returns>
         IDataReader FindLastMeasurement(string pointnum);
 
+        /// <summary>
+        /// 获取所有测点的最后计量值
+        /// </summary>
+        /// <param name="carrier">载体,汽、水、全部</param>
+        /// <returns></returns>
+        IDataReader GetLastMeasureValueByAllPoint(string carrier);
+
+
 
         /// <summary>
         /// 获取指定计量器的第一条记录值
