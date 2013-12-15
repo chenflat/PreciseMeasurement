@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>系统登陆</title>
+    <title>能源计量监测平台</title>
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"
         type="text/css" />
@@ -17,7 +17,7 @@
         <div class="bg">
             <div class="loginformwrap">
              <div class="loginformtitle">
-                    <span>计量监测平台</span>
+                    <span>能源计量监测平台</span>
                 </div>
             
             <form class="form-horizontal" role="form" runat="server">
@@ -53,6 +53,6 @@
             </div>
         </div>
     </div>
-    <div class="footer">Copyright &copy;2015-2015 北京菲波安乐仪表有限公司</div>
+    <div class="footer">Copyright &copy;2015-2015 北京菲波安乐仪表有限公司 Verson:3.0</div>
 </body>
 </html>
