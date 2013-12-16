@@ -17,6 +17,7 @@
     <link href="~/assets/css/pygments-manni.css" rel="stylesheet" />
     <link href="~/assets/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
         rel="stylesheet" />
+    <link href="~/assets/lib/weather/css/main.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="<%=ResolveUrl("~/assets/js/html5shiv.js") %>"></script>
@@ -78,6 +79,9 @@
                 <li><a href="<%=ResolveUrl("~/Account/Login.aspx?Action=Logout") %>">退出登陆</a></li>
               </ul>
             </li>
+            <li id="weather">
+            <script src="<%=ResolveUrl("~/assets/lib/weather/js/jquery.weather.build.js?parentbox=body&moveArea=all&moveArea=limit&zIndex=1&move=1&move=0&drag=1&drag=0&autoDrop=0&autoDrop=1&styleSize=big&styleSize=small&style=default&style=medialoot&style=meteocons&style=blue&style=cartoon-1&style=cartoon-2&style=cartoon-3&style=_random&time=1387202426&area=client&area=assign&city=%E5%8C%97%E4%BA%AC") %>" type="text/javascript"></script>
+            </li>
             <li class="clock">
             <div class="pull-left"><div class="time"> <%=DateTime.Now.ToShortTimeString() %></div></div>
             <div class="pull-right"><div class="week"><%=System.Globalization.DateTimeFormatInfo.CurrentInfo.DayNames[(byte)DateTime.Now.DayOfWeek]%></div>
@@ -90,8 +94,7 @@
 </header>
     <div class="container">
         <div class="bs-old-docs">
-            <iframe name="weather_inc" src="http://tianqi.xixik.com/cframe/1" width="330" height="35"
-                frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            
         </div>
         <form id="Form1" runat="server" class="form-horizontal" role="form">
         <div id="processing" class="processing" style="display: none;">
