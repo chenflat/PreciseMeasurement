@@ -5,7 +5,6 @@
     font-style: normal;
 	}
 	
-
 body {
   position: relative; /* For scrollyspy */
   padding-top: 50px; /* Account for fixed navbar */
@@ -421,7 +420,7 @@ label {font-weight:normal;}
   }
   .bs-sidebar.affix {
     position: fixed; /* Undo the static from mobile first approach */
-    top: 100px;
+    top: 70px;
   }
   .bs-sidebar.affix-bottom {
     position: absolute; /* Undo the static from mobile first approach */
@@ -445,6 +444,11 @@ label {font-weight:normal;}
 .bs-docs-section + .bs-docs-section {
   padding-top: 40px;
 }
+
+.bs-docs-section .page-header {
+    padding-bottom: 5px;
+    margin: 20px 0 20px;
+    }
 
 /* Janky fix for preventing navbar from overlapping */
 h1[id] {
