@@ -2,7 +2,7 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.locations.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <div class="toolbar bs-callout-danger">
+    <div class="toolbar bs-callout-info">
         位置查询：<asp:DropDownList ID="ddlCarrier" runat="server">
             <asp:ListItem Value="DESCRIPTION">名称</asp:ListItem>
             <asp:ListItem Value="LOCATION">编码</asp:ListItem>
