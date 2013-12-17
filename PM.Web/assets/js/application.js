@@ -55,7 +55,7 @@
             // $('.bs-top').affix()
         }, 100)
 
-        
+
         $('.bs-docs-navbar').tooltip({
             selector: "a[data-toggle=tooltip]",
             container: ".bs-docs-navbar .nav"
@@ -94,10 +94,12 @@
             $("#main-nav").hide();
         }
 
+        console.log(pathname);
 
         $.each($("#main-nav li"), function (index, li) {
             var link = $(li).find('a').attr('href');
-            if (link == pathname) {
+            if (pathname.indexOf(link)>-1) {
+            //if (link == pathname) {
                 $(li).addClass("active");
             }
             //console.log(link);

@@ -14,7 +14,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
  <div class="row">
         <div class="bs-docs-section">
-            <div class="alert alert-info">
+            <div class="toolbar bs-callout-info">
                 起始时间：
                 <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
