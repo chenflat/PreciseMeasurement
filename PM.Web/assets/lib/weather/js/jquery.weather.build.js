@@ -115,9 +115,10 @@
 				}
 				//如果不存在 父级容器，就创建
 				if( $weatherBox.size() == 0 ){
-					option.parentbox = '#weather-'+ (new Date()).valueOf() ;
+					//option.parentbox = '#weather-'+ (new Date()).valueOf() ;
+                    option.parentbox = '#weather';
 
-                    console.log("box" + option.parentbox.replace('#',''));
+                  //  console.log("box" + option.parentbox.replace('#',''));
 
 					$('body').append('<div id="'+ option.parentbox.replace('#','') +'"></div>');
 					$weatherBox = $(option.parentbox);
