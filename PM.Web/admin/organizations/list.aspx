@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
 <link rel="stylesheet" href="<%=ResolveUrl("~/assets/lib/treegrid/css/jquery.treegrid.css") %>">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/treegrid/js/jquery.treegrid.js") %>"></script>
-        <div class="toolbar bs-callout-danger">
+        <div class="toolbar bs-callout-info">
                 <a href="edit.aspx" class="btn btn-primary">新增</a>
         </div>
     <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">

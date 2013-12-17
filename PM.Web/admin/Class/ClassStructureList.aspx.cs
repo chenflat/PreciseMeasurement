@@ -5,8 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using PM.Common;
+using PM.Business;
+using PM.Entity;
+using PM.Business.Pages;
+
 namespace PM.Web.admin.Class {
-    public partial class ClassStructureList : System.Web.UI.Page {
+    public partial class ClassStructureList : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
 
         }

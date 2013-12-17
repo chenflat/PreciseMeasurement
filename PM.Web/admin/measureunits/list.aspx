@@ -2,7 +2,7 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measureunits.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <div class="toolbar bs-callout-danger">
+    <div class="toolbar bs-callout-info">
         标准参量名称：<asp:TextBox ID="description" runat="server"></asp:TextBox>
         <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />
     </div>
