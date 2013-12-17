@@ -17,7 +17,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="bs-docs-section">
-            <div class="alert alert-warning analysis">
+            <div class="toolbar bs-callout-info analysis">
                 时间类型：<label><input type="radio" name="datetype" checked="checked" value="MINUTE" />分钟</label>
                 <label>
                     <input type="radio" name="datetype" value="HOUR" />小时</label>

@@ -14,7 +14,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
         <div class="bs-docs-section">
-            <div class="alert alert-info">
+            <div class="toolbar bs-callout-info">
                 年：
                 <asp:TextBox ID="txtYear" CssClass="Wdate year" runat="server"></asp:TextBox>
               
