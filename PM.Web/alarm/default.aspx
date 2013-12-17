@@ -18,7 +18,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="bs-docs-section">
-            <div class="alert alert-warning alarm">
+            <div class="toolbar bs-callout-info alarm">
                 报警状态：<asp:DropDownList ID="ddlStatus" CssClass="status" runat="server">
                     <asp:ListItem Value="0">未确认</asp:ListItem>
                     <asp:ListItem Value="1">已确认</asp:ListItem>
