@@ -1,15 +1,22 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true" CodeBehind="MeterGroupList.aspx.cs" Inherits="PM.Web.admin.Meter.MeterGroupList" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
+    CodeBehind="MeterGroupList.aspx.cs" Inherits="PM.Web.admin.Meter.MeterGroupList" %>
 
-<div class="toolbar bs-callout-info">
-        <a href="MeterGroupForm.aspx" class="btn btn-info">新增</a>
-    <asp:DropDownList ID="ddlFields" runat="server">
-        <asp:ListItem Value="GROUPNAME">组名</asp:ListItem>
-        <asp:ListItem Value="DESCRIPTION">描述</asp:ListItem>
-    </asp:DropDownList>
-        <asp:TextBox ID="txtKeyword" runat="server"></asp:TextBox>
-         <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
-         <asp:Button ID="btnExport" runat="server" CssClass="btn btn-info" Text="导出" />
+<asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+    <div class="bs-docs-section">
+        <div class="page-header">
+            <h3>
+                计量器组</h3>
+            <div class="manager_buttons">
+                <a href="MeterGroupForm.aspx" class="btn btn-info">新增</a>
+                <asp:DropDownList ID="ddlFields" runat="server">
+                    <asp:ListItem Value="GROUPNAME">组名</asp:ListItem>
+                    <asp:ListItem Value="DESCRIPTION">描述</asp:ListItem>
+                </asp:DropDownList>
+                <asp:TextBox ID="txtKeyword" runat="server"></asp:TextBox>
+                <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
+                <asp:Button ID="btnExport" runat="server" CssClass="btn btn-info" Text="导出" />
+            </div>
+        </div>
     </div>
     <!-- /toolbar -->
     <asp:Repeater ID="rptMeterGroup" runat="server">
@@ -27,18 +34,15 @@
         <ItemTemplate>
             <tr>
                 <td>
-                <%# Eval("GroupName") %>
+                    <%# Eval("GroupName") %>
                 </td>
                 <td>
-                <%# Eval("Description") %>
+                    <%# Eval("Description") %>
                 </td>
-               
             </tr>
         </ItemTemplate>
         <FooterTemplate>
             </table>
         </FooterTemplate>
     </asp:Repeater>
-
-
 </asp:Content>

@@ -13,6 +13,15 @@ namespace PM.Web.admin.Asset {
     public partial class AssetList {
         
         /// <summary>
+        /// ddlFields 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFields;
+        
+        /// <summary>
         /// txtKeyword 控件。
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace PM.Web.admin.Asset {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtKeyword;
+        
+        /// <summary>
+        /// DropDownList1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
         /// btnQuery 控件。

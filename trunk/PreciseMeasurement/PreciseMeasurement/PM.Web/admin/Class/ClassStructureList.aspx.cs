@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -19,6 +19,26 @@ namespace PM.Web.admin.Class {
 
         protected void Page_Load(object sender, EventArgs e) {
 
+            if (!IsPostBack) {
+                BindData();
+            }
+        }
+
+        /// <summary>
+        /// 绑定类别结构数据
+        /// </summary>
+        private void BindData() {
+
+            DataTable dt = new DataTable();
+            if (dt.Rows.Count == 0) {
+                dt.Columns.Add("CLASSIFICATIONID");
+                dt.Columns.Add("Description");
+                dt.Columns.Add("PARENT");
+                dt.Rows.Add();
+            }
+
+            rptClassStructure.DataSource = dt;
+            rptClassStructure.DataBind();
         }
 
     }
