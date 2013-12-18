@@ -3,27 +3,23 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <div class="toolbar bs-callout-info">
-        
-        <nav id="navbar-example" class="navbar navbar-default navbar-static" role="navigation">
-        <div class="collapse navbar-collapse bs-js-navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="AssetForm.aspx" class="">新增</a> </li>
-            <li class="dropdown">
-              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">操作 <b class="caret"></b></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">复制资产</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">删除资产</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">导出数据</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.nav-collapse -->
-      </nav> <!-- /navbar-example -->
+        <a href="AssetForm.aspx" class="btn btn-info">新增</a>
+        <div class="btn-group">
+            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                操作 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">复制资产</a></li>
+                <li><a href="#">删除资产</a></li>
+            </ul>
+        </div>
+        <asp:TextBox ID="txtKeyword" runat="server"></asp:TextBox>
+            <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
+         <asp:Button ID="btnExport" runat="server" CssClass="btn btn-info" Text="导出" />
     </div>
     <!-- /toolbar -->
-
     <asp:Repeater ID="rptAssets" runat="server">
-    <HeaderTemplate>
+        <HeaderTemplate>
             <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
                 <tr>
                     <th width="15%">
@@ -44,17 +40,21 @@
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
         </ItemTemplate>
         <FooterTemplate>
             </table>
         </FooterTemplate>
     </asp:Repeater>
-
 </asp:Content>

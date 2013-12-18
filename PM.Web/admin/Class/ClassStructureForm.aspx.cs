@@ -11,15 +11,9 @@ using PM.Entity;
 using PM.Business.Pages;
 
 namespace PM.Web.admin.Class {
-
-    /// <summary>
-    /// 类别结构
-    /// </summary>
-    public partial class ClassStructureList : BasePage {
-
+    public partial class ClassStructureForm : BasePage {
         protected void Page_Load(object sender, EventArgs e) {
 
         }
-
     }
 }
