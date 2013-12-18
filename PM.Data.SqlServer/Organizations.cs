@@ -64,7 +64,8 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@PARENT", (DbType)SqlDbType.VarChar, 8, orgInfo.Parent)
 
                                   };
-            string commandText = string.Format("INSERT INTO [{0}ORGANIZATION] ([ORGID],[DESCRIPTION],[ORGTYPE],[LEVEL_],[COMMENTS],[LEADER],[PHONE],[ADDRESS],[PARENT]) VALUES(@ORGID, @DESCRIPTION, @ORGTYPE, @LEVEL, @COMMENTS, @LEADER, @PHONE,@ADDRESS,@PARENT)", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("INSERT INTO [{0}ORGANIZATION] ([ORGID],[DESCRIPTION],[ORGTYPE],[LEVEL_],[COMMENTS],[LEADER],[PHONE],[ADDRESS],[PARENT]) "+
+                " VALUES(@ORGID, @DESCRIPTION, @ORGTYPE, @LEVEL, @COMMENTS, @LEADER, @PHONE,@ADDRESS,@PARENT)", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
 
