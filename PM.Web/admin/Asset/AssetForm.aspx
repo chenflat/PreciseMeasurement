@@ -4,7 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <div class="bs-docs-section">
         <div class="page-header">
-            编辑资产
+            <h3>
+                资产 / 新增</h3>
+            <div class="manager_buttons">
+                <asp:Button ID="btnSave" CssClass="btn btn-warning" runat="server" Text="保存" />
+                <a href="AssetList.aspx" class="btn btn-info">返回</a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -13,9 +18,9 @@
                 <label for="<%=txtAssetNum.ClientID %>" class="col-lg-3 control-label">
                     资产：*</label>
                 <div class="col-lg-9">
-                    <asp:TextBox ID="txtAssetNum" CssClass="form-control" Width="80px" placeholder="编号"
+                    <asp:TextBox ID="txtAssetNum" CssClass="form-control" Width="120px" placeholder="编号"
                         runat="server"></asp:TextBox>
-                    <asp:TextBox ID="txtDescription" CssClass="form-control description" Width="160px"
+                    <asp:TextBox ID="txtDescription" CssClass="form-control description" Width="200px"
                         placeholder="描述" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvAssetNum" runat="server" Display="Dynamic" ErrorMessage="必填字段"
                         ControlToValidate="txtAssetNum" CssClass="help-inline"></asp:RequiredFieldValidator>
@@ -27,7 +32,7 @@
                 <label for="<%=txtStatus.ClientID %>" class="col-lg-3 control-label">
                     状态：</label>
                 <div class="col-lg-9">
-                    <asp:TextBox ID="txtStatus" runat="server" Enabled="false" Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="txtStatus" runat="server" Enabled="false" Width="120px"></asp:TextBox>
                 </div>
             </div>
         </div>
