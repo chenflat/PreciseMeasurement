@@ -865,6 +865,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="admin\Class\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
