@@ -10,51 +10,60 @@
 namespace PM.Web.admin.Meter {
     
     
-    public partial class MeterGroupList {
+    public partial class MeterGroupForm {
         
         /// <summary>
-        /// ddlFields 控件。
+        /// btnSave 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFields;
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// txtKeyword 控件。
+        /// txtGroupName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeyword;
+        protected global::System.Web.UI.WebControls.TextBox txtGroupName;
         
         /// <summary>
-        /// btnQuery 控件。
+        /// txtDescription 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQuery;
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
-        /// btnExport 控件。
+        /// rfvGroupName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExport;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGroupName;
         
         /// <summary>
-        /// rptMeterGroup 控件。
+        /// rfvDescrption 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptMeterGroup;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescrption;
+        
+        /// <summary>
+        /// rptMeteringroup 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptMeteringroup;
     }
 }

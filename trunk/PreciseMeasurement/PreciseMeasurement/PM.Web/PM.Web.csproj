@@ -63,6 +63,7 @@
     <Content Include="admin\Asset\AssetForm.aspx" />
     <Content Include="admin\Asset\AssetList.aspx" />
     <Content Include="admin\Class\ClassificationList.aspx" />
+    <Content Include="admin\Class\ClassStructureForm.aspx" />
     <Content Include="admin\Class\ClassStructureList.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
@@ -73,6 +74,7 @@
     <Content Include="admin\measurereplace\list.aspx" />
     <Content Include="admin\measureunits\edit.aspx" />
     <Content Include="admin\measureunits\list.aspx" />
+    <Content Include="admin\Meter\MeterGroupForm.aspx" />
     <Content Include="admin\Meter\MeterGroupList.aspx" />
     <Content Include="admin\organizations\edit.aspx" />
     <Content Include="admin\organizations\list.aspx" />
@@ -538,6 +540,13 @@
     <Compile Include="admin\Class\ClassificationList.aspx.designer.cs">
       <DependentUpon>ClassificationList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\Class\ClassStructureForm.aspx.cs">
+      <DependentUpon>ClassStructureForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Class\ClassStructureForm.aspx.designer.cs">
+      <DependentUpon>ClassStructureForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\Class\ClassStructureList.aspx.cs">
       <DependentUpon>ClassStructureList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -610,6 +619,13 @@
     </Compile>
     <Compile Include="admin\measureunits\list.aspx.designer.cs">
       <DependentUpon>list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Meter\MeterGroupForm.aspx.cs">
+      <DependentUpon>MeterGroupForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Meter\MeterGroupForm.aspx.designer.cs">
+      <DependentUpon>MeterGroupForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\Meter\MeterGroupList.aspx.cs">
       <DependentUpon>MeterGroupList.aspx</DependentUpon>
