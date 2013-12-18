@@ -62,9 +62,6 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="admin\Asset\AssetForm.aspx" />
     <Content Include="admin\Asset\AssetList.aspx" />
-    <Content Include="admin\Class\ClassificationList.aspx" />
-    <Content Include="admin\Class\ClassStructureForm.aspx" />
-    <Content Include="admin\Class\ClassStructureList.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
     <Content Include="admin\measurepoints\edit.aspx" />
@@ -532,27 +529,6 @@
     </Compile>
     <Compile Include="admin\Asset\AssetList.aspx.designer.cs">
       <DependentUpon>AssetList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\Class\ClassificationList.aspx.cs">
-      <DependentUpon>ClassificationList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\Class\ClassificationList.aspx.designer.cs">
-      <DependentUpon>ClassificationList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\Class\ClassStructureForm.aspx.cs">
-      <DependentUpon>ClassStructureForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\Class\ClassStructureForm.aspx.designer.cs">
-      <DependentUpon>ClassStructureForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\Class\ClassStructureList.aspx.cs">
-      <DependentUpon>ClassStructureList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\Class\ClassStructureList.aspx.designer.cs">
-      <DependentUpon>ClassStructureList.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\locations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
