@@ -39,13 +39,25 @@
   <ItemGroup>
     <Compile Include="DataProvider\Alarmlog.cs" />
     <Compile Include="DataProvider\AnalyzeSetting.cs" />
+    <Compile Include="DataProvider\Asset.cs" />
+    <Compile Include="DataProvider\Assetattribute.cs" />
+    <Compile Include="DataProvider\Assetmeter.cs" />
+    <Compile Include="DataProvider\Assetspechist.cs" />
+    <Compile Include="DataProvider\Classification.cs" />
+    <Compile Include="DataProvider\Classspec.cs" />
+    <Compile Include="DataProvider\Classstructure.cs" />
     <Compile Include="DataProvider\Locations.cs" />
+    <Compile Include="DataProvider\Longdescription.cs" />
     <Compile Include="DataProvider\Measurement.cs" />
     <Compile Include="DataProvider\MeasurePoint.cs" />
     <Compile Include="DataProvider\MeasureReplace.cs" />
     <Compile Include="DataProvider\MeasureUnit.cs" />
+    <Compile Include="DataProvider\Metergroup.cs" />
+    <Compile Include="DataProvider\Meteringroup.cs" />
     <Compile Include="DataProvider\Organizations.cs" />
+    <Compile Include="DataProvider\Pmdomain.cs" />
     <Compile Include="DataProvider\ReportSetting.cs" />
+    <Compile Include="DataProvider\Synonymdomain.cs" />
     <Compile Include="DataProvider\Users.cs" />
     <Compile Include="DataReaderExtender.cs" />
     <Compile Include="DbException.cs" />

@@ -37,7 +37,7 @@ namespace PM.Data.SqlServer {
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
 
-        public bool UpdateLongdescription(LongdescriptionInfo longdescriptionInfo) {
+        public bool UpdateLongdescriptionById(LongdescriptionInfo longdescriptionInfo) {
 
             DbParameter[] parms = { 
 						DbHelper.MakeInParam("@LONGDESCRIPTIONID", (DbType)SqlDbType.BigInt,8,longdescriptionInfo.Longdescriptionid),
@@ -49,6 +49,21 @@ namespace PM.Data.SqlServer {
                         DbHelper.MakeInParam("@CONTENTUID", (DbType)SqlDbType.VarChar,10,longdescriptionInfo.Contentuid)	
 			};
             string commandText = string.Format("UPDATE [{0}LONGDESCRIPTION] SET [LDKEY] = @LDKEY,[LDOWNERTABLE] = @LDOWNERTABLE,[LDOWNERCOLE] = @LDOWNERCOLE,[LDTEXT] = @LDTEXT,[LANGCODE] = @LANGCODE,[CONTENTUID] = @CONTENTUID WHERE [LONGDESCRIPTIONID]=@LONGDESCRIPTIONID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
+        }
+
+        public bool UpdateLongdescriptionByKey(LongdescriptionInfo longdescriptionInfo) {
+
+            DbParameter[] parms = { 
+						DbHelper.MakeInParam("@LONGDESCRIPTIONID", (DbType)SqlDbType.BigInt,8,longdescriptionInfo.Longdescriptionid),
+                        DbHelper.MakeInParam("@LDKEY", (DbType)SqlDbType.BigInt,8,longdescriptionInfo.Ldkey)	,
+                        DbHelper.MakeInParam("@LDOWNERTABLE", (DbType)SqlDbType.VarChar,30,longdescriptionInfo.Ldownertable)	,
+                        DbHelper.MakeInParam("@LDOWNERCOLE", (DbType)SqlDbType.VarChar,30,longdescriptionInfo.Ldownercole)	,
+                        DbHelper.MakeInParam("@LDTEXT", (DbType)SqlDbType.VarChar,4000,longdescriptionInfo.Ldtext)	,
+                        DbHelper.MakeInParam("@LANGCODE", (DbType)SqlDbType.VarChar,4,longdescriptionInfo.Langcode)	,
+                        DbHelper.MakeInParam("@CONTENTUID", (DbType)SqlDbType.VarChar,10,longdescriptionInfo.Contentuid)	
+			};
+            string commandText = string.Format("UPDATE [{0}LONGDESCRIPTION] SET [LDTEXT] = @LDTEXT,[LANGCODE] = @LANGCODE WHERE [LDKEY]=@LDKEY and [LDOWNERTABLE]=@LDOWNERTABLE,[LDOWNERCOLE]=@LDOWNERCOLE,", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 

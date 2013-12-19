@@ -2,6 +2,12 @@
     CodeBehind="AssetForm.aspx.cs" Inherits="PM.Web.admin.Asset.AssetForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+ <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/AssetManager.js") %>"></script>
+    <script>
+        var USERID = "<%=userid %>";
+        var ORGID = "<%=orgid %>";
+    
+    </script>
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
@@ -67,7 +73,7 @@
                         <label for="<%=txtParent.ClientID %>" class="col-lg-3 control-label">
                             父资产：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtParent" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtParent" runat="server" class="parentAsset"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
