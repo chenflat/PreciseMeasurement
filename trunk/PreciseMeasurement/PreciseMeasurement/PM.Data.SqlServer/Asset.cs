@@ -157,7 +157,7 @@ namespace PM.Data.SqlServer {
         }
 
         public DataTable FindAssetByCondition(string condition) {
-            string commandText = string.Format("select {0}ASSET.* from [{0}ASSET] WHERE 1=1 {1})",
+            string commandText = string.Format("select {0}ASSET.* from [{0}ASSET] WHERE 1=1 {1}",
                                                 BaseConfigs.GetTablePrefix,
                                                 condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
@@ -165,7 +165,7 @@ namespace PM.Data.SqlServer {
         }
 
         public int AssetCount(string condition) {
-            string commandText = string.Format("SELECT COUNT(*) FROM [{0}ASSET] WHERE 1=1 {1})",
+            string commandText = string.Format("SELECT COUNT(*) FROM [{0}ASSET] WHERE 1=1 {1}",
                                              BaseConfigs.GetTablePrefix, condition);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
 
