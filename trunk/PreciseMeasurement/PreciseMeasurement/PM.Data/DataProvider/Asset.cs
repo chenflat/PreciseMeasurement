@@ -58,5 +58,35 @@ namespace PM.Data {
         }
 
 
+        public static AssetInfo GetAssetInfo(long assetuid) {
+            if (assetuid <= 0)
+                return new AssetInfo();
+            string condition = string.Format(" and ASSETUID='{0}'",assetuid);
+            DataTable result = FindAssetByCondition(condition);
+            AssetInfo assetInfo = null;
+            using (IDataReader reader = result.CreateDataReader()) {
+                if (reader.Read()) {
+                    assetInfo = LoadAssetInfo(reader);
+                }
+                reader.Close();
+            }
+            return assetInfo;
+        }
+
+        public static AssetInfo LoadAssetInfo(IDataReader reader) {
+            AssetInfo assetInfo = new AssetInfo();
+            assetInfo.Ancestor = reader["Ancestor"].ToString();
+            assetInfo.Assetnum = reader["Assetnum"].ToString();
+            assetInfo.Assettag = reader["Assettag"].ToString();
+            assetInfo.Assettype = reader["Assettype"].ToString();
+            assetInfo.Specclass = reader["Specclass"].ToString();
+            assetInfo.Calnum = reader["Calnum"].ToString();
+            assetInfo.Changeby = reader["Changeby"].ToString();
+            assetInfo.Changedate = TypeConverter.ObjectToDateTime(reader["Changedate"].ToString());
+
+
+            return assetInfo;
+        }
+
     }
 }
