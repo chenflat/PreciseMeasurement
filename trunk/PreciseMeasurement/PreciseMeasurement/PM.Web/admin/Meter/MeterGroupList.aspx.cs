@@ -9,6 +9,7 @@ using PM.Common;
 using PM.Business;
 using PM.Entity;
 using PM.Business.Pages;
+using PM.Common.ExcelUtils;
 
 namespace PM.Web.admin.Meter {
 
@@ -26,25 +27,30 @@ namespace PM.Web.admin.Meter {
         }
 
         private void btnExport_Click(object sender, EventArgs e) {
-           
+            DataTable dt = GetMeterGroup();
+            string fileName = "计量器组_" + DateTime.Now.ToString("yyyyMMdd");
+            ExcelHelper.CreateExcel(dt, fileName);
         }
 
         private void btnQuery_Click(object sender, EventArgs e) {
             BindData();
         }
 
-        private void BindData() {
+
+        private DataTable GetMeterGroup() {
             string condition = "";
-            if (txtKeyword.Text.Trim()!="") {
+            if (txtKeyword.Text.Trim() != "") {
                 condition = string.Format(" and {0} like '%{1}%'", ddlFields.SelectedValue, txtKeyword.Text.Trim());
             }
-            DataTable dt = new DataTable();
-            if (dt.Rows.Count == 0) {
-                dt.Columns.Add("GROUPNAME");
-                dt.Columns.Add("DESCRIPTION");
-                dt.Rows.Add();
-                dt.NewRow();
+            DataTable meterGroupData = PM.Data.Metergroup.FindMetergroupByCondition(condition);
+            if (meterGroupData.Rows.Count == 0) {
+                meterGroupData.Rows.Add();
             }
+            return meterGroupData;
+        }
+
+        private void BindData() {
+            DataTable dt = GetMeterGroup();
             rptMeterGroup.DataSource = dt;
             rptMeterGroup.DataBind();
         }
