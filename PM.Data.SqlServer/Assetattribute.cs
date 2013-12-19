@@ -67,8 +67,14 @@ namespace PM.Data.SqlServer {
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
         }
 
+
+        public IDataReader FindAssetattributeByAssetattrid(String assetattrid) {
+            string commandText = string.Format("select * from [{0}ASSETATTRIBUTE] where [ASSETATTRID]='{1}'", BaseConfigs.GetTablePrefix, assetattrid);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
         public DataTable FindAssetattributeByCondition(string condition) {
-            string commandText = string.Format("select {0}ASSETATTRIBUTE.* from [{0}ASSETATTRIBUTE] WHERE 1=1 {1})",
+            string commandText = string.Format("select {0}ASSETATTRIBUTE.* from [{0}ASSETATTRIBUTE] WHERE 1=1 {1}",
                                                 BaseConfigs.GetTablePrefix,
                                                 condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
@@ -76,7 +82,7 @@ namespace PM.Data.SqlServer {
         }
 
         public int AssetattributeCount(string condition) {
-            string commandText = string.Format("SELECT COUNT(*) FROM [{0}ASSETATTRIBUTE] WHERE 1=1 {1})",
+            string commandText = string.Format("SELECT COUNT(*) FROM [{0}ASSETATTRIBUTE] WHERE 1=1 {1}",
                                              BaseConfigs.GetTablePrefix, condition);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
 
