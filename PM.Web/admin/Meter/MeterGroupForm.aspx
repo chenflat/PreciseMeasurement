@@ -21,6 +21,7 @@
                         runat="server"></asp:TextBox>
                     <asp:TextBox ID="txtDescription" CssClass="form-control description" Width="200px"
                         placeholder="描述" runat="server"></asp:TextBox>
+                    <asp:HiddenField ID="hdnMetergroupid" runat="server" />
                     <asp:RequiredFieldValidator ID="rfvGroupName" runat="server" Display="Dynamic" ErrorMessage="必填字段"
                         ControlToValidate="txtGroupName" CssClass="help-inline"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator ID="rfvDescrption" runat="server" Display="Dynamic" ErrorMessage="必填字段"
@@ -48,9 +49,9 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <tr>
-                    <td><input type="text" name="sequence" placeholder="序号" value="<%# Eval("SEQUENCE")%>" /></td>
-                    <td><input type="text" name="metername" placeholder="计量点编号"  <%# Eval("METERNAME")%> /></td>
-                    <td><%# Eval("METERDESCRIPTION")%></td>
+                    <td><input type="text" name="sequence" placeholder="序号" value="" /></td>
+                    <td><input type="text" name="metername" placeholder="计量点编号"  /></td>
+                    <td></td>
                     <td><span class="glyphicon glyphicon-remove"></span></td>
                 </tr>
                 </ItemTemplate>

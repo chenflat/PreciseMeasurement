@@ -29,6 +29,7 @@
                     <th>
                         描述
                     </th>
+                    <th></th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
@@ -38,6 +39,9 @@
                 </td>
                 <td>
                     <%# Eval("Description") %>
+                </td>
+                <td>
+                <a href="MeterGroupForm.aspx?metergroupid=<%# Eval("METERGROUPID") %>">编辑</a>
                 </td>
             </tr>
         </ItemTemplate>

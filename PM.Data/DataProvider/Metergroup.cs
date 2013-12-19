@@ -48,5 +48,42 @@ namespace PM.Data {
             return DatabaseProvider.GetInstance().FindMetergroupByCondition(condition);
         }
 
+        /// <summary>
+        /// 获取计量器组信息
+        /// </summary>
+        /// <param name="metergroupid">计量器ID</param>
+        /// <returns></returns>
+        public static MetergroupInfo GetMetergroupInfo(long metergroupid) {
+            if (metergroupid <= 0)
+                return null;
+
+            MetergroupInfo metergroupInfo = null;
+            string condition = string.Format(" and METERGROUPID={0}",metergroupid);
+            DataTable result = FindMetergroupByCondition(condition);
+            using (IDataReader reader = result.CreateDataReader()) {
+                if (reader.Read()) {
+                    metergroupInfo = LoadMetergroupInfo(reader);
+                    reader.Close();
+                }
+            }
+
+            return metergroupInfo;
+        }
+
+        public static MetergroupInfo LoadMetergroupInfo(IDataReader reader) {
+
+            MetergroupInfo metergroupInfo = new MetergroupInfo();
+
+            metergroupInfo.Metergroupid = reader.GetInt64(reader.GetOrdinal("METERGROUPID"));
+            metergroupInfo.Description = reader["DESCRIPTION"].ToString();
+            metergroupInfo.Groupname = reader["GROUPNAME"].ToString();
+            metergroupInfo.Langcode = reader["LANGCODE"].ToString();
+            metergroupInfo.Hasld = reader.GetBoolean(reader.GetOrdinal("HASLD"));
+
+            return metergroupInfo;
+
+        }
+
+
     }
 }

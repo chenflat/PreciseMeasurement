@@ -25,6 +25,7 @@ namespace PM.Web.admin.Meter {
             if (!IsPostBack) {
                 if (Request.QueryString["metergroupid"] != null) {
                     metergroupid = long.Parse(PMRequest.GetString("metergroupid"));
+                    SetMeterGroup();
                 }
                 BindData();
             }
@@ -37,6 +38,10 @@ namespace PM.Web.admin.Meter {
         private void SetMeterGroup() {
             if (metergroupid == 0)
                 return;
+            MetergroupInfo metergroupInfo = PM.Data.Metergroup.GetMetergroupInfo(metergroupid);
+            txtGroupName.Text = metergroupInfo.Groupname;
+            txtDescription.Text = metergroupInfo.Description;
+            hdnMetergroupid.Value = metergroupid.ToString();
 
         }
 
@@ -46,9 +51,6 @@ namespace PM.Web.admin.Meter {
         private void BindData() {
             DataTable dt = new DataTable();
             if (dt.Rows.Count==0) {
-                dt.Columns.Add("SEQUENCE");
-                dt.Columns.Add("METERNAME");
-                dt.Columns.Add("METERDESCRIPTION");
                 dt.Rows.Add();
             }
             rptMeteringroup.DataSource = dt;
@@ -61,7 +63,9 @@ namespace PM.Web.admin.Meter {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e) {
-            
+            if (this.IsValid) { 
+                
+            }
         }
     }
 }

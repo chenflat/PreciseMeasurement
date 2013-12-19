@@ -120,6 +120,7 @@
     <Content Include="assets\ico\favicon.png" />
     <Content Include="assets\ico\icon.png" />
     <Content Include="assets\ico\realtime.gif" />
+    <Content Include="assets\ico\steamtrap.gif" />
     <Content Include="assets\ico\steam_trap.png" />
     <Content Include="assets\ico\subsystem.png" />
     <Content Include="assets\ico\valve.png" />
