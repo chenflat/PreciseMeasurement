@@ -46,11 +46,14 @@
                         <th width="15%">
                             父级
                         </th>
-                        <th width="25%">
+                        <th width="15%">
                             地点
                         </th>
                         <th width="10%">
                             状态
+                        </th>
+                        <th width="10%">
+                            
                         </th>
                     </tr>
             </HeaderTemplate>
@@ -65,6 +68,9 @@
                     <td><%# Eval("SITEID")%>
                     </td>
                     <td><%# Eval("STATUS") %>
+                    </td>
+                    <td>
+                   <a href="AssetForm.aspx?assetuid=<%# Eval("ASSETUID") %>">编辑</a>
                     </td>
                 </tr>
             </ItemTemplate>

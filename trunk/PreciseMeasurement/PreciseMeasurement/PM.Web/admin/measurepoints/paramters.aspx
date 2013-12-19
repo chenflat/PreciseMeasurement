@@ -7,10 +7,13 @@
             <h3>
                 <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置
             </h3>
+            <div class="manager_buttons">
+            <a href="list.aspx" class="btn btn-info">返回</a>
+            </div>
         </div>
     </div>
     <asp:GridView ID="gvParamters" runat="server" AutoGenerateColumns="False" CellPadding="4"
-        CellSpacing="1" CssClass="table table-striped" EnableModelValidation="True">
+        CellSpacing="1" CssClass="table table-bordered table-hover table-striped" EnableModelValidation="True">
         <Columns>
             <asp:BoundField DataField="MEASUREUNITNAME" HeaderText="参量名称" />
             <asp:BoundField DataField="ABBREVIATION" HeaderText="单位" />
@@ -28,10 +31,7 @@
         </Columns>
         <PagerSettings Visible="False" />
     </asp:GridView>
-    <div class="toolbar bs-callout-danger">
-        
-        <a href="list.aspx" class="btn btn-info">返回</a>
-    </div>
+    
     <div class="modal fade bs-example-modal" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

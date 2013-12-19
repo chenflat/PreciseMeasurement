@@ -191,9 +191,15 @@
 }
 
 .buttonSteamTrap {
-    background:url("../ico/steamtrap.png") no-repeat top left;
+    background:url("../ico/steam_trap.png") no-repeat top left;
+}
+.buttonSteamTrap:hover {
+    background:url("../ico/steam_trap.gif") no-repeat top left;
 }
    
 .buttonValve {
     background:url("../ico/valve.png") no-repeat top left;
+}
+.buttonValve:hover {
+    background:url("../ico/valve.gif") no-repeat top left;
 }
