@@ -67,6 +67,12 @@
         <li>
           <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
         </li>
+        <li>
+          <a href="<%=ResolveUrl("~/steamtrap/") %>">疏水器</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/valve/") %>">阀门</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right user-nav">
             <li id="sysmanage"><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">系统管理</a></li>
