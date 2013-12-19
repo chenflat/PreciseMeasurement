@@ -120,11 +120,13 @@
     <Content Include="assets\ico\favicon.png" />
     <Content Include="assets\ico\icon.png" />
     <Content Include="assets\ico\realtime.gif" />
-    <Content Include="assets\ico\steamtrap.gif" />
+    <Content Include="assets\ico\steam_trap.gif" />
     <Content Include="assets\ico\steam_trap.png" />
     <Content Include="assets\ico\subsystem.png" />
+    <Content Include="assets\ico\valve.gif" />
     <Content Include="assets\ico\valve.png" />
     <Content Include="assets\img\bg.png" />
+    <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\meter.png" />
     <Content Include="assets\img\refresh.png" />
     <Content Include="assets\img\systemrunchart.png" />
