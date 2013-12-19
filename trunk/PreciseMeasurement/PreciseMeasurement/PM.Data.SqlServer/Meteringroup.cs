@@ -45,8 +45,8 @@ namespace PM.Data.SqlServer
 		
 		public bool UpdateMeteringroup(MeteringroupInfo meteringroupInfo)
         {
-		
-			DbParameter[] parms = { 
+
+            DbParameter[] parms = { 
 			            DbHelper.MakeInParam("@METERINGROUPID", (DbType)SqlDbType.BigInt,8,meteringroupInfo.Meteringroupid),
                         DbHelper.MakeInParam("@AVGCALCMETHOD", (DbType)SqlDbType.VarChar,25,meteringroupInfo.Avgcalcmethod),			
                         DbHelper.MakeInParam("@GROUPNAME", (DbType)SqlDbType.VarChar,10,meteringroupInfo.Groupname),			
@@ -56,7 +56,7 @@ namespace PM.Data.SqlServer
                         DbHelper.MakeInParam("@SLIDINGWINDOWSIZE", (DbType)SqlDbType.Int,4,meteringroupInfo.Slidingwindowsize),			
                         DbHelper.MakeInParam("@STATICAVERAGE", (DbType)SqlDbType.Decimal,8,meteringroupInfo.Staticaverage)
 			
-			}
+			};
 			string commandText = string.Format("UPDATE [{0}METERINGROUP] SET [AVGCALCMETHOD] = @AVGCALCMETHOD,[GROUPNAME] = @GROUPNAME,[METERNAME] = @METERNAME,[ROLLOVER] = @ROLLOVER,[SEQUENCE] = @SEQUENCE,[SLIDINGWINDOWSIZE] = @SLIDINGWINDOWSIZE,[STATICAVERAGE] = @STATICAVERAGEWHERE [METERINGROUPID]=@METERINGROUPID",BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
 		}
