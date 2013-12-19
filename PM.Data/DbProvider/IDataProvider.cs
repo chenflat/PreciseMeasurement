@@ -4,10 +4,8 @@ using System.Text;
 using System.Data;
 using PM.Entity;
 
-namespace PM.Data
-{
-    public partial interface IDataProvider
-    {
+namespace PM.Data {
+    public partial interface IDataProvider {
         /// <summary>
         /// 获取组织机构
         /// </summary>
@@ -139,7 +137,7 @@ namespace PM.Data
         /// <param name="orgid">组织机构ID</param>
         /// <param name="siteid">地点ID</param>
         /// <returns></returns>
-        IDataReader GetLevels(string orgid,string siteid);
+        IDataReader GetLevels(string orgid, string siteid);
 
 
         /// <summary>
@@ -249,7 +247,7 @@ namespace PM.Data
         /// <param name="pointnum">计量点</param>
         /// <param name="lastsyntime">最后更新时间</param>
         /// <returns></returns>
-        bool UpdateMeasurePointLastSynTime(string pointnum,DateTime lastsyntime);
+        bool UpdateMeasurePointLastSynTime(string pointnum, DateTime lastsyntime);
 
 
         /// <summary>
@@ -286,7 +284,7 @@ namespace PM.Data
         /// <param name="orgid">组织机构ID</param>
         /// <param name="siteid">地点ID</param>
         /// <returns></returns>
-        IDataReader FindMeasurePointsByLevel(int level,string orgid,string siteid);
+        IDataReader FindMeasurePointsByLevel(int level, string orgid, string siteid);
 
         /// <summary>
         /// 添加计量点参数信息
@@ -454,7 +452,7 @@ namespace PM.Data
         /// <param name="pagesize">每页显示数</param>
         /// <param name="recordcount">总条数</param>
         /// <returns></returns>
-        DataTable FindMeasurementByCondition(string condition, string type,int pageindex, int pagesize, out int recordcount);
+        DataTable FindMeasurementByCondition(string condition, string type, int pageindex, int pagesize, out int recordcount);
 
         /// <summary>
         /// 获取指定测点的读表数据
@@ -467,7 +465,7 @@ namespace PM.Data
         /// <param name="pagesize">每页显示数</param>
         /// <param name="recordcount">总条数</param>
         /// <returns></returns>
-        DataSet FindMeasurementByPointnum(string pointnum,string startdate,string enddate, string type, int pageindex, int pagesize);
+        DataSet FindMeasurementByPointnum(string pointnum, string startdate, string enddate, string type, int pageindex, int pagesize);
 
         /// <summary>
         /// 获取指定时间内所有计量器的读表数据
@@ -479,7 +477,7 @@ namespace PM.Data
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize);
+        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string level, string type, int pageindex, int pagesize);
 
         /// <summary>
         /// 获取指定时间内的的测量数据
@@ -487,7 +485,7 @@ namespace PM.Data
         /// <param name="startdate">开始时间</param>
         /// <param name="enddate">结束时间</param>
         /// <returns></returns>
-        IDataReader FindMeasurementByDate(string startdate, string enddate,string pointNum,ReportType reportType);
+        IDataReader FindMeasurementByDate(string startdate, string enddate, string pointNum, ReportType reportType);
 
         /// <summary>
         /// 获取指定测点的最后计量时间
@@ -515,7 +513,7 @@ namespace PM.Data
         /// <param name="level">等级</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        DataTable GetMeasurementReport(string startdate, string enddate,string level, ReportType reportType);
+        DataTable GetMeasurementReport(string startdate, string enddate, string level, ReportType reportType);
 
 
         /// <summary>
@@ -589,14 +587,14 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        IDataReader FindAnalyzeSettingInfo(int userid,string orgid);
+        IDataReader FindAnalyzeSettingInfo(int userid, string orgid);
 
         /// <summary>
         /// 查找报警信息
         /// </summary>
         /// <param name="orgid">机构ID</param>
         /// <returns></returns>
-        DataSet FindAlarmlogInfo(string startdate, string enddate,string pointnum, int status, string orgid, int pageindex, int pagesize);
+        DataSet FindAlarmlogInfo(string startdate, string enddate, string pointnum, int status, string orgid, int pageindex, int pagesize);
 
         /// <summary>
         /// 创建报表设置
@@ -612,7 +610,7 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        bool DeleteReportSettingByUserId(string settingname,int userid,string orgid);
+        bool DeleteReportSettingByUserId(string settingname, int userid, string orgid);
 
         /// <summary>
         /// 删除指定用户的报表设置
@@ -645,5 +643,387 @@ namespace PM.Data
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
         IDataReader GetReportSettingNameList(int userid, string orgid);
+
+        /// <summary>
+        /// 创建资产信息
+        /// </summary>
+        /// <param name="assetInfo">资产信息</param>
+        /// <returns></returns>
+        int CreateAsset(AssetInfo assetInfo);
+
+        /// <summary>
+        /// 更新资产信息
+        /// </summary>
+        /// <param name="assetInfo"></param>
+        /// <returns></returns>
+        bool UpdateAsset(AssetInfo assetInfo);
+
+        /// <summary>
+        /// 删除指定的资产信息
+        /// </summary>
+        /// <param name="idList">资产数据主键ID列表</param>
+        /// <returns></returns>
+        int DeleteAsset(string idList);
+
+        /// <summary>
+        /// 查找指定条件的资产信息
+        /// </summary>
+        /// <param name="condition">查询条件SQL</param>
+        /// <returns></returns>
+        DataTable FindAssetByCondition(string condition);
+
+        /// <summary>
+        /// 返回指定查询条件的资产信息条数
+        /// </summary>
+        /// <param name="condition">查询条件SQL</param>
+        /// <returns></returns>
+        int AssetCount(string condition);
+
+
+        /// <summary>
+        /// 创建资产属性信息
+        /// </summary>
+        /// <param name="assetattributeInfo">资产属性对象</param>
+        /// <returns></returns>
+        int CreateAssetattribute(AssetattributeInfo assetattributeInfo);
+
+        /// <summary>
+        /// 更新资产属性信息
+        /// </summary>
+        /// <param name="assetattributeInfo">资产属性对象</param>
+        /// <returns></returns>
+        bool UpdateAssetattribute(AssetattributeInfo assetattributeInfo);
+
+        /// <summary>
+        /// 删除指定的资产属性信息
+        /// </summary>
+        /// <param name="idList">属性数据ID列表</param>
+        /// <returns></returns>
+        int DeleteAssetattribute(string idList);
+
+        /// <summary>
+        /// 查找指定属性ID的信息
+        /// </summary>
+        /// <param name="assetattrid">资产属性ID</param>
+        /// <returns></returns>
+        IDataReader FindAssetattributeByAssetattrid(String assetattrid);
+
+        /// <summary>
+        /// 查找指定条件的资产属性信息
+        /// </summary>
+        /// <param name="condition">查询条件SQL，以 and 开始</param>
+        /// <returns></returns>
+        DataTable FindAssetattributeByCondition(string condition);
+
+        /// <summary>
+        /// 获取查询条件的结果条数
+        /// </summary>
+        /// <param name="condition">查询条件SQL，以 and 开始</param>
+        /// <returns></returns>
+        int AssetattributeCount(string condition);
+
+        /// <summary>
+        /// 创建资产计量器
+        /// </summary>
+        /// <param name="assetmeterInfo">资产计量器对象</param>
+        /// <returns></returns>
+        int CreateAssetmeter(AssetmeterInfo assetmeterInfo);
+
+        /// <summary>
+        /// 更新资产计量器
+        /// </summary>
+        /// <param name="assetmeterInfo">资产计量器对象</param>
+        /// <returns></returns>
+        bool UpdateAssetmeter(AssetmeterInfo assetmeterInfo);
+
+        /// <summary>
+        /// 删除资产计量器
+        /// </summary>
+        /// <param name="idList">计量器ID列表</param>
+        /// <returns></returns>
+        int DeleteAssetmeter(string idList);
+
+        /// <summary>
+        /// 查找资产对应的计量器
+        /// </summary>
+        /// <param name="assetnum">资产编号</param>
+        /// <returns></returns>
+        DataTable FindAssetmeterByAssetnum(string assetnum);
+
+        /// <summary>
+        /// 查找资产计量器
+        /// </summary>
+        /// <param name="condition">查询SQL</param>
+        /// <returns></returns>
+        DataTable FindAssetmeterByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建计量器组信息
+        /// </summary>
+        /// <param name="metergroupInfo">计量器组对象</param>
+        /// <returns></returns>
+        int CreateMetergroup(MetergroupInfo metergroupInfo);
+
+        /// <summary>
+        /// 更新计量器组信息
+        /// </summary>
+        /// <param name="metergroupInfo">计量器组对象</param>
+        /// <returns></returns>
+        bool UpdateMetergroup(MetergroupInfo metergroupInfo);
+
+        /// <summary>
+        /// 删除计量器组信息
+        /// </summary>
+        /// <param name="idList">数据ID</param>
+        /// <returns></returns>
+        int DeleteMetergroup(string idList);
+
+        /// <summary>
+        /// 查找计量器组信息
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindMetergroupByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建计量器组包含的计量器
+        /// </summary>
+        /// <param name="meteringroupInfo">计量器组包含的计量器对象</param>
+        /// <returns></returns>
+        int CreateMeteringroup(MeteringroupInfo meteringroupInfo);
+
+        /// <summary>
+        /// 更新计量器组包含的计量器
+        /// </summary>
+        /// <param name="meteringroupInfo">计量器组包含的计量器对象</param>
+        /// <returns></returns>
+        bool UpdateMeteringroup(MeteringroupInfo meteringroupInfo);
+
+        /// <summary>
+        /// 删除计量器组包含的计量器
+        /// </summary>
+        /// <param name="idList">数据ID</param>
+        /// <returns></returns>
+        int DeleteMeteringroup(string idList);
+
+        /// <summary>
+        /// 查找计量器组包含的计量器
+        /// </summary>
+        /// <param name="condition">查询SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindMeteringroupByCondition(string condition);
+
+
+
+        /// <summary>
+        /// 创建资产规范变更历史记录
+        /// </summary>
+        /// <param name="assetspechistInfo">资产规范变更历史记录对象</param>
+        /// <returns></returns>
+        int CreateAssetspechist(AssetspechistInfo assetspechistInfo);
+
+        /// <summary>
+        /// 更新资产规范变更历史记录
+        /// </summary>
+        /// <param name="assetspechistInfo">资产规范变更历史记录对象</param>
+        /// <returns></returns>
+        bool UpdateAssetspechist(AssetspechistInfo assetspechistInfo);
+
+        /// <summary>
+        /// 删除资产规范变更历史记录
+        /// </summary>
+        /// <param name="idList">数据ID</param>
+        /// <returns></returns>
+        int DeleteAssetspechist(string idList);
+
+        /// <summary>
+        /// 查找资产规范变更历史记录
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindAssetspechistByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建资产类别定义
+        /// </summary>
+        /// <param name="classificationInfo">资产类别定义对象</param>
+        /// <returns></returns>
+        int CreateClassification(ClassificationInfo classificationInfo);
+
+        /// <summary>
+        /// 更新资产类别定义
+        /// </summary>
+        /// <param name="classificationInfo">资产类别定义对象</param>
+        /// <returns></returns>
+        bool UpdateClassification(ClassificationInfo classificationInfo);
+
+        /// <summary>
+        /// 删除资产类别定义
+        /// </summary>
+        /// <param name="idList">类别主键ID</param>
+        /// <returns></returns>
+        int DeleteClassification(string idList);
+
+        /// <summary>
+        /// 查找资产类别定义
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindClassificationByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建资产属性模板
+        /// </summary>
+        /// <param name="classspecInfo">资产属性模板对象</param>
+        /// <returns></returns>
+        int CreateClassspec(ClassspecInfo classspecInfo);
+
+        /// <summary>
+        /// 更新资产属性模板
+        /// </summary>
+        /// <param name="classspecInfo">资产属性模板对象</param>
+        /// <returns></returns>
+        bool UpdateClassspec(ClassspecInfo classspecInfo);
+
+        /// <summary>
+        /// 删除资产属性模板
+        /// </summary>
+        /// <param name="idList">属性模板ID</param>
+        /// <returns></returns>
+        int DeleteClassspec(string idList);
+
+        /// <summary>
+        /// 查找资产属性模板
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindClassspecByCondition(string condition);
+
+
+
+        /// <summary>
+        /// 创建类别层次结构定义
+        /// </summary>
+        /// <param name="classstructureInfo">类别层次结构定义对象</param>
+        /// <returns></returns>
+        int CreateClassstructure(ClassstructureInfo classstructureInfo);
+
+        /// <summary>
+        /// 更新类别层次结构定义
+        /// </summary>
+        /// <param name="classstructureInfo">类别层次结构定义对象</param>
+        /// <returns></returns>
+        bool UpdateClassstructure(ClassstructureInfo classstructureInfo);
+
+        /// <summary>
+        /// 删除类别层次结构定义
+        /// </summary>
+        /// <param name="idList">结构主键ID，多个ID以","分隔</param>
+        /// <returns></returns>
+        int DeleteClassstructure(string idList);
+
+        /// <summary>
+        /// 查找类别层次结构定义
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindClassstructureByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建长描述
+        /// </summary>
+        /// <param name="longdescriptionInfo">长描述对象</param>
+        /// <returns></returns>
+        int CreateLongdescription(LongdescriptionInfo longdescriptionInfo);
+
+        /// <summary>
+        /// 更新长描述，通过主键ID
+        /// </summary>
+        /// <param name="longdescriptionInfo">长描述对象</param>
+        /// <returns></returns>
+        bool UpdateLongdescriptionById(LongdescriptionInfo longdescriptionInfo);
+
+        /// <summary>
+        /// 更新长描述,通过键值
+        /// </summary>
+        /// <param name="longdescriptionInfo">长描述对象</param>
+        /// <returns></returns>
+        bool UpdateLongdescriptionByKey(LongdescriptionInfo longdescriptionInfo);
+
+        /// <summary>
+        /// 删除长描述
+        /// </summary>
+        /// <param name="idList">长描述主键ID，多个ID以","分隔</param>
+        /// <returns></returns>
+        int DeleteLongdescription(string idList);
+
+        /// <summary>
+        /// 查找长描述
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindLongdescriptionByCondition(string condition);
+
+
+        /// <summary>
+        /// 创建系统系统域定义
+        /// </summary>
+        /// <param name="pmdomainInfo">系统域定义对象</param>
+        /// <returns></returns>
+        int CreatePmdomain(PmdomainInfo pmdomainInfo);
+
+        /// <summary>
+        /// 更新系统域定义
+        /// </summary>
+        /// <param name="pmdomainInfo">系统域定义对象</param>
+        /// <returns></returns>
+        bool UpdatePmdomain(PmdomainInfo pmdomainInfo);
+
+        /// <summary>
+        /// 删除系统域定义
+        /// </summary>
+        /// <param name="idList">系统域定义主键ID，多个ID以","分隔</param>
+        /// <returns></returns>
+        int DeletePmdomain(string idList);
+
+        /// <summary>
+        /// 查找系统域定义
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns>查询条件SQL,以 and 开头</returns>
+        DataTable FindPmdomainByCondition(string condition);
+
+        /// <summary>
+        /// 创建同义数值域定义
+        /// </summary>
+        /// <param name="synonymdomainInfo">同义数值域定义对象</param>
+        /// <returns></returns>
+        int CreateSynonymdomain(SynonymdomainInfo synonymdomainInfo);
+
+        /// <summary>
+        /// 更新同义数值域定义
+        /// </summary>
+        /// <param name="synonymdomainInfo">同义数值域定义对象</param>
+        /// <returns></returns>
+        bool UpdateSynonymdomain(SynonymdomainInfo synonymdomainInfo);
+
+        /// <summary>
+        /// 删除同义数值域定义
+        /// </summary>
+        /// <param name="idList">同义数值域定义主键ID</param>
+        /// <returns></returns>
+        int DeleteSynonymdomain(string idList);
+
+        /// <summary>
+        /// 查找同义数值域定义
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindSynonymdomainByCondition(string condition);
     }
 }
