@@ -46,6 +46,7 @@
     <Compile Include="Classification.cs" />
     <Compile Include="Classspec.cs" />
     <Compile Include="Classstructure.cs" />
+    <Compile Include="ClassUseWith.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Longdescription.cs" />
     <Compile Include="Measurement.cs" />
