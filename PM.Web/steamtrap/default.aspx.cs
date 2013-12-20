@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 using PM.Common;
 using PM.Business;
@@ -16,7 +17,16 @@ namespace PM.Web.steamtrap
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack) {
+                BindData();
+            }
+        }
 
+        private void BindData() {
+            string condition = "SPECCLASS='STEAM' AND CLASSSTRUCTUREID='P010101'";
+            DataTable assets = PM.Data.Asset.FindAssetByCondition(condition);
+            rptAsset.DataSource = assets;
+            rptAsset.DataBind();
         }
     }
 }

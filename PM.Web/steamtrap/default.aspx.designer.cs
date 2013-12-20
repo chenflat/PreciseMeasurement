@@ -13,12 +13,12 @@ namespace PM.Web.steamtrap {
     public partial class _default {
         
         /// <summary>
-        /// rptMeasurePoint 控件。
+        /// rptAsset 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptMeasurePoint;
+        protected global::System.Web.UI.WebControls.Repeater rptAsset;
     }
 }

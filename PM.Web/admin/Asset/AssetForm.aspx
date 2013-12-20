@@ -2,7 +2,8 @@
     CodeBehind="AssetForm.aspx.cs" Inherits="PM.Web.admin.Asset.AssetForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
- <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/AssetManager.js") %>"></script>
+    
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/AssetManager.js") %>"></script>
     <script>
         var USERID = "<%=userid %>";
         var ORGID = "<%=orgid %>";
@@ -11,7 +12,8 @@
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
-                资产 / 新增</h3>
+                资产 / 
+                <asp:Literal ID="ltStatus" runat="server"></asp:Literal></h3>
             <div class="manager_buttons">
                 <asp:Button ID="btnSave" CssClass="btn btn-warning" runat="server" Text="保存" />
                 <a href="AssetList.aspx" class="btn btn-info">返回</a>
@@ -32,6 +34,7 @@
                         ControlToValidate="txtAssetNum" CssClass="help-inline"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator ID="rfvDescrption" runat="server" Display="Dynamic" ErrorMessage="必填字段"
                         ControlToValidate="txtDescription" CssClass="help-inline"></asp:RequiredFieldValidator>
+                    <asp:HiddenField ID="hdnAssetuid" runat="server" />
                 </div>
             </div>
             <div class="form-group">
@@ -51,11 +54,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
-                    类型：</label>
-                <div class="col-lg-9">
-                    <asp:TextBox ID="txtAssetType" runat="server"></asp:TextBox>
-                </div>
+                <label for="<%=ddlSpecClass.ClientID %>" class="col-lg-3 control-label">
+                    子系统：</label>
+                <div class="col-lg-9" >
+
+                    <asp:DropDownList ID="ddlSpecClass" CssClass="select2" Width="190px" runat="server">
+                    </asp:DropDownList>
+             
             </div>
         </div>
     </div>
@@ -70,10 +75,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="<%=txtParent.ClientID %>" class="col-lg-3 control-label">
+                        <label for="<%=ddlParent.ClientID %>" class="col-lg-3 control-label">
                             父资产：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtParent" runat="server" class="parentAsset"></asp:TextBox>
+                            <asp:DropDownList ID="ddlParent" Width="190px" CssClass="select2" runat="server">
+                            </asp:DropDownList>
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,10 +90,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="<%=txtGroupName.ClientID %>" class="col-lg-3 control-label">
+                        <label for="<%=ddlGroupName.ClientID %>" class="col-lg-3 control-label">
                             计量器组：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtGroupName" runat="server"></asp:TextBox>
+                            <asp:DropDownList ID="ddlGroupName" Width="190px" CssClass="select2" runat="server">
+                            </asp:DropDownList>
                         </div>
                     </div>
                     <div class="form-group">
@@ -108,39 +115,26 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
-                            日历：</label>
-                        <div class="col-lg-9">
-                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
-                            班次：</label>
-                        <div class="col-lg-9">
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
                             优先级：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPriority" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
+                        <label for="<%=txtSerialnum.ClientID %>" class="col-lg-3 control-label">
                             序列#：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtSerialnum" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
                             故障类：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtFailurecode" runat="server"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -155,24 +149,24 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="form-group">
-                            <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
-                                代理商：</label>
+                            <label for="<%=txtVendor.ClientID %>" class="col-lg-3 control-label">
+                                供应商：</label>
                             <div class="col-lg-9">
-                                <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtVendor" runat="server"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
+                            <label for="<%=txtManufacturer.ClientID %>" class="col-lg-3 control-label">
                                 制造商：</label>
                             <div class="col-lg-9">
-                                <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtManufacturer" runat="server"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
+                            <label for="<%=txtInstalldate.ClientID %>" class="col-lg-3 control-label">
                                 安装日期：</label>
                             <div class="col-lg-9">
-                                <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtInstalldate" runat="server"></asp:TextBox>
                             </div>
                         </div>
                     </div>

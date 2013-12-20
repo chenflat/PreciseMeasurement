@@ -13,6 +13,15 @@ namespace PM.Web.admin.Asset {
     public partial class AssetForm {
         
         /// <summary>
+        /// ltStatus 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltStatus;
+        
+        /// <summary>
         /// btnSave 控件。
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace PM.Web.admin.Asset {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescrption;
         
         /// <summary>
+        /// hdnAssetuid 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnAssetuid;
+        
+        /// <summary>
         /// txtStatus 控件。
         /// </summary>
         /// <remarks>
@@ -76,22 +94,22 @@ namespace PM.Web.admin.Asset {
         protected global::System.Web.UI.WebControls.TextBox txtSiteId;
         
         /// <summary>
-        /// txtAssetType 控件。
+        /// ddlSpecClass 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAssetType;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSpecClass;
         
         /// <summary>
-        /// txtParent 控件。
+        /// ddlParent 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParent;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParent;
         
         /// <summary>
         /// chkMainthierchy 控件。
@@ -103,13 +121,13 @@ namespace PM.Web.admin.Asset {
         protected global::System.Web.UI.WebControls.CheckBox chkMainthierchy;
         
         /// <summary>
-        /// txtGroupName 控件。
+        /// ddlGroupName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroupName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGroupName;
         
         /// <summary>
         /// txtUsage 控件。
@@ -148,76 +166,58 @@ namespace PM.Web.admin.Asset {
         protected global::System.Web.UI.WebControls.TextBox txtZ;
         
         /// <summary>
-        /// TextBox3 控件。
+        /// txtPriority 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtPriority;
         
         /// <summary>
-        /// TextBox1 控件。
+        /// txtSerialnum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtSerialnum;
         
         /// <summary>
-        /// TextBox4 控件。
+        /// txtFailurecode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtFailurecode;
         
         /// <summary>
-        /// TextBox5 控件。
+        /// txtVendor 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox txtVendor;
         
         /// <summary>
-        /// TextBox6 控件。
+        /// txtManufacturer 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox txtManufacturer;
         
         /// <summary>
-        /// TextBox7 控件。
+        /// txtInstalldate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
-        
-        /// <summary>
-        /// TextBox8 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
-        
-        /// <summary>
-        /// TextBox9 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox9;
+        protected global::System.Web.UI.WebControls.TextBox txtInstalldate;
         
         /// <summary>
         /// chkIsrunning 控件。
