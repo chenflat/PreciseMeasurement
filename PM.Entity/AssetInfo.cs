@@ -409,6 +409,22 @@ namespace PM.Entity
 				get	{ return _Ec15; }
 				set	{ _Ec15 = value; }
 			}
+
+            public string X {
+                get { return _Ec1; }
+                set { _Ec1 = value; }
+            }
+
+            public string Y {
+                get { return _Ec2; }
+                set { _Ec2 = value; }
+            }
+            public string Z {
+                get { return _Ec3; }
+                set { _Ec3 = value; }
+            }
+
+
 						
 		#endregion
 	}
