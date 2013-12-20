@@ -50,5 +50,15 @@ namespace PM.Data {
         public static DataTable FindSynonymdomainByCondition(string condition) {
             return DatabaseProvider.GetInstance().FindSynonymdomainByCondition(condition);
         }
+
+
+        /// <summary>
+        /// 查找同义数值域定义
+        /// </summary>
+        /// <param name="domainId">域ID</param>
+        /// <returns></returns>
+        public static DataTable FindSynonymdomainByDomainId(string domainId) {
+            return DatabaseProvider.GetInstance().FindSynonymdomainByDomainId(domainId);
+        }
     }
 }

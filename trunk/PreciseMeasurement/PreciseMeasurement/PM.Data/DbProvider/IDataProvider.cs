@@ -1025,5 +1025,12 @@ namespace PM.Data {
         /// <param name="condition">查询条件SQL,以 and 开头</param>
         /// <returns></returns>
         DataTable FindSynonymdomainByCondition(string condition);
+
+        /// <summary>
+        /// 查找同义数值域定义
+        /// </summary>
+        /// <param name="domainId">域ID</param>
+        /// <returns></returns>
+        DataTable FindSynonymdomainByDomainId(string domainId);
     }
 }
