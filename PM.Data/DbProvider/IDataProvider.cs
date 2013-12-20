@@ -998,6 +998,8 @@ namespace PM.Data {
         /// <returns>查询条件SQL,以 and 开头</returns>
         DataTable FindPmdomainByCondition(string condition);
 
+ 
+
         /// <summary>
         /// 创建同义数值域定义
         /// </summary>
