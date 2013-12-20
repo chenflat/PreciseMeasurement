@@ -69,7 +69,19 @@ namespace PM.Data.SqlServer {
                                                 BaseConfigs.GetTablePrefix,
                                                 condition);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
 
+
+        /// <summary>
+        /// 查找同义数值域定义
+        /// </summary>
+        /// <param name="domainId">域ID</param>
+        /// <returns></returns>
+        public DataTable FindSynonymdomainByDomainId(string domainId) {
+            string commandText = string.Format("select {0}SYNONYMDOMAIN.* from [{0}SYNONYMDOMAIN] WHERE DOMAINID='{1}'",
+                                               BaseConfigs.GetTablePrefix,
+                                               domainId);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
 
