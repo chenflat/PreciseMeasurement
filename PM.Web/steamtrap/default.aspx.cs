@@ -23,7 +23,7 @@ namespace PM.Web.steamtrap
         }
 
         private void BindData() {
-            string condition = "SPECCLASS='STEAM' AND CLASSSTRUCTUREID='P010101'";
+            string condition = " AND SPECCLASS='STEAM' AND CLASSSTRUCTUREID='P010101'";
             DataTable assets = PM.Data.Asset.FindAssetByCondition(condition);
             rptAsset.DataSource = assets;
             rptAsset.DataBind();

@@ -26,7 +26,7 @@
                 <label for="<%=txtAssetNum.ClientID %>" class="col-lg-3 control-label">
                     资产：*</label>
                 <div class="col-lg-9">
-                    <asp:TextBox ID="txtAssetNum" CssClass="form-control" Width="120px" placeholder="编号"
+                    <asp:TextBox ID="txtAssetNum" CssClass="form-control assetnum" Width="120px" placeholder="编号"
                         runat="server"></asp:TextBox>
                     <asp:TextBox ID="txtDescription" CssClass="form-control description" Width="200px"
                         placeholder="描述" runat="server"></asp:TextBox>
@@ -108,9 +108,9 @@
                         <label for="<%=txtX.ClientID %>" class="col-lg-3 control-label">
                             拓扑位置：</label>
                         <div class="col-lg-9">
-                            X:<asp:TextBox ID="txtX" runat="server" Width="40px"></asp:TextBox>
-                            Y:<asp:TextBox ID="txtY" runat="server" Width="40px"></asp:TextBox>
-                            Z:<asp:TextBox ID="txtZ" runat="server" Width="40px"></asp:TextBox>
+                            X:<asp:TextBox ID="txtX" runat="server" CssClass="coordinate x" Width="40px"></asp:TextBox>
+                            Y:<asp:TextBox ID="txtY" runat="server" CssClass="coordinate y" Width="40px"></asp:TextBox>
+                            Z:<asp:TextBox ID="txtZ" runat="server" CssClass="coordinate z" Width="40px"></asp:TextBox>
                         </div>
                     </div>
                 </div>

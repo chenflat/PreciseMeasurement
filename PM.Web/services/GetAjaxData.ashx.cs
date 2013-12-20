@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Text;
 using System.Reflection;
@@ -88,8 +87,6 @@ namespace PM.Web.services {
 
             return ret;
         }
-
-
 
 
         private void OutputString(HttpContext context, string strReturn) {
