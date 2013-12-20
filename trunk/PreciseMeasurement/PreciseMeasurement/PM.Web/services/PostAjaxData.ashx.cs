@@ -42,11 +42,9 @@ namespace PM.Web.services {
             if (dictionary.ContainsKey("data")) {
 
                 List<AssetInfo> list = JsonConvert.DeserializeObject<List<AssetInfo>>(dictionary["data"].ToString());
-
+                int count = PM.Data.Asset.UpdateAssetCoordinateList(list);
+                ret = count.ToString();
             }
-
-
-
             return ret;
 
         }

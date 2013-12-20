@@ -43,6 +43,19 @@ namespace PM.Data {
         }
 
         /// <summary>
+        /// 更新资产坐标
+        /// </summary>
+        /// <param name="coordinates">坐标列表</param>
+        /// <returns></returns>
+        public static int UpdateAssetCoordinateList(List<AssetInfo> coordinates) {
+            int count = 0;
+            for (int i = 0; i < coordinates.Count; i++) {
+                count += UpdateAssetCoordinates(coordinates[i].Assetuid, coordinates[i].X, coordinates[i].Y, coordinates[i].Z);
+            }
+            return count;
+        }
+
+        /// <summary>
         /// 删除指定的资产信息
         /// </summary>
         /// <param name="idList">资产数据主键ID列表</param>
