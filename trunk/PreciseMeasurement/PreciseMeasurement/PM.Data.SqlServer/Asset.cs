@@ -149,6 +149,27 @@ namespace PM.Data.SqlServer {
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
+        /// <summary>
+        /// 更新资产坐标
+        /// </summary>
+        /// <param name="assetuid"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public int UpdateAssetCoordinates(long assetuid, string x, string y, string z) {
+
+            DbParameter[] parms = { 
+			        DbHelper.MakeInParam("@ASSETUID", (DbType)SqlDbType.BigInt,8,assetuid),
+                    		
+                    DbHelper.MakeInParam("@EC1", (DbType)SqlDbType.VarChar,10,x),			
+                    DbHelper.MakeInParam("@EC2", (DbType)SqlDbType.VarChar,10,y),			
+                    DbHelper.MakeInParam("@EC3", (DbType)SqlDbType.VarChar,10,z)
+                                   };
+		    string commandText = string.Format("UPDATE [{0}ASSET] SET [EC1] = @EC1,[EC2] = @EC2,[EC3] = @EC3 WHERE [ASSETUID]=@ASSETUID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
         public int DeleteAsset(string idList) {
             string commandText = string.Format("DELETE FROM [{0}ASSET] WHERE [ASSETUID] IN ({1})",
                                               BaseConfigs.GetTablePrefix,
