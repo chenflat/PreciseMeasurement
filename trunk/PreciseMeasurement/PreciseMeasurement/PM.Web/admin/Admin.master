@@ -2,6 +2,8 @@
     Inherits="PM.Web.admin.Admin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<link href="<%=ResolveUrl("~/assets/lib/select2/select2.css") %>" rel="stylesheet" />
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/select2/select2.min.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row col-md-12" style="padding: 0px;">

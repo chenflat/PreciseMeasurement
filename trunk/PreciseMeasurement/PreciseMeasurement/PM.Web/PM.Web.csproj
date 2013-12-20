@@ -177,6 +177,8 @@
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="assets\lib\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="assets\lib\My97DatePicker\WdatePicker.js" />
+    <Content Include="assets\lib\select2\select2.css" />
+    <Content Include="assets\lib\select2\select2.min.js" />
     <Content Include="assets\lib\treegrid\css\jquery.treegrid.css" />
     <Content Include="assets\lib\treegrid\img\collapse.png" />
     <Content Include="assets\lib\treegrid\img\expand.png" />
@@ -467,6 +469,7 @@
     <Content Include="report\month.aspx" />
     <Content Include="report\week.aspx" />
     <Content Include="steamtrap\default.aspx" />
+    <Content Include="steamtrap\detailinfo.aspx" />
     <Content Include="structure\default.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="valve\default.aspx" />
@@ -869,6 +872,13 @@
     </Compile>
     <Compile Include="steamtrap\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="steamtrap\detailinfo.aspx.cs">
+      <DependentUpon>detailinfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="steamtrap\detailinfo.aspx.designer.cs">
+      <DependentUpon>detailinfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="structure\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
