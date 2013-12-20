@@ -4,6 +4,8 @@
 */
 $(function () {
 
-   // parentAsset
+    // parentAsset
+
+    $(".select2").select2();
 
 });
