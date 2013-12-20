@@ -48,5 +48,34 @@ namespace PM.Data {
             return DatabaseProvider.GetInstance().FindPmdomainByCondition(condition);
         }
 
+        /// <summary>
+        /// 查找域对象数据
+        /// </summary>
+        /// <param name="domainId"></param>
+        /// <returns></returns>
+        public static DataTable FindPMDomainByDomainId(string domainId) {
+
+            string condition = string.Format(" and [DOMAINID]='{0}'",domainId);
+            DataTable result = FindPmdomainByCondition(condition);
+            string domainType = "";
+            using (IDataReader reader = result.CreateDataReader()) {
+                if (reader.Read()) {
+                    domainType = reader["DOMAINTYPE"].ToString();
+                }
+                reader.Close();
+            }
+
+            DataTable deatails = null;
+            switch (domainType) {
+                case "SYNONYM":
+                    deatails = PM.Data.Synonymdomain.FindSynonymdomainByDomainId(domainId);
+                    break;
+                default:
+                    break;
+            }
+            return deatails;
+
+        }
+
     }
 }
