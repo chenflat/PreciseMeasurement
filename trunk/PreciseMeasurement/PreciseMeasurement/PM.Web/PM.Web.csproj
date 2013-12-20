@@ -853,6 +853,9 @@
     <Compile Include="services\GetReportSetting.ashx.cs">
       <DependentUpon>GetReportSetting.ashx</DependentUpon>
     </Compile>
+    <Compile Include="services\PostAjaxData.ashx.cs">
+      <DependentUpon>PostAjaxData.ashx</DependentUpon>
+    </Compile>
     <Compile Include="services\SaveMeasurePoint.ashx.cs">
       <DependentUpon>SaveMeasurePoint.ashx</DependentUpon>
     </Compile>
@@ -938,6 +941,7 @@
     <None Include="assets\lib\weather\images\cartoon-2\_ui\1.eps" />
     <None Include="assets\lib\weather\images\cartoon-3\_ui\1.ai" />
     <None Include="assets\lib\weather\images\medialoot\_ui\Free Weather Icons.ai" />
+    <Content Include="services\PostAjaxData.ashx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

@@ -75,6 +75,67 @@ $(function () {
     }
 
 
+    /**
+    * 保存资产安装位置
+    */
+    $("#btnSave").click(function () {
 
+        var meters = $(".meter");
+        var coordinates = new Array();
+        $.each($(meters), function (index, obj) {
+
+            //获取测点结构图位置，并保存到数组中
+            coordinates.push({ "Assetnum": $(obj).attr("id"), "Assetuid":$(obj).attr("uid"),"X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": ORGID });
+        });
+        if (coordinates.length == 0) {
+            return;
+        }
+
+      
+        $.ajax({
+            type: "POST",
+            url: "../services/PostAjaxData.ashx",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({"funname":"SaveAssetCoordinates","data":coordinates}),
+            success: function (data) {
+                console.log(data);
+                alert("计量点位置保存成功，请关闭窗口!");
+            },
+            error: function (data) {
+                //console.log(response);
+            }
+        });
+
+    });
+
+});
+
+
+$(window).load(function () {
+
+    //计量点编辑
+    var asset = window.dialogArguments;
+    if (asset == null) {
+        return;
+    }
+    console.log(asset);
+    console.log(asset.OpStatus);
+    if (asset.OpStatus == "edit") {
+        $(".structure-tools").show();
+
+        $(".meter").draggable();
+        $("#structure").droppable({
+            deactivate: function (event, ui) {
+                console.log(ui);
+                console.log(ui.draggable);
+
+                var elementId = ui.draggable.attr("id");
+
+                //console.log("ID:" + elementId + ",Left:" + ui.position.left + ",Top:" + ui.position.top);
+
+            }
+        });
+    }
 
 });

@@ -28,7 +28,7 @@
         <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptAsset" runat="server">
         <ItemTemplate>
-            <div id="<%# Eval("ASSETNUM") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("EC1") %>px;top:<%# Eval("EC2") %>px;">
+            <div id="<%# Eval("ASSETNUM") %>" title="<%# Eval("Description") %>" class="meter" uid="<%# Eval("ASSETUID") %>" style="left:<%# Eval("EC1") %>px;top:<%# Eval("EC2") %>px;">
             <span class="text"><%# Eval("ASSETNUM")%></span>
             <span class="icon"></span>
             </div>
