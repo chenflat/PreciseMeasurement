@@ -659,6 +659,16 @@ namespace PM.Data {
         bool UpdateAsset(AssetInfo assetInfo);
 
         /// <summary>
+        /// 更新资产坐标
+        /// </summary>
+        /// <param name="assetuid"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        int UpdateAssetCoordinates(long assetuid, string x, string y, string z);
+
+        /// <summary>
         /// 删除指定的资产信息
         /// </summary>
         /// <param name="idList">资产数据主键ID列表</param>
