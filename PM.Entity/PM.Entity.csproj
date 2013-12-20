@@ -47,7 +47,7 @@
     <Compile Include="ClassificationInfo.cs" />
     <Compile Include="ClassspecInfo.cs" />
     <Compile Include="ClassstructureInfo.cs" />
-    <Compile Include="ClassUseWith.cs" />
+    <Compile Include="ClassUseWithInfo.cs" />
     <Compile Include="GroupInfo.cs" />
     <Compile Include="LocationInfo.cs" />
     <Compile Include="LochierarchyInfo.cs" />
