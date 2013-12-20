@@ -46,6 +46,7 @@
     <Compile Include="DataProvider\Classification.cs" />
     <Compile Include="DataProvider\Classspec.cs" />
     <Compile Include="DataProvider\Classstructure.cs" />
+    <Compile Include="DataProvider\ClassUseWith.cs" />
     <Compile Include="DataProvider\Locations.cs" />
     <Compile Include="DataProvider\Longdescription.cs" />
     <Compile Include="DataProvider\Measurement.cs" />
