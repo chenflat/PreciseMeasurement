@@ -935,6 +935,34 @@ namespace PM.Data {
 
 
         /// <summary>
+        /// 创建分类结构使用的对象
+        /// </summary>
+        /// <param name="classUseWithInfo">分类结构使用的对象</param>
+        /// <returns></returns>
+        int CreateClassUseWith(ClassUseWithInfo classUseWithInfo);
+
+        /// <summary>
+        /// 更新分类结构使用的对象
+        /// </summary>
+        /// <param name="classUseWithInfo">分类结构使用的对象</param>
+        /// <returns></returns>
+        bool UpdateClassUseWith(ClassUseWithInfo classUseWithInfo);
+        /// <summary>
+        /// 删除分类结构使用的对象
+        /// </summary>
+        /// <param name="idList">主键ID，多个ID以","分隔</param>
+        /// <returns></returns>
+        int DeleteClassUseWith(string idList);
+        /// <summary>
+        /// 查找分类结构使用的对象
+        /// </summary>
+        /// <param name="condition">查询条件SQL,以 and 开头</param>
+        /// <returns></returns>
+        DataTable FindClassUseWithByCondition(string condition);
+
+
+
+        /// <summary>
         /// 创建长描述
         /// </summary>
         /// <param name="longdescriptionInfo">长描述对象</param>
