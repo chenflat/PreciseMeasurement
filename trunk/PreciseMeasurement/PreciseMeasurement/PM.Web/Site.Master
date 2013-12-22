@@ -52,9 +52,12 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" id="main-nav">
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">计量系统 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
         <li>
-          <a href="<%=ResolveUrl("~/structure/default.aspx") %>">计量系统图</a>
-        </li>
+           <a href="<%=ResolveUrl("~/structure/default.aspx") %>">系统结构图</a>
+           </li>
         <li>
           <a href="<%=ResolveUrl("~/realtime/default.aspx") %>">实时参数</a>
         </li>
@@ -67,11 +70,22 @@
         <li>
           <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
         </li>
+        </ul>
+        </li>
+
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">疏水系统 <b class="caret"></b></a><ul class="dropdown-menu">
         <li>
-          <a href="<%=ResolveUrl("~/steamtrap/") %>">疏水器</a>
+           <a href="<%=ResolveUrl("~/structure/steamtrap.aspx") %>">系统结构图</a>
+           </li>
+        </ul>
+          
         </li>
         <li>
-          <a href="<%=ResolveUrl("~/valve/") %>">阀门</a>
+          <a href="#">阀门系统</a>
+        </li>
+        <li>
+          <a href="#">冷凝系统</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right user-nav">
@@ -98,9 +112,8 @@
     </nav>
   </div>
 </header>
-    <div class="container" style="min-height:400px;">
+    <div class="container" style="min-height: 400px;">
         <div class="bs-old-docs">
-            
         </div>
         <form id="Form1" runat="server" class="form-horizontal" role="form">
         <div id="processing" class="processing" style="display: none;">
@@ -119,6 +132,7 @@
       </div>
     </footer>
     <!-- Placed at the end of the document so the pages load faster -->
-     <script src="<%=ResolveUrl("~/assets/lib/weather/js/jquery.weather.build.js?parentbox=weather&moveArea=limit&zIndex=1&move=0&drag=0&autoDrop=0&styleSize=small&style=default&time=1387202426&area=client&city=%E5%8C%97%E4%BA%AC") %>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/assets/lib/weather/js/jquery.weather.build.js?parentbox=weather&moveArea=limit&zIndex=1&move=0&drag=0&autoDrop=0&styleSize=small&style=default&time=1387202426&area=client&city=%E5%8C%97%E4%BA%AC") %>"
+        type="text/javascript"></script>
 </body>
 </html>

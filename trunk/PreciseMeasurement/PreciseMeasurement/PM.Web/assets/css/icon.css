@@ -1,17 +1,22 @@
-#NavButtons {
-    height: 260px;
-    margin: 60px auto;
+.NavButtons {
+    height: 120px;
+    margin: 60px auto 0 auto;
     width: 98%;
     clear: both;
     min-width:1240px;
 }
-#NavButtons li
+
+.subNavButtons {
+    margin: 30px auto 0 auto;
+ }
+
+.NavButtons li
 {
     color:#333333;
     cursor: pointer;
     float: left;
     height: 117px;
-    margin: 50px;
+    margin: 0px 50px;
     text-align: center;
     width: 117px;
     text-shadow:1px 1px 3px #666666;
@@ -29,11 +34,21 @@
     background-repeat: no-repeat;
   }
   
-.btnSteam  
+.icon_steam  
 {
-    background-position: 40px 20px;
+    background-position: 25px 20px;
 } 
 
+.icon_water {
+    background-position: 25px -64px;    
+}
+
+.icon_airpressure {
+    background-position: 25px -160px; 
+ }
+.icon_electricity {
+    background-position: 25px -250px; 
+ }
 
 .buttonComm {
     background-image:url("../ico/icon.png");
@@ -203,3 +218,7 @@
 .buttonValve:hover {
     background:url("../ico/valve.gif") no-repeat top left;
 }
+
+.ico_condensation {
+    background:url("../ico/condensation.png") no-repeat top left;
+ }

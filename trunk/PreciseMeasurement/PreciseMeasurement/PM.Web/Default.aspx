@@ -5,11 +5,11 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="bs-docs-section" style="margin-top: 80px;">
-        <ul id="NavButtons">
-            <li class="btnSubSystem btnSteam" onclick="window.location.href='<%=ResolveUrl("~/measuresystem.aspx") %>'">蒸汽系统</li>
-            <li class="buttonComm buttonRealTime">水系统</li>
-            <li class="buttonComm buttonStationDayReport">空压系统</li>
-            <li class="buttonComm buttonChartCompare">电系统</li>
+        <ul id="NavButtons"  class="NavButtons">
+            <li onclick="window.location.href='<%=ResolveUrl("~/measuresystem.aspx") %>'"><div class="buttonInSquare btnSubSystem icon_steam"> </div>蒸汽系统</li>
+            <li><div class="btnSubSystem buttonInSquare icon_water"></div> 水系统</li>
+            <li><div class="btnSubSystem buttonInSquare icon_airpressure"></div> 空压系统</li>
+            <li><div class="btnSubSystem buttonInSquare icon_electricity"></div> 电系统</li>
         </ul>
     </div>
 </asp:Content>
