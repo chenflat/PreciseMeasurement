@@ -15,7 +15,8 @@ namespace PM.Web.admin.Asset {
         private long m_assetuid = 0;
 
         protected void Page_Load(object sender, EventArgs e) {
-            
+
+            btnSave.Click += new EventHandler(btnSave_Click);
             if (!IsPostBack) {
 
                 BindDropDownData();
@@ -28,6 +29,8 @@ namespace PM.Web.admin.Asset {
 
             }
         }
+
+        
 
         private void BindDropDownData() {
             //子系统
@@ -80,6 +83,23 @@ namespace PM.Web.admin.Asset {
             txtStatusDate.Text = assetInfo.Statusdate.ToString("yyyy-MM-dd HH:mm:ss");
             txtTotdowntime.Text = "";
             hdnAssetuid.Value = m_assetuid.ToString();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e) {
+            if (Page.IsValid) {
+                AssetInfo assetInfo = null;
+                if (hdnAssetuid.Value == "") {
+                    assetInfo = new AssetInfo();
+                }
+                else {
+                    assetInfo = PM.Data.Asset.GetAssetInfo(m_assetuid);
+                }
+
+
+
+
+            }
+
         }
 
     }
