@@ -88,15 +88,42 @@ namespace PM.Web.admin.Asset {
         private void btnSave_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
                 AssetInfo assetInfo = null;
+                bool isnew = true;
                 if (hdnAssetuid.Value == "") {
                     assetInfo = new AssetInfo();
                 }
                 else {
                     assetInfo = PM.Data.Asset.GetAssetInfo(m_assetuid);
+                    isnew = false;
                 }
-
-
-
+                assetInfo.Assetnum = txtAssetNum.Text.Trim();
+                assetInfo.Description = txtDescription.Text.Trim();
+                assetInfo.Status = txtStatus.Text.Trim() == "" ? "OPERATING" : txtStatus.Text.Trim();
+                assetInfo.Specclass = ddlSpecClass.SelectedValue;
+                assetInfo.Parent = ddlParent.Text.Trim();
+                assetInfo.Mainthierchy = chkMainthierchy.Checked;
+                assetInfo.Groupname = ddlGroupName.SelectedValue;
+                assetInfo.Usage = txtUsage.Text.Trim();
+                assetInfo.Ec1 = txtX.Text;
+                assetInfo.Ec2 = txtY.Text;
+                assetInfo.Ec3 = txtZ.Text;
+                assetInfo.Priority = Utils.StrToInt(txtPriority.Text.Trim(), 0);
+                assetInfo.Failurecode = txtFailurecode.Text.Trim();
+                assetInfo.Vendor = txtVendor.Text.Trim();
+                assetInfo.Manufacturer = txtManufacturer.Text.Trim();
+                assetInfo.Installdate = TypeConverter.ObjectToDateTime(txtInstalldate.Text.Trim());
+                assetInfo.Isrunning = chkIsrunning.Checked;
+                assetInfo.Statusdate = TypeConverter.ObjectToDateTime(txtStatusDate.Text.Trim());
+                bool isSuccess = false;
+                if (isnew) {
+                    isSuccess = PM.Data.Asset.CreateAsset(assetInfo)>0;
+                }
+                else {
+                    isSuccess = PM.Data.Asset.UpdateAsset(assetInfo);
+                }
+                if (isSuccess) {
+                    Response.Redirect("AssetList.aspx");
+                }
 
             }
 
