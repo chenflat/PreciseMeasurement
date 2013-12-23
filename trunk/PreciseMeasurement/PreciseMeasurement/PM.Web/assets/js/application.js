@@ -76,7 +76,7 @@
       })
 
 
-        var pathname = window.location.pathname;
+        var pathname = window.location.href;
 
         $.each($("#admin-nav li"), function (index, li) {
             var link = $(li).find('a').attr('href');

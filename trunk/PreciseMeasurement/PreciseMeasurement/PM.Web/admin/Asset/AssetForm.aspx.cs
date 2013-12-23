@@ -38,6 +38,7 @@ namespace PM.Web.admin.Asset {
             ddlSpecClass.DataValueField = "VALUE";
             ddlSpecClass.DataSource = PM.Data.Pmdomain.FindPMDomainByDomainId("SUBSYS");
             ddlSpecClass.DataBind();
+           
 
             //父资产
             string condition = "";
@@ -55,6 +56,7 @@ namespace PM.Web.admin.Asset {
             ddlGroupName.DataValueField = "GROUPNAME";
             ddlGroupName.DataSource = PM.Data.Metergroup.FindMetergroupByCondition("");
             ddlGroupName.DataBind();
+            ddlGroupName.Items.Insert(0, new ListItem("", ""));
         }
 
         private void SetAssetForm() {

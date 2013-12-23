@@ -63,16 +63,17 @@ namespace PM.Data.SqlServer
         /// <param name="orgid">组织机构ID</param>
         /// <param name="siteid">地点ID</param>
         /// <returns></returns>
-        public IDataReader FindMeasurePointsByLevel(int level, string orgid, string siteid) {
+        public IDataReader FindMeasurePointsByLevel(string carrier, int level, string orgid, string siteid) {
 
             DbParameter[] parms = { 
+                                  DbHelper.MakeInParam("@CARRIER", (DbType)SqlDbType.VarChar, 12, carrier),
                                   DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, level),
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
                                   DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, siteid)
                                     };
 
 
-            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] WHERE LEVEL=@LEVEL " +
+            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] WHERE LEVEL=@LEVEL and CARRIER=@CARRIER " +
                 " and isnull([{0}MEASUREPOINT].orgid,'')=@ORGID and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
                 BaseConfigs.GetTablePrefix);
 

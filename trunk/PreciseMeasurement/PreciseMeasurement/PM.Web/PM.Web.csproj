@@ -83,6 +83,7 @@
     <Content Include="admin\users\roles.aspx" />
     <Content Include="alarm\default.aspx" />
     <Content Include="analysis\default.aspx" />
+    <Content Include="analysis\streamtrap.aspx" />
     <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.css" />
@@ -700,6 +701,13 @@
     </Compile>
     <Compile Include="analysis\MeasurementHistoryData.ashx.cs">
       <DependentUpon>MeasurementHistoryData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="analysis\streamtrap.aspx.cs">
+      <DependentUpon>streamtrap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="analysis\streamtrap.aspx.designer.cs">
+      <DependentUpon>streamtrap.aspx</DependentUpon>
     </Compile>
     <Compile Include="controls\PageControl.ascx.cs">
       <DependentUpon>PageControl.ascx</DependentUpon>

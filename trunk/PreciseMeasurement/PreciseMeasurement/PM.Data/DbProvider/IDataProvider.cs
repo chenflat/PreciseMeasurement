@@ -280,11 +280,12 @@ namespace PM.Data {
         /// <summary>
         /// 获取指定层级的计量器列表
         /// </summary>
+        /// <param name="carrier">携能载体</param>
         /// <param name="level">层级ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <param name="siteid">地点ID</param>
         /// <returns></returns>
-        IDataReader FindMeasurePointsByLevel(int level, string orgid, string siteid);
+        IDataReader FindMeasurePointsByLevel(string carrier,int level, string orgid, string siteid);
 
         /// <summary>
         /// 添加计量点参数信息

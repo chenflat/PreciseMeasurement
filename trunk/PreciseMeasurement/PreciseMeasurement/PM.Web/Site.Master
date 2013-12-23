@@ -53,7 +53,7 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" id="main-nav">
         <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">计量系统 <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">蒸汽监测 <b class="caret"></b></a>
         <ul class="dropdown-menu">
         <li>
            <a href="<%=ResolveUrl("~/structure/default.aspx") %>">系统结构图</a>
@@ -74,18 +74,18 @@
         </li>
 
         <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">疏水系统 <b class="caret"></b></a><ul class="dropdown-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">疏水监测 <b class="caret"></b></a><ul class="dropdown-menu">
         <li>
            <a href="<%=ResolveUrl("~/structure/steamtrap.aspx") %>">系统结构图</a>
            </li>
+        <li>
+          <a href="<%=ResolveUrl("~/analysis/streamtrap.aspx") %>">曲线对比</a>
+        </li>
         </ul>
           
         </li>
         <li>
-          <a href="#">阀门系统</a>
-        </li>
-        <li>
-          <a href="#">冷凝系统</a>
+          <a href="#">阀门监测</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right user-nav">

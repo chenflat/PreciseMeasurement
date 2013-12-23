@@ -59,10 +59,10 @@
                 </label>
                 <div class="col-lg-7">
                     <asp:DropDownList ID="carrier" runat="server" CssClass="form-control">
-                        <asp:ListItem>汽</asp:ListItem>
-                        <asp:ListItem>水</asp:ListItem>
-                        <asp:ListItem>电</asp:ListItem>
-                        <asp:ListItem>空气</asp:ListItem>
+                        <asp:ListItem Value="steam">汽</asp:ListItem>
+                        <asp:ListItem Value="water">水</asp:ListItem>
+                        <asp:ListItem Value="electricity">电</asp:ListItem>
+                        <asp:ListItem Value="area">空气</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>

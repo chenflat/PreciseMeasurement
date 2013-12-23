@@ -74,9 +74,9 @@
 
             <div class="alert alert-info">
             <span id="spanType1" style="overflow: hidden;">
-                                <input id="radSteam1" type="radio" value="汽" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
+                                <input id="radSteam1" type="radio" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
                                 <label for="radSteam1" style="cursor: pointer;">汽</label>
-                                <input id="radWater1" type="radio" value="水" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                <input id="radWater1" type="radio" value="water" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radWater1" style="cursor: pointer;">水</label>
                                  <input id="radAll" type="radio" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radAll" style="cursor: pointer;">全部</label>

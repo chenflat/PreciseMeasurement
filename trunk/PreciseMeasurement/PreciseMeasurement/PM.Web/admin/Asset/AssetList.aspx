@@ -43,10 +43,13 @@
                         <th width="35%">
                             描述
                         </th>
-                        <th width="15%">
+                        <th width="10%">
                             父级
                         </th>
-                        <th width="15%">
+                        <th width="10%">
+                            类别
+                        </th>
+                        <th width="10%">
                             地点
                         </th>
                         <th width="10%">
@@ -64,6 +67,8 @@
                     <td><%# Eval("DESCRIPTION") %>
                     </td>
                     <td><%# Eval("PARENT") %>
+                    </td>
+                     <td><%# Eval("Classstructureid")%>
                     </td>
                     <td><%# Eval("SITEID")%>
                     </td>
