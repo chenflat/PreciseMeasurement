@@ -29,8 +29,9 @@ namespace PM.Web.admin.Class {
         /// </summary>
         private void BindData() {
 
-            DataTable dt = new DataTable();
+            DataTable dt = PM.Data.Classstructure.FindClassstructureByCondition("");
             if (dt.Rows.Count == 0) {
+                dt = new DataTable();
                 dt.Columns.Add("CLASSIFICATIONID");
                 dt.Columns.Add("Description");
                 dt.Columns.Add("PARENT");

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 
+using PM.Common;
 using PM.Business.Pages;
 using PM.Entity;
 using PM.Common.ExcelUtils;
@@ -17,13 +18,15 @@ namespace PM.Web.report
 
         //层级计量点列表
         public Dictionary<string, List<MeasurePointInfo>> measurePointList = null;
+        private string m_type = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
-
+                m_type = PMRequest.GetString("type");
+                if (m_type == "") m_type = "steam";
                 BindMeasurePointData();
             }
         }
@@ -47,7 +50,7 @@ namespace PM.Web.report
 
             for (int i = 1; i < 6; i++) {
                 int level = i;
-                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(level, orgid, siteid);
+                List<MeasurePointInfo> listByLevel = Business.MeasurePoint.FindMeasurePointsByLevel(m_type,level, orgid, siteid);
 
                 if (listByLevel.Count > 0) {
                     result.Add(level.ToString() + "级", listByLevel);

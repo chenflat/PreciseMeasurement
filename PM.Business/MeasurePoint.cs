@@ -149,14 +149,14 @@ namespace PM.Business
         /// <param name="orgid">组织机构ID</param>
         /// <param name="siteid">地点ID</param>
         /// <returns></returns>
-        public static List<MeasurePointInfo> FindMeasurePointsByLevel(int level, string orgid, string siteid) {
+        public static List<MeasurePointInfo> FindMeasurePointsByLevel(string carrier,int level, string orgid, string siteid) {
 
             if (orgid == null) orgid = "";
             if (siteid == null) siteid = "";
 
             List<MeasurePointInfo> list = new List<MeasurePointInfo>();
 
-            using (IDataReader reader = Data.MeasurePoint.FindMeasurePointsByLevel(level,orgid,siteid))
+            using (IDataReader reader = Data.MeasurePoint.FindMeasurePointsByLevel(carrier,level, orgid, siteid))
             {
                 while (reader.Read()) {
                     MeasurePointInfo measurePointInfo = Data.MeasurePoint.LoadMeasurePointInfo(reader);

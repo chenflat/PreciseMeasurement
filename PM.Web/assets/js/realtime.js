@@ -14,7 +14,7 @@ $(function () {
    //获取设置类型
    function GetType() {
       var type = $("input[name='carrier']:checked").val();
-        if (type == '') { type = "汽"; }
+        if (type == '') { type = "steam"; }
         return type;
    }
 
@@ -31,7 +31,7 @@ $(function () {
        // console.log(type);
 
         var url = "../services/GetAjaxData.ashx";
-        var params = {"funname":"GetMeasurePointList", "type" : type, "orgid" : ORGID};
+        var params = {"funname":"GetMeasurePointList", "carrier" : type, "orgid" : ORGID};
 
         $.getJSON(url,params,function(data){
            // console.log(data);

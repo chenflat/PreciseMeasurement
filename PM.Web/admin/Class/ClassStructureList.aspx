@@ -31,18 +31,22 @@
                     <th>
                         父级分类
                     </th>
+                    <th width="10%"></th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
                 <td>
-                    <%# Eval("CLASSIFICATIONID")%>
+                    <%# Eval("Classstructureid")%>
                 </td>
                 <td>
                     <%# Eval("Description") %>
                 </td>
                 <td>
                     <%# Eval("PARENT")%>
+                </td>
+                <td>
+                    <a href="ClassStructureForm.aspx?Classstructureuid=<%# Eval("Classstructureuid") %>">编辑</a>
                 </td>
             </tr>
         </ItemTemplate>

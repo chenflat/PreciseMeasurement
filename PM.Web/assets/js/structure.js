@@ -58,7 +58,7 @@ $(function () {
     //获取设置类型
     function GetType() {
         var type = $("input[name='carrier']:checked").val();
-        if (type == '') { type = "汽"; }
+        if (type == '') { type = "steam"; }
         return type;
     }
 

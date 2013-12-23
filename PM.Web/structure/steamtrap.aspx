@@ -15,7 +15,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
    <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
-    <td colspan="3" class="structure-title">蒸汽蒸汽疏水阀系统图</td>
+    <td colspan="3" class="structure-title">蒸汽疏水监测系统图</td>
 </tr>
 <tr>
  <td colspan="3" id="tools" class="structure-tools"><span>拖动以确定位置，然后点击确定按钮。</span>
@@ -46,7 +46,7 @@
                     <div class="col-lg-7 after_temperature"><div>-</div></div>
                 </div>
                
-                <div class="detail text-center"><a href="detailinfo.aspx?assetuid=<%# Eval("ASSETUID") %>">查看详细</a></div>
+                <div class="detail text-center"><a href="../analysis/streamtrap.aspx?assetuid=<%# Eval("ASSETUID") %>">查看详细</a></div>
  
                 </div>
             
@@ -77,11 +77,13 @@
         <table class="table table-bordered table-striped" id="gvRealtimeData">
         <thead>
             <tr>
-                <th>计量点</th>
+                <th>级别</th>
+                <th>设备名称</th>
                 <th>采集时间</th>
-                <th>压力(MPa)</th>
-                <th>温度(℃)</th>
-                <th>瞬时流量(t/h)</th>
+                <th>前端温度(℃)</th>
+                <th>后端温度(℃)</th>
+                <th>温度差(℃)</th>
+                <th>设备状态</th>
             </tr>
         </thead>
         <tbody>

@@ -44,6 +44,10 @@ namespace PM.Web.services {
                 string pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"].Trim();
                 //计量点类型
                 string type = context.Request["type"] == null ? "" : context.Request["type"].Trim();
+
+                //载体
+                string carrier = context.Request["carrier"] == null ? "" : context.Request["carrier"].Trim();
+
                 //组织机构
                 string orgid = context.Request["orgid"] == null ? "" : context.Request["orgid"].Trim();
                 //地点ID
