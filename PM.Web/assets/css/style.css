@@ -1207,6 +1207,12 @@ h1[id] {
 	font-size: 14px;
 	background-color: white;
 }
+
+.table-noborder > tbody > tr > td {border:0px;}
+.table-noborder > tbody > tr:hover >td {background:#ccc;font-size:16px; color:#ff0000;}
+.table-border-bottom > tbody > tr > td {border-bottom:1px solid #ccc;}
+
+.structure  {margin:0 auto;}
 /** �ṹͼ */
 #structure .popover {width:260px;}
 #structure .popover-content .form-group {margin-bottom:4px; font-size:12px;}

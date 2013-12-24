@@ -105,6 +105,7 @@ namespace PM.Data {
             assetInfo.Assettag = reader["Assettag"].ToString();
             assetInfo.Assettype = reader["Assettype"].ToString();
             assetInfo.Specclass = reader["Specclass"].ToString();
+            assetInfo.Specsubclass = reader["Specsubclass"].ToString();
             assetInfo.Calnum = reader["Calnum"].ToString();
             assetInfo.Changeby = reader["Changeby"].ToString();
             assetInfo.Changedate = TypeConverter.ObjectToDateTime(reader["Changedate"].ToString());
@@ -155,6 +156,47 @@ namespace PM.Data {
 
             return assetInfo;
         }
+
+        /// <summary>
+        /// 获取资产最后一条测量数值
+        /// </summary>
+        /// <param name="specclass">子系统</param>
+        /// <param name="specsubclass">子系统类别</param>
+        /// <param name="assetnum">资产编号</param>
+        /// <returns></returns>
+        public static List<AssetMeasurementInfo> GetAssetMeasurementValue(string specclass, string specsubclass, string assetnum) {
+
+            List<AssetMeasurementInfo> result = new List<AssetMeasurementInfo>();
+
+            string condition = string.Format(" and [SPECCLASS]='{0}' and [SPECSUBCLASS]='{1}'", specclass, specsubclass);
+            if (assetnum != "")
+                condition += string.Format(" and [ASSETNUM]='{0}'",assetnum);
+            DataTable assets = FindAssetByCondition(condition);
+            using (IDataReader reader = assets.CreateDataReader()) {
+                while (reader.Read()) {
+                    AssetMeasurementInfo assetMeasurementInfo = new Entity.AssetMeasurementInfo();
+                    AssetInfo assetInfo = LoadAssetInfo(reader);
+                    List<MeasurementInfo> measurements = new List<MeasurementInfo>();
+                    using (IDataReader meterReader = Assetmeter.FindAssetmeterByAssetnum(assetInfo.Assetnum).CreateDataReader()) {
+                        while (meterReader.Read()) {
+                            string metername = meterReader["METERNAME"].ToString();
+                            MeasurementInfo measurementInfo = PM.Data.Measurement.GetLastMeasurement(metername);
+                            measurements.Add(measurementInfo);
+                        }
+                        meterReader.Close();
+                    }
+
+                    assetMeasurementInfo.AssetInfo = assetInfo;
+                    assetMeasurementInfo.Measurements = measurements;
+                    result.Add(assetMeasurementInfo);
+                }
+                reader.Close();
+            }
+
+            return result;
+
+        }
+
 
     }
 }

@@ -81,7 +81,7 @@ $(function () {
         $("#gvRealtimeData tbody").html("");
         var content = "";
         //获取所有测点对应的实时数据
-        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetRealtimeMeasureValue", "carrier": carrier }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAsssetRealtimeMeasureValue", "specclass": "STEAM", "specsubclass": "STEAMTRAP"}, function (data) {
             //设置计量点数值
             $.each(data, function (index, obj) {
                 var mstyle = "";
