@@ -23,7 +23,7 @@
 </tr>
 <tr style="vertical-align:top">
     <td>
-     <div class="structure pull-left" id="structure">
+     <div class="structure" id="structure">
         <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptAsset" runat="server">
         <ItemTemplate>

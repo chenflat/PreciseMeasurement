@@ -60,8 +60,16 @@
 
                     <asp:DropDownList ID="ddlSpecClass" CssClass="select2" Width="190px" runat="server">
                     </asp:DropDownList>
-             
-            </div>
+                </div>
+              </div>
+             <div class="form-group">
+                <label for="<%=ddlSpecSubClass.ClientID %>" class="col-lg-3 control-label">
+                    类型：</label>
+                <div class="col-lg-9" >
+                    <asp:DropDownList ID="ddlSpecSubClass" CssClass="select2" Width="190px" runat="server">
+                    </asp:DropDownList>
+                    </div>
+                </div>
         </div>
     </div>
     <div class="row">

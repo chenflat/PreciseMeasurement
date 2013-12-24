@@ -48,7 +48,7 @@
                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                {%>
                             <li <%  if(measurepointid==point.Measurepointid) Response.Write("class='active'"); %>><a href="?type=<%=point.Carrier %>&measurepointid=<%=point.Measurepointid %>">
-                                <%=point.Description%></a></li>
+                               [<%=point.Pointnum%>] <%=point.Description%></a></li>
                             <% } %>
                         </ul>
                     </li>

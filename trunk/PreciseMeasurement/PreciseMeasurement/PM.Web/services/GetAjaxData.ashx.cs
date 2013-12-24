@@ -9,12 +9,16 @@ using PM.Data;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using log4net;
 
 namespace PM.Web.services {
     /// <summary>
     /// 获取AJAX数据
     /// </summary>
     public class GetAjaxData : IHttpHandler {
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(GetAjaxData));
+
 
         /// <summary>
         /// 处理请求
@@ -79,18 +83,57 @@ namespace PM.Web.services {
             try {
                 //计量点载体名称
                 string carrier = context.Request["carrier"] == null ? "" : context.Request["carrier"].Trim();
-               
-                List<MeasurementInfo> list = PM.Data.Measurement.GetLastMeasureValueList(carrier);
-                
-                ret = JsonConvert.SerializeObject(list);
+                string pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"].Trim();
+                if (carrier != "") {
 
+                    List<MeasurementInfo> list = PM.Data.Measurement.GetLastMeasureValueList(carrier);
+                    ret = JsonConvert.SerializeObject(list);
+
+                } else if (pointnum!="") {
+
+                    MeasurementInfo measurementInfo = PM.Data.Measurement.GetLastMeasurement(pointnum);
+                    ret = JsonConvert.SerializeObject(measurementInfo);
+
+                }
             }
-            catch (Exception ex) {
+            catch (Exception ex)  {
+                 log.Error(ex);
                 throw ex;
+               
             }
 
             return ret;
         }
+
+
+        /// <summary>
+        /// 获取设置实时值
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetAsssetRealtimeMeasureValue(HttpContext context) {
+
+            string ret = "";
+
+            try {
+
+                //计量点载体名称
+                string specclass = context.Request["specclass"] == null ? "" : context.Request["specclass"].Trim();
+                string specsubclass = context.Request["specclass"] == null ? "" : context.Request["specsubclass"].Trim();
+                string assetnum = context.Request["assetnum"] == null ? "" : context.Request["assetnum"].Trim();
+                List<AssetMeasurementInfo> list = PM.Data.Asset.GetAssetMeasurementValue(specclass, specsubclass, assetnum);
+
+                ret = JsonConvert.SerializeObject(list);
+            } catch (Exception ex) {
+                log.Error(ex);
+                throw ex;
+
+            }
+
+            return ret;
+        }
+
+
 
 
         private void OutputString(HttpContext context, string strReturn) {

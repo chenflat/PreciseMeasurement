@@ -17,9 +17,9 @@
  <td colspan="3" id="tools" class="structure-tools"><span>拖动以确定位置，然后点击确定按钮。</span>
              <input type="button" id="btnSave" value="确定" /></td>
 </tr>
-<tr style="vertical-align:top">
-    <td>
-     <div class="structure pull-left" id="structure">
+<tr style="vertical-align:top; ">
+    <td id="structWrap">
+     <div class="structure" id="structure">
         <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>

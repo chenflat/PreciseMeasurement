@@ -2,13 +2,11 @@
 
 $(function () {
 
-
+    //打开或关闭级别菜单
    $("label.tree-toggler").on('click',function(){
         $(this).parent().children('ul.tree').toggle(300);
    
    });
-
-
 
 
    //获取设置类型
@@ -93,15 +91,18 @@ $(function () {
             $SWPressure = $("#SW_Pressure"),
             $ATFlow = $("#AT_Flow")
         //设置编号
-        var devicenum = $("#devicenum").val();
-        if(devicenum!="" && typeof(devicenum)!='undefined') {
-            $.getJSON('../services/GetRealtimeMeasurement.ashx',{"devicenum":devicenum},function(data){
+        var pointnum = $("#pointnum").val();
+        if(pointnum!="" && typeof(pointnum)!='undefined') {
+            $.getJSON('../services/GetAjaxData.ashx',{ "funname": "GetRealtimeMeasureValue","pointnum":pointnum},function(data){
                 if(data!=null) {
-                    $AiDensity.text(isNaN(data.AI_Density)?data.AI_Density.substr(0,data.AI_Density.indexOf(".")+2) : data.AI_Density);  
-                    $SWTemperature.text(isNaN(data.SW_Temperature)?data.SW_Temperature.substr(0,data.SW_Temperature.indexOf(".")+2) : data.SW_Temperature);
-                    $AFFlowInstant.text(isNaN(data.AF_FlowInstant)?data.AF_FlowInstant.substr(0,data.AF_FlowInstant.indexOf(".")+2) : data.AF_FlowInstant);
-                    $SWPressure.text(isNaN(data.SW_Pressure)?data.SW_Pressure.substr(0,data.SW_Pressure.indexOf(".")+2) : data.SW_Pressure);
-                    $ATFlow.text(isNaN(data.AT_Flow)?data.AT_Flow.substr(0,data.AT_Flow.indexOf(".")+2) : data.AT_Flow);
+                    $AiDensity.text(isNaN(data.AiDensity)?data.AiDensity.substr(0,data.AiDensity.indexOf(".")+2) : data.AiDensity);  
+                    $SWTemperature.text(isNaN(data.SwTemperature)?data.SwTemperature.substr(0,data.SwTemperature.indexOf(".")+2) : data.SwTemperature);
+                    $AFFlowInstant.text(isNaN(data.AfFlowinstant)?data.AfFlowinstant.substr(0,data.AfFlowinstant.indexOf(".")+2) : data.AfFlowinstant);
+                    $SWPressure.text(isNaN(data.SwPressure)?data.SwPressure.substr(0,data.SwPressure.indexOf(".")+2) : data.SwPressure);
+                    $ATFlow.text(isNaN(data.AtFlow)?data.AtFlow.substr(0,data.AtFlow.indexOf(".")+2) : data.AtFlow);
+                    $("#lastMeasuretime").text(data.Measuretime);
+                    
+
                 }
             });
         }

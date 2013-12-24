@@ -24,6 +24,7 @@ namespace PM.Entity
 			private string _Assettag;
 			private string _Assettype;
 			private string _Specclass;
+            private string _Specsubclass;
 			private string _Calnum;
 			private string _Changeby;
 			private DateTime _Changedate;
@@ -174,6 +175,11 @@ namespace PM.Entity
 				get	{ return _Specclass; }
 				set	{ _Specclass = value; }
 			}
+
+            public string Specsubclass {
+                get { return _Specsubclass; }
+                set { _Specsubclass = value; }
+            }
 		
 			public string Calnum {
 				get	{ return _Calnum; }

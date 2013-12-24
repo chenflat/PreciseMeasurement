@@ -41,6 +41,7 @@
     <Compile Include="AnalyzeSettingInfo.cs" />
     <Compile Include="AssetattributeInfo.cs" />
     <Compile Include="AssetInfo.cs" />
+    <Compile Include="AssetMeasurementInfo.cs" />
     <Compile Include="AssetmeterInfo.cs" />
     <Compile Include="AssetspechistInfo.cs" />
     <Compile Include="AuthoritiesInfo.cs" />
