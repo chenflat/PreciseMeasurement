@@ -35,6 +35,7 @@ namespace PM.Entity
 			private string _Metername;
 			private string _Orgid;
 			private string _Pointnum;
+            private string _PointDescription;
 			private string _Readingtype;
 			private string _Remarks;
 			private string _Rolldownsource;
@@ -179,6 +180,11 @@ namespace PM.Entity
 				get	{ return _Pointnum; }
 				set	{ _Pointnum = value; }
 			}
+
+            public string PointDescription {
+                get { return _PointDescription; }
+                set { _PointDescription = value; }
+            }
 		
 			public string Readingtype {
 				get	{ return _Readingtype; }
