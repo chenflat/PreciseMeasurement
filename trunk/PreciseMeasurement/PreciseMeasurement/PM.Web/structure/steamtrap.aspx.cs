@@ -22,7 +22,7 @@ namespace PM.Web.structure {
         }
 
         private void BindData() {
-            string condition = " AND SPECCLASS='STEAM' AND CLASSSTRUCTUREID='P010101'";
+            string condition = " AND SPECCLASS='STEAM' AND SPECSUBCLASS='STEAMTRAP'";
             DataTable assets = PM.Data.Asset.FindAssetByCondition(condition);
             rptAsset.DataSource = assets;
             rptAsset.DataBind();

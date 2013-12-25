@@ -73,6 +73,22 @@ namespace PM.Data {
             return DatabaseProvider.GetInstance().FindAssetByCondition(condition);
         }
 
+        public static List<AssetInfo> GetAssetByCondition(string condition) {
+
+            List<AssetInfo> list = new List<AssetInfo>();
+            DataTable dt = FindAssetByCondition(condition);
+
+            using (IDataReader reader = dt.CreateDataReader()) {
+                while (reader.Read()) {
+                    AssetInfo assetInfo = LoadAssetInfo(reader);
+                    list.Add(assetInfo);
+                }
+                reader.Close();
+            }
+            return list;
+
+        }
+
         /// <summary>
         /// 返回指定查询条件的资产信息条数
         /// </summary>

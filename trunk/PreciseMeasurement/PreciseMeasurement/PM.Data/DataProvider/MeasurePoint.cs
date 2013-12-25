@@ -24,6 +24,22 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindMeasurePointByCondition(condition);
         }
 
+
+        public static MeasurePointInfo GetMeasurePointByPointNum(string pointnum) {
+            string condition = string.Format(" and POINTNUM='{0}'",pointnum);
+            DataTable dt = FindMeasurePointByCondition(condition);
+            MeasurePointInfo measurePointInfo = new MeasurePointInfo();
+            using (IDataReader reader = dt.CreateDataReader()) {
+                if (reader.Read()) {
+                  measurePointInfo =  LoadMeasurePointInfo(reader);
+                }
+                reader.Close();
+            }
+            return measurePointInfo;
+        }
+
+
+
         /// <summary>
         /// 获取指定位置的计量点列表
         /// </summary>
