@@ -43,9 +43,12 @@
                 
                  <div class="form-group">
                     <div class="col-lg-5 text-right">后端温度:</div>
-                    <div class="col-lg-7 after_temperature"><div>-</div></div>
+                    <div class="col-lg-7 after_temperature"><span>-</span> ℃</div>
                 </div>
-               
+                 <div class="form-group">
+                    <div class="col-lg-5 text-right">采集时间:</div>
+                    <div class="col-lg-7 measuretime"><div>-</div></div>
+                </div>
                 <div class="detail text-center"><a href="../analysis/streamtrap.aspx?assetuid=<%# Eval("ASSETUID") %>">查看详细</a></div>
  
                 </div>

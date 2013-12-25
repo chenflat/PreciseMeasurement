@@ -160,6 +160,7 @@
     <Content Include="assets\js\structure.js" />
     <Content Include="assets\js\uglify.js" />
     <Content Include="assets\js\valve.js" />
+    <Content Include="assets\js\streamtrap_analysis.js" />
     <Content Include="assets\lib\bootbox\bootbox.min.js" />
     <Content Include="assets\lib\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />

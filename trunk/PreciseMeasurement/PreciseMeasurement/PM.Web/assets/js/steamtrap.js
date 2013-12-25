@@ -81,30 +81,42 @@ $(function () {
         $("#gvRealtimeData tbody").html("");
         var content = "";
         //获取所有测点对应的实时数据
-        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAsssetRealtimeMeasureValue", "specclass": "STEAM", "specsubclass": "STEAMTRAP"}, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAsssetRealtimeMeasureValue", "specclass": "STEAM", "specsubclass": "STEAMTRAP" }, function (data) {
             //设置计量点数值
             $.each(data, function (index, obj) {
                 var mstyle = "";
 
-                if ((new Date(obj.Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
-                    mstyle = " style='color:red;'";
+                var level = 1;
+                var measuretime = "";
+                var front_temperature = "0"
+                var after_temperature = "0"
+                var diff_temperature = "0"
+                var status = "";   //疏水 直通  堵塞
+
+                if (obj.Measurements.length > 0) {
+                    if ((new Date(obj.Measurements[0].Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
+                        mstyle = " style='color:red;'";
+                    }
+                    measuretime = obj.Measurements[0].Measuretime;
+                    front_temperature = obj.Measurements[0].SwTemperature;
+                    after_temperature = obj.Measurements[1].SwTemperature;
+                    diff_temperature = parseFloat(front_temperature) - parseFloat(after_temperature);
+                    console.log(measuretime);
                 }
-                console.log(mstyle);
+
                 content += "<tr " + mstyle + ">"
-                content += "<td>" + obj.Level + "级</td>"
-                content += "<td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
-                content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
-                content += "<td>" + obj.SwPressure + "</td>"
-                content += "<td>" + obj.SwTemperature + "</td>"
-                content += "<td>" + obj.AfFlowinstant + "</td>"
+                content += "<td>" + level + "级</td>"
+                content += "<td>[" + obj.AssetInfo.Assetnum + "]" + obj.AssetInfo.Description + "</td>"
+                content += "<td>" + measuretime + "</td>"
+                content += "<td>" + front_temperature + "</td>"
+                content += "<td>" + after_temperature + "</td>"
+                content += "<td>" + diff_temperature + "</td>"
+                content += "<td>" + status + "</td>"
                 content += "</tr>";
 
-                $("#" + obj.Pointnum + "_data .SW_Temperature span").text(obj.SwTemperature);
-                $("#" + obj.Pointnum + "_data .SW_Pressure span").text(obj.SwPressure);
-                $("#" + obj.Pointnum + "_data .AF_FlowInstant span").text(obj.AfFlowinstant);
-                $("#" + obj.Pointnum + "_data .AT_Flow span").text(obj.AtFlow);
-                $("#" + obj.Pointnum + "_data .AI_Density span").text(obj.AiDensity);
-                $("#" + obj.Pointnum + "_data .MEASURETIME div").text(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:mm:ss"));
+                $("#" + obj.AssetInfo.Assetnum + "_data .front_temperature span").text(front_temperature);
+                $("#" + obj.AssetInfo.Assetnum + "_data .after_temperature span").text(after_temperature);
+                $("#" + obj.AssetInfo.Assetnum + "_data .measuretime div").text(measuretime);
 
             });
 
@@ -123,19 +135,19 @@ $(function () {
         $.each($(meters), function (index, obj) {
 
             //获取测点结构图位置，并保存到数组中
-            coordinates.push({ "Assetnum": $(obj).attr("id"), "Assetuid":$(obj).attr("uid"),"X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": ORGID });
+            coordinates.push({ "Assetnum": $(obj).attr("id"), "Assetuid": $(obj).attr("uid"), "X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": ORGID });
         });
         if (coordinates.length == 0) {
             return;
         }
 
-      
+
         $.ajax({
             type: "POST",
             url: "../services/PostAjaxData.ashx",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({"funname":"SaveAssetCoordinates","data":coordinates}),
+            data: JSON.stringify({ "funname": "SaveAssetCoordinates", "data": coordinates }),
             success: function (data) {
                 console.log(data);
                 alert("计量点位置保存成功，请关闭窗口!");

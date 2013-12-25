@@ -13,8 +13,22 @@ using PM.Common;
 
 namespace PM.Web.analysis {
     public partial class streamtrap : BasePage {
+        private int assetuid = 0;
         protected void Page_Load(object sender, EventArgs e) {
+            if (!IsPostBack) {
+                assetuid = PMRequest.GetInt("assetuid", 0);
 
+
+            }
         }
+
+        private void BindAssst() { 
+        
+        
+        
+        }
+
+
+
     }
 }
