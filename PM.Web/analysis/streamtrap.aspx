@@ -6,7 +6,7 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/highcharts/highstock.js") %>"></script>
-    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/analysis.js") %>"></script>
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/streamtrap_analysis.js") %>"></script>
     <script>
         var USERID = "<%=userid %>";
         var ORGID = "<%=orgid %>";
@@ -45,23 +45,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">
-                                        1、选择对比参量</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <ul style="margin:0px; list-style:none;" id="paramlist">
-                                        <li id="SW_Temperature"><a href="#">温度</a></li>
-                                        <li id="SW_Pressure"><a href="#">压力</a></li>
-                                        <li id="AF_FlowInstant"><a href="#">瞬时流量</a></li>
-                                        <li id="AI_Density"><a href="#">频率</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
@@ -75,19 +59,14 @@
                                 </ul>
                                 </div>
                             </div></div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                              <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         3、核对查询条件</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="sel-params">
-                                    选择的参数
-                                    <ul id="container-params">
-                                    
-                                    </ul>
-                                   </div>
+     
                                     <div class="sel-points">
                                     选择的计量点
                                     <ul  id="container-measurepoints">
