@@ -89,18 +89,18 @@
 
         //main-nav
 
-        console.log(pathname);
+        //console.log(pathname);
         if (pathname == "/" || pathname.toLowerCase() == "/default.aspx") {
             $("#main-nav").hide();
         }
 
-        console.log(pathname);
+       // console.log(pathname);
 
         $.each($("#main-nav li"), function (index, li) {
             var link = $(li).find('a').attr('href');
             if (pathname.indexOf(link)>-1) {
             //if (link == pathname) {
-                $(li).addClass("active");
+            //    $(li).addClass("active");
             }
             //console.log(link);
         });

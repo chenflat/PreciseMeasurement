@@ -44,7 +44,7 @@ $(function () {
                 $("#refresh").css({ left: 1100 });
             } else {
                 $("#swichbar").text('<<');
-                $("#refresh").css({ left: 1000 });
+                $("#refresh").css({ left: 750 });
             }
         });
     });

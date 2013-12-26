@@ -168,6 +168,22 @@ namespace PM.Web.services {
             return result;
         }
 
+        /// <summary>
+        /// 获取报表设置
+        /// </summary>
+        /// <returns></returns>
+        public string GetReportSetting(HttpContext context) {
+
+            int m_userid = PM.Common.Utils.StrToInt(context.Request["userid"].ToString(), 0);
+            string m_orgid = context.Request["orgid"].ToString();
+            string m_settingname = context.Request["settingname"].ToString();
+
+            List<ReportSettingInfo> list = PM.Business.ReportSetting.GetReportSettingByUserId(m_settingname, m_userid, m_orgid);
+            string result = JsonConvert.SerializeObject(list);
+
+            return result;
+
+        }
 
 
 

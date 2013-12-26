@@ -62,13 +62,13 @@
           <a href="<%=ResolveUrl("~/realtime/default.aspx") %>">实时参数</a>
         </li>
         <li>
-          <a href="<%=ResolveUrl("~/report/") %>">统计报表</a>
+          <a href="<%=ResolveUrl("~/report/default.aspx") %>">统计报表</a>
         </li>
         <li>
-          <a href="<%=ResolveUrl("~/analysis/") %>">曲线对比</a>
+          <a href="<%=ResolveUrl("~/analysis/default.aspx") %>">曲线对比</a>
         </li>
         <li>
-          <a href="<%=ResolveUrl("~/alarm/") %>">报警管理</a>
+          <a href="<%=ResolveUrl("~/alarm/default.aspx") %>">报警管理</a>
         </li>
         </ul>
         </li>
