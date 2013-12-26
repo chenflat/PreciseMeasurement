@@ -101,7 +101,7 @@
                                         <ul class="nav measurepoint-list">
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                                {%>
-                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;"><%=point.Description%></li>
+                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;"><%=point.Description%> </li>
                                             <% } %>
                                         </ul>
                                     </li>
@@ -141,6 +141,8 @@
                         关闭</button>
                     <button type="button" class="btn btn-primary" id="btnSaveSetting">
                         保存设置</button>
+                    <button type="button" id="btnDelete" class="btn btn-default" data-dismiss="modal">
+                        删除</button>
                 </div>
             </div>
             <!-- /.modal-content -->

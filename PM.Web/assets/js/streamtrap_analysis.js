@@ -345,7 +345,7 @@ function GetChart(startdate, enddate, datetype) {
              
                     switch (obj.num) {
                         case "SW_Temperature":
-                            console.log(seriesOptions_Temp);
+                           // console.log(seriesOptions_Temp);
                             createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)');
                             break;
                         case "AI_Density":

@@ -10,6 +10,7 @@ using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.IO;
+using PM.Common;
 
 namespace PM.Web.services {
     /// <summary>
@@ -37,6 +38,12 @@ namespace PM.Web.services {
         }
 
 
+        /// <summary>
+        /// 保存资产坐标
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
         public string SaveAssetCoordinates(HttpContext context, Dictionary<string, object> dictionary) {
             string ret = "";
             if (dictionary.ContainsKey("data")) {
@@ -48,6 +55,45 @@ namespace PM.Web.services {
             return ret;
 
         }
+
+        /// <summary>
+        /// 删除报表设置
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string DeleteReportSetting(HttpContext context, Dictionary<string, object> dictionary) {
+            bool ret = false;
+            if (dictionary.ContainsKey("settingname")) {
+                string settingname = dictionary["settingname"].ToString();
+                int userid = Utils.StrToInt(dictionary["userid"].ToString(), 0);
+                string orgid = dictionary["orgid"].ToString();
+               ret = PM.Data.ReportSetting.DeleteReportSettingByUserId(settingname, userid, orgid);
+            }
+
+
+            return ret.ToString();
+        }
+
+
+        /// <summary>
+        /// 保存报表设置
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public string SaveReportSetting(HttpContext context, Dictionary<string, object> dictionary) {
+
+            bool ret = false;
+            if (dictionary.ContainsKey("data")) {
+
+                List<ReportSettingInfo> list = JsonConvert.DeserializeObject<List<ReportSettingInfo>>(dictionary["data"].ToString());
+                ret = PM.Business.ReportSetting.SaveReportSetting(list);
+            }
+            return ret.ToString();
+        }
+
+
+
 
         private void OutputString(HttpContext context, string strReturn) {
             try {

@@ -5,6 +5,8 @@
 */
 $(function () {
 
+    $("#btnDelete").hide();
+
     //为开始、结束时间绑定日历控制
     $(".startdate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
@@ -50,11 +52,11 @@ $(function () {
         $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM-dd'));
     }
 
-   
+
 
     var path = window.location.pathname;
     if (path == '/report/custom.aspx') {
-        $('[id$=btnExport]').attr({"disabled":true})
+        $('[id$=btnExport]').attr({ "disabled": true })
 
         initSettings();
     } else if (path == '/report/month.aspx') {
@@ -80,6 +82,7 @@ $(function () {
         //清空设置名称，显示设置窗口
         $("#SettingName").val("");
         $('#myModal').modal('show');
+        $("#btnDelete").hide();
     });
 
     /**
@@ -94,12 +97,12 @@ $(function () {
         $("#SettingName").val(name);
 
         //获取设置数据
-        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID, "settingname": name }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetReportSetting", "userid": USERID, "orgid": ORGID, "settingname": name }, function (data) {
             var points = [];
             //遍历数组
             $.each(data, function (index, obj) {
                 if ($.trim(obj.SettingName) == name) {
-                    points.push('<li id="' + obj.Pointnum + '">' + obj.Description + '</li>');
+                    points.push('<li id="' + obj.Pointnum + '"><span class="desc">' + obj.Description + '</span><div class="pull-right">×</div></li>');
                 }
             });
 
@@ -110,16 +113,17 @@ $(function () {
     /**
     * 编辑自定义设置
     */
-    $("#SettingNameList li").click(function () {
+    $("#SettingNameList").on("click", "li", function () {
+        $("#btnDelete").show();
         GetReportSettingByName($(this).text());
         $('#myModal').modal('show');
     });
-
 
     /**
     * 动态添加计量点到列表
     */
     $(".measurepoint-list li").click(function () {
+
         $("#message").empty();
         var text = $(this).text();
         var id = $(this).attr("id");
@@ -163,21 +167,18 @@ $(function () {
         if (settings.length == 0)
             return;
 
-        $.ajax({
-            type: "POST",
-            url: "../services/SaveReportSetting.ashx",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(settings),
-            success: function (data) {
-                if (path == '/report/custom.aspx') {
-                    var li = "<li><a href=\"#\">" + $("#SettingName").val() + "</a></li>";
-                    $("#SettingNameList").append(li);
-                    $("#CreateSettingNameList").append(li);
-                }
-                $('#myModal').modal('hide')
-            },
-            error: OnFail
+        var data = JSON.stringify({ "funname": "SaveReportSetting", "data": settings })
+
+        $.post("../services/PostAjaxData.ashx", data, function (result) {
+            if (result == "True") {
+                var li = "<li><a href=\"#\">" + $("#SettingName").val() + "</a></li>";
+
+                console.log(li);
+
+                $("#SettingNameList").append(li);
+                $("#CreateSettingNameList").append(li);
+
+            }
         });
 
         $('#myModal').modal('hide');
@@ -205,6 +206,29 @@ $(function () {
         return ret;
     }
 
+    $("#btnDelete").click(function () {
+        var settingname = $("#SettingName").val();
+        var data = JSON.stringify({ "funname": "DeleteReportSetting", "settingname": settingname, "userid": USERID, "orgid": ORGID });
+        $.post("../services/PostAjaxData.ashx", data, function (data) {
+            if (data == "True") {
+                $.each($("#SettingNameList li"), function (index, obj) {
+                    if ($(this).text() == settingname) {
+                        $(this).remove();
+                    }
+                });
+
+                $.each($("#CreateSettingNameList li"), function (index, obj) {
+                    if ($(this).text() == settingname) {
+                        $(this).remove();
+                    }
+                });
+
+
+            }
+        });
+
+    });
+
 
     /**
     * 生成自定义报表
@@ -230,6 +254,7 @@ $(function () {
     * 选择设置创建报表
     */
     $("#CreateSettingNameList li").click(function () {
+
         var settingName = $(this).text();
         $('[id$=hdnSettingName]').val(settingName);
         $('[id$=btnExport]').attr("disabled", false);
@@ -244,7 +269,7 @@ $(function () {
     function CreateCustomReport(settingName) {
 
         //获取设置数据
-        $.getJSON('../services/GetReportSetting.ashx', { "userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', {"funname":"GetReportSetting", "userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
 
             var strPointnums = "";
             $.each(data, function (index, obj) {

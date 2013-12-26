@@ -107,7 +107,7 @@
 				var $weatherBox = $(option.parentbox),
 					cityName = option.city.indexOf('%') == 0 ? option.city : encodeURI( option.city );
 					
-                    console.log($weatherBox);
+                    //console.log($weatherBox);
                     
                     	
 				if( 'client' == option.area ){ //如果选定地区，根据IP
