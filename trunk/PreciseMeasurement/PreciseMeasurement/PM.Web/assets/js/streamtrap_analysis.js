@@ -5,8 +5,8 @@
 $(function () {
 
     $(".bs-sidenav .active").on('click', function () {
-            $(this).children('ul').toggle(300);
-        });
+        $(this).children('ul').toggle(300);
+    });
 
 
 
@@ -42,16 +42,6 @@ $(function () {
     });
 
 
-    //动态添加参数到列表
-    $("#paramlist li").click(function () {
-        //  console.log($(this).attr("id") + ", " + $(this).text());
-        var text = $(this).text();
-        var li = "<li id='" + $(this).attr("id") + "'>" + text + "</li>";
-        if (!hasParamElement(text)) {
-            $("#container-params").append(li);
-        }
-    });
-
     //动态添加计量点到列表
     $(".measurepoint-list li").click(function () {
         var text = $(this).text();
@@ -61,6 +51,23 @@ $(function () {
             $("#container-measurepoints").append(li);
         }
     });
+
+    //添加资产对应的计量器到列表
+    $(".assetitem").click(function () {
+        var children = $(this).children().find("li");
+        $.each(children, function (index, obj) {
+            var text = $(obj).text();
+            var id = $(obj).attr("id");
+            var li = "<li id='" + id + "'>" + text + "</li>";
+
+            if (!hasPointElement(text)) {
+                $("#container-measurepoints").append(li);
+            }
+        });
+    });
+
+
+
 
     //移除参数
     $("#container-params").on("click", "li", function () {
@@ -102,22 +109,44 @@ $(function () {
     * 初始化设置
     */
     function initSettings() {
+        var parameters = window.location.search.slice(1);
+        if (parameters != "") {
+            if (parameters.indexOf("&") >= 0) {
+                var arrParams = parameters.split("&");
+            } else {
+                var arrKeyValues = parameters.split("=");
+                var key = arrKeyValues[0];
+                var value = arrKeyValues[1];
 
-        $.getJSON('GetAnalyzeSettings.ashx', { "userid": USERID, "orgid": ORGID }, function (data) {
-
-            var params = [];
-            var points = [];
-
-            $.each(data, function (index, obj) {
-                if (obj.Type == 0) {
-                    params.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
-                } else {
-                    points.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
+                if (key == "assetuid") {
+                    $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAssetmeters", "assetuid": value }, function (data) {
+                        var points = [];
+                        $.each(data, function (index, obj) {
+                            points.push('<li id="' + obj.Metername + '">' + obj.PointDescription + '</li>');
+                        });
+                        $("#container-measurepoints").append(points.join(""));
+                    });
                 }
+            }
+
+        } else {
+
+            $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAnalyzeSettings", "userid": USERID, "orgid": ORGID, "tablename": "STREAMTRAP" }, function (data) {
+
+                var params = [];
+                var points = [];
+
+                $.each(data, function (index, obj) {
+                    if (obj.Type == 0) {
+                        params.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
+                    } else {
+                        points.push('<li id="' + obj.SettingName + '">' + obj.Description + '</li>');
+                    }
+                });
+                $("#container-params").append(params.join(""));
+                $("#container-measurepoints").append(points.join(""));
             });
-            $("#container-params").append(params.join(""));
-            $("#container-measurepoints").append(points.join(""));
-        });
+        }
     }
 
 
@@ -126,13 +155,13 @@ $(function () {
 
         var settings = new Array();
 
-        $("#container-params li").each(function (index, obj) {
-            var item = { "type": "MEASUREUNIT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "USERID": USERID, "ORGID": ORGID };
-            settings.push(item);
-        });
+        //        $("#container-params li").each(function (index, obj) {
+        //            var item = { "type": "MEASUREUNIT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "USERID": USERID, "ORGID": ORGID };
+        //            settings.push(item);
+        //        });
 
         $("#container-measurepoints li").each(function (index, obj) {
-            var item = { "type": "MEASUREPOINT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "USERID": USERID, "ORGID": ORGID };
+            var item = { "type": "MEASUREPOINT", "SETTINGNAME": $(obj).attr("id"), "DESCRIPTION": $.trim($(obj).text()), "TABLENAME": "STREAMTRAP", "USERID": USERID, "ORGID": ORGID };
             settings.push(item);
         });
 
@@ -251,9 +280,9 @@ function getComparePoints() {
 */
 function GetChart(startdate, enddate, datetype) {
 
-
     //获取比较参数
-    var params = getCompareParams();
+    var params = [];
+    params.push({ "num": "SW_Temperature", "description": "温度" }); 
     //获取要比较的计量点
     var points = getComparePoints();
     var datetype = getDateType();
@@ -313,8 +342,10 @@ function GetChart(startdate, enddate, datetype) {
             if (seriesCounter == points.length) {
                 //不同的参数创建不同的图表
                 $.each(params, function (index, obj) {
+             
                     switch (obj.num) {
                         case "SW_Temperature":
+                            console.log(seriesOptions_Temp);
                             createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)');
                             break;
                         case "AI_Density":
@@ -337,8 +368,7 @@ function GetChart(startdate, enddate, datetype) {
 
     // create the chart when all data is loaded
     function createChart(obj,series,ytitle,unit) {
-
-        console.log(obj.description);
+        console.log(series);
         $("#charts").append("<div id='"+ obj.num +"'></div>");
         var id = obj.num;
         Highcharts.setOptions({

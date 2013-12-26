@@ -580,7 +580,7 @@ namespace PM.Data {
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid);
+        bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid,string tablename);
 
         /// <summary>
         /// 查找分析设置信息
@@ -588,7 +588,7 @@ namespace PM.Data {
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        IDataReader FindAnalyzeSettingInfo(int userid, string orgid);
+        IDataReader FindAnalyzeSettingInfo(int userid, string orgid,string tablename);
 
         /// <summary>
         /// 查找报警信息

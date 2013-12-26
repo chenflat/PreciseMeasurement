@@ -48,9 +48,9 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public static bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid)
+        public static bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid, string tablename)
         {
-            return DatabaseProvider.GetInstance().DeleteAnalyzeSettingInfoByUser(userid, orgid);
+            return DatabaseProvider.GetInstance().DeleteAnalyzeSettingInfoByUser(userid, orgid, tablename);
         }
 
 
@@ -60,8 +60,8 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        public static IDataReader FindAnalyzeSettingInfo(int userid, string orgid) {
-            return DatabaseProvider.GetInstance().FindAnalyzeSettingInfo(userid, orgid);
+        public static IDataReader FindAnalyzeSettingInfo(int userid, string orgid,string tablename) {
+            return DatabaseProvider.GetInstance().FindAnalyzeSettingInfo(userid, orgid, tablename);
         }
 
         /// <summary>
