@@ -1233,3 +1233,5 @@ h1[id] {
 #realdata td,#realdata th {word-break: keep-all;white-space:nowrap;}
 
 .structure-tools {display:none;background:#f4f4f4;font-size:12px;padding:4px;}
+
+.assetitem > a {background:#e5e3e9;}

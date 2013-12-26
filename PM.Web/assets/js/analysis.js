@@ -103,7 +103,7 @@ $(function () {
     */
     function initSettings() {
 
-        $.getJSON('GetAnalyzeSettings.ashx', { "userid": USERID, "orgid": ORGID }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetAnalyzeSettings", "userid": USERID, "orgid": ORGID }, function (data) {
 
             var params = [];
             var points = [];

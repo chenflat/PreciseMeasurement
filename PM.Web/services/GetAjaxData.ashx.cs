@@ -133,6 +133,41 @@ namespace PM.Web.services {
             return ret;
         }
 
+        /// <summary>
+        /// 获取分析设置
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetAnalyzeSettings(HttpContext context) {
+
+            int m_userid = PM.Common.Utils.StrToInt(context.Request["userid"].ToString(), 0);
+            string m_orgid = context.Request["orgid"].ToString();
+            string m_tablename = context.Request["tablename"]==null ? "" : context.Request["tablename"].ToString();
+
+            List<AnalyzeSettingInfo> list = PM.Business.AnalyzeSetting.GetUserAnalyzeSettingInfoList(m_userid, m_orgid, m_tablename);
+
+            string result = JsonConvert.SerializeObject(list);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取资产计量器
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetAssetmeters(HttpContext context) {
+            string result = "";
+            int assetuid = PM.Common.Utils.StrToInt(context.Request["assetuid"].ToString(), 0);
+
+            string assetnum = PM.Data.Asset.GetAssetInfo(assetuid).Assetnum;
+            List<AssetmeterInfo> list = PM.Data.Assetmeter.GetAssetmeterByAssetnum(assetnum);
+            
+            result = JsonConvert.SerializeObject(list);
+
+            return result;
+        }
+
 
 
 

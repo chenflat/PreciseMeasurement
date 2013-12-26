@@ -53,7 +53,23 @@
                                 </div>
                                 <div class="panel-body bs-sidebar">
                                      <ul class="nav bs-sidenav" style="margin:0px;">
-    
+                                    <%
+                                        foreach (System.Collections.Generic.KeyValuePair<PM.Entity.AssetInfo, System.Collections.Generic.List<PM.Entity.AssetmeterInfo>> pair in dicts)
+                                        { 
+                                    %>
+                                    <li class="assetitem"><a href="#">
+                                        [<%= pair.Key.Assetnum %>]<%= pair.Key.Description %></a>
+                                        <ul class="nav measurepoint-list">
+                                            <% foreach (PM.Entity.AssetmeterInfo point in pair.Value)
+                                               {%>
+                                            <li id="<%=point.Metername %>"><a href="#">
+                                                <%=point.PointDescription%></a></li>
+                                            <% } %>
+                                        </ul>
+                                    </li>
+                                    <%
+                                    }
+                                    %>
                                    
                    
                                 </ul>

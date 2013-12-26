@@ -81,12 +81,13 @@ namespace PM.Data.SqlServer
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid) {
+        public bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid,string tablename) {
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
+                                  DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, tablename)
                                   };
-            string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID and TABLENAME=@TABLENAME", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
@@ -97,13 +98,14 @@ namespace PM.Data.SqlServer
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns>分析设置信息</returns>
-        public IDataReader FindAnalyzeSettingInfo(int userid, string orgid)
+        public IDataReader FindAnalyzeSettingInfo(int userid, string orgid, string tablename)
         {
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
-                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid)
+                                  DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
+                                  DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, tablename)
                                   };
-            string commandText = string.Format("select * from [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("select * from [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID and TABLENAME=@TABLENAME", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
     }

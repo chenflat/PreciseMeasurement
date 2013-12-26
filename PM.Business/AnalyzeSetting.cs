@@ -20,9 +20,9 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public static string GetUserMeasureUnit(int userid,string orgid) {
+        public static string GetUserMeasureUnit(int userid,string orgid,string tablename) {
             StringBuilder sb = new StringBuilder();
-            List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
+            List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid, tablename);
             foreach (var item in list)
             {
                 if (item.Type == SettingType.MEASUREUNIT) {
@@ -41,10 +41,10 @@ namespace PM.Business
         /// <param name="userid"></param>
         /// <param name="orgid"></param>
         /// <returns></returns>
-        public static string GetUserMeasurePoint(int userid, string orgid)
+        public static string GetUserMeasurePoint(int userid, string orgid,string tablename)
         {
             StringBuilder sb = new StringBuilder();
-            List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid);
+            List<AnalyzeSettingInfo> list = GetUserAnalyzeSettingInfoList(userid, orgid, tablename);
             foreach (var item in list)
             {
                 if (item.Type == SettingType.MEASUREPOINT)
@@ -66,13 +66,13 @@ namespace PM.Business
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public static List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, string orgid)
+        public static List<AnalyzeSettingInfo> GetUserAnalyzeSettingInfoList(int userid, string orgid,string tablename)
         {
             if (userid <= 0) {
                 return new List<AnalyzeSettingInfo>();
             }
             List<AnalyzeSettingInfo> list = new List<AnalyzeSettingInfo>();
-            using (IDataReader reader = PM.Data.AnalyzeSetting.FindAnalyzeSettingInfo(userid,orgid))
+            using (IDataReader reader = PM.Data.AnalyzeSetting.FindAnalyzeSettingInfo(userid, orgid, tablename))
             {
                 while (reader.Read())
                 {
@@ -96,14 +96,16 @@ namespace PM.Business
             //获取用户ID
             int userid = 0;
             string orgid = "";
+            string tablename = "";
 
             if (list.Count > 0)
             {
                 userid = list[0].UserId;
                 orgid = list[0].Orgid;
+                tablename = list[0].TableName;
             }
             //删除该用户设置
-            bool ret = PM.Data.AnalyzeSetting.DeleteAnalyzeSettingInfoByUser(userid, orgid);
+            bool ret = PM.Data.AnalyzeSetting.DeleteAnalyzeSettingInfoByUser(userid, orgid, tablename);
             //重新保存设置
             foreach (var item in list)
             {
