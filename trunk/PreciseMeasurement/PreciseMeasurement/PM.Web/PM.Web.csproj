@@ -131,6 +131,7 @@
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\meter.png" />
     <Content Include="assets\img\refresh.png" />
+    <Content Include="assets\img\status_on.gif" />
     <Content Include="assets\img\systemrunchart.png" />
     <Content Include="assets\js\alarm.js" />
     <Content Include="assets\js\analysis.js" />
@@ -151,6 +152,7 @@
     <Content Include="assets\js\jszip.js" />
     <Content Include="assets\js\less.js" />
     <Content Include="assets\js\measurepoint.js" />
+    <Content Include="assets\js\MeasureSystem.js" />
     <Content Include="assets\js\Pager.min.js" />
     <Content Include="assets\js\raw-files.js" />
     <Content Include="assets\js\realtime.js" />

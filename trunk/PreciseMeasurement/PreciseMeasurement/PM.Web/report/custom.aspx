@@ -19,13 +19,21 @@
                 <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
-                级别：<asp:DropDownList ID="ddlLevel" runat="server">
-                     <asp:ListItem>全部</asp:ListItem>
-                     <asp:ListItem Value="1">一级</asp:ListItem>
-                     <asp:ListItem Value="2">二级</asp:ListItem>
-                     <asp:ListItem Value="3">三级</asp:ListItem>
-                     <asp:ListItem Value="4">四级</asp:ListItem>
-                </asp:DropDownList>
+
+                设置列表：
+                <select id="settingNameList">
+                     <% foreach (var item in SettingList) {
+                        %>
+                     <option><%=item %></option> 
+                        <% 
+                     } %>
+                
+                </select>
+
+               
+                  <asp:HiddenField ID="hdnSettingName" runat="server" />
+                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
+                
                 &nbsp;
                 <div class="btn-group">
                 <button type="button" class="btn btn-danger" id="CreateSetting">自定义设置</button>
@@ -39,18 +47,7 @@
                 </ul>
               </div>
 
-              <div class="btn-group">
-                  <asp:HiddenField ID="hdnSettingName" runat="server" />
-                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" id="CreateSettingNameList">
-                  <% foreach (var item in SettingList) {
-                        %>
-                        <li><a href="#"><%=item %></a></li>
-                        <% 
-                     } %>
-                </ul>
-              </div>
+              
                 
                 <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
