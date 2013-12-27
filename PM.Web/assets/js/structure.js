@@ -80,9 +80,11 @@ $(function () {
             //设置计量点数值
             $.each(data, function (index, obj) {
                 var mstyle = "";
-               
+
                 if ((new Date(obj.Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
                     mstyle = " style='color:red;'";
+
+                    $("#" + obj.Pointnum).find(".status").hide();
                 }
                 console.log(mstyle);
                 content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
