@@ -26,6 +26,7 @@
             <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" >
             <span class="text"><%# Eval("Pointnum") %></span>
             <span class="icon"></span>
+            <span class="status"><img src="../assets/img/status_on.gif" width="16px" alt="数据采集正常"/></span>
             </div>
             <div id="<%# Eval("Pointnum") %>_data" class="popover meter_content" style="display:none;">
             <div class="arrow"></div>
