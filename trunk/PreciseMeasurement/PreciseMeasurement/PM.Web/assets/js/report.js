@@ -222,8 +222,6 @@ $(function () {
                         $(this).remove();
                     }
                 });
-
-
             }
         });
 
@@ -236,15 +234,9 @@ $(function () {
     $("#btnCustomQuery").click(function () {
 
         //取第一个设置为默认值
-        var defSettingName = "";
-        $.each($("#CreateSettingNameList li"), function (index, obj) {
-            if (index == 0) {
-                defSettingName = $.trim($(this).text());
-                //给隐藏域赋值：
-                $('[id$=hdnSettingName]').val(defSettingName);
-                return;
-            }
-        });
+        var defSettingName = $.trim($("#settingNameList").val());
+        //给隐藏域赋值：
+        $('[id$=hdnSettingName]').val(defSettingName);
         //创建自定义报表
         CreateCustomReport(defSettingName);
 
@@ -269,7 +261,7 @@ $(function () {
     function CreateCustomReport(settingName) {
 
         //获取设置数据
-        $.getJSON('../services/GetAjaxData.ashx', {"funname":"GetReportSetting", "userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
+        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetReportSetting", "userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
 
             var strPointnums = "";
             $.each(data, function (index, obj) {
