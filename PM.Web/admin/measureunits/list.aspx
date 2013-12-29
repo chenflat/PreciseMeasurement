@@ -2,6 +2,13 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measureunits.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+
+    <ol class="breadcrumb margintop20">
+  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
+  系统管理</a></li>
+  <li class="active">标准参量</li>
+</ol>
+
     <div class="toolbar bs-callout-info">
         标准参量名称：<asp:TextBox ID="description" runat="server"></asp:TextBox>
         <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />

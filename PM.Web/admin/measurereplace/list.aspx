@@ -4,6 +4,13 @@
 <%@ Register src="../../controls/PageControl.ascx" tagname="PageControl" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+
+    <ol class="breadcrumb margintop20">
+  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
+  系统管理</a></li>
+  <li class="active">换表管理</li>
+</ol>
+
     <div class="toolbar bs-callout-info">
         起始时间：<asp:TextBox ID="startdate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>
         终止时间：<asp:TextBox ID="enddate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>

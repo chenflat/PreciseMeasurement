@@ -48,5 +48,16 @@ namespace PM.Data {
             return DatabaseProvider.GetInstance().FindMeteringroupByCondition(condition);
         }
 
+
+        /// <summary>
+        /// 查找指定组的计量器
+        /// </summary>
+        /// <param name="groupName">组编号</param>
+        /// <returns></returns>
+        public static DataTable FindMeteringroupByGroup(string groupName) {
+            return DatabaseProvider.GetInstance().FindMeteringroupByGroup(groupName);
+        }
+
+
     }
 }

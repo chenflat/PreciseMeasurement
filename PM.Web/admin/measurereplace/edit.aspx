@@ -2,6 +2,11 @@
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.measurereplace.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+    <ol class="breadcrumb margintop20">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
+        <li><a href="list.aspx">换表管理</a></li>
+        <li class="active">编辑</li>
+    </ol>
     <div class="page-header">
         <h3>
             编辑换表记录</h3>

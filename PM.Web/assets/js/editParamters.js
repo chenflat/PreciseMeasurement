@@ -20,10 +20,10 @@ $(function () {
         // console.log(row);
 
         //设置编辑值
-        $("#upperwarning").val($("td", row).eq(2).html());
-        $("#lowerwarning").val($("td", row).eq(3).html());
-        $("#upperaction").val($("td", row).eq(4).html());
-        $("#loweraction").val($("td", row).eq(5).html());
+        $("[id*=txtUpperwarning]").val(convertFloat($("td", row).eq(2).html()));
+        $("[id*=txtLowerwarning]").val(convertFloat($("td", row).eq(3).html()));
+        $("[id*=txtUpperaction]").val(convertFloat($("td", row).eq(4).html()));
+        $("[id*=txtLoweraction]").val(convertFloat($("td", row).eq(5).html()));
         $("#measurepointparamuid").val(measurepointparamuid);
 
         //显示编辑对话框
@@ -32,16 +32,29 @@ $(function () {
     });
 
 
+    function convertFloat(text) {
+        if (text == "")
+            return 0;
+        if (isNaN($('#Field').val() / 1) == false) {
+            return parseFloat(text);
+        } else {
+            return 0;
+        }
+    }
+
+
+
+
     //保存参量信息
     $("#btnSaveSetting").click(function () {
 
         //定义变量并赋值
         var pointnum = $("[id*=ddlPointNum]").val();
         var measureunitid = $("[id*=ddlMeasureUnitId]").val();
-        var upperwarning = $("#upperwarning").val();
-        var lowerwarning = $("#lowerwarning").val();
-        var upperaction = $("#upperaction").val();
-        var loweraction = $("#loweraction").val();
+        var upperwarning = $("[id*=txtUpperwarning]").val();
+        var lowerwarning = $("[id*=txtLowerwarning]").val();
+        var upperaction = $("[id*=txtUupperaction]").val();
+        var loweraction = $("[id*=txtLoweraction]").val();
 
         var measurePointParamInfo = { "Measurepointparamuid": $("#measurepointparamuid").val(), "Pointnum": pointnum, "Measureunitid": measureunitid, "Lowerwarning": lowerwarning, "Loweraction": loweraction, "Upperwarning": upperwarning, "Upperaction": upperaction };
 
@@ -78,7 +91,7 @@ $(function () {
 
         });
 
-       
+
 
         $('#myModal').modal('hide');
     });

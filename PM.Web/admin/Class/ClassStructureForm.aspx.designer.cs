@@ -22,13 +22,22 @@ namespace PM.Web.admin.Class {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// txtGroupName 控件。
+        /// hdnClassstructureuid 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroupName;
+        protected global::System.Web.UI.WebControls.HiddenField hdnClassstructureuid;
+        
+        /// <summary>
+        /// txtClassstructureid 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClassstructureid;
         
         /// <summary>
         /// txtDescription 控件。
@@ -40,13 +49,13 @@ namespace PM.Web.admin.Class {
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
-        /// rfvGroupName 控件。
+        /// rfvClassstructureid 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGroupName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClassstructureid;
         
         /// <summary>
         /// rfvDescrption 控件。
@@ -65,5 +74,14 @@ namespace PM.Web.admin.Class {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOrgId;
+        
+        /// <summary>
+        /// rptChildren 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptChildren;
     }
 }

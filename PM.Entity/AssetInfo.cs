@@ -56,20 +56,20 @@ namespace PM.Entity
 			private DateTime _Statusdate;
 			private string _Usage;
 			private string _Vendor;
-			private DateTime _Warrantyexpdate;
+            private DateTime _Warrantyexpdate = DateTime.Now;
 			private string _Ec1;
 			private string _Ec2;
 			private string _Ec3;
 			private string _Ec4;
 			private decimal _Ec5;
-			private DateTime _Ec6;
+            private DateTime _Ec6 = DateTime.Now;
 			private decimal _Ec7;
 			private string _Ec8;
 			private string _Ec9;
 			private string _Ec10;
 			private string _Ec11;
 			private decimal _Ec12;
-			private DateTime _Ec13;
+            private DateTime _Ec13 = DateTime.Now;
 			private string _Ec14;
 			private decimal _Ec15;
 		

@@ -10,7 +10,7 @@
             <li class="steam">
                 <div class="buttonInSquare btnSubSystem icon_steam">
                 </div>
-                <a href="#steam">蒸汽监测</a></li>
+                <a href="#steam">蒸汽计量</a></li>
             <li  class="steamtrap">
                 <div class="buttonSteamTrap buttonInSquare buttonComm">
                 </div>

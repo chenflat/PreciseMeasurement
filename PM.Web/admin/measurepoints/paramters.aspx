@@ -2,13 +2,18 @@
     CodeBehind="paramters.aspx.cs" Inherits="PM.Web.admin.measurepoints.paramters" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+    <ol class="breadcrumb margintop20">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
+        <li><a href="list.aspx">计量点管理</a></li>
+        <li class="active">计量点参量</li>
+    </ol>
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
                 <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置
             </h3>
             <div class="manager_buttons">
-            <a href="list.aspx" class="btn btn-info">返回</a>
+                <a href="list.aspx" class="btn btn-info">返回</a>
             </div>
         </div>
     </div>
@@ -31,7 +36,6 @@
         </Columns>
         <PagerSettings Visible="False" />
     </asp:GridView>
-    
     <div class="modal fade bs-example-modal" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -46,7 +50,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-lg-5 text-right">计量点:</label>
+                                <label class="col-lg-5 text-right">
+                                    计量点:</label>
                                 <div class="col-lg-7">
                                     <asp:DropDownList ID="ddlPointNum" runat="server">
                                     </asp:DropDownList>
@@ -55,48 +60,53 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label class="col-lg-5 text-right">参量名称:</label>
-                            <div class="col-lg-7">
-                                <asp:DropDownList ID="ddlMeasureUnitId" runat="server">
+                                <label class="col-lg-5 text-right">
+                                    参量名称:</label>
+                                <div class="col-lg-7">
+                                    <asp:DropDownList ID="ddlMeasureUnitId" runat="server">
                                     </asp:DropDownList>
                                     <input type="hidden" id="measurepointparamuid" />
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-lg-5 text-right">运行上限:</label>
+                                <label class="col-lg-5 text-right">
+                                    运行上限:</label>
                                 <div class="col-lg-7">
-                                   <input type="text" id="upperwarning" />
+                                    <asp:TextBox ID="txtUpperwarning" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label class="col-lg-5 text-right">运行下限:</label>
-                            <div class="col-lg-7">
-                                <input type="text" id="lowerwarning" />
-                            </div>
+                                <label class="col-lg-5 text-right">
+                                    运行下限:</label>
+                                <div class="col-lg-7">
+                                    <asp:TextBox ID="txtLowerwarning" runat="server"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-lg-5 text-right">故障上限:</label>
+                                <label class="col-lg-5 text-right">
+                                    故障上限:</label>
                                 <div class="col-lg-7">
-                                    <input type="text" id="upperaction" />
+                                    <asp:TextBox ID="txtUpperaction" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label class="col-lg-5 text-right">故障下限:</label>
-                            <div class="col-lg-7">
-                                <input type="text" id="loweraction" />
-                            </div>
+                                <label class="col-lg-5 text-right">
+                                    故障下限:</label>
+                                <div class="col-lg-7">
+                                    <asp:TextBox ID="txtLoweraction" runat="server"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,8 +114,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         关闭</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveSetting">
-                        保存设置</button>
+                    <asp:Button ID="btnSaveSetting" CssClass="btn btn-primary" runat="server" Text="保存设置" />
                 </div>
             </div>
         </div>

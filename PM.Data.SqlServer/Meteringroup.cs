@@ -77,6 +77,20 @@ namespace PM.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
           
 		}
+
+
+        
+        /// <summary>
+        /// 查找指定组的计量器
+        /// </summary>
+        /// <param name="groupName">组编号</param>
+        /// <returns></returns>
+        public DataTable FindMeteringroupByGroup(string groupName) {
+            string commandText = string.Format("select {0}METERINGROUP.*,{0}MEASUREPOINT.* from {0}[METERINGROUP] INNER JOIN {0}[MEASUREPOINT] ON {0}METERINGROUP.METERNAME={0}MEASUREPOINT.POINTNUM WHERE  {0}METERINGROUP.GROUPNAME='{1}' ",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupName);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
 		
 		
 	}

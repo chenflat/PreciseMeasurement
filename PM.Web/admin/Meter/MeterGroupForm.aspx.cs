@@ -25,9 +25,9 @@ namespace PM.Web.admin.Meter {
             if (!IsPostBack) {
                 if (Request.QueryString["metergroupid"] != null) {
                     metergroupid = long.Parse(PMRequest.GetString("metergroupid"));
-                    SetMeterGroup();
                 }
-                BindData();
+                SetMeterGroup();
+             
             }
         }
 
@@ -36,26 +36,29 @@ namespace PM.Web.admin.Meter {
         /// 设置计量器组信息
         /// </summary>
         private void SetMeterGroup() {
-            if (metergroupid == 0)
+            DataTable dt = null;
+
+            if (metergroupid == 0) {
+                dt = new DataTable();
+                dt.Rows.Add();
                 return;
+            }
             MetergroupInfo metergroupInfo = PM.Data.Metergroup.GetMetergroupInfo(metergroupid);
             txtGroupName.Text = metergroupInfo.Groupname;
             txtDescription.Text = metergroupInfo.Description;
             hdnMetergroupid.Value = metergroupid.ToString();
 
-        }
-
-        /// <summary>
-        /// 绑定组包含的计量器
-        /// </summary>
-        private void BindData() {
-            DataTable dt = new DataTable();
+            //绑定组包含的计量器
+            dt = PM.Data.Meteringroup.FindMeteringroupByGroup(metergroupInfo.Groupname);
             if (dt.Rows.Count==0) {
                 dt.Rows.Add();
             }
             rptMeteringroup.DataSource = dt;
             rptMeteringroup.DataBind();
+
         }
+
+        
 
         /// <summary>
         /// 保存计量器组信息

@@ -101,7 +101,13 @@ namespace PM.Web.admin.users
                     }
                 }
                 else {
-                    userinfo.Password = txtPassWord.Text.Trim();
+
+                    UserInfo modifyUser = PM.Data.Users.GetUserInfo(userinfo.UserId);
+                    if (modifyUser.Password!=Utils.MD5(txtPassWord.Text.Trim())) {
+                        userinfo.Password = Utils.MD5(txtPassWord.Text.Trim());
+                    } else {
+                        userinfo.Password  = modifyUser.Password;
+                    } 
                 }
                 userinfo.ReminderQueryQuestion = txtReminderQueryQuestion.Text.Trim();
                 userinfo.ReminderQueryAnswer = txtReminderQueryAnswer.Text.Trim();

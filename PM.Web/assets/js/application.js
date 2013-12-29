@@ -22,9 +22,6 @@
         })
 
 
-
-
-
         // back to top
         setTimeout(function () {
             var $sideBar = $('.bs-sidebar')
@@ -89,18 +86,19 @@
 
         //main-nav
 
-        //console.log(pathname);
-        if (pathname == "/" || pathname.toLowerCase() == "/default.aspx") {
+        console.log(window.location.pathname);
+        if (window.location.pathname == "/" || window.location.pathname.toLowerCase() == "/default.aspx") {
+            console.log("this");
             $("#main-nav").hide();
         }
 
-       // console.log(pathname);
+        // console.log(pathname);
 
         $.each($("#main-nav li"), function (index, li) {
             var link = $(li).find('a').attr('href');
-            if (pathname.indexOf(link)>-1) {
-            //if (link == pathname) {
-            //    $(li).addClass("active");
+            if (pathname.indexOf(link) > -1) {
+                //if (link == pathname) {
+                //    $(li).addClass("active");
             }
             //console.log(link);
         });
@@ -119,6 +117,9 @@
             inline: true
         });
     })
+
+
+    setInterval("GetTime()", 60000);
 
 } (window.jQuery)
 
@@ -144,3 +145,37 @@ var Message = (function () {
 
     return that;
 } ());
+
+
+
+/**
+* 动态设置日期时间和星期
+*/
+function GetTime() {
+    var now, hour, min, sec;
+
+    now = new Date();
+    hour = now.getHours();
+    min = now.getMinutes();
+    sec = now.getSeconds();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+    if (min < 10) {
+        min = "0" + min;
+    }
+    if (sec < 10) {
+        sec = "0" + sec;
+    }
+
+    var time = hour + ":" + min;
+    var date = now.getFullYear() + "-" + mon[now.getMonth()] + "-"
+			+ now.getDate();
+    var week = day[now.getDay()];
+
+    if ($("#time").length) {
+        $("#time").html(time);
+    }
+
+
+}

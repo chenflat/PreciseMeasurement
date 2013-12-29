@@ -12,18 +12,19 @@
       <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="<%=txtGroupName.ClientID %>" class="col-lg-4 control-label">
+                <label for="<%=txtClassstructureid.ClientID %>" class="col-lg-4 control-label">
                     分类：*</label>
                 <div class="col-lg-8">
                     <div class="col-lg-6">
-                    <asp:TextBox ID="txtGroupName" CssClass="form-control col-lg-6" placeholder="编号"
+                        <asp:HiddenField ID="hdnClassstructureuid" runat="server" />
+                    <asp:TextBox ID="txtClassstructureid" CssClass="form-control col-lg-6" placeholder="编号"
                         runat="server"></asp:TextBox>
                     </div>
                     <div class="col-lg-6">
                     <asp:TextBox ID="txtDescription" CssClass="form-control col-lg-6 description"
                         placeholder="描述" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvGroupName" runat="server" Display="Dynamic" ErrorMessage="必填字段"
-                        ControlToValidate="txtGroupName" CssClass="help-inline"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="rfvClassstructureid" runat="server" Display="Dynamic" ErrorMessage="必填字段"
+                        ControlToValidate="txtClassstructureid" CssClass="help-inline"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator ID="rfvDescrption" runat="server" Display="Dynamic" ErrorMessage="必填字段"
                         ControlToValidate="txtDescription" CssClass="help-inline"></asp:RequiredFieldValidator>
                     </div>
@@ -43,12 +44,43 @@
     </div>
     <div class="row">
         <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a href="#home" data-toggle="tab">子级</a></li>
+            <li class="active"><a href="#children" data-toggle="tab">子级</a></li>
             <li class=""><a href="#attribute" data-toggle="tab">属性</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="home"></div>
+            <div class="tab-pane active" id="children">
+                <asp:Repeater ID="rptChildren" runat="server">
+                <HeaderTemplate>
+                <table id="" class="table table-hover table-bordered">
+                <tr>
+                    <th>分类</th>
+                    <th>分类描述</th>
+                    <th>生成描述</th>
+                    <th>使用分类</th>
+                    <th>组织</th>
+                    <th>地点</th>
+                    <th></th>
+                </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
+                <tr>
+                    <td><%# Eval("CLASSIFICATIONID")%></td>
+                    <td><%# Eval("DESCRIPTION") %></td>
+                    <td><%# Eval("GENASSETDESC")%></td>
+                    <td><%# Eval("USECLASSINDESC")%></td>
+                    <td><%# Eval("ORGID") %></td>
+                    <td><%# Eval("SITEID") %></td>
+                    <td></td>
+                </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                </table>
+                </FooterTemplate>
+                </asp:Repeater>
+            
+            
+            </div>
             <div class="tab-pane active" id="attribute"></div>
         </div>
     </div>
