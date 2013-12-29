@@ -2,6 +2,11 @@
     CodeBehind="AssetList.aspx.cs" Inherits="PM.Web.admin.Asset.AssetList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
+<ol class="breadcrumb margintop20">
+  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
+  系统管理</a></li>
+  <li class="active">资产管理</li>
+</ol>
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>

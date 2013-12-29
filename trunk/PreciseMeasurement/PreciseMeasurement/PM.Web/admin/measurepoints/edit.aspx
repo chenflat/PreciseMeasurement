@@ -3,17 +3,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/measurepoint.js") %>"></script>
-
+    <ol class="breadcrumb margintop20">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
+        <li><a href="list.aspx">计量点管理</a></li>
+        <li class="active">编辑计量点</li>
+    </ol>
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
                 编辑计量点</h3>
-                <div class="manager_buttons">
+            <div class="manager_buttons">
                 <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
-        <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
-        <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
-        <a href="list.aspx" class="btn btn-info">返回</a>
-                </div>
+                <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
+                <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
+                <a href="list.aspx" class="btn btn-info">返回</a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -22,7 +26,8 @@
                 <label for="<%=description.ClientID %>" class="col-lg-5 control-label">
                     测点名称*</label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="description" CssClass="form-control description" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="description" CssClass="form-control description" placeholder=""
+                        runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvDescription" runat="server" Display="Dynamic"
                         ErrorMessage="必填字段" ControlToValidate="description" CssClass="help-inline"></asp:RequiredFieldValidator>
                 </div>
@@ -49,7 +54,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -203,7 +207,8 @@
                     X坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbX" ToolTip="双击编辑坐标信息" CssClass="form-control coordinate x" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbX" ToolTip="双击编辑坐标信息" CssClass="form-control coordinate x" placeholder=""
+                        runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -213,7 +218,8 @@
                     Y坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbY" ToolTip="双击编辑坐标信息"  CssClass="form-control coordinate y" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbY" ToolTip="双击编辑坐标信息" CssClass="form-control coordinate y" placeholder=""
+                        runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -223,7 +229,8 @@
                     Z坐标
                 </label>
                 <div class="col-lg-7">
-                    <asp:TextBox ID="tbZ" ToolTip="双击编辑坐标信息"  CssClass="form-control coordinate z" placeholder="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbZ" ToolTip="双击编辑坐标信息" CssClass="form-control coordinate z" placeholder=""
+                        runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>

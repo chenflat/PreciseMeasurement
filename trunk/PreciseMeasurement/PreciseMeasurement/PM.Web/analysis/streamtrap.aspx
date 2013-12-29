@@ -7,7 +7,7 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/highcharts/highstock.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/streamtrap_analysis.js") %>"></script>
-    <script>
+    <script type="text/javascript">
         var USERID = "<%=userid %>";
         var ORGID = "<%=orgid %>";
     
@@ -49,7 +49,7 @@
                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        2、选择对比计量点</h3>
+                                        1、选择对比计量点</h3>
                                 </div>
                                 <div class="panel-body bs-sidebar">
                                      <ul class="nav bs-sidenav" style="margin:0px;">
@@ -79,7 +79,7 @@
                              <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        3、核对查询条件</h3>
+                                        2、核对查询条件</h3>
                                 </div>
                                 <div class="panel-body">
      

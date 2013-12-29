@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="计量点管理" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true" CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measurepoints.list" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-
+<ol class="breadcrumb margintop20">
+  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
+  系统管理</a></li>
+  <li class="active">计量点管理</li>
+</ol>
 <div class="toolbar bs-callout-info">
         所属组织：<asp:DropDownList ID="ddlOrgId" runat="server">
     </asp:DropDownList>

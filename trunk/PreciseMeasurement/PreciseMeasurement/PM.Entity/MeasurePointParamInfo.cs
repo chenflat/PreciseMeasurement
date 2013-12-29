@@ -12,12 +12,12 @@ namespace PM.Entity
         private string pointname;
         private string measureunitid;
         private string measureunitname;
-        private decimal lowerwarning;
-        private decimal loweraction;
+        private decimal lowerwarning = 0;
+        private decimal loweraction = 0;
         private string llpmnum;
         private int llpriority;
-        private decimal upperwarning;
-        private decimal upperaction;
+        private decimal upperwarning = 0;
+        private decimal upperaction = 0;
         private string ulpmnum;
         private int ulpriority;
 

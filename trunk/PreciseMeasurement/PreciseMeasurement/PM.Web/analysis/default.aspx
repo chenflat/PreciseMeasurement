@@ -75,7 +75,7 @@
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                                         { 
                                     %>
-                                    <li class="active"><a href="#">
+                                    <li  class="assetitem"><a href="#">
                                         <%= pair.Key %></a>
                                         <ul class="nav measurepoint-list">
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)

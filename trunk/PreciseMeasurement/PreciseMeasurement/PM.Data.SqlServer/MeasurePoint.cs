@@ -113,29 +113,29 @@ namespace PM.Data.SqlServer
                                 + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS,@LEVEL,@X,@Y,@Z)", BaseConfigs.GetTablePrefix);
 
             //累计更新行
-            int retRows = 0;
-            if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > -1)
-            {
+            //int retRows = 0;
+            //if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > -1)
+            //{
                 
-                //新增计量器参数信息
-                string commandText2 = string.Format("SELECT * FROM [{0}MEASUREUNIT] WHERE ISMAINPARAM=1",BaseConfigs.GetTablePrefix);
-                using (IDataReader dr = DbHelper.ExecuteReader(CommandType.Text, commandText2))
-                {
-                    while (dr.Read())
-                    {
-                        DbParameter[] unitParams = { 
-                                           DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Pointnum),
-                                           DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 16, dr["MEASUREUNITID"].ToString())
-                                           };
-                        string commandText3 = string.Format("INSERT INTO [{0}MEASUREPOINTPARAM](POINTNUM,MEASUREUNITID)VALUES(@POINTNUM,@MEASUREUNITID)",BaseConfigs.GetTablePrefix);
-                        retRows+=DbHelper.ExecuteNonQuery(CommandType.Text, commandText3, unitParams);
+                ////新增计量器参数信息
+                //string commandText2 = string.Format("SELECT * FROM [{0}MEASUREUNIT] WHERE ISMAINPARAM=1",BaseConfigs.GetTablePrefix);
+                //using (IDataReader dr = DbHelper.ExecuteReader(CommandType.Text, commandText2))
+                //{
+                //    while (dr.Read())
+                //    {
+                //        DbParameter[] unitParams = { 
+                //                           DbHelper.MakeInParam("@POINTNUM", (DbType)SqlDbType.VarChar, 8, measurePointInfo.Pointnum),
+                //                           DbHelper.MakeInParam("@MEASUREUNITID", (DbType)SqlDbType.VarChar, 16, dr["MEASUREUNITID"].ToString())
+                //                           };
+                //        string commandText3 = string.Format("INSERT INTO [{0}MEASUREPOINTPARAM](POINTNUM,MEASUREUNITID)VALUES(@POINTNUM,@MEASUREUNITID)",BaseConfigs.GetTablePrefix);
+                //        retRows+=DbHelper.ExecuteNonQuery(CommandType.Text, commandText3, unitParams);
 
-                    }
-                    dr.Close();
-                }
+                //    }
+                //    dr.Close();
+                //}
 
-            }
-            return retRows;
+            //}
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
 
 
         }

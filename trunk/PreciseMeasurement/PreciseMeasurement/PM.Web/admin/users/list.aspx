@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="用户管理" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true" CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.users.list" %>
 <%@ Register src="../../controls/PageControl.ascx" tagname="PageControl" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-<div class="toolbar bs-callout-danger">
+<div class="toolbar bs-callout-info">
         所属组织：<asp:DropDownList ID="ddlOrgId" runat="server">
     </asp:DropDownList>
     用户名称：<asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>

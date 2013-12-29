@@ -826,6 +826,12 @@ namespace PM.Data {
         /// <returns></returns>
         DataTable FindMeteringroupByCondition(string condition);
 
+        /// <summary>
+        /// 查找指定组的计量器
+        /// </summary>
+        /// <param name="groupName">组编号</param>
+        /// <returns></returns>
+        DataTable FindMeteringroupByGroup(string groupName);
 
 
         /// <summary>

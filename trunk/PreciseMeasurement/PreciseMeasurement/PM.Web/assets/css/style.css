@@ -94,7 +94,7 @@ label {font-weight:normal;}
 .bs-docs-nav .navbar-brand .logo {
      background:url('../img/logo.png') no-repeat top left;
      height:36px;
-     width:200px;
+     width:300px;
      margin:7px 4px 0;
      padding-left:72px;
      line-height:36px;
@@ -1208,6 +1208,8 @@ h1[id] {
 	background-color: white;
 }
 
+.margintop20 {margin-top:20px;}
+
 .table-noborder > tbody > tr > td {border:0px;}
 .table-noborder > tbody > tr:hover >td {background:#ccc;font-size:16px; color:#ff0000;}
 .table-border-bottom > tbody > tr > td {border-bottom:1px solid #ccc;}
@@ -1221,7 +1223,7 @@ h1[id] {
 #structure {position:relative;width:1110px;}
 #structure .meter {z-index:100;position:absolute; cursor:pointer;display: inline-block; }
 #structure .icon {width:32px;height:32px;position: relative;display: inline-block;background:url(../img/meter.png) no-repeat;  }
-#structure .text {float:left;padding-top:8px;}
+#structure .text {float:left;padding-right:4px;}
 #structure .status {position: relative;display: inline-block; vertical-align:top;}
 #structure .meter_content {z-index:200;position:absolute;}
 #structure .close {margin:6px 10px 0 0;}

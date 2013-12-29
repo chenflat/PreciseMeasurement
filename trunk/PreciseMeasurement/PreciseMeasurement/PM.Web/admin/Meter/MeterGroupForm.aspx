@@ -49,9 +49,9 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <tr>
-                    <td><input type="text" name="sequence" placeholder="序号" value="" /></td>
-                    <td><input type="text" name="metername" placeholder="计量点编号"  /></td>
-                    <td></td>
+                    <td><input type="text" name="sequence" placeholder="序号" value="<%# Eval("SEQUENCE") %>" /></td>
+                    <td><input type="text" name="metername" placeholder="计量点编号" value="<%# Eval("METERNAME") %>"  /></td>
+                    <td><%# Eval("DESCRIPTION") %></td>
                     <td><span class="glyphicon glyphicon-remove"></span></td>
                 </tr>
                 </ItemTemplate>

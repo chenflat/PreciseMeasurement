@@ -222,3 +222,14 @@
 .ico_condensation {
     background:url("../ico/condensation.png") no-repeat top left;
  }
+ 
+ 
+ .steamtrap_status {
+    background:url("../ico/steamtrap_status.png");   
+    background-repeat: no-repeat;  
+    width:20px;height:20px;position: relative;display: inline-block;
+}
+ .meter .normal { background-position:0 -30px;}
+ .meter .error {background-position:0 -90px;}
+ .meter .warn {background-position:0 -60px;}
+ .meter .invalid {background-position:0 0px;}

@@ -5,8 +5,8 @@
 $(function () {
 
     $(".bs-sidenav .active").on('click', function () {
-            $(this).children('ul').toggle(300);
-        });
+        $(this).children('ul').toggle(300);
+    });
 
 
 
@@ -52,8 +52,14 @@ $(function () {
         }
     });
 
+//    $(".assetitem").click(function () {
+//        $(this).find("ul").toggle();
+
+//    });
+
     //动态添加计量点到列表
     $(".measurepoint-list li").click(function () {
+        $(this).parent().show();
         var text = $(this).text();
         var id = $(this).attr("id");
         var li = "<li id='" + id + "'>" + text + "</li>";

@@ -9,6 +9,14 @@
         var ORGID = "<%=orgid %>";
     
     </script>
+
+    <ol class="breadcrumb margintop20">
+  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
+  系统管理</a></li>
+  <li><a href="AssetForm.aspx">资产管理</a></li>
+  <li class="active">编辑资产</li>
+</ol>
+
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>

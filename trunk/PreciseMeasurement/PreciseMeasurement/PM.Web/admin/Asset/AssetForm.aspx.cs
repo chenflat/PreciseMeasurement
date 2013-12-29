@@ -128,6 +128,8 @@ namespace PM.Web.admin.Asset {
                     isSuccess = PM.Data.Asset.CreateAsset(assetInfo)>0;
                 }
                 else {
+                    assetInfo.Changeby = AdminInfo.UserName;
+                    assetInfo.Changedate = DateTime.Now;
                     isSuccess = PM.Data.Asset.UpdateAsset(assetInfo);
                 }
                 if (isSuccess) {

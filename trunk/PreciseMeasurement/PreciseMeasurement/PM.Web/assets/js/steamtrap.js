@@ -1,11 +1,7 @@
 ﻿
 /**
-* 疏水器JS
+* 疏水器系统图
 * 
-*
-*
-*
-*
 *
 *@author PING.CHEN
 *@version 1.0
@@ -17,6 +13,8 @@ $(function () {
     * 点击记量点，动态显示当前数据的计量值
     */
     $("#structure div").click(function () {
+        //不弹出信息
+        return;
         //编辑时不弹出计量点信息
         if (window.dialogArguments) {
             return;
@@ -40,43 +38,17 @@ $(function () {
         getRealData();
     });
 
-    /**
-    * 关闭或显示时间数据表格
-    */
-    $("#swichbar").click(function () {
-        $("#realdata").toggle(function () {
-            if ($("#realdata").css("display") == 'none') {
-                $("#swichbar").text('>>');
-                $("#refresh").css({ left: 1100 });
-            } else {
-                $("#swichbar").text('<<');
-                $("#refresh").css({ left: 1000 });
-            }
-        });
-    });
 
 
     //每60秒自动重新获取实时数据
     setInterval(getRealData, 60000);
     getRealData()
 
-    //获取设置类型
-    function GetType() {
-        var type = $("input[name='carrier']:checked").val();
-        if (type == '') { type = "steam"; }
-        return type;
-    }
-
-    //切换类型
-    $('input[name="carrier"]:radio').change(function () {
-        getRealData();
-    });
-
     /**
     * 获取所有测点的实时数据
     */
     function getRealData() {
-        var carrier = GetType();
+        
 
         $("#gvRealtimeData tbody").html("");
         var content = "";
@@ -104,15 +76,6 @@ $(function () {
                     console.log(measuretime);
                 }
 
-                content += "<tr " + mstyle + ">"
-                content += "<td>" + level + "级</td>"
-                content += "<td>[" + obj.AssetInfo.Assetnum + "]" + obj.AssetInfo.Description + "</td>"
-                content += "<td>" + measuretime + "</td>"
-                content += "<td>" + front_temperature + "</td>"
-                content += "<td>" + after_temperature + "</td>"
-                content += "<td>" + diff_temperature + "</td>"
-                content += "<td>" + status + "</td>"
-                content += "</tr>";
 
                 $("#" + obj.AssetInfo.Assetnum + "_data .front_temperature span").text(front_temperature);
                 $("#" + obj.AssetInfo.Assetnum + "_data .after_temperature span").text(after_temperature);
@@ -140,8 +103,6 @@ $(function () {
         if (coordinates.length == 0) {
             return;
         }
-
-       
 
         $.ajax({
             type: "POST",
