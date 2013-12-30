@@ -154,6 +154,8 @@ var Message = (function () {
 function GetTime() {
     var now, hour, min, sec;
 
+    mon = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+			"11", "12");
     now = new Date();
     hour = now.getHours();
     min = now.getMinutes();
@@ -171,7 +173,7 @@ function GetTime() {
     var time = hour + ":" + min;
     var date = now.getFullYear() + "-" + mon[now.getMonth()] + "-"
 			+ now.getDate();
-    var week = day[now.getDay()];
+    //var week = day[now.getDay()];
 
     if ($("#time").length) {
         $("#time").html(time);

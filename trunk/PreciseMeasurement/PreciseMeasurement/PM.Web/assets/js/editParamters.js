@@ -4,6 +4,23 @@
 */
 $(function () {
 
+    //新增参量
+    $("#btnAddParamter").click(function () {
+
+        //参量UID和参量编码
+        var measurepointparamuid = $(this).attr("id");
+        var measureunitid = $(this).attr("name");
+        $("[id*=ddlMeasureUnitId]").val(measureunitid);
+
+        //设置元素状态
+        $("[id*=ddlPointNum]").attr("disabled", true);
+        $("[id*=ddlMeasureUnitId]").attr("disabled", false);
+
+        //显示编辑对话框
+        $('#myModal').modal('show');
+    });
+
+
     //点击参量编辑链接，显示编辑对话框
     $("[id*=gvParamters] a").click(function () {
 

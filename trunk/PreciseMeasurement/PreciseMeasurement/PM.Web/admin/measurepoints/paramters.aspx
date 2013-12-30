@@ -13,6 +13,7 @@
                 <asp:Literal ID="ltPointName" runat="server"></asp:Literal>的参量设置
             </h3>
             <div class="manager_buttons">
+                <a class="btn btn-info" id="btnAddParamter">新增参量</a>
                 <a href="list.aspx" class="btn btn-info">返回</a>
             </div>
         </div>

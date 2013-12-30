@@ -48,7 +48,7 @@ $(function () {
     * 获取所有测点的实时数据
     */
     function getRealData() {
-        
+
 
         $("#gvRealtimeData tbody").html("");
         var content = "";
@@ -65,15 +65,29 @@ $(function () {
                 var diff_temperature = "0"
                 var status = "";   //疏水 直通  堵塞
 
+
+                console.log(obj);
+
+
                 if (obj.Measurements.length > 0) {
                     if ((new Date(obj.Measurements[0].Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
                         mstyle = " style='color:red;'";
                     }
                     measuretime = obj.Measurements[0].Measuretime;
-                    front_temperature = obj.Measurements[0].SwTemperature;
-                    after_temperature = obj.Measurements[1].SwTemperature;
-                    diff_temperature = parseFloat(front_temperature) - parseFloat(after_temperature);
-                    console.log(measuretime);
+
+
+
+                    if (new Date(measuretime).toString('yyyy-MM-dd HH:mm') == Date.today().toString("yyyy-MM-dd HH:mm")) {
+                        $("#" + obj.AssetInfo.Assetnum + " span.steamtrap_status").removeClass("invalid").addClass('normal');
+                    } else {
+
+                    }
+
+                    // front_temperature = obj.Measurements[0].SwTemperature;
+                    //  after_temperature = obj.Measurements[1].SwTemperature;
+                    //diff_temperature = parseFloat(front_temperature) - parseFloat(after_temperature);
+                } else {
+
                 }
 
 
