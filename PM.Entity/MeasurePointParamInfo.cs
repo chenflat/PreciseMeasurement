@@ -7,7 +7,7 @@ namespace PM.Entity
     [Serializable()]
     public class MeasurePointParamInfo
     {
-        private int measurepointparamuid;
+        private int measurepointparamuid =0;
         private string pointnum;
         private string pointname;
         private string measureunitid;
