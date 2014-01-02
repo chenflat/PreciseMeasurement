@@ -59,6 +59,7 @@
     <Compile Include="DataProvider\Pmdomain.cs" />
     <Compile Include="DataProvider\ReportSetting.cs" />
     <Compile Include="DataProvider\Synonymdomain.cs" />
+    <Compile Include="DataProvider\UserGroup.cs" />
     <Compile Include="DataProvider\Users.cs" />
     <Compile Include="DataReaderExtender.cs" />
     <Compile Include="DbException.cs" />

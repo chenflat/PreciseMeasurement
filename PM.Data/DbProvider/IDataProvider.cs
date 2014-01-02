@@ -423,6 +423,43 @@ namespace PM.Data {
 
 
         /// <summary>
+        /// 创建用户组
+        /// </summary>
+        /// <param name="groupInfo"></param>
+        /// <returns></returns>
+        bool CreateUserGroup(GroupInfo groupInfo);
+
+        /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="groupInfo"></param>
+        /// <returns></returns>
+        bool UpdateUserGroup(GroupInfo groupInfo);
+
+        /// <summary>
+        /// 删除用户组
+        /// </summary>
+        /// <param name="idList"></param>
+        /// <returns></returns>
+        int DeleteUserGroupByIdList(string idList);
+
+        /// <summary>
+        /// 查找指定的用户
+        /// </summary>
+        /// <param name="groupid"></param>
+        /// <returns></returns>
+        IDataReader FindUserGroupById(int groupid);
+
+        /// <summary>
+        /// 查找用户组信息
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        DataTable FindUserGroupByCondition(string condition);
+
+
+
+        /// <summary>
         /// 获取指定计量器的最后记录值
         /// </summary>
         /// <param name="pointnum">记录器编号</param>
