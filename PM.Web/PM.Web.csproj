@@ -80,6 +80,7 @@
     <Content Include="admin\organizations\list.aspx" />
     <Content Include="admin\users\edit.aspx" />
     <Content Include="admin\users\list.aspx" />
+    <Content Include="admin\users\roleform.aspx" />
     <Content Include="admin\users\roles.aspx" />
     <Content Include="alarm\default.aspx" />
     <Content Include="alarm\steamtrap.aspx" />
@@ -676,6 +677,13 @@
     </Compile>
     <Compile Include="admin\users\list.aspx.designer.cs">
       <DependentUpon>list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\users\roleform.aspx.cs">
+      <DependentUpon>roleform.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\users\roleform.aspx.designer.cs">
+      <DependentUpon>roleform.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\users\roles.aspx.cs">
       <DependentUpon>roles.aspx</DependentUpon>
