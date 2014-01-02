@@ -9,9 +9,9 @@
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
-                资产</h3>
+                用户组</h3>
             <div class="manager_buttons">
-                <a href="AssetForm.aspx" class="btn btn-info">新增</a>
+                <a href="roleform.aspx" class="btn btn-info">新增</a>
                 &nbsp;&nbsp;
                 <asp:TextBox ID="txtGroupName" runat="server"></asp:TextBox>
                 <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
@@ -22,23 +22,24 @@
         <HeaderTemplate>
             <table class="table table-hover table-bordered table-condensed">
                 <tr>
-                    <th>
+                    <th  width="30%">
                         用户组
                     </th>
                     <th>
                         描述
                     </th>
-                    <td>
+                    <td width="10%">
                     </td>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td>
+                <td><%# Eval("Group_Name") %>
                 </td>
-                <td>
+                <td><%# Eval("DESCRIPTION") %>
                 </td>
-                <td>
+                <td><a href="roleform.aspx?groupid=<%# Eval("GROUP_ID") %>">修改</a>
+                <a href="list.aspx?groupid=<%# Eval("GROUP_ID") %>">列出用户</a>
                 </td>
             </tr>
         </ItemTemplate>
