@@ -47,7 +47,7 @@
                         <i class='fa fa-book'></i><span class='hidden-minibar'>安全性</span> </a>
                            <ul>
                            <li class=''><a href='<%=ResolveUrl("~/admin/users/list.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>用户管理</span></a></li>
-                            <li class=''><a href='<%=ResolveUrl("~/admin/users/roles.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>角色管理</span></a></li>
+                            <li class=''><a href='<%=ResolveUrl("~/admin/users/roles.aspx") %>' data-original-title='organizations'><i class='fa fa-calendar'></i><span class='hidden-minibar'>用户组</span></a></li>
 
                            </ul>
                     </li>
