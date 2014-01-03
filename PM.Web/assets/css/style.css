@@ -61,58 +61,6 @@ label {font-weight:normal;}
  * Turn the `.navbar` at the top of the docs purple.
  */
 
-.bs-docs-nav {
-  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  background-color: #29a2d7 !important;
-  border-color: #54b5df !important;
-  box-shadow: 0 1px 0 rgba(255,255,255,.1);
-}
-.bs-docs-nav .navbar-collapse {
-  border-color: #463265;
-}
-.bs-docs-nav .navbar-brand {
-  color: #fff;
-  padding:0px;
-}
-
-.bs-docs-nav .navbar-brand .text {
-    padding:15px 0;
-}
-
-
-.bs-docs-nav .navbar-brand .logo {
-     background:url('../img/logo.png') no-repeat top left;
-     height:36px;
-     width:300px;
-     margin:7px 4px 0;
-     padding-left:72px;
-     line-height:36px;
-     font-size:20px;
-    }
-.bs-docs-nav .navbar-nav > li > a {
-  color: #fff;
-  font-size:16px;
-}
-.bs-docs-nav .navbar-nav > li > a:hover {
-  color: #fff;
-}
-.navbar-inverse .navbar-nav > .dropdown > a .caret {
-    border-top-color: #fff;
-    border-bottom-color: #fff;
-    }
-.bs-docs-nav .navbar-nav > .active > a,
-.bs-docs-nav .navbar-nav > .active > a:hover {
-  color: #fff;
-  background-color: #1b67af;
-}
-.bs-docs-nav .navbar-toggle {
-  border-color: #563d7c;
-}
-.bs-docs-nav .navbar-toggle:hover {
-  background-color: #463265;
-  border-color: #463265;
-}
-
 .clock .time {
     font-size: 42px;
     width: 100px;
@@ -2533,6 +2481,73 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0028323c', end
 .bg-dark .icon-muted {
 	color:#4a647e !important;
 }
+
+
+.bg-blue {
+    text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+  background-color: #29a2d7 !important;
+  border-color: #54b5df !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+.bg-blue.lt, .bg-blue .lt {
+	background-color:#374b5e;
+}
+.bg-blue.lter, .bg-blue .lter {
+	background-color:#41586e;
+}
+.bg-blue.dk, .bg-blue .dk {
+	background-color:#25313e;
+}
+.bg-blue.dker, .bg-blue .dker {
+	background-color:#1b252e;
+}
+.bg-blue .bg {
+	background-color:#2e3e4e;
+}
+.bg-blue a {
+	color:#fff;
+}
+.bg-blue a:hover {
+	color:#fff;
+	
+}
+.bg-blue a.list-group-item:hover, .bg-blue a.list-group-item:focus {
+	background-color:inherit;
+}
+.bg-blue .nav .caret {
+	border-top-color:#fff;
+	border-bottom-color:#fff;
+}
+.bg-blue .nav>li>a {
+	 color: #fff;
+    font-size:16px;
+}
+.bg-blue .nav>li>a:hover {
+	color:#fff;
+	background:#1C95C9;
+}
+.bg-blue .nav>li>a:hover .caret {
+	border-top-color:#fff;
+	border-bottom-color:#fff;
+}
+.bg-blue .nav .open>a {
+	background-color:#25313e;
+}
+.bg-blue.navbar .nav>li.active>a {
+	color: #fff;
+   background-color: #1b67af;
+}
+.bg-blue .open>a, .bg-blue .open>a:hover, .bg-blue .open>a:focus {
+	color:#fff;
+}
+.bg-blue .text-muted {
+	color:#8da4bb !important;
+}
+.bg-blue .icon-muted {
+	color:#4a647e !important;
+}
+
+
 .bg-black {
 	background-color:#282828;
 	color:#9b9b9b;

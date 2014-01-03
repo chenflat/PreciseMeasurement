@@ -46,7 +46,7 @@
     <section class="vbox">
     <a class="sr-only" href="#content">Skip navigation</a>
     <!-- Docs master nav -->
-    <header class="bg-dark dk header navbar navbar-fixed-top-xs  navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <header class="bg-blue dk header navbar navbar-fixed-top-xs  " role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
