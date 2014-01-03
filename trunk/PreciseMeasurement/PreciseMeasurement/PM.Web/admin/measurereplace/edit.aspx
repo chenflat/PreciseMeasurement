@@ -2,15 +2,10 @@
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.measurereplace.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <ol class="breadcrumb margintop20">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
-        <li><a href="list.aspx">换表管理</a></li>
-        <li class="active">编辑</li>
-    </ol>
-    <div class="page-header">
-        <h3>
-            编辑换表记录</h3>
-    </div>
+    <section class="panel panel-default"> 
+<header class="panel-heading font-bold">  编辑换表记录</header> 
+<div class="panel-body"> 
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -180,9 +175,15 @@
             </div>
         </div>
     </div>
-    <div class="toolbar bs-callout-danger">
-        <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
+    <div class="row">
+
+        <div class="col-md-2 col-md-offset-1">
+             <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
         <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
         <a href="list.aspx" class="btn btn-info">返回</a>
+        
+        </div>
     </div>
+</div> 
+</section>
 </asp:Content>
