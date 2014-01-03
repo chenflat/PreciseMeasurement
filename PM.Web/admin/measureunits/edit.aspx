@@ -1,12 +1,11 @@
-﻿<%@ Page Title="计量单位" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
+﻿<%@ Page Title="标准参量" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.measureunits.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                编辑计量单位</h3>
-        </div>
+   <section class="panel panel-default"> 
+<header class="panel-heading font-bold">  编辑标准参量</header> 
+<div class="panel-body"> 
+    <div class="row">
         <div class="form-group">
             <label for="<%=description.ClientID %>" class="col-lg-2">
                 参量名称：</label>
@@ -57,7 +56,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="<%=isMainParam.ClientID %>" class="col-lg-2" CssClass="form-control">
+            <label for="<%=isMainParam.ClientID %>" class="col-lg-2" cssclass="form-control">
                 作为主要参数显示：</label>
             <div class="col-lg-6">
                 <asp:DropDownList ID="isMainParam" runat="server" CssClass="form-control">
@@ -71,16 +70,19 @@
                 显示顺序：</label>
             <div class="col-lg-6">
                 <asp:TextBox ID="displaysequence" CssClass="form-control" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
-                    Display="Dynamic" ErrorMessage="非法数字" 
-                    ValidationExpression="^[-]?[0-9]*[.]?[0-9]*$" 
-                    ControlToValidate="displaysequence" SetFocusOnError="True"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="Dynamic"
+                    ErrorMessage="非法数字" ValidationExpression="^[-]?[0-9]*[.]?[0-9]*$" ControlToValidate="displaysequence"
+                    SetFocusOnError="True"></asp:RegularExpressionValidator>
             </div>
         </div>
-         <div class="toolbar bs-callout-danger">
-            <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
+    </div>
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-2">
+    <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
             <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" Visible="false" />
             <a href="list.aspx" class="btn btn-info">返回</a>
-        </div>
+            </div>
     </div>
+    </div>
+    </section>
 </asp:Content>

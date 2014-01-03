@@ -2,11 +2,10 @@
     CodeBehind="AssetList.aspx.cs" Inherits="PM.Web.admin.Asset.AssetList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-<ol class="breadcrumb margintop20">
-  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
-  系统管理</a></li>
-  <li class="active">资产管理</li>
-</ol>
+    <ol class="breadcrumb margintop20">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
+        <li class="active">资产管理</li>
+    </ol>
     <div class="bs-docs-section">
         <div class="page-header">
             <h3>
@@ -22,7 +21,6 @@
                         <li><a href="#">删除资产</a></li>
                     </ul>
                 </div>
-
                 &nbsp;&nbsp;
                 <asp:DropDownList ID="ddlFields" runat="server">
                     <asp:ListItem Value="ASSETNUM">编号</asp:ListItem>
@@ -61,26 +59,31 @@
                             状态
                         </th>
                         <th width="10%">
-                            
                         </th>
                     </tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
-                    <td><%# Eval("ASSETNUM") %>
-                    </td>
-                    <td><%# Eval("DESCRIPTION") %>
-                    </td>
-                    <td><%# Eval("PARENT") %>
-                    </td>
-                     <td><%# Eval("Classstructureid")%>
-                    </td>
-                    <td><%# Eval("SITEID")%>
-                    </td>
-                    <td><%# Eval("STATUS") %>
+                    <td>
+                        <%# Eval("ASSETNUM") %>
                     </td>
                     <td>
-                   <a href="AssetForm.aspx?assetuid=<%# Eval("ASSETUID") %>">编辑</a>
+                        <%# Eval("DESCRIPTION") %>
+                    </td>
+                    <td>
+                        <%# Eval("PARENT") %>
+                    </td>
+                    <td>
+                        <%# Eval("Classstructureid")%>
+                    </td>
+                    <td>
+                        <%# Eval("SITEID")%>
+                    </td>
+                    <td>
+                        <%# Eval("STATUS") %>
+                    </td>
+                    <td>
+                        <a href="AssetForm.aspx?assetuid=<%# Eval("ASSETUID") %>">编辑</a>
                     </td>
                 </tr>
             </ItemTemplate>

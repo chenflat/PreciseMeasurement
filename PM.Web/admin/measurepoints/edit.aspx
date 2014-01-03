@@ -3,23 +3,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/measurepoint.js") %>"></script>
-    <ol class="breadcrumb margintop20">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
-        <li><a href="list.aspx">计量点管理</a></li>
-        <li class="active">编辑计量点</li>
-    </ol>
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                编辑计量点</h3>
-            <div class="manager_buttons">
-                <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
-                <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
-                <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
-                <a href="list.aspx" class="btn btn-info">返回</a>
-            </div>
-        </div>
-    </div>
+
+ <section class="panel panel-default"> 
+<header class="panel-heading font-bold">  编辑标准参量</header> 
+<div class="panel-body"> 
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -235,4 +223,17 @@
             </div>
         </div>
     </div>
+   
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
+            <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
+            <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
+            <a href="list.aspx" class="btn btn-info">返回</a>
+        </div>
+    </div>
+
+    </div>
+    </section>
+     
 </asp:Content>

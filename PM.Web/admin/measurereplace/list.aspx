@@ -5,12 +5,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
 
-    <ol class="breadcrumb margintop20">
-  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
-  系统管理</a></li>
-  <li class="active">换表管理</li>
-</ol>
-
     <div class="toolbar bs-callout-info">
         起始时间：<asp:TextBox ID="startdate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>
         终止时间：<asp:TextBox ID="enddate" runat="server" Width="80px" CssClass="datepicker"></asp:TextBox>
@@ -28,7 +22,7 @@
         <a href="edit.aspx" class="btn btn-info">新增</a>
     </div>
     <asp:GridView ID="gvMeasureReplace" runat="server" EnableModelValidation="True" 
-        AutoGenerateColumns="False" CssClass="table table-striped" 
+        AutoGenerateColumns="False" CssClass="table table-bordered table-striped" 
         DataKeyNames="MEASURETRANSID" PageSize="20" CellPadding="4" 
     CellSpacing="1" GridLines="None">
         <Columns>

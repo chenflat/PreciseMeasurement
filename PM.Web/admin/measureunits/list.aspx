@@ -1,13 +1,7 @@
-﻿<%@ Page Title="计量单位" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
+﻿<%@ Page Title="标准参量" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measureunits.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-
-    <ol class="breadcrumb margintop20">
-  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
-  系统管理</a></li>
-  <li class="active">标准参量</li>
-</ol>
 
     <div class="toolbar bs-callout-info">
         标准参量名称：<asp:TextBox ID="description" runat="server"></asp:TextBox>
@@ -15,7 +9,7 @@
     </div>
     <asp:Repeater ID="rptMeasureUnits" runat="server">
         <HeaderTemplate>
-            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
+            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-striped">
                 <tr>
                     <th width="20%">
                         单位编码
