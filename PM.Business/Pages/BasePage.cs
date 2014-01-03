@@ -41,6 +41,8 @@ namespace PM.Business.Pages
 
         protected internal string ip;
 
+        protected internal string title;
+
          public UserInfo AdminInfo {
             get
             {
@@ -52,6 +54,9 @@ namespace PM.Business.Pages
             }
         }
 
+         public static string GetSystemTitle() {
+             return "";
+         }
 
 
 
