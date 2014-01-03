@@ -121,6 +121,26 @@
 
     setInterval("GetTime()", 60000);
 
+
+     var scrollToTop = function() { ! location.hash && setTimeout(function() {
+                if (!pageYOffset) window.scrollTo(0, 0);
+            },
+            1000);
+
+    $(document).on('click', '.nav-primary a',
+        function (e) {
+            var $this = $(e.target),
+            $active;
+            $this.is('a') || ($this = $this.closest('a'));
+            if ($('.nav-vertical').length) {
+                return;
+            }
+            $active = $this.parent().siblings(".active");
+            $active && $active.find('> a').toggleClass('active') && $active.toggleClass('active').find('> ul:visible').slideUp(200); ($this.hasClass('active') && $this.next().slideUp(200)) || $this.next().slideDown(200);
+            $this.toggleClass('active').parent().toggleClass('active');
+            $this.next().is('ul') && e.preventDefault();
+        });
+
 } (window.jQuery)
 
 
