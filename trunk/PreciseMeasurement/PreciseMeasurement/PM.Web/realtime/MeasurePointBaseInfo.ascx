@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurePointBaseInfo.ascx.cs" Inherits="PM.Web.realtime.MeasurePointBaseInfo" %>
 
-
-<ol class="breadcrumb">
-    <li class="active">
-        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的基础信息</li>
-</ol>
+<div class="panel panel-default">
+<div class="panel-heading">
+        <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的基础信息
+</div>
+ <div class="panel-body">
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
@@ -151,4 +151,6 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
