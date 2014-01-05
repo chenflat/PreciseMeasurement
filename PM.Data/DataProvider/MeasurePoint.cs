@@ -136,6 +136,8 @@ namespace PM.Data
             measurePointInfo.X = Utils.ContainsField(reader, "X") ? reader["X"].ToString() : "";
             measurePointInfo.Y = Utils.ContainsField(reader, "Y") ? reader["Y"].ToString() : "";
             measurePointInfo.Z = Utils.ContainsField(reader, "Z") ? reader["Z"].ToString() : "";
+            measurePointInfo.Classstructureid = Utils.ContainsField(reader,"Classstructureid") ? reader["Classstructureid"].ToString() : "";
+            
             return measurePointInfo;
         }
 
@@ -193,9 +195,9 @@ namespace PM.Data
             MeasurePointParamInfo paramInfo = new MeasurePointParamInfo();
             paramInfo.Measurepointparamuid = reader.GetInt32(reader.GetOrdinal("MEASUREPOINTPARAMUID"));
             paramInfo.Pointnum = reader["POINTNUM"].ToString();
-            paramInfo.PointName = reader["POINTNAME"].ToString();
+            paramInfo.PointName =  Utils.ContainsField(reader,"POINTNAME")? reader["POINTNAME"].ToString() : "";
             paramInfo.Measureunitid = reader["MEASUREUNITID"].ToString();
-            paramInfo.MeasureUnitName = reader["MEASUREUNITNAME"].ToString();
+            paramInfo.MeasureUnitName = Utils.ContainsField(reader, "MEASUREUNITNAME") ? reader["MEASUREUNITNAME"].ToString() : "";  
             paramInfo.Lowerwarning = reader.GetDecimal(reader.GetOrdinal("LOWERWARNING"));
             paramInfo.Loweraction = reader.GetDecimal(reader.GetOrdinal("LOWERACTION"));
             paramInfo.Llpmnum = reader["LLPMNUM"].ToString();
@@ -203,7 +205,13 @@ namespace PM.Data
             paramInfo.Upperwarning = reader.GetDecimal(reader.GetOrdinal("UPPERWARNING"));
             paramInfo.Upperaction = reader.GetDecimal(reader.GetOrdinal("UPPERACTION"));
             paramInfo.Ulpmnum = reader["ULPMNUM"].ToString();
-            paramInfo.Ulpriority = TypeConverter.ObjectToInt(reader["ULPRIORITY"]); 
+            paramInfo.Ulpriority = TypeConverter.ObjectToInt(reader["ULPRIORITY"]);
+            paramInfo.Abbreviation = reader["Abbreviation"].ToString();
+            paramInfo.Displaysequence = reader.IsDBNull(reader.GetOrdinal("Displaysequence")) ? 0 : reader.GetInt32(reader.GetOrdinal("Displaysequence"));
+            paramInfo.IsCalculate = reader.IsDBNull(reader.GetOrdinal("IsCalculate")) ? false : Convert.ToBoolean(reader["IsCalculate"]);
+            paramInfo.Visabled = reader.IsDBNull(reader.GetOrdinal("Visabled")) ? false : Convert.ToBoolean(reader["Visabled"]);
+            paramInfo.IsMainParam = reader.IsDBNull(reader.GetOrdinal("IsMainParam")) ? false : Convert.ToBoolean(reader["IsMainParam"]);
+
             return paramInfo;
         }
 

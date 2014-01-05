@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <div class="bs-docs-section">
         <div class="page-header">
-         <h3> 资产分类</h3>
           <div class="manager_buttons">
         <a href="ClassStructureForm.aspx" class="btn btn-info">新增</a>
         类别名称：

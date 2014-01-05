@@ -20,6 +20,12 @@ namespace PM.Entity
         private decimal upperaction = 0;
         private string ulpmnum;
         private int ulpriority;
+        private string abbreviation;
+        private int displaysequence;
+        private bool isCalculate;
+        private bool visabled;
+        private bool isMainParam;
+
 
         public int Measurepointparamuid { 
             get {return measurepointparamuid;}
@@ -87,6 +93,31 @@ namespace PM.Entity
         {
             get { return ulpriority; }
             set { ulpriority = value; }
+        }
+
+        public string Abbreviation {
+            get { return abbreviation; }
+            set { abbreviation = value; }
+        }
+
+        public int Displaysequence {
+            get { return displaysequence; }
+            set { displaysequence = value; }
+        }
+
+        public bool IsCalculate {
+            get { return isCalculate; }
+            set { isCalculate = value; }
+        }
+
+        public bool Visabled {
+            get { return visabled; }
+            set { visabled = value; }
+        }
+
+        public bool IsMainParam {
+            get { return isMainParam; }
+            set { isMainParam = value; }
         }
     }
 }

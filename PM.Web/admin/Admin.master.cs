@@ -11,14 +11,19 @@ namespace PM.Web.admin
 {
     public partial class Admin : System.Web.UI.MasterPage
     {
+        private string parentTitle = "";
         protected string Title;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Title = Page.Header.Title;
+           // if (!IsPostBack) {
 
-            this.Page.Header.Title = BasePage.GetSystemTitle() + "-" + Title;
+                parentTitle = BasePage.GetSystemTitle();
+
+                Title = Page.Header.Title;
+
+                this.Page.Header.Title = (parentTitle == "") ? Title : parentTitle + "-" + Title;
             
-            
+            //} 
         }
     }
 }

@@ -177,7 +177,7 @@
     </div>
     <div class="row">
 
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-4 col-md-offset-1">
              <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
         <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
         <a href="list.aspx" class="btn btn-info">返回</a>

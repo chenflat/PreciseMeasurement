@@ -42,11 +42,11 @@ namespace PM.Web.admin.organizations
         /// </summary>
         private void BindDropDownList()
         {
-            parent.DataTextField = "Description";
-            parent.DataValueField = "ORGID";
-            parent.DataSource = Business.Organizations.GetOrganizationTreeList("-");
-            parent.DataBind();
-            parent.Items.Insert(0, new ListItem("",""));
+            ddlParent.DataTextField = "Description";
+            ddlParent.DataValueField = "ORGID";
+            ddlParent.DataSource = Business.Organizations.GetOrganizationTreeList("-");
+            ddlParent.DataBind();
+            ddlParent.Items.Insert(0, new ListItem("", ""));
         }
 
 
@@ -59,12 +59,12 @@ namespace PM.Web.admin.organizations
             tbOrgid.Text = orginfo.Orgid;
             description.Text = orginfo.Description;
             orgtype.SelectedValue = orginfo.Orgtype;
-            parent.SelectedValue = orginfo.Parent;
+            ddlParent.SelectedValue = orginfo.Parent;
             leader.Text = orginfo.Leader;
             phone.Text = orginfo.Phone;
             address.Text = orginfo.Address;
             comments.Text = orginfo.Comments;
-            organizationid.Value = orginfo.Organizationid.ToString();
+            hdnOrganizationid.Value = orginfo.Organizationid.ToString();
 
         }
 
@@ -72,21 +72,27 @@ namespace PM.Web.admin.organizations
         {
             if (this.IsValid)
             {
+                long m_organizationid = Utils.StrToInt(hdnOrganizationid.Value, 0);
+                bool isnew = m_organizationid == 0;
+                if (isnew && PM.Data.Organizations.GetOrganizationInfoByOrgId(tbOrgid.Text.Trim()) != null) {
+                    ShowMessage(this, MsgType.DANGER, "组织机构代码已经存在");
+                    return;
+                }
+
                 OrganizationInfo orgInfo = new OrganizationInfo();
-                orgInfo.Organizationid = Utils.StrToInt(organizationid.Value, 0);
+                orgInfo.Organizationid = m_organizationid;
                 orgInfo.Orgid = tbOrgid.Text.Trim();
                 orgInfo.Description = description.Text.Trim();
                 orgInfo.Orgtype = orgtype.SelectedValue;
-                orgInfo.Parent = parent.SelectedValue;
+                orgInfo.Parent = ddlParent.SelectedValue;
                 orgInfo.Leader = leader.Text.Trim();
                 orgInfo.Phone = phone.Text.Trim();
                 orgInfo.Address = address.Text.Trim();
                 orgInfo.Comments = comments.Text.Trim();
                 bool isSuccess = false;
-                if (Utils.StrToInt(organizationid.Value, 0) == 0)
+                if (isnew)
                 {
                     isSuccess = Organizations.CreateOrganizationInfo(orgInfo) > 0;
-
                 }
                 else
                 {
@@ -95,6 +101,7 @@ namespace PM.Web.admin.organizations
 
                 if (isSuccess)
                 {
+                    PM.Business.Organizations.RemoveTreeList();
                     Response.Redirect("list.aspx");
                 }
             }

@@ -22,7 +22,7 @@
         <a href="edit.aspx" class="btn btn-info">新增</a>
     </div>
     <asp:GridView ID="gvMeasureReplace" runat="server" EnableModelValidation="True" 
-        AutoGenerateColumns="False" CssClass="table table-bordered table-striped" 
+        AutoGenerateColumns="False" CssClass="table table-bordered table-hover table-striped" 
         DataKeyNames="MEASURETRANSID" PageSize="20" CellPadding="4" 
     CellSpacing="1" GridLines="None">
         <Columns>

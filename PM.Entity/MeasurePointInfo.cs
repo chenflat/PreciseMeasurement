@@ -30,6 +30,7 @@ namespace PM.Entity
         private string x;
         private string y;
         private string z;
+        private string _Classstructureid;
         /// <summary>
         /// 最后同步时间
         /// </summary>
@@ -158,6 +159,11 @@ namespace PM.Entity
         public string Z {
             get { return z; }
             set { z = value; }
+        }
+
+        public string Classstructureid {
+            get { return _Classstructureid; }
+            set { _Classstructureid = value; }
         }
     }
 }

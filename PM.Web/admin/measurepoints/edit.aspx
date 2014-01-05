@@ -5,8 +5,8 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/measurepoint.js") %>"></script>
 
  <section class="panel panel-default"> 
-<header class="panel-heading font-bold">  编辑标准参量</header> 
-<div class="panel-body"> 
+<header class="panel-heading font-bold">  编辑计量点</header> 
+    <div class="panel-body"> 
 
     <div class="row">
         <div class="col-md-4">
@@ -84,7 +84,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="<%=ddlOrgid.ClientID %>" class="col-lg-5 control-label">
-                    所属公司
+                    所属机构
                 </label>
                 <div class="col-lg-7">
                     <asp:DropDownList ID="ddlOrgid" runat="server" CssClass="form-control">
@@ -108,6 +108,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="<%=txtClassstructureid.ClientID %>" class="col-lg-5 control-label">
+                    所属系统 *
+                </label>
+                <div class="col-lg-7">
+                     <asp:TextBox ID="txtClassstructureid"  runat="server"></asp:TextBox>  
+                     
+                     <a data-toggle="modal" href="../Class/ClassStructureTreeView.aspx" data-target="#myModal"><span class="glyphicon glyphicon-search" id="btnDlgClassstructureid"></span></a>
+                    </div>
+                   
+                </div>
+            </div>
+        
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -127,7 +141,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="<%=cardnum.ClientID %>" class="col-lg-5 control-label">
-                    3G卡号
+                    手机号
                 </label>
                 <div class="col-lg-7">
                     <asp:TextBox ID="cardnum" CssClass="form-control" placeholder="" runat="server"></asp:TextBox>
@@ -228,12 +242,35 @@
         <div class="col-md-4 col-md-offset-1">
          <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
             <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
-            <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" />
+            <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" OnClientClick="return confirm('删除记录点数据不可恢复，确定要删除记量点吗？')" />
             <a href="list.aspx" class="btn btn-info">返回</a>
         </div>
     </div>
 
+
     </div>
     </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">类别结构</h4>
+
+            </div>
+            <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
      
 </asp:Content>

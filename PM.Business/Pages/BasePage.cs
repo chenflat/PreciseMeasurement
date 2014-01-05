@@ -55,7 +55,7 @@ namespace PM.Business.Pages
         }
 
          public static string GetSystemTitle() {
-             return "";
+             return "能源计量监测平台";
          }
 
 

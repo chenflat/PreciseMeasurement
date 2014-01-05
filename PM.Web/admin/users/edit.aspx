@@ -2,12 +2,9 @@
     CodeBehind="edit.aspx.cs" Inherits="PM.Web.admin.users.edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                编辑用户信息</h3>
-        </div>
-    </div>
+        <section class="panel panel-default"> 
+<header class="panel-heading font-bold">  编辑用户信息</header> 
+<div class="panel-body"> 
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -320,10 +317,18 @@
             </div>
         </div>
     </div>
-    <div class="toolbar bs-callout-danger">
-        <asp:HiddenField ID="hdnUserId" runat="server" />
+
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-2">
+         <asp:HiddenField ID="hdnUserId" runat="server" />
         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
         <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" Visible="false" />
         <a href="list.aspx" class="btn btn-info">返回</a>
+        </div>
+    
     </div>
+
+    </div>
+    </section>
+
 </asp:Content>

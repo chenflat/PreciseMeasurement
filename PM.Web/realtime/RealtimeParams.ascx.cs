@@ -26,7 +26,7 @@ namespace PM.Web.realtime
         {
             if (MeasurePointInfo == null)
                 return;
-            ltDescription.Text = MeasurePointInfo.Description;
+            ltDescription.Text = string.Format("[{0}]{1}",MeasurePointInfo.Pointnum, MeasurePointInfo.Description);
 
 
 

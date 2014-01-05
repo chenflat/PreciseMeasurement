@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
+﻿<%@ Page Title="资产" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
     CodeBehind="AssetForm.aspx.cs" Inherits="PM.Web.admin.Asset.AssetForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
@@ -9,25 +9,10 @@
         var ORGID = "<%=orgid %>";
     
     </script>
-
-    <ol class="breadcrumb margintop20">
-  <li><a href="#"><span class="glyphicon glyphicon-home"></span>
-  系统管理</a></li>
-  <li><a href="AssetForm.aspx">资产管理</a></li>
-  <li class="active">编辑资产</li>
-</ol>
-
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                资产 / 
-                <asp:Literal ID="ltStatus" runat="server"></asp:Literal></h3>
-            <div class="manager_buttons">
+<asp:Literal ID="ltStatus" runat="server" Visible="false"></asp:Literal>
                 <asp:Button ID="btnSave" CssClass="btn btn-warning" runat="server" Text="保存" />
                 <a href="AssetList.aspx" class="btn btn-info">返回</a>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -71,11 +56,10 @@
                 </div>
               </div>
              <div class="form-group">
-                <label for="<%=ddlSpecSubClass.ClientID %>" class="col-lg-3 control-label">
+                <label for="<%=txtClassstructureid.ClientID %>" class="col-lg-3 control-label">
                     类型：</label>
                 <div class="col-lg-9" >
-                    <asp:DropDownList ID="ddlSpecSubClass" CssClass="select2" Width="190px" runat="server">
-                    </asp:DropDownList>
+                    <asp:TextBox ID="txtClassstructureid" runat="server"></asp:TextBox>
                     </div>
                 </div>
         </div>
@@ -94,7 +78,7 @@
                         <label for="<%=ddlParent.ClientID %>" class="col-lg-3 control-label">
                             父资产：</label>
                         <div class="col-lg-9">
-                            <asp:DropDownList ID="ddlParent" Width="190px" CssClass="select2" runat="server">
+                            <asp:DropDownList ID="ddlParent" Enabled="false" Width="190px" CssClass="select2" runat="server">
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -102,7 +86,7 @@
                         <label for="<%=chkMainthierchy.ClientID %>" class="col-lg-3 control-label">
                             维护结构：</label>
                         <div class="col-lg-9">
-                            <asp:CheckBox ID="chkMainthierchy" runat="server" />
+                            <asp:CheckBox ID="chkMainthierchy" Enabled="false" runat="server" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -117,7 +101,7 @@
                         <label for="<%=txtUsage.ClientID %>" class="col-lg-3 control-label">
                             使用情况：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtUsage" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtUsage" Enabled="false" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
@@ -143,14 +127,14 @@
                         <label for="<%=txtSerialnum.ClientID %>" class="col-lg-3 control-label">
                             序列#：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtSerialnum" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtSerialnum" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="<%=txtSiteId.ClientID %>" class="col-lg-3 control-label">
                             故障类：</label>
                         <div class="col-lg-9">
-                            <asp:TextBox ID="txtFailurecode" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtFailurecode" runat="server" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                 </div>

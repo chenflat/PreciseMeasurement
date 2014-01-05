@@ -1,12 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
+﻿<%@ Page Title="计量器组" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
     CodeBehind="MeterGroupList.aspx.cs" Inherits="PM.Web.admin.Meter.MeterGroupList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     <div class="bs-docs-section">
         <div class="page-header">
-            <h3>
-                计量器组</h3>
-            <div class="manager_buttons">
+
                 <a href="MeterGroupForm.aspx" class="btn btn-info">新增</a>
                 <asp:DropDownList ID="ddlFields" runat="server">
                     <asp:ListItem Value="GROUPNAME">组名</asp:ListItem>
@@ -15,7 +13,7 @@
                 <asp:TextBox ID="txtKeyword" runat="server"></asp:TextBox>
                 <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
                 <asp:Button ID="btnExport" runat="server" CssClass="btn btn-info" Text="导出" />
-            </div>
+
         </div>
     </div>
     <!-- /toolbar -->

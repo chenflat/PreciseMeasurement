@@ -73,8 +73,10 @@ namespace PM.Web.admin.measurepoints
             condition = "";
             if (ddlOrgId.SelectedValue.Length>0)
             {
-                condition += string.Format(" and {0}MEASUREPOINT.ORGID='{1}'", 
-                    BaseConfigs.GetTablePrefix,ddlOrgId.SelectedValue);
+                string orgids = PM.Data.Organizations.GetOrganizationAndChildrenByOrgId(ddlOrgId.SelectedValue);
+
+                condition += string.Format(" and {0}MEASUREPOINT.ORGID IN ({1})",
+                    BaseConfigs.GetTablePrefix, orgids);
             }
             if (txtDescription.Text.Trim().Length>0)
             {

@@ -2,15 +2,10 @@
     CodeBehind="MeterGroupForm.aspx.cs" Inherits="PM.Web.admin.Meter.MeterGroupForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3> 计量器组 / 新增</h3>
-            <div class="manager_buttons">
+
             <asp:Button ID="btnSave" CssClass="btn btn-warning" runat="server" Text="保存" />
              <a href="MeterGroupList.aspx" class="btn btn-info">返回</a>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">

@@ -81,7 +81,7 @@
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                                {%>
                                             <li id="<%=point.Pointnum %>"><a href="#">
-                                                <%=point.Description%></a></li>
+                                               [<%=point.Pointnum %>] <%=point.Description%></a></li>
                                             <% } %>
                                         </ul>
                                     </li>

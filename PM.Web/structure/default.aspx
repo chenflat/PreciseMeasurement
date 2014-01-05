@@ -15,15 +15,18 @@
 </tr>
 <tr>
  <td colspan="3" id="tools" class="structure-tools"><span>拖动以确定位置，然后点击确定按钮。</span>
-             <input type="button" id="btnSave" value="确定" /></td>
+             <button type="button" id="btnSave" autocomplete="off" data-loading-text="Saveing..." class="btn">
+  确定
+</button>
+             </td>
 </tr>
 <tr style="vertical-align:top; ">
-    <td id="structWrap">
+    <td id="structWrap" class="scrollable">
      <div class="structure" id="structure">
-        <div id="refresh"> <img src="../assets/img/refresh.png" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
+        <div id="refresh"> <img src="../assets/img/sync.gif" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
-            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" >
+            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" orgid="<%# Eval("Orgid") %>">
             <span class="text"><%# Eval("Pointnum") %></span>
             <span class="icon"></span>
             <span class="status"><img src="../assets/img/status_on.gif" width="16px" alt="数据采集正常"/></span>

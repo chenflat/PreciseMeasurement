@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
+
 using PM.Data;
 using PM.Config;
 using PM.Common;
@@ -73,9 +74,9 @@ namespace PM.Data.SqlServer
                                     };
 
 
-            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] WHERE LEVEL=@LEVEL and CARRIER=@CARRIER " +
-                " and isnull([{0}MEASUREPOINT].orgid,'')=@ORGID and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
-                BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] inner join CP_GetOrgIdTable('{1}') b on [{0}MEASUREPOINT].orgid=b.orgid WHERE [{0}MEASUREPOINT].LEVEL=@LEVEL and [{0}MEASUREPOINT].CARRIER=@CARRIER " +
+                " and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
+                BaseConfigs.GetTablePrefix,orgid);
 
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
@@ -103,14 +104,16 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, measurePointInfo.Level),
                                   DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
                                   DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
-                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
+                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z),
+                                  DbHelper.MakeInParam("@Classstructureid", (DbType)SqlDbType.VarChar, 20, measurePointInfo.Classstructureid),
+                                  
 
                                  };
 
             string commandText = string.Format("INSERT INTO [{0}MEASUREPOINT] ([POINTNUM],[POINTCODE],[DESCRIPTION],[DISPLAYSEQUENCE],[IPADDRESS],"
-                                + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS],[LEVEL],[X],[Y],[Z])"
+                                + "[CARDNUM],[DEVICENUM],[SERVERIP],[SERVERPORT],[METERNAME],[ORGID],[SITEID],[LOCATION],[CARRIER],[SUPERVISOR],[PHONE],[STATUS],[LEVEL],[X],[Y],[Z],[Classstructureid])"
                                 + " VALUES(@POINTNUM, @POINTCODE, @DESCRIPTION, @DISPLAYSEQUENCE, @IPADDRESS, @CARDNUM, @DEVICENUM,@SERVERIP,@SERVERPORT,"
-                                + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS,@LEVEL,@X,@Y,@Z)", BaseConfigs.GetTablePrefix);
+                                + "@METERNAME,@ORGID,@SITEID,@LOCATION,@CARRIER,@SUPERVISOR,@PHONE,@STATUS,@LEVEL,@X,@Y,@Z,@Classstructureid)", BaseConfigs.GetTablePrefix);
 
             //累计更新行
             //int retRows = 0;
@@ -164,7 +167,8 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LEVEL", (DbType)SqlDbType.Int, 4, measurePointInfo.Level),
                                   DbHelper.MakeInParam("@X", (DbType)SqlDbType.VarChar, 10, measurePointInfo.X),
                                   DbHelper.MakeInParam("@Y", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Y),
-                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z)
+                                  DbHelper.MakeInParam("@Z", (DbType)SqlDbType.VarChar, 10, measurePointInfo.Z),
+                                  DbHelper.MakeInParam("@Classstructureid", (DbType)SqlDbType.VarChar, 20, measurePointInfo.Classstructureid)
                                  };
 
 
@@ -172,7 +176,7 @@ namespace PM.Data.SqlServer
             + "[DESCRIPTION]=@DESCRIPTION,[DISPLAYSEQUENCE]=@DISPLAYSEQUENCE,[IPADDRESS]=@IPADDRESS,[CARDNUM]=@CARDNUM,"
             + "[DEVICENUM]=@DEVICENUM,[SERVERIP]=@SERVERIP,[SERVERPORT]=@SERVERPORT,[METERNAME]=@METERNAME,ORGID=@ORGID,"
             + "[SITEID]=@SITEID,[LOCATION]=@LOCATION,[CARRIER]=@CARRIER,[SUPERVISOR]=@SUPERVISOR,[PHONE]=@PHONE,[STATUS]=@STATUS,"
-            + "[LEVEL]=@LEVEL,[X]=@X,[Y]=@Y,[Z]=@Z"
+            + "[LEVEL]=@LEVEL,[X]=@X,[Y]=@Y,[Z]=@Z,[Classstructureid]=@Classstructureid"
             + " WHERE [MEASUREPOINTID]=@MEASUREPOINTID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
@@ -226,8 +230,7 @@ namespace PM.Data.SqlServer
 
         public IDataReader FindMeasurePointParamById(int id) {
             DbParameter param = DbHelper.MakeInParam("@MEASUREPOINTPARAMUID", (DbType)SqlDbType.Int, 4, id);
-            string commandText = string.Format("SELECT {0} FROM [{1}MEASUREPOINTPARAM] WHERE [MEASUREPOINTPARAMUID]=@MEASUREPOINTPARAMUID",
-                                                DbFields.MEASUREPOINTPARAM,
+            string commandText = string.Format("SELECT * FROM [{0}MEASUREPOINTPARAM] WHERE [MEASUREPOINTPARAMUID]=@MEASUREPOINTPARAMUID",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
@@ -244,12 +247,19 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LLPRIORITY", (DbType)SqlDbType.Int, 50, paramInfo.Llpriority),
                                   DbHelper.MakeInParam("@UPPERWARNING", (DbType)SqlDbType.Decimal, 4, paramInfo.Upperwarning),
                                   DbHelper.MakeInParam("@UPPERACTION", (DbType)SqlDbType.VarChar, 8, paramInfo.Upperaction),
-                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum)
+                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ABBREVIATION", (DbType)SqlDbType.VarChar, 8, paramInfo.Abbreviation),
+                                  DbHelper.MakeInParam("@DISPLAYSEQUENCE", (DbType)SqlDbType.Int, 4, paramInfo.Displaysequence),
+                                  DbHelper.MakeInParam("@ISCALCULATE", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsCalculate),
+                                  DbHelper.MakeInParam("@VISABLED", (DbType)SqlDbType.TinyInt, 1, paramInfo.Visabled),
+                                  DbHelper.MakeInParam("@ISMAINPARAM", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsMainParam)
+
                                  };
             string commandText = string.Format("INSERT INTO [{0}MEASUREPOINTPARAM] ([POINTNUM],[MEASUREUNITID],[LOWERWARNING],"
-                                +"[LOWERACTION],[LLPMNUM],[LLPRIORITY],[UPPERWARNING],[UPPERACTION],[ULPMNUM]) "
+                                + "[LOWERACTION],[LLPMNUM],[LLPRIORITY],[UPPERWARNING],[UPPERACTION],[ULPMNUM],[ABBREVIATION],"
+                                + "[DISPLAYSEQUENCE],[ISCALCULATE],[VISABLED],[ISMAINPARAM]) "
                                 + "VALUES(@POINTNUM, @MEASUREUNITID, @LOWERWARNING, @LOWERACTION, @LLPMNUM, @LLPRIORITY,"
-                                + " @UPPERWARNING,@UPPERACTION,@ULPMNUM)", BaseConfigs.GetTablePrefix);
+                                + " @UPPERWARNING,@UPPERACTION,@ULPMNUM, @ABBREVIATION, @DISPLAYSEQUENCE,@ISCALCULATE,@VISABLED,@ISMAINPARAM)", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
@@ -265,12 +275,19 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LLPRIORITY", (DbType)SqlDbType.Int, 50, paramInfo.Llpriority),
                                   DbHelper.MakeInParam("@UPPERWARNING", (DbType)SqlDbType.Decimal, 4, paramInfo.Upperwarning),
                                   DbHelper.MakeInParam("@UPPERACTION", (DbType)SqlDbType.VarChar, 8, paramInfo.Upperaction),
-                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum)
+                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ABBREVIATION", (DbType)SqlDbType.VarChar, 8, paramInfo.Abbreviation),
+                                  DbHelper.MakeInParam("@DISPLAYSEQUENCE", (DbType)SqlDbType.Int, 4, paramInfo.Displaysequence),
+                                  DbHelper.MakeInParam("@ISCALCULATE", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsCalculate),
+                                  DbHelper.MakeInParam("@VISABLED", (DbType)SqlDbType.TinyInt, 1, paramInfo.Visabled),
+                                  DbHelper.MakeInParam("@ISMAINPARAM", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsMainParam)
                                  };
             string commandText = string.Format("UPDATE [{0}MEASUREPOINTPARAM] SET "
                                 + "LOWERWARNING=@LOWERWARNING,[LOWERACTION]=@LOWERACTION,"
                                 + "[LLPMNUM]=@LLPMNUM,[LLPRIORITY]=@LLPRIORITY,[UPPERWARNING]=@UPPERWARNING,"
-                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM where MEASUREPOINTPARAMUID=@MEASUREPOINTPARAMUID", BaseConfigs.GetTablePrefix);
+                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM,[ABBREVIATION]=@ABBREVIATION,"
+                                + "[DISPLAYSEQUENCE]=@DISPLAYSEQUENCE,[ISCALCULATE]=@ISCALCULATE,[VISABLED]=@VISABLED,"
+                                + "[ISMAINPARAM]=@ISMAINPARAM where MEASUREPOINTPARAMUID=@MEASUREPOINTPARAMUID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
 
         }
@@ -279,7 +296,7 @@ namespace PM.Data.SqlServer
         
         public int DeleteMeasurePointParam(string idList)
         {
-            string commandText = string.Format("DELETE FROM [{0}MEASUREPOINTPARAM] WHERE [MEASUREPOINTPARAMUID] IN ({1}))",
+            string commandText = string.Format("DELETE FROM [{0}MEASUREPOINTPARAM] WHERE [MEASUREPOINTPARAMUID] IN ({1})",
                                               BaseConfigs.GetTablePrefix,
                                               idList);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);

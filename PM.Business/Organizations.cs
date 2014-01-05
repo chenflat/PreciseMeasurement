@@ -67,7 +67,7 @@ namespace PM.Business
         /// <returns></returns>
         public static List<OrganizationInfo> GetOrganizationTreeList(string prefix)
         {
-            if (treeList == null) {
+           // if (treeList == null) {
                 treeList = new List<OrganizationInfo>();
                 List<OrganizationInfo> listAll = GetOrganizationsList();
                 foreach (OrganizationInfo orginfo in listAll) {
@@ -79,7 +79,7 @@ namespace PM.Business
                     }
                 }
                 
-            }
+           // }
             return treeList;
         }
 
@@ -124,16 +124,27 @@ namespace PM.Business
         }
 
         public static long CreateOrganizationInfo(OrganizationInfo orgInfo) {
+            orgInfo.Level = GetLevel(orgInfo);
             long result = Data.Organizations.CreateOrganizationInfo(orgInfo);
             RemoveTreeList();
             return result;
         }
 
         public static long UpdateOrganizationInfo(OrganizationInfo orgInfo) {
+            orgInfo.Level = GetLevel(orgInfo);
             long result = Data.Organizations.UpdateOrganizationInfo(orgInfo);
             RemoveTreeList();
             return result;
         }
+
+
+        public static int GetLevel(OrganizationInfo orgInfo) {
+            if (orgInfo.Parent == "")
+                return 1;
+           OrganizationInfo parentInfo = PM.Data.Organizations.GetOrganizationInfoByOrgId(orgInfo.Parent);
+           return parentInfo.Level +1;
+        }
+
 
         public static long DeleteOrganizationInfo(long organizationid)
         {

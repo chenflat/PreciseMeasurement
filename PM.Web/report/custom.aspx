@@ -98,7 +98,7 @@
                                         <ul class="nav measurepoint-list">
                                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                                {%>
-                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;"><%=point.Description%> </li>
+                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;">[<%=point.Pointnum %>]<%=point.Description%> </li>
                                             <% } %>
                                         </ul>
                                     </li>

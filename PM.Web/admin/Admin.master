@@ -2,8 +2,7 @@
     Inherits="PM.Web.admin.Admin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%=ResolveUrl("~/assets/lib/select2/select2.css") %>" rel="stylesheet" />
-    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/select2/select2.min.js") %>"></script>
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <aside class="bg-light lter b-r aside-md hidden-print" id="nav">
@@ -13,35 +12,35 @@
               <nav class="nav-primary hidden-xs">
                 <ul class="nav">
                  
-                        <li class="active"><a href="#"><i class="fa fa-flask icon"></i><span>计量点</span></a>
+                        <li class="<% if(Request.RawUrl.IndexOf("/measure")>0) { %>active<%} %>"><a href="#"><i class="fa fa-flask icon"></i><span>计量点</span></a>
                             <ul class="nav lt">
-                                <li class='active'><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>" data-original-title='计量点管理'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/measurepoints/")>0) { %>active<%} %>'><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>" data-original-title='计量点管理'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>计量点管理</span></a>
                                 </li>
-                                <li class=''><a href="<%=ResolveUrl("~/admin/measureunits/list.aspx") %>" data-original-title='标准参量'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/measureunits/")>0) { %>active<%} %>'><a href="<%=ResolveUrl("~/admin/measureunits/list.aspx") %>" data-original-title='标准参量'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>标准参量</span></a> </li>
-                                <li class=''><a href="<%=ResolveUrl("~/admin/measurereplace/list.aspx") %>" data-original-title='换表管理'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/measurereplace/measureunits")>0) { %>active<%} %>'><a href="<%=ResolveUrl("~/admin/measurereplace/list.aspx") %>" data-original-title='换表管理'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>换表管理</span></a> </li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-tags"></i><span>资产</span></a>
+                        <li class="<% if(Request.RawUrl.IndexOf("/Asset")>0 || Request.RawUrl.IndexOf("/Meter")>0) { %>active<%} %>"><a href="#"><i class="fa fa-tags"></i><span>资产</span></a>
                             <ul class="nav lt">
-                                <li class=''><a href='<%=ResolveUrl("~/admin/Asset/AssetList.aspx") %>' data-original-title='organizations'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/Asset/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/Asset/AssetList.aspx") %>' data-original-title='organizations'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>资产管理</span></a></li>
-                                <li class=''><a href='<%=ResolveUrl("~/admin/Meter/MeterGroupList.aspx") %>' data-original-title='organizations'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/Meter/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/Meter/MeterGroupList.aspx") %>' data-original-title='organizations'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>计量器组</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-cogs  "></i><span>系统</span></a>
+                        <li class="<% if(Request.RawUrl.IndexOf("/organizations")>0 || Request.RawUrl.IndexOf("/Class")>0) { %>active<%} %>"><a href="#"><i class="fa fa-cogs  "></i><span>系统</span></a>
                             <ul class="nav lt">
-                                <li class=''><a href='<%=ResolveUrl("~/admin/organizations/list.aspx") %>' data-original-title='organizations'>
+                                <li class='<% if(Request.RawUrl.IndexOf("/organizations/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/organizations/list.aspx") %>' data-original-title='organizations'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>组织机构</span></a></li>
-                                <li class=''><a href='<%=ResolveUrl("~/admin/Class/ClassStructureList.aspx") %>'
+                                <li class='<% if(Request.RawUrl.IndexOf("/Class/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/Class/ClassStructureList.aspx") %>'
                                     data-original-title='organizations'><i class='fa fa-angle-right'></i><span class='hidden-minibar'>
                                         资产分类</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-users"></i><span>安全性</span></a>
+                        <li class="<% if(Request.RawUrl.IndexOf("/users/")>0) { %>active<%} %>"><a href="#"><i class="fa fa-users"></i><span>安全性</span></a>
                             <ul class="nav lt">
                                 <li class=''><a href='<%=ResolveUrl("~/admin/users/list.aspx") %>' data-original-title='organizations'>
                                     <i class='fa fa-angle-right'></i><span class='hidden-minibar'>用户管理</span></a></li>
@@ -59,7 +58,7 @@
     <section id="content">
     <section class="vbox">
     <header class="header bg-white b-b b-light">
-            <p><i class="fa fa-columns"></i>  <%=Title%></p>
+            <p><i class="fa fa-bars"></i>  <%=Title%></p>
           </header>
     <section class="scrollable wrapper">
 
