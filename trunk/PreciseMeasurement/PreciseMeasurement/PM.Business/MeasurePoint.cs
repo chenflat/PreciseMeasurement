@@ -177,7 +177,10 @@ namespace PM.Business
         public static List<MeasurePointInfo> GetMeasurePointByType(string carrier,string pointnum, string orgid, string siteid) {
             //设置查询条件
 
-            string condition = string.Format(" and ISNULL([MEASUREPOINT].[ORGID],'')='{0}' AND ISNULL([MEASUREPOINT].[siteid],'')='{1}'", orgid, siteid);
+            string orgids = PM.Data.Organizations.GetOrganizationAndChildrenByOrgId(orgid);
+
+
+            string condition = string.Format(" and ISNULL([MEASUREPOINT].[ORGID],'') in ({0}) AND ISNULL([MEASUREPOINT].[siteid],'')='{1}'", orgids, siteid);
             if (!string.IsNullOrEmpty(carrier)) {
                 condition += string.Format(" and [MEASUREPOINT].[CARRIER]='{0}'",carrier);
             }

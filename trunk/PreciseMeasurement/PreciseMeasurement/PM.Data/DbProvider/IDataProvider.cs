@@ -33,6 +33,14 @@ namespace PM.Data {
         IDataReader FindOrganizationsByOrgId(String orgid);
 
         /// <summary>
+        /// 获取指定的组织机构及子机构
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        IDataReader FindOrganizationAndChildrenByOrgId(String orgid);
+
+
+        /// <summary>
         /// 新增组织机构信息
         /// </summary>
         /// <param name="orgInfo"></param>

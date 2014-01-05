@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RealtimeParams.ascx.cs"
     Inherits="PM.Web.realtime.RealtimeParams" %>
-<ol class="breadcrumb">
+<ol class="breadcrumb no-radius">
     <li class="active">
         <asp:Literal ID="ltDescription" runat="server"></asp:Literal>的实时参数   <span class="text-info" style="margin-left:50px;"> 最后一次通讯时间：</span><span id="lastMeasuretime" class="text-info"></span> </li>
 </ol>

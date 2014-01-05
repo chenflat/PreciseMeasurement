@@ -22,13 +22,22 @@ namespace PM.Web.admin.organizations {
         protected global::System.Web.UI.WebControls.TextBox tbOrgid;
         
         /// <summary>
-        /// organizationid 控件。
+        /// hdnOrganizationid 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField organizationid;
+        protected global::System.Web.UI.WebControls.HiddenField hdnOrganizationid;
+        
+        /// <summary>
+        /// rfvOrgID 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrgID;
         
         /// <summary>
         /// description 控件。
@@ -40,6 +49,15 @@ namespace PM.Web.admin.organizations {
         protected global::System.Web.UI.WebControls.TextBox description;
         
         /// <summary>
+        /// rfvDescription 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescription;
+        
+        /// <summary>
         /// orgtype 控件。
         /// </summary>
         /// <remarks>
@@ -49,13 +67,13 @@ namespace PM.Web.admin.organizations {
         protected global::System.Web.UI.WebControls.DropDownList orgtype;
         
         /// <summary>
-        /// parent 控件。
+        /// ddlParent 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList parent;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParent;
         
         /// <summary>
         /// leader 控件。

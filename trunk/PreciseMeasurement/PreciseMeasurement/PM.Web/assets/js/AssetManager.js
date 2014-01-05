@@ -6,7 +6,7 @@ $(function () {
 
     // parentAsset
 
-    $(".select2").select2();
+    
 
 
     $(".coordinate").dblclick(function () {

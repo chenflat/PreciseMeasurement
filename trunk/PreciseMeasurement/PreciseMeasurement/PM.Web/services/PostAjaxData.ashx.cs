@@ -92,7 +92,42 @@ namespace PM.Web.services {
             return ret.ToString();
         }
 
+        /// <summary>
+        /// 保存计量点坐标位置
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public string SaveMeasurePointCoordinates(HttpContext context, Dictionary<string, object> dictionary) {
+            bool ret = false;
+            if (dictionary.ContainsKey("data")) {
 
+                List<MeasurePointInfo> list = JsonConvert.DeserializeObject<List<MeasurePointInfo>>(dictionary["data"].ToString());
+                ret = PM.Business.MeasurePoint.UpdateMeasurePointCoordinates(list);
+            }
+            return ret.ToString();
+        }
+
+        /// <summary>
+        /// 删除计量点参量
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public string DeleteMeasurepointparam(HttpContext context, Dictionary<string, object> dictionary) {
+            int count = 0;
+            if (dictionary.ContainsKey("data")) {
+                StringBuilder sb = new StringBuilder();
+                List<MeasurePointParamInfo> list = JsonConvert.DeserializeObject<List<MeasurePointParamInfo>>(dictionary["data"].ToString());
+                foreach (var item in list) {
+                    if (sb.Length > 0)
+                        sb.Append(",");
+                    sb.Append(item.Measurepointparamuid);
+                }
+                count = PM.Data.MeasurePoint.DeleteMeasurePointParam(sb.ToString());
+            }
+            return (count > 0).ToString();
+        }
 
 
         private void OutputString(HttpContext context, string strReturn) {

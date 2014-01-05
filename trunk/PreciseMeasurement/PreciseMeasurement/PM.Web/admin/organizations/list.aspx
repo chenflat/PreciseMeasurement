@@ -3,23 +3,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
 
- <ol class="breadcrumb margintop20">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
-        <li class="active">组织机构</li>
-    </ol>
-<div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                组织机构</h3>
-            <div class="manager_buttons">
+            <div class="btn-tools">
                 <a href="edit.aspx" class="btn btn-primary">新增</a>
             </div>
-        </div>
-    </div>
+
 <link rel="stylesheet" href="<%=ResolveUrl("~/assets/lib/treegrid/css/jquery.treegrid.css") %>">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/treegrid/js/jquery.treegrid.js") %>"></script>
        
-    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-striped">
+    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-hover table-striped">
             <tr>
                 <th width="20%">
                     机构名称

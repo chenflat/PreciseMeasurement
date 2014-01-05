@@ -38,6 +38,25 @@ $(function () {
    }
 
 
+   $("#carrier li").click(function(){
+        var type = $(this).attr("id");
+        findMeasurePointByType(type);
+   });
+
+   //获取指定类型的测点列表
+   function findMeasurePointByType(type) {
+    console.log(type);
+                var url = "../services/GetAjaxData.ashx";
+        var params = {"funname":"GetMeasurePointList", "carrier" : type, "orgid" : ORGID};
+         $.getJSON(url,params,function(data){
+           // console.log(data);
+            CreateMeasurePointTreeList(data);
+        });
+   }
+
+
+
+
    function CreateMeasurePointTreeList(data) {
     
     var arrLevel = [];
@@ -53,20 +72,20 @@ $(function () {
 
    
     $(".bs-sidenav").empty();
-    
-    
+
     var firstli = "";
     var secondli = "";
      //第二次迭代,设置层级数据
     $.each(arrLevel,function(j,level){
-        firstli += "<li class=\"\"><label class=\"tree-toggler nav-header\"><a href=\"#\">" +
-            level + "级</a></label>" +
-            "<ul class=\"nav tree\">";
+        firstli += "<li class=\"active\"><a href=\"#\"><i class=\"fa fa-wrench\"></i>" +
+           "<span class=\"pull-right\"> <i class=\"fa fa-angle-down text\"></i> <i class=\"fa fa-angle-up text-active\"></i> </span><span>" +
+            level + "级</span></a>" +
+            "<ul class=\"nav lt tree\">";
             var secondli = "";
         $.each(data,function(i,obj){
             if(obj.Level==level) {
                 //arrLevel[j].push(obj);
-                secondli +="<li><a href='?measurepointid='"+ obj.Measurepointid +">"+ obj.Description +"</a></li>";
+                secondli +="<li><a href='?type="+ obj.Carrier +"&measurepointid="+ obj.Measurepointid +"'>["+ obj.Pointnum +"] "+ obj.Description +"</a></li>";
 
             }
 
@@ -338,6 +357,8 @@ $(function () {
         var startdate = $(".day #startdate").val();
         var endate = $(".day #enddate").val();
 
+        //console.log(pointnum + "," + startdate +"," + endate);
+
         GetDayData(pointnum, startdate, endate, 1)
     });
 
@@ -357,20 +378,26 @@ $(function () {
     $("#btnHistoryQuery").click(function () {
         var type = $('input:radio[name=datetype]:checked').val();
         var pointnum = $("#pointnum").val();
-        var startdate = $(".history #startdate").val();
-        var endate = $(".history #enddate").val();
+        var startdate = $(".hsdate").val();
+        var enddate = $(".hedate").val();
 		
-        if (type == "MINUTE") {
-            GetMinuteChart(pointnum, startdate, endate);
-        } else {
-			if(endate==startdate) {
-				enddate = enddate + " 23:59";
-			} else {
-				var dn = new Date(enddate);
-				enddate = dn.addDays(-1).toString('yyyy-MM-dd') + " 23:59";
+        console.log(pointnum + "," + startdate + "," + enddate );
 
-			}
-            GetHourChart(pointnum, startdate, endate);
+
+        if (type == "MINUTE") {
+            GetMinuteChart(pointnum, startdate, enddate);
+        } else {
+//			if(endate==startdate) {
+//				enddate = enddate + " 23:59";
+//			} else {
+
+//				enddate = dn.addDays(-1).toString('yyyy-MM-dd') + " 23:59";
+
+//			}
+
+            enddate = enddate + " 23:59";
+
+            GetHourChart(pointnum, startdate, enddate);
         }
     });
 
@@ -485,7 +512,10 @@ function OnSuccessForHour(response) {
 
 //获取每天数据
 function GetDayData(pointnum, startdate, enddate, pageindex) {
-    enddate = new Date(enddate).add(1).day().toString();
+    enddate = new Date(enddate).add(1).day().toString("yyyy-MM-dd");
+
+   // console.log(pointnum + "," + startdate + "," + enddate + "," + pageindex);
+
     $.ajax({
         type: "GET",
         url: "RealtimeParam.ashx",
@@ -545,7 +575,7 @@ function OnSuccessForDay(response) {
 * @param enddate 结束统计日期
 */
 function GetMinuteChart(pointnum, startdate, enddate) {
-
+    
     $.ajax({
         type: "GET",
         url: "MeasurementHistoryData.ashx",
@@ -565,7 +595,7 @@ function GetMinuteChart(pointnum, startdate, enddate) {
 * @param enddate 结束统计日期
 */
 function GetHourChart(pointnum, startdate, enddate) {
-
+    console.log(pointnum + "," + startdate + "," + enddate);
     $.ajax({
         type: "GET",
         url: "MeasurementHistoryData.ashx",

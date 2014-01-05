@@ -65,6 +65,7 @@
     <Content Include="admin\Class\ClassificationList.aspx" />
     <Content Include="admin\Class\ClassStructureForm.aspx" />
     <Content Include="admin\Class\ClassStructureList.aspx" />
+    <Content Include="admin\Class\ClassStructureTreeView.aspx" />
     <Content Include="admin\locations\edit.aspx" />
     <Content Include="admin\locations\list.aspx" />
     <Content Include="admin\measurepoints\edit.aspx" />
@@ -134,10 +135,12 @@
     <Content Include="assets\ico\valve.gif" />
     <Content Include="assets\ico\valve.png" />
     <Content Include="assets\img\bg.png" />
+    <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\meter.png" />
     <Content Include="assets\img\refresh.png" />
     <Content Include="assets\img\status_on.gif" />
+    <Content Include="assets\img\sync.gif" />
     <Content Include="assets\img\systemrunchart.png" />
     <Content Include="assets\js\alarm.js" />
     <Content Include="assets\js\analysis.js" />
@@ -577,6 +580,13 @@
     <Compile Include="admin\Class\ClassStructureList.aspx.designer.cs">
       <DependentUpon>ClassStructureList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\Class\ClassStructureTreeView.aspx.cs">
+      <DependentUpon>ClassStructureTreeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Class\ClassStructureTreeView.aspx.designer.cs">
+      <DependentUpon>ClassStructureTreeView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\locations\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -894,9 +904,6 @@
     <Compile Include="services\PostAjaxData.ashx.cs">
       <DependentUpon>PostAjaxData.ashx</DependentUpon>
     </Compile>
-    <Compile Include="services\SaveMeasurePoint.ashx.cs">
-      <DependentUpon>SaveMeasurePoint.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -960,7 +967,6 @@
     <Content Include="services\GetRealtimeMeasurement.ashx" />
     <Content Include="services\GetAlarmlogs.ashx" />
     <Content Include="services\GetMeasurePoints.ashx" />
-    <Content Include="services\SaveMeasurePoint.ashx" />
     <Content Include="services\GetAjaxData.ashx" />
     <None Include="assets\fonts\Roboto-Thin-webfont.eot" />
     <None Include="assets\fonts\Roboto-Thin-webfont.ttf" />

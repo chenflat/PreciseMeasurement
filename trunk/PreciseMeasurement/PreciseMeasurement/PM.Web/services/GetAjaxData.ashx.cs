@@ -57,13 +57,7 @@ namespace PM.Web.services {
                 //地点ID
                 string siteid = context.Request["siteid"] == null ? "" : context.Request["siteid"].Trim();
 
-
-                //全部类型，重置为空
-                if (type == "ALL") {
-                    type = "";
-                }
-
-                List<MeasurePointInfo> list = Business.MeasurePoint.GetMeasurePointByType(type, pointnum, orgid, siteid);
+                List<MeasurePointInfo> list = Business.MeasurePoint.GetMeasurePointByType(carrier, pointnum, orgid, siteid);
 
                 ret = JsonConvert.SerializeObject(list);
 
@@ -183,6 +177,18 @@ namespace PM.Web.services {
 
             return result;
 
+        }
+
+        /// <summary>
+        /// 获取计量参量信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetMeasurePointParam(HttpContext context) {
+            int m_measurepointparamuid = PM.Common.Utils.StrToInt(context.Request["measurepointparamuid"].ToString(), 0);
+           MeasurePointParamInfo paramInfo = PM.Data.MeasurePoint.GetMeasurePointParamInfo(m_measurepointparamuid);
+           string result = JsonConvert.SerializeObject(paramInfo);
+           return result;
         }
 
 

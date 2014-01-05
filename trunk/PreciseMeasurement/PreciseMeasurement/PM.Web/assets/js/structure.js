@@ -6,6 +6,8 @@
 
 $(function () {
 
+    $('#btnSave').button();
+    $(".meter_content").draggable();
 
     /**
     * 点击记量点，动态显示当前数据的计量值
@@ -86,7 +88,7 @@ $(function () {
 
                     $("#" + obj.Pointnum).find(".status").hide();
                 }
-                console.log(mstyle);
+               // console.log(mstyle);
                 content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
                 content += "<td>" + obj.SwPressure + "</td>"
@@ -99,7 +101,7 @@ $(function () {
                 $("#" + obj.Pointnum + "_data .AF_FlowInstant span").text(obj.AfFlowinstant);
                 $("#" + obj.Pointnum + "_data .AT_Flow span").text(obj.AtFlow);
                 $("#" + obj.Pointnum + "_data .AI_Density span").text(obj.AiDensity);
-                $("#" + obj.Pointnum + "_data .MEASURETIME div").text(new Date(obj.Measuretime).toString("yyyy-MM-dd HH:mm:ss"));
+                $("#" + obj.Pointnum + "_data .MEASURETIME div").text(obj.Measuretime);
 
             });
 
@@ -116,29 +118,36 @@ $(function () {
         var meters = $(".meter");
         var coordinates = new Array();
         $.each($(meters), function (index, obj) {
-
             //获取测点结构图位置，并保存到数组中
-            coordinates.push({ "Pointnum": $(obj).attr("id"), "X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": ORGID });
-
-            //console.log($(obj).attr("id") + "," + $(obj).position().left + "," + $(obj).position().top);
+            coordinates.push({ "Pointnum": $(obj).attr("id"), "X": $(obj).position().left, "Y": $(obj).position().top, "Orgid": $(obj).attr("orgid") });
         });
         if (coordinates.length == 0) {
             return;
         }
-        $.ajax({
-            type: "POST",
-            url: "../services/SaveMeasurePoint.ashx",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(coordinates),
-            success: function (data) {
-                console.log(data);
+
+        var data = JSON.stringify({ "funname": "SaveMeasurePointCoordinates", "data": coordinates })
+
+        $.post("../services/PostAjaxData.ashx", data, function (result) {
+            console.log(result);
+            if (result == "True") {
                 alert("计量点位置保存成功，请关闭窗口!");
-            },
-            error: function (data) {
-                //console.log(response);
             }
         });
+
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "../services/SaveMeasurePoint.ashx",
+        //            contentType: "application/json; charset=utf-8",
+        //            dataType: "json",
+        //            data: JSON.stringify(coordinates),
+        //            success: function (data) {
+        //                console.log(data);
+        //                alert("计量点位置保存成功，请关闭窗口!");
+        //            },
+        //            error: function (data) {
+        //                //console.log(response);
+        //            }
+        //        });
 
     });
 

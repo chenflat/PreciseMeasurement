@@ -43,11 +43,9 @@ namespace PM.Web.admin.measurepoints
             ddlOrgid.DataSource = Business.Organizations.GetOrganizationTreeList("-");
             ddlOrgid.DataBind();
 
-            //location.DataTextField = "Description";
-            //location.DataValueField = "Location";
-            //location.DataSource = Business.Locations.GetLocationsTreeList("└");
-            //location.DataBind();
-            //location.Items.Insert(0, new ListItem("", ""));
+
+
+
         }
 
 

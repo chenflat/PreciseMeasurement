@@ -2,15 +2,9 @@
     CodeBehind="AssetList.aspx.cs" Inherits="PM.Web.admin.Asset.AssetList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <ol class="breadcrumb margintop20">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
-        <li class="active">资产管理</li>
-    </ol>
+
     <div class="bs-docs-section">
         <div class="page-header">
-            <h3>
-                资产</h3>
-            <div class="manager_buttons">
                 <a href="AssetForm.aspx" class="btn btn-info">新增</a>
                 <div class="btn-group">
                     <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -31,7 +25,7 @@
                 </asp:DropDownList>
                 <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
                 <asp:Button ID="btnExport" runat="server" CssClass="btn btn-info" Text="导出" />
-            </div>
+  
         </div>
     </div>
     <!-- /toolbar -->

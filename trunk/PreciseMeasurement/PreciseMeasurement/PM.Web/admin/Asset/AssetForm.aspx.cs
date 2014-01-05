@@ -39,11 +39,11 @@ namespace PM.Web.admin.Asset {
             ddlSpecClass.DataSource = PM.Data.Pmdomain.FindPMDomainByDomainId("SUBSYS");
             ddlSpecClass.DataBind();
 
-            ddlSpecSubClass.DataTextField = "DESCRIPTION";
-            ddlSpecSubClass.DataValueField = "VALUE";
-            ddlSpecSubClass.DataSource = PM.Data.Pmdomain.FindPMDomainByDomainId("ASSETTYPE");
-            ddlSpecSubClass.DataBind();
-            ddlSpecSubClass.Items.Insert(0, new ListItem("", ""));
+            //ddlSpecSubClass.DataTextField = "DESCRIPTION";
+            //ddlSpecSubClass.DataValueField = "VALUE";
+            //ddlSpecSubClass.DataSource = PM.Data.Pmdomain.FindPMDomainByDomainId("ASSETTYPE");
+            //ddlSpecSubClass.DataBind();
+            //ddlSpecSubClass.Items.Insert(0, new ListItem("", ""));
 
            
 

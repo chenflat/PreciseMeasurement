@@ -21,13 +21,21 @@ namespace PM.Web.admin.measurepoints
             {
                 string keyId = PMRequest.GetString("id");
                 string pointnum = PMRequest.GetString("pointnum");
+                string action = PMRequest.GetString("action");
+                int paramterId = PMRequest.GetInt("paramterid",0);
                 if (keyId != "" && Utils.IsNumeric(keyId))
                 {
                     SetPointDescrption(long.Parse(keyId));
                 }
-                BindData(pointnum);
+                if (action == "delete" && paramterId>0) {
+                    int ret = PM.Data.MeasurePoint.DeleteMeasurePointParam(paramterId.ToString());
+                    if (ret > 0) {
+                       string uri = HttpContext.Current.Request.UrlReferrer.AbsoluteUri;
+                       Response.Redirect(uri,true);
+                    }
+                }
 
-               // btnBack.NavigateUrl = "edit.aspx?id="+ keyId;
+                BindData(pointnum);
             }
         }
 
@@ -47,9 +55,10 @@ namespace PM.Web.admin.measurepoints
             ddlMeasureUnitId.DataBind();
 
             MeasurePointInfo pointInfo = MeasurePoint.GetMeasurePointInfo(id);
-            ltPointName.Text = pointInfo.Description;
+            ltPointName.Text = "[" + pointInfo.Pointnum + "]" + pointInfo.Description;
             //设置当前选择的计量点
             ddlPointNum.SelectedValue = pointInfo.Pointnum;
+            hdnMeasurePointId.Value = pointInfo.Measurepointid.ToString();
         }
 
         private void BindData(string pointnum)

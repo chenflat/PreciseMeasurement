@@ -9,7 +9,7 @@
     </div>
     <asp:Repeater ID="rptMeasureUnits" runat="server">
         <HeaderTemplate>
-            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-striped">
+            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-hover table-bordered table-striped">
                 <tr>
                     <th width="20%">
                         单位编码

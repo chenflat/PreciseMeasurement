@@ -78,6 +78,33 @@ label {font-weight:normal;}
      }
     .clock .week {letter-spacing:4px}
 
+.navbar-brand .logo {
+     background:url('../img/logo.png') no-repeat top left;
+     height:36px;
+     width:300px;
+     margin:7px 4px 0;
+     padding-left:72px;
+     line-height:36px;
+     font-size:20px;
+    }
+
+.loading {
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/loading.gif') 
+                50% 50% 
+                no-repeat;
+    
+    
+}
+
+
+
 /*
  * Footer
  *
@@ -194,7 +221,7 @@ label {font-weight:normal;}
 
 /* First level of nav */
 .bs-sidenav {
-  margin-top: -5px;
+  margin-top: 0px;
   margin-bottom: 30px;
   padding-top:    0px;
   padding-bottom: 10px;

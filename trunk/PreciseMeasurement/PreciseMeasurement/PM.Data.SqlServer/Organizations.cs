@@ -96,6 +96,16 @@ namespace PM.Data.SqlServer
                                                 organizationid);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
         }
-       
+
+
+        /// <summary>
+        /// 获取指定的组织机构及子机构
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public IDataReader FindOrganizationAndChildrenByOrgId(String orgid) {
+            string commandText = string.Format("SELECT * from CP_GetOrgIdTable('{0}')", orgid);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
     }
 }

@@ -2,22 +2,14 @@
     CodeBehind="roles.aspx.cs" Inherits="PM.Web.admin.users.roles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    <ol class="breadcrumb margintop20">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>系统管理</a></li>
-        <li class="active">用户组</li>
-    </ol>
-    <div class="bs-docs-section">
-        <div class="page-header">
-            <h3>
-                用户组</h3>
-            <div class="manager_buttons">
+
+            <div class="btn-tools">
                 <a href="roleform.aspx" class="btn btn-info">新增</a>
                 &nbsp;&nbsp;
                 <asp:TextBox ID="txtGroupName" runat="server"></asp:TextBox>
                 <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-info" Text="查询" />
             </div>
-        </div>
-    </div>
+
     <asp:Repeater ID="rptGroup" runat="server">
         <HeaderTemplate>
             <table class="table table-hover table-bordered table-condensed">

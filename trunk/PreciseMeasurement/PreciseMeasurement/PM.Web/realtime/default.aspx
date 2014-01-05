@@ -23,11 +23,10 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row" id="realtime_wrap">
-        <div class="col-md-2 col-xs-4">
-            <div class="bs-sidebar hidden-print affix-top" role="complementary">
-            <header class="bs-sidenav-header">
-                            <label>计量点</label>
+        <aside class="bg-light lter b-r aside-md hidden-print" id="nav">
+    <section class="vbox">
+       <header class="header bg-default lter text-center clearfix" style="padding:5px 0px;margin:0px;min-height:30px;">
+           <%-- <label>计量点</label>
                             <input id="searchstationinput" class="radiuscorner" type="text" style="width: 80px;">
                             <span id="spanType1" style="overflow: hidden;">
                                 <input id="radSteam1" type="radio" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
@@ -35,16 +34,54 @@
                                 <input id="radWater1" type="radio" value="water" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radWater1" style="cursor: pointer;">水</label>
                             </span>
-                        
-                    </header>
+--%>
+
+                <div class="btn-group">
+                    
+              <div class="btn-group hidden-nav-xs">
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"> 计量点 <span class="caret"></span> </button>
+                <ul class="dropdown-menu text-left" id="carrier">
+                  <li id="steam"><a href="#">汽</a></li>
+                  <li id="water"><a href="#" >水</a></li>
+                </ul>
+              </div>
+              <%--<button type="button" class="btn btn-sm btn-dark btn-icon" title="Search"><i class="fa fa-fw fa-search"></i></button>--%>
+              <a href="#" class="dropdown-toggle btn btn-sm btn-dark btn-icon" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
+              <section class="dropdown-menu aside-xl animated fadeInUp">
+          <section class="panel bg-white">
+           
+              <div class="form-group wrapper m-b-none">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-info btn-icon"><i class="fa fa-search"></i></button>
+                  </span> </div>
+              </div>
+            
+          </section>
+        </section>
+
+
+                </div>
+
+          </header>
+
+
+          <section class="w-f scrollable">
+            <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333"> <!-- nav -->
+   
+           <nav class="nav-primary hidden-xs">
                 <ul class="nav nav-list bs-sidenav">
                     <%
                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                         { 
                     %>
-                    <li><label class="tree-toggler nav-header"><a href="#">
-                        <%= pair.Key %></a></label>
-                        <ul class="nav tree">
+                    <li class="active">
+
+                    <a href="#"> <i class="fa fa-wrench"></i>
+                    <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>
+                      <span>  <%= pair.Key %></span></a>
+                        <ul class="nav lt tree">
                             <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
                                {%>
                             <li <%  if(measurepointid==point.Measurepointid) Response.Write("class='active'"); %>><a href="?type=<%=point.Carrier %>&measurepointid=<%=point.Measurepointid %>">
@@ -58,11 +95,17 @@
                    
                 </ul>
                 
-            </div>
+            </nav>
         </div>
-        <div class="col-md-10 col-xs-8" role="main">
-            <div class="bs-docs-section">
-                <div class="page-header" style="border-bottom: none; margin: 40px 0 0 0;">
+    </section>
+    </section>
+    </aside>
+    <section id="content">
+    <section class="vbox">
+        <header class="header bg-white b-b b-light">
+            <p><i class="fa fa-bars"></i> 实时参数</p>
+          </header>
+        <section class="scrollable wrapper">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active"><a href="#realtime" data-toggle="tab">实时参数</a></li>
                         <li><a href="#minute" data-toggle="tab">分钟数据</a></li>
@@ -72,8 +115,7 @@
                         <li><a href="#alarm" data-toggle="tab">报警信息</a></li>
                         <li><a href="#info" data-toggle="tab">计量点信息</a></li>
                     </ul>
-                </div>
-                <div id="myTabContent" class="tab-content">
+                <div id="myTabContent" class="tab-content" style="padding-top:8px;">
                     <div class="tab-pane fade in active" id="realtime">
                         <uc2:RealtimeParams ID="RealtimeParams1" runat="server" />
                     </div>
@@ -100,8 +142,13 @@
                     <input type="hidden" id="cardnum" value="<%=measurePointInfo.Cardnum %>" />
                     
                 </div>
-            </div>
-        </div>
+
+    
+        </section>
+
+    </section>
+    </section>
+    
     </div>
     <script type="text/javascript">
         $('#myTab a').click(function (e) {

@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="~/assets/ico/favicon.png" />
-    <title>生产监测系统</title>
+    <title>能源计量监测平台</title>
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"
         type="text/css" />
@@ -19,6 +19,7 @@
         rel="stylesheet" />
     <link href="~/assets/lib/weather/css/main.css" rel="stylesheet" />
     <link href="~/assets/fonts/font-awesome-4/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/assets/lib/select2/select2.css") %>" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="<%=ResolveUrl("~/assets/js/ie/html5shiv.js") %>"></script>
@@ -33,7 +34,8 @@
     <script src="<%=ResolveUrl("~/assets/lib/bootbox/bootbox.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/js/modernizr.custom.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/lib/jquery.slimscroll/jquery.slimscroll.min.js") %>"></script>
-
+     
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/select2/select2.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/assets/js/application.js") %>"></script>
     <script>
         var CONTEXT_PATH = "<%=PM.Config.BaseConfigs.GetSystemPath %>"
@@ -41,7 +43,8 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="dvProgress.style.display = 'none';">
+<div class="loading" id="dvProgress"></div>
 <form id="Form1" runat="server" class="form-horizontal" role="form" style="height:100%;">
     <section class="vbox">
     <a class="sr-only" href="#content">Skip navigation</a>
@@ -55,7 +58,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%--<a href="/" class="navbar-brand"><div class="logo">北京统一饮品有限公司</div> </a>--%>
+      <a href="/" class="navbar-brand"><div class="logo">北京统一饮品有限公司</div> </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" id="main-nav">
@@ -131,8 +134,7 @@
 </header>
     
         
-         <div id="processing" class="processing" style="display: none;">
-            处理中...</div>
+         
         <section>
         <section class="hbox stretch">
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />

@@ -12,7 +12,7 @@
     
      <a href="edit.aspx" class="btn btn-primary">新增</a>
     </div>
-    <asp:GridView ID="gvUsers" runat="server"  CssClass="table table-striped" 
+    <asp:GridView ID="gvUsers" runat="server"  CssClass="table table-bordered table-hover table-striped" 
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" CellSpacing="1" 
         EnableModelValidation="True" GridLines="None" PageSize="20">
         <Columns>

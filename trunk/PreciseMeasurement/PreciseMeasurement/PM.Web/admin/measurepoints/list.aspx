@@ -2,26 +2,28 @@
     CodeBehind="list.aspx.cs" Inherits="PM.Web.admin.measurepoints.list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-    
+        <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/measurepoint.js") %>"></script>
     <div class="toolbar bs-callout-info">
         所属组织：<asp:DropDownList ID="ddlOrgId" runat="server">
         </asp:DropDownList>
-        计量点名称：<asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
+        
         携能载体：<asp:DropDownList ID="ddlCarrier" runat="server">
             <asp:ListItem Value="">全部</asp:ListItem>
-            <asp:ListItem>汽</asp:ListItem>
-            <asp:ListItem>水</asp:ListItem>
-            <asp:ListItem>电</asp:ListItem>
-            <asp:ListItem>空气</asp:ListItem>
+            <asp:ListItem Value="steam">汽</asp:ListItem>
+            <asp:ListItem Value="water">水</asp:ListItem>
+            <asp:ListItem Value="electricity">电</asp:ListItem>
+            <asp:ListItem Value="area">空气</asp:ListItem>
         </asp:DropDownList>
+        计量点名称：<asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
         <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />
         <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="导出" />
+        <button type="button" id="btnCoordinate" class="btn btn-primary">位置定义</button>
         <%--<asp:Button ID="btnClone" runat="server" CssClass="btn btn-primary" Text="复制" />--%>
         <a href="edit.aspx" class="btn btn-primary">新增</a>
     </div>
     <asp:Repeater ID="rptMeasurePoint" runat="server">
         <HeaderTemplate>
-            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-striped">
+            <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-hover table-striped">
                 <tr>
                     <th width="8%">
                         计量编号
@@ -33,7 +35,7 @@
                         序号
                     </th>
                     <th width="15%">
-                        所属公司
+                        所属机构
                     </th>
                     <th width="10%">
                         计量点IP

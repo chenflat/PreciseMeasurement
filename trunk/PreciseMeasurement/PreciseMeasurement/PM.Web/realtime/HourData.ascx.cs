@@ -35,7 +35,7 @@ namespace PM.Web.realtime
         {
             if (MeasurePointInfo == null)
                 return;
-            ltDescription.Text = MeasurePointInfo.Description;
+            ltDescription.Text = string.Format("[{0}]{1}", MeasurePointInfo.Pointnum, MeasurePointInfo.Description);
 
             gvHourMeasurement.DataSource = Measurement.GetMeasurementByPointnum(MeasurePointInfo.Pointnum, m_startdate, m_enddate,"", "HOUR", 1, 12).List ;
             gvHourMeasurement.DataBind();

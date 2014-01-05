@@ -29,6 +29,39 @@ namespace PM.Data
             return DatabaseProvider.GetInstance().FindOrganizationsListDataTable();
         }
 
+
+        /// <summary>
+        /// 获取指定的组织机构及子机构
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static IDataReader FindOrganizationAndChildrenByOrgId(String orgid) {
+            return DatabaseProvider.GetInstance().FindOrganizationAndChildrenByOrgId(orgid);
+        }
+
+
+        /// <summary>
+        /// 获取指定的组织机构及子机构字符串
+        /// </summary>
+        /// <param name="orgid">组织机构ID</param>
+        /// <returns></returns>
+        public static string GetOrganizationAndChildrenByOrgId(String orgid) {
+            StringBuilder sb = new StringBuilder();
+            using (IDataReader reader =FindOrganizationAndChildrenByOrgId(orgid) ) {
+                while (reader.Read()) {
+                    string m_orgid = reader["OrgId"].ToString();
+                    if (sb.Length > 0)
+                        sb.Append(",");
+                    if (m_orgid != "") {
+                        sb.Append(string.Format("'{0}'",m_orgid));
+                    }
+                }
+            }
+            return sb.ToString();
+        }
+
+
+
         /// <summary>
         /// 获取组织机构信息
         /// </summary>

@@ -22,15 +22,6 @@ namespace PM.Web.admin.measurepoints {
         protected global::System.Web.UI.WebControls.DropDownList ddlOrgId;
         
         /// <summary>
-        /// txtDescription 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
-        
-        /// <summary>
         /// ddlCarrier 控件。
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace PM.Web.admin.measurepoints {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCarrier;
+        
+        /// <summary>
+        /// txtDescription 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
         /// btnQuery 控件。
