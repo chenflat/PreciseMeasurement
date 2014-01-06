@@ -53,7 +53,7 @@ namespace DBWinService {
             timer = new System.Timers.Timer();
             timer.Elapsed += new ElapsedEventHandler(timer_Tick);
            // double timeInSeconds = 5.0;
-            //每30分钟整理一次
+            //每10分钟整理一次
             timer.Interval = (10 * 60 * 1000);
             timer.AutoReset = true;
             timer.Enabled = true;

@@ -44,6 +44,8 @@ namespace PM.Web.report
             string fileName = "计量日报表_" + DateTime.Now.ToString("yyyyMMdd");
             DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
             ExcelHelper.CreateExcel(table, fileName);
+             
+
         }
 
         private void BindData() {
