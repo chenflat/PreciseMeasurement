@@ -15,11 +15,11 @@
 .weather .weather-is-move{ cursor: move !important;}
 
 /*.weather{ position:absolute; top:0; left:0; width:100%; z-index:0;}*/
-.weather{ width:60px; height:50px; z-index:0;}
+.weather{ width:60px; height:50px; z-index:0;float:left;}
 .weather .sky{ top:0; left:0;position:absolute;  cursor: pointer;  _background:none;/* display: none;*/}
 .weather .sky .drop{ position:absolute; top:0; left:0; cursor:auto; display: none;}
 .weather .sky .drop i{ display:block; width:100%; height:100%;}
 .weather .sky .child{ position: relative; left:0; top:0; }
 
 .weather .sky-0{}
-.weather .sky-1{ left:260px; top:10px;}
+.weather .sky-1{ left:60px; top:10px;}

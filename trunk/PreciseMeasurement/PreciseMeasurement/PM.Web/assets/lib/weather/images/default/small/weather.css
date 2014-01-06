@@ -16,7 +16,7 @@
 .weather .snow i{ background:url(snow_drop_0.png) no-repeat; _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://julying.com/lab/weather/images/default/small/snow_drop_0.png'); _background:none;}
 
 
-.weather .sky .child-0{width:60px; height:60px;}
+.weather .sky .child-0{width:60px; height:45px;}
 .weather .sky .child-1{width:45px; height:45px; }
 .weather .rainy .drop{ width:7px; height:15px; }
 .weather .rainy .child-0 .drop{top:40px;}

@@ -470,7 +470,6 @@ function GetHourData(pointnum, startdate, enddate, pageindex) {
         error: OnFail
     });
 
-    // return false;
 }
 
 function OnSuccessForHour(response) {
@@ -487,9 +486,9 @@ function OnSuccessForHour(response) {
     $.each(measurements, function (index, obj) {
         // console.log(obj);
         $("td", row).eq(0).html(obj.Description);
-        $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd HH:00"));
+        $("td", row).eq(1).html(new Date(obj.Starttime).toString("yyyy-MM-dd HH:mm"));
         $("td", row).eq(2).html((obj.StartValue).toFixed(0));
-        $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd HH:00"));
+        $("td", row).eq(3).html(new Date(obj.Endtime).toString("yyyy-MM-dd HH:mm"));
         $("td", row).eq(4).html((obj.LastValue).toFixed(0));
         $("td", row).eq(5).html((obj.Value).toFixed(0));
 
@@ -514,8 +513,6 @@ function OnSuccessForHour(response) {
 function GetDayData(pointnum, startdate, enddate, pageindex) {
     enddate = new Date(enddate).add(1).day().toString("yyyy-MM-dd");
 
-   // console.log(pointnum + "," + startdate + "," + enddate + "," + pageindex);
-
     $.ajax({
         type: "GET",
         url: "RealtimeParam.ashx",
@@ -525,8 +522,6 @@ function GetDayData(pointnum, startdate, enddate, pageindex) {
         success: OnSuccessForDay,
         error: OnFail
     });
-
-    // return false;
 }
 
 function OnSuccessForDay(response) {
