@@ -9,7 +9,7 @@
             <li onclick="window.location.href='<%=ResolveUrl("~/measuresystem.aspx") %>'"><div class="buttonInSquare btnSubSystem icon_steam"> </div>蒸汽系统</li>
             <li><div class="btnSubSystem buttonInSquare icon_water"></div> 水系统</li>
             <li><div class="btnSubSystem buttonInSquare icon_airpressure"></div> 空压系统</li>
-            <li><div class="btnSubSystem buttonInSquare icon_electricity"></div> 电系统</li>
+            <li onclick="window.location.href='<%=ResolveUrl("~/electricity.aspx") %>'" ><div class="btnSubSystem buttonInSquare icon_electricity"></div> 电系统</li>
         </ul>
     </div>
 </asp:Content>

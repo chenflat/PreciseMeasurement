@@ -48,7 +48,7 @@ namespace PM.Business
             }
 #endif
             //context.Response.Write("<html><body style=\"font-size:14px;\">");
-            //context.Response.Write("Discuz!NT Error:<br />");
+            //context.Response.Write("PM Error:<br />");
             //context.Response.Write("<textarea name=\"errormessage\" style=\"width:80%; height:200px; word-break:break-all\">");
             //context.Response.Write(System.Web.HttpUtility.HtmlEncode(context.Server.GetLastError().ToString()));
             //context.Response.Write("</textarea>");

@@ -468,6 +468,8 @@
     <Content Include="assets\lib\weather\js\jquery.weather.min.js" />
     <Content Include="controls\PageControl.ascx" />
     <Content Include="Default.aspx" />
+    <Content Include="Electricity.aspx" />
+    <Content Include="ElectricitySystem\Structure.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
     <Content Include="index.htm" />
@@ -756,6 +758,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Electricity.aspx.cs">
+      <DependentUpon>Electricity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Electricity.aspx.designer.cs">
+      <DependentUpon>Electricity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricitySystem\Structure.aspx.cs">
+      <DependentUpon>Structure.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ElectricitySystem\Structure.aspx.designer.cs">
+      <DependentUpon>Structure.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
