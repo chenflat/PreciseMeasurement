@@ -61,6 +61,8 @@
       <a href="/" class="navbar-brand"><div class="logo">北京统一饮品有限公司</div> </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+    <% if (Session["CURRENTSYSTEM"].ToString()=="measuresystem.aspx") { %>
+    
       <ul class="nav navbar-nav" id="main-nav">
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">蒸汽计量 <b class="caret"></b></a>
@@ -108,6 +110,44 @@
           <a href="#">冷凝监测</a>
         </li>
       </ul>
+          
+    <%}
+       else if (Session["CURRENTSYSTEM"].ToString() == "electricity.aspx") { %>
+
+       <ul class="nav navbar-nav" id="Ul1">
+               <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统结构图 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li>
+           <a href="<%=ResolveUrl("~/ElectricitySystem/Structure.aspx") %>">10KV系统图</a>
+           </li>
+        <li>
+          <a href="<%=ResolveUrl("~/realtime/default.aspx") %>">1#变系统图</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/report/default.aspx") %>">2#系统图</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/analysis/default.aspx") %>">3#变系统1图</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/alarm/default.aspx") %>">3#变系统2图</a>
+        </li>
+        <li>
+          <a href="<%=ResolveUrl("~/alarm/default.aspx") %>">直流屏图</a>
+        </li>
+        </ul>
+        </li>
+        <li>
+          <a href="#">统计报表</a>
+        </li>
+        <li>
+          <a href="#">曲线分析</a>
+        </li>
+
+       </ul>
+    <%} %>
+
       <ul class="nav navbar-nav navbar-right user-nav">
             <li id="sysmanage"><a href="<%=ResolveUrl("~/admin/measurepoints/list.aspx") %>">系统管理</a></li>
             <li class="dropdown">

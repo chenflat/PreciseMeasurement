@@ -55,6 +55,9 @@
     <Compile Include="Pages\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\MeasureSystemBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\RealtimeBaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
