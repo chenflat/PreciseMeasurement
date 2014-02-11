@@ -37,7 +37,13 @@ namespace PM.Web.report
 
             string fileName = "计量月报表_" + DateTime.Now.ToString("yyyyMM");
             DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Month);
-            ExcelHelper.CreateExcel(table, fileName);
+
+
+            DateTime startDate = PM.Common.TypeConverter.ObjectToDateTime(m_startdate);
+            string title = "蒸汽月用量表";
+            ExcelHelper.CreateReportExcelFile(table, "计量月报表", startDate, title, "MONTH");
+            
+          //  ExcelHelper.CreateExcel(table, fileName);
         }
 
         private void btnMonthQuery_Click(object sender, EventArgs e)

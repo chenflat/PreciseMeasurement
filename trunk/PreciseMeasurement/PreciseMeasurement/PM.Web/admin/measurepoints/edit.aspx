@@ -239,8 +239,9 @@
     </div>
    
     <div class="row">
-        <div class="col-md-4 col-md-offset-1">
-         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="提交" />
+        <div class="col-md-6 col-md-offset-1">
+         <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="保存" />
+         <asp:Button ID="btnSaveAndNew" CssClass="btn btn-primary" runat="server" Text="保存并新增" OnClick="btnSaveAndNew_Click" />
             <asp:HyperLink ID="btnParams" CssClass="btn btn-info" runat="server">参量设置</asp:HyperLink>
             <asp:Button ID="btnDelte" CssClass="btn btn-danger" runat="server" Text="删除" OnClientClick="return confirm('删除记录点数据不可恢复，确定要删除记量点吗？')" />
             <a href="list.aspx" class="btn btn-info">返回</a>

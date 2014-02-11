@@ -9,6 +9,8 @@ using System.Data;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Reflection;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace PM.Common.ExcelUtils
 {

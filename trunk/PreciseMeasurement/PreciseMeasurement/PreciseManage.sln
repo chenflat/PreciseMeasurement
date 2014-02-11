@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Web", "PM.Web\PM.Web.csproj", "{FA0DDC6F-5AD3-4125-AA7A-1D2E87BEDC4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.Data", "PM.Data\PM.Data.csproj", "{9BD3666B-7BE9-42C1-B316-BCD3CE52192C}"

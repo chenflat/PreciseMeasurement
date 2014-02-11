@@ -6,7 +6,15 @@
 */
 $(function () {
 
+    //双击打开
     $(".coordinate").dblclick(function () {
+        var measurepointid = $("[id*=measurepointid]").val();
+        var btnSave = $("[id*=btnSave]");
+        console.log("measurepointid:" + measurepointid);
+        if (measurepointid == "") {
+            btnSave.click();
+            return;
+        }
 
         // console.log($(this));
 

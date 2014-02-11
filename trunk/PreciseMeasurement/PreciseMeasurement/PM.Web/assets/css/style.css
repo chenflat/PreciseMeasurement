@@ -550,8 +550,8 @@ h1[id] {
 .structure-title {background:#BCE8F1;padding:4px;text-align:center;}
 #structure {position:relative;width:1110px;}
 #structure .meter {z-index:100;position:absolute; cursor:pointer;display: inline-block; }
-#structure .icon {width:32px;height:32px;position: relative;display: inline-block;background:url(../img/meter.png) no-repeat;  }
-#structure .text {float:left;padding-right:4px;}
+#structure .icon {width:39px;height:20px;position: relative;display: inline-block;background:url(../ico/meter.png) no-repeat;  }
+#structure .text {float:none;padding-right:4px;font-size:12px;}
 #structure .status {position: relative;display: inline-block; vertical-align:top;}
 #structure .meter_content {z-index:200;position:absolute;}
 #structure .close {margin:6px 10px 0 0;}

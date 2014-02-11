@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace PM.Web {
+namespace PM.Web.structure {
     
     
-    public partial class MeasureSystem {
+    public partial class water {
     }
 }

@@ -43,8 +43,11 @@ namespace PM.Web.report
         {
             string fileName = "计量日报表_" + DateTime.Now.ToString("yyyyMMdd");
             DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
-            ExcelHelper.CreateExcel(table, fileName);
-             
+            //ExcelHelper.CreateExcel(table, fileName);
+
+            DateTime startDate = PM.Common.TypeConverter.ObjectToDateTime(startdate.Text.Trim());
+            string title = "蒸汽日用量表";
+            ExcelHelper.CreateReportExcelFile(table, "计量日报表", startDate, title,"DAY");
 
         }
 

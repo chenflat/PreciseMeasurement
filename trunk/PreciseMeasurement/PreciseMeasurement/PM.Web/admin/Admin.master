@@ -55,23 +55,32 @@
              </section>
         </section>
     </aside>
-    <section id="content">
-    <section class="vbox">
-    <header class="header bg-white b-b b-light">
-            <p><i class="fa fa-bars"></i>  <%=Title%></p>
-          </header>
-    <section class="scrollable wrapper">
 
-        <asp:PlaceHolder ID="msgPlaceHolder" runat="server" Visible="False">
-        <div style="margin-top:40px;" class="alert alert-<asp:Literal ID="ltMsgType" runat="server"></asp:Literal> fade in">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                            ×</button>
-                        <asp:Literal ID="message" runat="server"></asp:Literal>
-                    </div>
-        </asp:PlaceHolder>
-        <asp:ContentPlaceHolder ID="cph" runat="server">
-        </asp:ContentPlaceHolder>
+       
+        <section id="content">
+          <section class="vbox">
+               <section class="scrollable padder">
+             <%--<header class="no-border header bg-white b-b b-light">--%>
+                   <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+                    <li><i class="fa fa-bars"></i> &nbsp;&nbsp;&nbsp;<%=Title%></li>
+                   </ul>
+                <%--  </header>--%>
+
+            <div class="rows"  data-color="#333333">
+                <asp:PlaceHolder ID="msgPlaceHolder" runat="server" Visible="False">
+                <div style="margin-top:40px;" class="alert alert-<asp:Literal ID="ltMsgType" runat="server"></asp:Literal> fade in">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                    ×</button>
+                                <asp:Literal ID="message" runat="server"></asp:Literal>
+                            </div>
+                </asp:PlaceHolder>
+                <asp:ContentPlaceHolder ID="cph" runat="server">
+                </asp:ContentPlaceHolder>
+
+                        </div>
+              </section>
+
+          </section>
         </section>
-        </section>
-    </section>
+
 </asp:Content>

@@ -49,7 +49,8 @@ $(function () {
     var $reportrows = $("[id*=gvReport] tr");
     for (var i = 1; i < $reportrows.length; i++) {
         $($reportrows[i]).find("td").eq(0).attr("width", "100px");
-        $($reportrows[i]).find("td").eq(0).text(new Date($($reportrows[i]).find("td").eq(0).text()).toString('yyyy-MM-dd'));
+
+        $($reportrows[i]).find("td").eq(0).text($($reportrows[i]).find("td").eq(0).text().substr(0, 10));
     }
 
 
@@ -63,7 +64,7 @@ $(function () {
         $reportrows = $("[id*=gvMonthReport] tr");
         for (var j = 1; j < $reportrows.length; j++) {
             $($reportrows[j]).find("td").eq(0).attr("width", "100px");
-            $($reportrows[j]).find("td").eq(0).text(new Date($($reportrows[j]).find("td").eq(0).text()).toString('yyyy-MM'));
+            $($reportrows[j]).find("td").eq(0).text(($($reportrows[j]).find("td").eq(0).text()).substr(0, 7));
         }
     }
 
@@ -409,7 +410,10 @@ function initQueryDate () {
         $enddate.val(Date.today().toString("yyyy-MM-dd"));
         $startdate.val(Date.today().addDays(-8).toString("yyyy-MM-dd"));
     }
-    getAllReportData(1);
+
+    if (window.location.pathname == '/report/default.aspx' || window.location.pathname == '/report/') {
+        getAllReportData(1);
+     }
 }
 
 /**
