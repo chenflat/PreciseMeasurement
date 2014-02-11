@@ -26,10 +26,13 @@
         <div id="refresh"> <img src="../assets/img/sync.gif" id="refreshData" style="cursor:pointer;" title="点击获取实时值" /> <span id="counter">60</span>秒后刷新</div>
         <asp:Repeater ID="rptMeasurePoint" runat="server">
         <ItemTemplate>
-            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" orgid="<%# Eval("Orgid") %>">
-            <span class="text"><%# Eval("Pointnum") %></span>
-            <span class="icon"></span>
-            <span class="status"><img src="../assets/img/status_on.gif" width="16px" alt="数据采集正常"/></span>
+            <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter text-center" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" orgid="<%# Eval("Orgid") %>">
+          
+            <span class="icon"> <br />
+                <span class="text"><%# Eval("Pointnum") %></span>
+            </span>
+             
+           <%-- <span class="status"><img src="../assets/img/status_on.gif" width="16px" alt="数据采集正常"/></span>--%>
             </div>
             <div id="<%# Eval("Pointnum") %>_data" class="popover meter_content" style="display:none;">
             <div class="arrow"></div>

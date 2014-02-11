@@ -13,7 +13,7 @@ namespace PM.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["CURRENTSYSTEM"] = "";
         }
     }
 }

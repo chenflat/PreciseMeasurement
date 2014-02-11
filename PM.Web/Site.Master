@@ -61,7 +61,7 @@
       <a href="/" class="navbar-brand"><div class="logo">北京统一饮品有限公司</div> </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-    <% if (Session["CURRENTSYSTEM"].ToString()=="measuresystem.aspx") { %>
+    <% if (Session["CURRENTSYSTEM"].ToString() == "measurement") { %>
     
       <ul class="nav navbar-nav" id="main-nav">
         <li class="dropdown">
@@ -111,8 +111,7 @@
         </li>
       </ul>
           
-    <%}
-       else if (Session["CURRENTSYSTEM"].ToString() == "electricity.aspx") { %>
+    <%} else if (Session["CURRENTSYSTEM"].ToString() == "electricity") { %>
 
        <ul class="nav navbar-nav" id="Ul1">
                <li class="dropdown">
@@ -137,6 +136,40 @@
           <a href="<%=ResolveUrl("~/alarm/default.aspx") %>">直流屏图</a>
         </li>
         </ul>
+        </li>
+        <li>
+          <a href="#">统计报表</a>
+        </li>
+        <li>
+          <a href="#">曲线分析</a>
+        </li>
+
+       </ul>
+    <%} else if (Session["CURRENTSYSTEM"].ToString() == "water")
+       { %>
+       <ul class="nav navbar-nav">
+         <li>
+            <a href="<%=ResolveUrl("~/structure/water.aspx") %>">系统结构图</a>
+        </li>
+         <li>
+          <a href="#">实时参数</a>
+        </li>
+        <li>
+          <a href="#">统计报表</a>
+        </li>
+        <li>
+          <a href="#">曲线分析</a>
+        </li>
+
+       </ul>
+    <%} else if (Session["CURRENTSYSTEM"].ToString() == "airpressure")
+       { %>
+       <ul class="nav navbar-nav">
+         <li>
+            <a href="<%=ResolveUrl("~/structure/airpressure.aspx") %>">系统结构图</a>
+        </li>
+         <li>
+          <a href="#">实时参数</a>
         </li>
         <li>
           <a href="#">统计报表</a>
@@ -175,7 +208,7 @@
     
         
          
-        <section>
+        <section id="content">
         <section class="hbox stretch">
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </section>

@@ -93,48 +93,63 @@ namespace PM.Web.admin.measurepoints
         {
             if (this.IsValid)
             {
-                try
-                {
-                    MeasurePointInfo pointInfo = new MeasurePointInfo();
-                    pointInfo.Measurepointid = Utils.StrToInt(measurepointid.Value, -1);
-                    pointInfo.Description = description.Text.Trim();
-                    pointInfo.PointCode = pointcode.Text.Trim();
-                    pointInfo.Pointnum = pointnum.Text.Trim();
-                    pointInfo.Carrier = carrier.SelectedValue;
-                    pointInfo.Supervisor = supervisor.Text.Trim();
-                    pointInfo.Phone = phone.Text.Trim();
-                    pointInfo.Orgid = ddlOrgid.SelectedValue;
-                   // pointInfo.Location = location.SelectedValue;
-                    pointInfo.Level = Utils.StrToInt(ddlLevel.Text.Trim(), 0);
-                    pointInfo.Ipaddress = ipaddress.Text.Trim();
-                    pointInfo.Cardnum = cardnum.Text.Trim();
-                    pointInfo.Devicenum = devicenum.Text.Trim();
-                    pointInfo.Serverip = serverip.Text.Trim();
-                    pointInfo.Serverport = Utils.StrToInt(serverport.Text.Trim(), -1);
-                    pointInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
-                    pointInfo.X = tbX.Text.Trim();
-                    pointInfo.Y = tbY.Text.Trim();
-                    pointInfo.Z = tbZ.Text.Trim();
-
-                    bool isSuccess = false;
-                    if (pointInfo.Measurepointid > 0)
-                    {
-                        isSuccess = Business.MeasurePoint.UpdateMeasurePoint(pointInfo);
-                    }
-                    else
-                    {
-                        isSuccess = Business.MeasurePoint.CreateMeasurePoint(pointInfo) > 0;
-                    }
-                    if (isSuccess)
-                    {
-                        Response.Redirect("list.aspx");
-                    }
-                } catch (Exception ex)
-                {
-                    throw ex;
-                }
+                SaveMeasurepoint(false);
             }
         }
+
+        /// <summary>
+        /// 保存计量点
+        /// </summary>
+        /// <param name="IsSaveOrNew">是否保存并新增</param>
+        private void SaveMeasurepoint(bool IsSaveOrNew) {
+            try
+            {
+                MeasurePointInfo pointInfo = new MeasurePointInfo();
+                pointInfo.Measurepointid = Utils.StrToInt(measurepointid.Value, -1);
+                pointInfo.Description = description.Text.Trim();
+                pointInfo.PointCode = pointcode.Text.Trim();
+                pointInfo.Pointnum = pointnum.Text.Trim();
+                pointInfo.Carrier = carrier.SelectedValue;
+                pointInfo.Supervisor = supervisor.Text.Trim();
+                pointInfo.Phone = phone.Text.Trim();
+                pointInfo.Orgid = ddlOrgid.SelectedValue;
+                // pointInfo.Location = location.SelectedValue;
+                pointInfo.Level = Utils.StrToInt(ddlLevel.Text.Trim(), 0);
+                pointInfo.Ipaddress = ipaddress.Text.Trim();
+                pointInfo.Cardnum = cardnum.Text.Trim();
+                pointInfo.Devicenum = devicenum.Text.Trim();
+                pointInfo.Serverip = serverip.Text.Trim();
+                pointInfo.Serverport = Utils.StrToInt(serverport.Text.Trim(), -1);
+                pointInfo.Displaysequence = Utils.StrToInt(displaysequence.Text.Trim(), 0);
+                pointInfo.X = tbX.Text.Trim();
+                pointInfo.Y = tbY.Text.Trim();
+                pointInfo.Z = tbZ.Text.Trim();
+
+                bool isSuccess = false;
+                if (pointInfo.Measurepointid > 0)
+                {
+                    isSuccess = Business.MeasurePoint.UpdateMeasurePoint(pointInfo);
+                }
+                else
+                {
+                    isSuccess = Business.MeasurePoint.CreateMeasurePoint(pointInfo) > 0;
+                }
+                if (isSuccess)
+                {
+                    if (IsSaveOrNew) {
+                        Response.Redirect("edit.aspx");
+                    }
+                    else { 
+                        Response.Redirect("list.aspx");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         void btnDelte_Click(object sender, EventArgs e)
         {
@@ -157,5 +172,13 @@ namespace PM.Web.admin.measurepoints
         }
 
         #endregion
+
+        protected void btnSaveAndNew_Click(object sender, EventArgs e)
+        {
+            if (this.IsValid)
+            {
+                SaveMeasurepoint(true);
+            }
+        }
     }
 }
