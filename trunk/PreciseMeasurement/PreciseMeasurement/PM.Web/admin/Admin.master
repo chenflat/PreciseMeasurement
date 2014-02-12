@@ -38,6 +38,9 @@
                                 <li class='<% if(Request.RawUrl.IndexOf("/Class/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/Class/ClassStructureList.aspx") %>'
                                     data-original-title='organizations'><i class='fa fa-angle-right'></i><span class='hidden-minibar'>
                                         资产分类</span></a></li>
+                                 <li class='<% if(Request.RawUrl.IndexOf("/Class/")>0) { %>active<%} %>'><a href='<%=ResolveUrl("~/admin/Class/ClassStructureList.aspx") %>'
+                                    data-original-title='organizations'><i class='fa fa-angle-right'></i><span class='hidden-minibar'>
+                                        系统设置</span></a></li>
                             </ul>
                         </li>
                         <li class="<% if(Request.RawUrl.IndexOf("/users/")>0) { %>active<%} %>"><a href="#"><i class="fa fa-users"></i><span>安全性</span></a>
