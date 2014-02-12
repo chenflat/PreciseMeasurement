@@ -54,7 +54,7 @@
                         <asp:ListItem Value="steam">汽</asp:ListItem>
                         <asp:ListItem Value="water">水</asp:ListItem>
                         <asp:ListItem Value="electricity">电</asp:ListItem>
-                        <asp:ListItem Value="area">空气</asp:ListItem>
+                        <asp:ListItem Value="air">空气</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
