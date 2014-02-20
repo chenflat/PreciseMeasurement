@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
     
-    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/AssetManager.js") %>"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/assets/js/SystemConfig.js") %>"></script>
     <script>
         var USERID = "<%=userid %>";
         var ORGID = "<%=orgid %>";
