@@ -90,6 +90,7 @@
     <Content Include="admin\Meter\MeterGroupList.aspx" />
     <Content Include="admin\organizations\edit.aspx" />
     <Content Include="admin\organizations\list.aspx" />
+    <Content Include="admin\system\config.aspx" />
     <Content Include="admin\users\edit.aspx" />
     <Content Include="admin\users\list.aspx" />
     <Content Include="admin\users\roleform.aspx" />
@@ -185,6 +186,7 @@
     <Content Include="assets\js\steamtrap.js" />
     <Content Include="assets\js\steamtrap_realtimedata.js" />
     <Content Include="assets\js\structure.js" />
+    <Content Include="assets\js\SystemConfig.js" />
     <Content Include="assets\js\uglify.js" />
     <Content Include="assets\js\valve.js" />
     <Content Include="assets\js\streamtrap_analysis.js" />
@@ -689,6 +691,13 @@
     <Compile Include="admin\organizations\list.aspx.designer.cs">
       <DependentUpon>list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\system\config.aspx.cs">
+      <DependentUpon>config.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\system\config.aspx.designer.cs">
+      <DependentUpon>config.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\users\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -970,7 +979,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\system\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -1007,6 +1015,8 @@
     <None Include="assets\lib\weather\images\cartoon-3\_ui\1.ai" />
     <None Include="assets\lib\weather\images\medialoot\_ui\Free Weather Icons.ai" />
     <Content Include="services\PostAjaxData.ashx" />
+    <Content Include="config\systemsetting.config" />
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PM.Business\PM.Business.csproj">

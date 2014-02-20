@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using log4net;
 using PM.Common;
+using PM.Config;
 
 namespace PM.Web.services {
     /// <summary>
@@ -192,6 +193,21 @@ namespace PM.Web.services {
            string result = JsonConvert.SerializeObject(paramInfo);
            return result;
         }
+
+        public string GetSystemItemInfo(HttpContext context) {
+            string code = context.Request["code"] == null ? "" : context.Request["code"];
+            SystemInfo systemInfo = SystemConfigs.GetConfig();
+            SystemItemInfoConllection items = systemInfo.SystemItemInfoCollection;
+            foreach (var item in items) {
+                if (item.Code == code) {
+                    return JsonConvert.SerializeObject(item);
+                
+                }
+            }
+            return null;
+        }
+
+
 
 
         public string GetMeasurementReport(HttpContext context) {

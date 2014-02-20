@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.IO;
 using PM.Common;
+using PM.Config;
 
 namespace PM.Web.services {
     /// <summary>
@@ -107,6 +108,23 @@ namespace PM.Web.services {
             }
             return ret.ToString();
         }
+
+        public string SaveSystemConfig(HttpContext context, Dictionary<string, object> dictionary) {
+
+            bool ret = false;
+            if (dictionary.ContainsKey("data")) {
+                SystemItemInfo systemItemInfo =   JsonConvert.DeserializeObject<SystemItemInfo>(dictionary["data"].ToString());
+                SystemInfo systemInfo = SystemConfigs.GetConfig();
+                if (systemInfo.SystemItemInfoCollection.Contains(systemItemInfo)) {
+                    systemInfo.SystemItemInfoCollection.Remove(systemItemInfo);
+                }
+                systemInfo.SystemItemInfoCollection.Add(systemItemInfo);
+                ret = SystemConfigs.SaveConfig(systemInfo);
+            }
+            
+            return ret.ToString();
+        }
+
 
         /// <summary>
         /// 删除计量点参量
