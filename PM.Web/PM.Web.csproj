@@ -195,9 +195,13 @@
     <Content Include="assets\lib\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
     <Content Include="assets\lib\cookies\jquery.cookie.js" />
     <Content Include="assets\lib\cookies\jquery.cookies.2.2.0.min.js" />
+    <Content Include="assets\lib\datagrid\DataGridUtils.js" />
+    <Content Include="assets\lib\datagrid\pagination.css" />
     <Content Include="assets\lib\highcharts\highcharts.js" />
     <Content Include="assets\lib\highcharts\highstock.js" />
     <Content Include="assets\lib\jquery.slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="assets\lib\knockout\knockout-3.0.0.debug.js" />
+    <Content Include="assets\lib\knockout\knockout-3.0.0.js" />
     <Content Include="assets\lib\My97DatePicker\calendar.js" />
     <Content Include="assets\lib\My97DatePicker\lang\en.js" />
     <Content Include="assets\lib\My97DatePicker\lang\zh-cn.js" />
