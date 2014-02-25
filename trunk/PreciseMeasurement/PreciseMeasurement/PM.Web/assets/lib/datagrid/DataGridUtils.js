@@ -2,39 +2,39 @@
 
 var CERP = window.CERP || {};
 
-CERP.Services = CERP.Services || {};
-CERP.Services.AjaxGetCall = function (fullUrl, callbackFunction) {
+PM.Services = PM.Services || {};
+PM.Services.AjaxGetCall = function (fullUrl, callbackFunction) {
     $.ajax({
         url: fullUrl,
         cache: false,
-        success: function (data) { callbackFunction(CERP.Utils.GetJson(data)); },
+        success: function (data) { callbackFunction(PM.Utils.GetJson(data)); },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("error :" + XMLHttpRequest.responseText);
             alert('There was an error in performing this operation.');
         }
     });
 };
-CERP.Services.AjaxPostCall = function (fullUrl, dataObj, callbackFunction) {
+PM.Services.AjaxPostCall = function (fullUrl, dataObj, callbackFunction) {
     $.ajax({
         url: fullUrl,
         cache: false,
         type: 'post',
         data : dataObj,
-        success: function (data) { callbackFunction(CERP.Utils.GetJson(data)); },
+        success: function (data) { callbackFunction(PM.Utils.GetJson(data)); },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("error :" + XMLHttpRequest.responseText);
             alert('There was an error in performing this operation.');
         }
     });
 };
-CERP.Services.AjaxJsonPostCall = function (fullUrl, dataObj, callbackFunction) {
+PM.Services.AjaxJsonPostCall = function (fullUrl, dataObj, callbackFunction) {
     $.ajax({
         type: 'post',
         url: fullUrl,
         data: JSON.stringify(dataObj),
         dataType: 'json',
         cache: false,
-        success: function (data) { callbackFunction(CERP.Utils.GetJson(data)); },
+        success: function (data) { callbackFunction(PM.Utils.GetJson(data)); },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("error :" + XMLHttpRequest.responseText);
             alert('There was an error in performing this operation.');
@@ -44,7 +44,7 @@ CERP.Services.AjaxJsonPostCall = function (fullUrl, dataObj, callbackFunction) {
 
 
 
-CERP.Services.NumericObservable = function (initialValue) {
+PM.Services.NumericObservable = function (initialValue) {
     var _actual = ko.observable(initialValue);
 
     var result = ko.dependentObservable({
@@ -62,7 +62,7 @@ CERP.Services.NumericObservable = function (initialValue) {
 
 
 
-CERP.DataGridAjax = (function () {
+PM.DataGridAjax = (function () {
     var getDataUrl = '';
     function DataGridAjax(url, size) {
         var self = this;
@@ -77,7 +77,7 @@ CERP.DataGridAjax = (function () {
             requestedPage: ko.observable(0),
             pageSizeOptions: [1,5, 10, 20, 30, 50, 100]
         };
-        self.PageSlide = ko.observable(2); //CERP.Services.NumericObservable(2);
+        self.PageSlide = ko.observable(2); //PM.Services.NumericObservable(2);
         self.DataRows = ko.observableArray();
         self.Pages = ko.observableArray();
         self.SelectedPageSizeOption = ko.observable(size);
@@ -111,12 +111,12 @@ CERP.DataGridAjax = (function () {
     };
     DataGridAjax.prototype.GetData = function () {
         var self = this;
-        CERP.Services.AjaxPostCall(getDataUrl, self.GridParams, $.proxy(self.OnGetDataDone, this));
+        PM.Services.AjaxPostCall(getDataUrl, self.GridParams, $.proxy(self.OnGetDataDone, this));
     };
     DataGridAjax.prototype.OnGetDataDone = function (data) {
         var self = this;
-        self.DataRows(CERP.Utils.GetJson(data.content));
-        self.GridParams.totalElements(CERP.Utils.GetJson(data.totalElements));
+        self.DataRows(PM.Utils.GetJson(data.content));
+        self.GridParams.totalElements(PM.Utils.GetJson(data.totalElements));
         var totalPages = Math.ceil(self.GridParams.totalElements() / self.GridParams.size());
         self.GridParams.totalPages(totalPages);
         self.GridParams.requestedPage(self.GridParams.number());
@@ -172,7 +172,7 @@ CERP.DataGridAjax = (function () {
     return DataGridAjax;
 })();
 
-CERP.DataGridBasic = (function () {
+PM.DataGridBasic = (function () {
     var getDataUrl = '';
     var allDataRows = new Array();
     function DataGridBasic(url, size) {
@@ -195,12 +195,12 @@ CERP.DataGridBasic = (function () {
     }
     DataGridBasic.prototype.GetData = function () {
         var self = this;
-        CERP.Services.AjaxPostCall(getDataUrl, '', $.proxy(self.OnGetDataDone, this));
+        PM.Services.AjaxPostCall(getDataUrl, '', $.proxy(self.OnGetDataDone, this));
     };
     DataGridBasic.prototype.OnGetDataDone = function (data) {
         var self = this;
-        allDataRows = CERP.Utils.GetJson(data.content);
-        self.GridParams.totalElements(CERP.Utils.GetJson(data.totalElements));
+        allDataRows = PM.Utils.GetJson(data.content);
+        self.GridParams.totalElements(PM.Utils.GetJson(data.totalElements));
         self.UpdateData();
     };
     DataGridBasic.prototype.UpdateData = function () {
@@ -295,8 +295,8 @@ CERP.DataGridBasic = (function () {
 })();
 
 
-CERP.Utils = CERP.Utils || {};
-CERP.Utils.GetJson = function (data) {
+PM.Utils = PM.Utils || {};
+PM.Utils.GetJson = function (data) {
     if (data == '' || data == 'undefined') return null;
     //return (JSON && JSON.parse(data) || $.parseJSON(data));
     return data;
