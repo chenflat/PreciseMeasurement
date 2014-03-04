@@ -46,7 +46,7 @@ namespace PM.Web.realtime
             }
             else
             {
-                Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate,"", type, pageindex, 12);
+                Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate,"", type,"", pageindex, 12);
                 result = javaScriptSerializer.Serialize(pagination);
 
                 result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");

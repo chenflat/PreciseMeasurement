@@ -28,7 +28,7 @@
         <ItemTemplate>
             <div id="<%# Eval("Pointnum") %>" title="<%# Eval("Description") %>" class="meter text-center" style="left:<%# Eval("X") %>px;top:<%# Eval("Y") %>px;" devicenum="<%# Eval("Devicenum") %>" cardnum="<%# Eval("Cardnum") %>" orgid="<%# Eval("Orgid") %>">
           
-            <span class="icon"> <br />
+            <span class="icon nomarl"> <br />
                 <span class="text"><%# Eval("Pointnum") %></span>
             </span>
              
@@ -72,7 +72,7 @@
        
         </ItemTemplate>
         </asp:Repeater>
-        <img src="../assets/img/systemrunchart.png" width="1100" alt="" />
+        <img src="../assets/img/systemrunchart.png" width="1100" alt="" id="structrueimg" />
     </div>
     </td>
     <td> <div class="swichbar" id="swichbar">>></div></td>

@@ -26,7 +26,8 @@
                      <asp:ListItem Value="4">四级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
-                
+                部门：<asp:DropDownList ID="ddlOrgId" runat="server"></asp:DropDownList>
+                 &nbsp;
                 <asp:Button ID="btnMonthQuery" runat="server" CssClass="btn btn-info" Text="月报查询" />
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="default.aspx" class="btn btn-info" >返回主报表</a>

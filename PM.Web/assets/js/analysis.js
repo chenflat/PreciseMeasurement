@@ -145,17 +145,25 @@ $(function () {
         if (settings.length == 0)
             return;
 
-        $.ajax({
-            type: "POST",
-            url: "HandlerAnalyzeSetting.ashx",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(settings),
-            success: function (data) {
-                $('#myModal').modal('hide')
-            },
-            error: OnFail
+        var data = JSON.stringify({ "funname": "SaveAnalyzeSetting", "data": JSON.stringify(settings) });
+        $.post('../../services/PostAjaxData.ashx', data, function (result) {
+            if (result == "True") {
+                $('#myModal').modal('hide');
+            }
         });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: "HandlerAnalyzeSetting.ashx",
+        //    contentType: "application/json; charset=utf-8",
+        //    dataType: "json",
+        //    data: JSON.stringify(settings),
+        //    success: function (data) {
+        //        $('#myModal').modal('hide')
+        //    },
+        //    error: OnFail
+        //});
     });
 
     //生成曲线
@@ -317,20 +325,37 @@ function GetChart(startdate, enddate, datetype) {
             seriesCounter++;
 
             if (seriesCounter == points.length) {
+
+
+                console.log(data_SwTemperature);
+                console.log(data_AiDensity);
+                console.log(data_AfFlowInstant);
+                console.log(data_SwPressure);
+
+                // set the allowed units for data grouping
+                var groupingUnits = [[
+                    'week',                         // unit name
+                    [1]                             // allowed multiples
+                ], [
+                    'month',
+                    [1, 2, 3, 4, 6]
+                ]];
+
+
                 //不同的参数创建不同的图表
                 $.each(params, function (index, obj) {
                     switch (obj.num) {
                         case "SW_Temperature":
-                            createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)');
+                            createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)', seriesCounter);
                             break;
                         case "AI_Density":
-                            createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)');
+                            createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)', seriesCounter);
                             break;
                         case "AF_FlowInstant":
-                            createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)');
+                            createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)', seriesCounter);
                             break;
                         case "SW_Pressure":
-                            createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)');
+                            createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)', seriesCounter);
                             break;
                         default:
                             break;
@@ -341,8 +366,11 @@ function GetChart(startdate, enddate, datetype) {
         });
     });
 
-    // create the chart when all data is loaded
-    function createChart(obj,series,ytitle,unit) {
+    /**
+    * 当所有数据全部加载完成后，动态创建图表
+    */
+    function createChart(obj,series,ytitle,unit,countParam) {
+
 
         console.log(obj.description);
         $("#charts").append("<div id='"+ obj.num +"'></div>");
@@ -366,12 +394,27 @@ function GetChart(startdate, enddate, datetype) {
                 borderWidth: 0
             },
             xAxis: {
+                events: {
+                    setExtremes: function(e) {
+                       $('#report').html('<b>Set extremes:</b> e.min: '+ Highcharts.dateFormat(null, e.min) +
+                             ' | e.max: '+ Highcharts.dateFormat(null, e.max) + ' | e.trigger: ' + e.trigger);
+                       console.log(countParam);
+                       // for (var k = 0; k < countParam; k++) {
+                            setTimeout(function () {
+                                Highcharts.charts[0].xAxis[0].setExtremes(e.min, e.max)
+                                Highcharts.charts[1].xAxis[0].setExtremes(e.min, e.max)
+                                Highcharts.charts[2].xAxis[0].setExtremes(e.min, e.max)
+                            }, 1);
+                      //  }
+                    }
+                },
                 tickPixelInterval: 240, //x轴上的间隔  
                 type: 'datetime', //定义x轴上日期的显示格式  
                 labels: {
                     formatter: function () {
                         var vDate = new Date(this.value);
                         var ret = ""
+                        //区分分钟和小时数据的日期格式
                         if (datetype == 'MINUTE') {
                             ret = vDate.getFullYear() + "-" + (vDate.getMonth() + 1) + "-" + vDate.getDate() + " " + vDate.getHours() + ":" + vDate.getMinutes();
                         } else {

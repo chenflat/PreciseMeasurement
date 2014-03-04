@@ -29,6 +29,7 @@
                      <asp:ListItem Value="4">四级</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
+                部门：<asp:DropDownList ID="ddlOrgId" runat="server" CssClass="orgid"></asp:DropDownList>
                 <button type="button" class="btn btn-info" id="btnQuery">查询</button>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                 <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>

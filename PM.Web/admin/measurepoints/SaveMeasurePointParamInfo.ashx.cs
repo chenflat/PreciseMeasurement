@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.IO;
 using PM.Entity;
+using Newtonsoft.Json;
 
 namespace PM.Web.admin.measurepoints {
     /// <summary>
@@ -20,10 +21,9 @@ namespace PM.Web.admin.measurepoints {
             var sr = new StreamReader(data.InputStream);
             var stream = sr.ReadToEnd();
 
-            var javaScriptSerializer = new JavaScriptSerializer();
-
             //反序列化
-            var measurePointParamInfo = javaScriptSerializer.Deserialize<MeasurePointParamInfo>(stream);
+            var measurePointParamInfo = JsonConvert.DeserializeObject<MeasurePointParamInfo>(stream);
+
 
             //更新设置
             bool ret = PM.Business.MeasurePoint.UpdateMeasurePointParam(measurePointParamInfo);

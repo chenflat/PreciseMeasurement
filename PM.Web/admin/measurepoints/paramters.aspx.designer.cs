@@ -58,15 +58,6 @@ namespace PM.Web.admin.measurepoints {
         protected global::System.Web.UI.WebControls.DropDownList ddlAbbreviation;
         
         /// <summary>
-        /// ddlIsMainParam 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlIsMainParam;
-        
-        /// <summary>
         /// ddlMeasureUnitId 控件。
         /// </summary>
         /// <remarks>
@@ -74,68 +65,5 @@ namespace PM.Web.admin.measurepoints {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMeasureUnitId;
-        
-        /// <summary>
-        /// ddlIsCalculate 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlIsCalculate;
-        
-        /// <summary>
-        /// ddlVisabled 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlVisabled;
-        
-        /// <summary>
-        /// txtDisplaysequence 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDisplaysequence;
-        
-        /// <summary>
-        /// txtUpperwarning 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUpperwarning;
-        
-        /// <summary>
-        /// txtUpperaction 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUpperaction;
-        
-        /// <summary>
-        /// txtLowerwarning 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLowerwarning;
-        
-        /// <summary>
-        /// txtLoweraction 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLoweraction;
     }
 }

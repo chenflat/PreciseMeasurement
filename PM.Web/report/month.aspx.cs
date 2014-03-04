@@ -27,7 +27,21 @@ namespace PM.Web.report
                     txtYear.Text = DateTime.Now.Year.ToString();
                 }
                 BindData();
+                BindDropDownList();
             }
+        }
+
+
+        /// <summary>
+        /// 绑定DropDownList数据源
+        /// </summary>
+        private void BindDropDownList() {
+            ddlOrgId.Items.Clear();
+            ddlOrgId.DataTextField = "DESCRIPTION";
+            ddlOrgId.DataValueField = "ORGID";
+            ddlOrgId.DataSource = Business.Organizations.GetOrganizationTreeList("└");
+            ddlOrgId.DataBind();
+            ddlOrgId.Items.Insert(0, new ListItem(""));
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -36,7 +50,7 @@ namespace PM.Web.report
             m_enddate = txtYear.Text.Trim() + "-12-31";
 
             string fileName = "计量月报表_" + DateTime.Now.ToString("yyyyMM");
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Month);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, ddlOrgId.SelectedValue,Entity.ReportType.Month);
 
 
             DateTime startDate = PM.Common.TypeConverter.ObjectToDateTime(m_startdate);
@@ -57,7 +71,7 @@ namespace PM.Web.report
             m_enddate = txtYear.Text.Trim() + "-12-31";
 
 
-            gvMonthReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Month);
+            gvMonthReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue,ddlOrgId.SelectedValue,Entity.ReportType.Month);
             gvMonthReport.DataBind();
 
         }

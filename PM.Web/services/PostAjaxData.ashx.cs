@@ -148,6 +148,25 @@ namespace PM.Web.services {
         }
 
 
+        /// <summary>
+        /// 保存分析设置
+        /// </summary>
+        /// <param name="context">上下文对象</param>
+        /// <param name="dictionary">要保存的数据对象</param>
+        /// <returns>true||false</returns>
+        public string SaveAnalyzeSetting(HttpContext context, Dictionary<string, object> dictionary) {
+            int count = 0;
+            if (dictionary.ContainsKey("data")) {
+                List<AnalyzeSettingInfo> list = JsonConvert.DeserializeObject<List<AnalyzeSettingInfo>>(dictionary["data"].ToString());
+                bool ret = PM.Business.AnalyzeSetting.SaveAnalyzeSettingList(list);
+                if (ret) count++;
+                    
+            }
+            return (count>0).ToString();
+        }
+
+
+
         private void OutputString(HttpContext context, string strReturn) {
             try {
                 try {

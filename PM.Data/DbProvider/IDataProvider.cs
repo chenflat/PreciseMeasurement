@@ -523,7 +523,7 @@ namespace PM.Data {
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string level, string type, int pageindex, int pagesize);
+        DataSet FindMeasurementByAllPoint(string startdate, string enddate, string level, string type,string orgid, int pageindex, int pagesize);
 
         /// <summary>
         /// 获取指定时间内的的测量数据
@@ -559,7 +559,7 @@ namespace PM.Data {
         /// <param name="level">等级</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        DataTable GetMeasurementReport(string startdate, string enddate, string level, ReportType reportType);
+        DataTable GetMeasurementReport(string startdate, string enddate, string level,string orgid, ReportType reportType);
 
 
         /// <summary>

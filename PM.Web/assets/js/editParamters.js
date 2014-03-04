@@ -16,6 +16,11 @@ $(function () {
         $("[id*=ddlPointNum]").attr("disabled", true);
         $("[id*=ddlMeasureUnitId]").attr("disabled", false);
 
+        $("#ddlIsMainParam").val("true");
+        $("#ddlIsCalculate").val("true");
+        $("#ddlVisabled").val("true");
+        $("#txtDisplaysequence").val("0");
+
         //显示编辑对话框
         $('#myModal').modal('show');
     });
@@ -56,20 +61,24 @@ $(function () {
         // console.log(row);
 
         //设置编辑值
-        $("[id*=txtUpperwarning]").val(convertFloat($("td", row).eq(2).html()));
-        $("[id*=txtLowerwarning]").val(convertFloat($("td", row).eq(3).html()));
-        $("[id*=txtUpperaction]").val(convertFloat($("td", row).eq(4).html()));
-        $("[id*=txtLoweraction]").val(convertFloat($("td", row).eq(5).html()));
         $("#measurepointparamuid").val(measurepointparamuid);
 
 
         $.getJSON('../../services/GetAjaxData.ashx', { "funname": "GetMeasurePointParam", "measurepointparamuid": measurepointparamuid }, function (data) {
 
+
+            //console.log(data);
+
+            $("#txtUpperwarning").val(data.Upperwarning);
+            $("#txtLowerwarning").val(data.Lowerwarning);
+            $("#txtUpperaction").val(data.Upperaction);
+            $("#txtLoweraction").val(data.Loweraction);
+
             $("[id*=ddlAbbreviation]").val(data.Abbreviation);
-            $("[id*=ddlIsMainParam]").val(data.IsMainParam);
-            $("[id*=ddlIsCalculate]").val(data.IsCalculate);
-            $("[id*=ddlVisabled]").val(data.Visabled);
-            $("[id*=txtDisplaysequence]").val(data.Displaysequence);
+            $("#ddlIsMainParam").val(data.IsMainParam.toString());
+            $("#ddlIsCalculate").val(data.IsCalculate.toString());
+            $("#ddlVisabled").val(data.Visabled.toString());
+            $("#txtDisplaysequence").val(data.Displaysequence.toString());
         });
 
 
@@ -100,18 +109,19 @@ $(function () {
         //定义变量并赋值
         var pointnum = $("[id*=ddlPointNum]").val();
         var measureunitid = $("[id*=ddlMeasureUnitId]").val();
-        var upperwarning = $("[id*=txtUpperwarning]").val();
-        var lowerwarning = $("[id*=txtLowerwarning]").val();
-        var upperaction = $("[id*=txtUupperaction]").val();
-        var loweraction = $("[id*=txtLoweraction]").val();
+        var upperwarning = $("#txtUpperwarning").val();
+        var lowerwarning = $("#txtLowerwarning").val();
+        var upperaction = $("#txtUpperaction").val();
+        var loweraction = $("#txtLoweraction").val();
         var Abbreviation = $("[id*=ddlAbbreviation]").val();
-        var IsMainParam = $("[id*=ddlIsMainParam]").val();
-        var IsCalculate = $("[id*=ddlIsCalculate]").val();
-        var Visabled = $("[id*=ddlVisabled]").val();
-        var Displaysequence = $("[id*=txtDisplaysequence]").val();
+        var IsMainParam = $("#ddlIsMainParam").val();
+        var IsCalculate = $("#ddlIsCalculate").val();
+        var Visabled = $("#ddlVisabled").val();
+        var Displaysequence = $("#txtDisplaysequence").val();
 
         var measurePointParamInfo = { "Measurepointparamuid": $("#measurepointparamuid").val(), "Pointnum": pointnum, "Measureunitid": measureunitid, "Lowerwarning": lowerwarning, "Loweraction": loweraction, "Upperwarning": upperwarning, "Upperaction": upperaction, "Abbreviation": Abbreviation, "IsMainParam": IsMainParam, "IsCalculate": IsCalculate, "Visabled": Visabled, "Displaysequence": Displaysequence };
 
+        //console.log(measurePointParamInfo);
 
         $.ajax({
             type: "POST",

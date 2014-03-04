@@ -71,10 +71,11 @@
                                 <label class="col-lg-5 text-right">
                                      作为主要参数显示?</label>
                                 <div class="col-lg-7">
-                                    <asp:DropDownList ID="ddlIsMainParam" runat="server" >
-                    <asp:ListItem Value="true">是</asp:ListItem>
-                    <asp:ListItem Value="false">否</asp:ListItem>
-                </asp:DropDownList>
+                                    
+                                    <select id="ddlIsMainParam">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>
                                 </div>
                             </div>
                             
@@ -95,28 +96,30 @@
                                 <label class="col-lg-5 text-right">
                                     是否参与运算?</label>
                                 <div class="col-lg-7">
-                                    <asp:DropDownList ID="ddlIsCalculate" runat="server">
-                    <asp:ListItem Value="true">是</asp:ListItem>
-                    <asp:ListItem Value="false">否</asp:ListItem>
-                </asp:DropDownList>
+                                    
+                                     <select id="ddlIsCalculate">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="col-lg-5 text-right">
                                     是否显示?</label>
                                 <div class="col-lg-7">
-                                   <asp:DropDownList ID="ddlVisabled" runat="server">
-                    <asp:ListItem Value="true">是</asp:ListItem>
-                    <asp:ListItem Value="false">否</asp:ListItem>
-                </asp:DropDownList>
+                                    <select id="ddlVisabled">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-5 text-right">
                                     显示顺序:</label>
                                 <div class="col-lg-7">
-                                    <asp:TextBox ID="txtDisplaysequence" runat="server"></asp:TextBox>
-                                </div>
+                                   
+                               <input type="text" id="txtDisplaysequence" />
+                                     </div>
                             </div>
                         </div>
                     </div>
@@ -126,14 +129,16 @@
                                 <label class="col-lg-5 text-right">
                                     运行上限:</label>
                                 <div class="col-lg-7">
-                                    <asp:TextBox ID="txtUpperwarning" runat="server"></asp:TextBox>
+                                    
+                                     <input type="text" id="txtUpperwarning" />
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="col-lg-5 text-right">
                                     故障上限:</label>
                                 <div class="col-lg-7">
-                                    <asp:TextBox ID="txtUpperaction" runat="server"></asp:TextBox>
+                                    
+                                    <input type="text" id="txtUpperaction" />
                                 </div>
                             </div>
                         </div>
@@ -142,14 +147,15 @@
                                 <label class="col-lg-5 text-right">
                                     运行下限:</label>
                                 <div class="col-lg-7">
-                                    <asp:TextBox ID="txtLowerwarning" runat="server"></asp:TextBox>
+                                    <input type="text" id="txtLowerwarning" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-5 text-right">
                                     故障下限:</label>
                                 <div class="col-lg-7">
-                                    <asp:TextBox ID="txtLoweraction" runat="server"></asp:TextBox>
+                                   
+                                    <input type="text" id="txtLoweraction" />
                                 </div>
                             </div>
                         </div>
