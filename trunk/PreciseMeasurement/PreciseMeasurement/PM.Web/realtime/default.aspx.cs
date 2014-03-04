@@ -23,10 +23,15 @@ namespace PM.Web.realtime
         public long measurepointid = -1;
         public MeasurePointInfo measurePointInfo = new MeasurePointInfo();
         private string m_type = "";
+
+        public List<OrganizationInfo> organizationInfoList;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                organizationInfoList = Organizations.GetOrganizationTreeList("");
+
                 m_type = PMRequest.GetString("type");
                 if (m_type == "") m_type = "steam";
                 measurepointid = PMRequest.GetInt("measurepointid", -1);

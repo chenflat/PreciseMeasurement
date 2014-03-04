@@ -127,7 +127,7 @@ namespace PM.Data.SqlServer
        /// <param name="pageindex">当前页</param>
        /// <param name="pagesize">每页显示数</param>
        /// <returns></returns>
-       public DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize)
+       public DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type,string orgid,int pageindex, int pagesize)
        {
            DbParameter[] parms = { 
                                  
@@ -135,6 +135,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
                                   DbHelper.MakeInParam("@Level", (DbType)SqlDbType.VarChar, 30, level),
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, type), 
+                                  DbHelper.MakeInParam("@OrgId", (DbType)SqlDbType.VarChar, 20, orgid), 
                                   DbHelper.MakeInParam("@PageIndex",(DbType)SqlDbType.Int,4,pageindex),
                                   DbHelper.MakeInParam("@PageSize",(DbType)SqlDbType.Int,4,pagesize),
                                   DbHelper.MakeOutParam("@RecordCount",(DbType)SqlDbType.Int,4)
@@ -215,13 +216,14 @@ namespace PM.Data.SqlServer
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-       public DataTable GetMeasurementReport(string startdate, string enddate,string level, ReportType reportType)
+       public DataTable GetMeasurementReport(string startdate, string enddate,string level,string orgid, ReportType reportType)
        {
            DbParameter[] parms = {                                
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
                                   DbHelper.MakeInParam("@Level", (DbType)SqlDbType.VarChar, 30, level), 
                                   DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 30, reportType.ToString()),
+                                  DbHelper.MakeInParam("@Orgid", (DbType)SqlDbType.VarChar, 20, orgid.ToString()),
                                   };
            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, "GetMeasurementReport", parms).Tables[0];
        }

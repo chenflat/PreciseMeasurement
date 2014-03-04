@@ -122,6 +122,9 @@ $(function () {
                     $slimResize;
         $self.slimScroll($data);
 
+        console.log($data);
+
+
       
         $(window).resize(function (e) {
             clearTimeout($slimResize);

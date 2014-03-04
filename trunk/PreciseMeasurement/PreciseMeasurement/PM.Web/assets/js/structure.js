@@ -6,6 +6,9 @@
 
 $(function () {
 
+
+
+
     $('#btnSave').button();
     $(".meter_content").draggable();
 
@@ -87,7 +90,24 @@ $(function () {
                     mstyle = " style='color:red;'";
 
                     $("#" + obj.Pointnum).find(".status").hide();
+
+                    $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('noconnection');
                 }
+
+
+                var lasttime = new Date(obj.Measuretime);
+                var currtime = new Date();
+
+                console.log("last:" + lasttime);
+                console.log("currtime:" + currtime);
+
+                var diff = (currtime - lasttime)/(1000*60);
+
+                if (diff > 1) {
+                    $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('fault');
+                }
+
+
                // console.log(mstyle);
                 content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"

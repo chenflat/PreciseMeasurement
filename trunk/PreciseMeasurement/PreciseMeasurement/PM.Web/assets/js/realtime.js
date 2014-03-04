@@ -21,6 +21,21 @@ $(function () {
         GetMeasurePointList($(this).val());
    });
 
+
+   $("#organizationlist a").click(function () {
+       var orgid = $(this).attr("id");
+       //console.log(orgid);
+
+       var url = "../services/GetAjaxData.ashx";
+       var params = { "funname": "GetMeasurePointList", "orgid": orgid };
+
+       $.getJSON(url, params, function (data) {
+           // console.log(data);
+           CreateMeasurePointTreeList(data);
+       });
+   });
+
+
    /**
    * 获取测量点列表
    * @param type 测点类型

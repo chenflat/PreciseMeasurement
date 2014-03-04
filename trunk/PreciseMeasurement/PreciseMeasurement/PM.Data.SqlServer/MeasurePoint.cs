@@ -247,7 +247,8 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LLPRIORITY", (DbType)SqlDbType.Int, 50, paramInfo.Llpriority),
                                   DbHelper.MakeInParam("@UPPERWARNING", (DbType)SqlDbType.Decimal, 4, paramInfo.Upperwarning),
                                   DbHelper.MakeInParam("@UPPERACTION", (DbType)SqlDbType.VarChar, 8, paramInfo.Upperaction),
-                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.VarChar, 8, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ULPRIORITY", (DbType)SqlDbType.Int, 4, paramInfo.Ulpriority),
                                   DbHelper.MakeInParam("@ABBREVIATION", (DbType)SqlDbType.VarChar, 8, paramInfo.Abbreviation),
                                   DbHelper.MakeInParam("@DISPLAYSEQUENCE", (DbType)SqlDbType.Int, 4, paramInfo.Displaysequence),
                                   DbHelper.MakeInParam("@ISCALCULATE", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsCalculate),
@@ -275,7 +276,8 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@LLPRIORITY", (DbType)SqlDbType.Int, 50, paramInfo.Llpriority),
                                   DbHelper.MakeInParam("@UPPERWARNING", (DbType)SqlDbType.Decimal, 4, paramInfo.Upperwarning),
                                   DbHelper.MakeInParam("@UPPERACTION", (DbType)SqlDbType.VarChar, 8, paramInfo.Upperaction),
-                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.Int, 4, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ULPMNUM", (DbType)SqlDbType.VarChar, 8, paramInfo.Ulpmnum),
+                                  DbHelper.MakeInParam("@ULPRIORITY", (DbType)SqlDbType.Int, 4, paramInfo.Ulpriority),
                                   DbHelper.MakeInParam("@ABBREVIATION", (DbType)SqlDbType.VarChar, 8, paramInfo.Abbreviation),
                                   DbHelper.MakeInParam("@DISPLAYSEQUENCE", (DbType)SqlDbType.Int, 4, paramInfo.Displaysequence),
                                   DbHelper.MakeInParam("@ISCALCULATE", (DbType)SqlDbType.TinyInt, 1, paramInfo.IsCalculate),
@@ -285,7 +287,7 @@ namespace PM.Data.SqlServer
             string commandText = string.Format("UPDATE [{0}MEASUREPOINTPARAM] SET "
                                 + "LOWERWARNING=@LOWERWARNING,[LOWERACTION]=@LOWERACTION,"
                                 + "[LLPMNUM]=@LLPMNUM,[LLPRIORITY]=@LLPRIORITY,[UPPERWARNING]=@UPPERWARNING,"
-                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM,[ABBREVIATION]=@ABBREVIATION,"
+                                + "[UPPERACTION]=@UPPERACTION,[ULPMNUM]=@ULPMNUM,[ABBREVIATION]=@ABBREVIATION,[ULPRIORITY]=@ULPRIORITY,"
                                 + "[DISPLAYSEQUENCE]=@DISPLAYSEQUENCE,[ISCALCULATE]=@ISCALCULATE,[VISABLED]=@VISABLED,"
                                 + "[ISMAINPARAM]=@ISMAINPARAM where MEASUREPOINTPARAMUID=@MEASUREPOINTPARAMUID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;

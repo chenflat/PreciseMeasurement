@@ -8,23 +8,23 @@ namespace PM.Entity
     public class MeasurePointParamInfo
     {
         private int measurepointparamuid =0;
-        private string pointnum;
-        private string pointname;
-        private string measureunitid;
-        private string measureunitname;
+        private string pointnum = "";
+        private string pointname = "";
+        private string measureunitid = "";
+        private string measureunitname = "";
         private decimal lowerwarning = 0;
         private decimal loweraction = 0;
-        private string llpmnum;
-        private int llpriority;
+        private string llpmnum = "";
+        private int llpriority = 0;
         private decimal upperwarning = 0;
         private decimal upperaction = 0;
-        private string ulpmnum;
-        private int ulpriority;
-        private string abbreviation;
-        private int displaysequence;
-        private bool isCalculate;
-        private bool visabled;
-        private bool isMainParam;
+        private string ulpmnum = "";
+        private int ulpriority = 0;
+        private string abbreviation = "";
+        private int displaysequence = 0;
+        private bool isCalculate = false;
+        private bool visabled = true;
+        private bool isMainParam = false;
 
 
         public int Measurepointparamuid { 

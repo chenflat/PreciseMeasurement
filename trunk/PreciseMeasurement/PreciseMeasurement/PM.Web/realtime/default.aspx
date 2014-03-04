@@ -49,7 +49,42 @@
               <a href="#" class="dropdown-toggle btn btn-sm btn-dark btn-icon" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
               <section class="dropdown-menu aside-xl animated fadeInUp">
           <section class="panel bg-white">
-           
+              <div id="organizationlist">
+                   <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-hover table-striped">
+            <tr>
+                <th width="20%">
+                    选择部门
+                </th>
+            </tr>
+            <%if (organizationInfoList != null)
+                      {
+                          foreach (PM.Entity.OrganizationInfo item in organizationInfoList)
+                          {
+                              string kg = "";
+                              for (int i = 1; i < item.Level; i++) {
+                                  kg += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                              }
+                              
+                    %>
+        <tr onmouseover="this.className='tdbgmouseover'; " onmouseout="this.className='tdbg'" class="tdbg">
+                        <td align="left">
+                           <%=kg %>
+                            <a id="<%=item.Orgid %>" href="#"><%=item.Description%></a>
+                        </td>
+                        
+                    </tr>
+                        <%}%>
+                    <%}
+                      else
+                      {%>
+                    <tr>
+                        <td>没有数据</td>
+                    </tr>
+                    <%} %>
+       
+        </table>
+
+              </div>
               <div class="form-group wrapper m-b-none">
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search">

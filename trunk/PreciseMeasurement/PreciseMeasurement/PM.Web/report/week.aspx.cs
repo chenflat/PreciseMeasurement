@@ -27,11 +27,22 @@ namespace PM.Web.report
                     weekstartdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 }
                 BindData();
+                BindDropDownList();
             }
 
         }
 
-        
+        /// <summary>
+        /// 绑定DropDownList数据源
+        /// </summary>
+        private void BindDropDownList() {
+            ddlOrgId.Items.Clear();
+            ddlOrgId.DataTextField = "DESCRIPTION";
+            ddlOrgId.DataValueField = "ORGID";
+            ddlOrgId.DataSource = Business.Organizations.GetOrganizationTreeList("└");
+            ddlOrgId.DataBind();
+            ddlOrgId.Items.Insert(0, new ListItem(""));
+        }
 
         private void btnWeekQuery_Click(object sender, EventArgs e)
         {
@@ -46,7 +57,7 @@ namespace PM.Web.report
             int days = weeks * 7;
             m_startdate = DateTime.Parse(m_enddate).AddDays(-days).ToString("yyyy-MM-dd");
 
-            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Week);
+            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, ddlOrgId.SelectedValue, Entity.ReportType.Week);
             gvReport.DataBind();
         }
 
@@ -59,7 +70,7 @@ namespace PM.Web.report
 
             string fileName = "计量周报表_" + DateTime.Now.ToString("yyyyMMdd");
 
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, Entity.ReportType.Week);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue,ddlOrgId.SelectedValue, Entity.ReportType.Week);
             ExcelHelper.CreateExcel(table, fileName);
         }
     }

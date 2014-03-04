@@ -31,6 +31,7 @@ namespace PM.Web.report
                 }
 
                 BindData();
+                BindDropDownList();
             }
         }
 
@@ -39,10 +40,23 @@ namespace PM.Web.report
             BindData();
         }
 
+
+        /// <summary>
+        /// 绑定DropDownList数据源
+        /// </summary>
+        private void BindDropDownList() {
+            ddlOrgId.Items.Clear();
+            ddlOrgId.DataTextField = "DESCRIPTION";
+            ddlOrgId.DataValueField = "ORGID";
+            ddlOrgId.DataSource = Business.Organizations.GetOrganizationTreeList("└");
+            ddlOrgId.DataBind();
+            ddlOrgId.Items.Insert(0, new ListItem(""));
+        }
+
         private void btnExport_Click(object sender, EventArgs e)
         {
             string fileName = "计量日报表_" + DateTime.Now.ToString("yyyyMMdd");
-            DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
+            DataTable table = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue,ddlOrgId.SelectedValue, Entity.ReportType.Day);
             //ExcelHelper.CreateExcel(table, fileName);
 
             DateTime startDate = PM.Common.TypeConverter.ObjectToDateTime(startdate.Text.Trim());
@@ -53,7 +67,7 @@ namespace PM.Web.report
 
         private void BindData() {
 
-            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue, Entity.ReportType.Day);
+            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue,ddlOrgId.SelectedValue, Entity.ReportType.Day);
             gvReport.DataBind();
 
         }

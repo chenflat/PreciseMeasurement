@@ -20,9 +20,23 @@ namespace PM.Web.report
             btnExport.Click += new EventHandler(btnExport_Click);
             if (!IsPostBack)
             {
+                BindDropDownList();
                 BindData();
             }
         }
+
+        /// <summary>
+        /// 绑定DropDownList数据源
+        /// </summary>
+        private void BindDropDownList() {
+            ddlOrgId.Items.Clear();
+            ddlOrgId.DataTextField = "DESCRIPTION";
+            ddlOrgId.DataValueField = "ORGID";
+            ddlOrgId.DataSource = Business.Organizations.GetOrganizationTreeList("└");
+            ddlOrgId.DataBind();
+            ddlOrgId.Items.Insert(0, new ListItem(""));
+        }
+
 
         private void BindData() {
 
@@ -56,7 +70,7 @@ namespace PM.Web.report
                 m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59";
             }
 
-            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate,m_level, "ALL", pageindex, pagesize).Tables[0];
+            DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate,m_level, "ALL",ddlOrgId.SelectedValue, pageindex, pagesize).Tables[0];
 
             return measurements;
         }

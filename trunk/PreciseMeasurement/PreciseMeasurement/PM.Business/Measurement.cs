@@ -109,13 +109,13 @@ namespace PM.Business
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static Pagination<MeasurementStatInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate,string level, string type, int pageindex, int pagesize)
+        public static Pagination<MeasurementStatInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate,string level, string type, string orgid,int pageindex, int pagesize)
         {
             Pagination<MeasurementStatInfo> pagination = new Pagination<MeasurementStatInfo>();
             DataSet ds = null;
             if (pointnum == "")
             {
-                ds = Data.Measurement.FindMeasurementByAllPoint(startdate, enddate,level, type, pageindex, pagesize);
+                ds = Data.Measurement.FindMeasurementByAllPoint(startdate, enddate,level, type,orgid, pageindex, pagesize);
             }
             else {
                 ds = Data.Measurement.FindMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, pagesize);
@@ -157,14 +157,14 @@ namespace PM.Business
         /// <param name="pageindex">当前页</param>
         /// <param name="pagesize">每页显示数</param>
         /// <returns></returns>
-        public static Pagination<MeasurementStatInfo> GetMeasurementByAllPoint(string startdate, string enddate, string type, int pageindex, int pagesize)
+        public static Pagination<MeasurementStatInfo> GetMeasurementByAllPoint(string startdate, string enddate, string type,string orgid, int pageindex, int pagesize)
         {
-            return GetMeasurementByPointnum("", startdate, enddate,"", type, pageindex, pagesize);
+            return GetMeasurementByPointnum("", startdate, enddate,"", type,orgid, pageindex, pagesize);
 
         }
 
-        public static Pagination<MeasurementStatInfo> GetMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize) {
-            return GetMeasurementByPointnum("", startdate, enddate, level, type, pageindex, pagesize);
+        public static Pagination<MeasurementStatInfo> GetMeasurementByAllPoint(string startdate, string enddate,string level, string type, string orgid,int pageindex, int pagesize) {
+            return GetMeasurementByPointnum("", startdate, enddate, level, type,orgid, pageindex, pagesize);
         }
 
         public static Pagination<ReportDataInfo> GetReportData(string startdate, string enddate, string type, int pageindex, int pagesize) {

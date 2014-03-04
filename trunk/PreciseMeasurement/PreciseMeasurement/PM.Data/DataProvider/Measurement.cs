@@ -196,8 +196,8 @@ namespace PM.Data
         /// <param name="enddate">结束时间</param>
         /// <param name="reportType">查询方式</param>
         /// <returns></returns>
-        public static DataTable GetMeasurementReport(string startdate, string enddate,string level,ReportType reportType) {
-            return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate,level, reportType);
+        public static DataTable GetMeasurementReport(string startdate, string enddate,string level,string orgid,ReportType reportType) {
+            return DatabaseProvider.GetInstance().GetMeasurementReport(startdate, enddate,level,orgid, reportType);
         }
 
 
@@ -242,7 +242,20 @@ namespace PM.Data
         /// <returns></returns>
         public static DataSet FindMeasurementByAllPoint(string startdate, string enddate,string level, string type, int pageindex, int pagesize)
         {
-            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate,level, type, pageindex, pagesize);
+            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate,level, type,"", pageindex, pagesize);
+        }
+
+        /// <summary>
+        /// 获取指定时间内所有计量器的读表数据
+        /// </summary>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="enddate">结束时间</param>
+        /// <param name="type">查询方式： ALL全部 DAY日报 WEEK周报 MONTH月报 </param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">每页显示数</param>
+        /// <returns></returns>
+        public static DataSet FindMeasurementByAllPoint(string startdate, string enddate, string level, string type, string orgid,int pageindex, int pagesize) {
+            return DatabaseProvider.GetInstance().FindMeasurementByAllPoint(startdate, enddate, level, type,orgid, pageindex, pagesize);
         }
 
         /// <summary>
