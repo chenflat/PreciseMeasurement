@@ -150,7 +150,7 @@ namespace PM.Data.SqlServer
            dt.Rows.Add();
            dt.Rows[0]["PageIndex"] = pageindex;
            dt.Rows[0]["PageSize"] = pagesize;
-           dt.Rows[0]["RecordCount"] = TypeConverter.ObjectToInt(parms[6].Value);
+           dt.Rows[0]["RecordCount"] = TypeConverter.ObjectToInt(parms[7].Value);
            ds.Tables.Add(dt);
 
            return ds;
