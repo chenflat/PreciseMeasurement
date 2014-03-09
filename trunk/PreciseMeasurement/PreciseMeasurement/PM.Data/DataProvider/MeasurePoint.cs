@@ -198,12 +198,12 @@ namespace PM.Data
             paramInfo.PointName =  Utils.ContainsField(reader,"POINTNAME")? reader["POINTNAME"].ToString() : "";
             paramInfo.Measureunitid = reader["MEASUREUNITID"].ToString();
             paramInfo.MeasureUnitName = Utils.ContainsField(reader, "MEASUREUNITNAME") ? reader["MEASUREUNITNAME"].ToString() : "";  
-            paramInfo.Lowerwarning = reader.GetDecimal(reader.GetOrdinal("LOWERWARNING"));
-            paramInfo.Loweraction = reader.GetDecimal(reader.GetOrdinal("LOWERACTION"));
+            paramInfo.Lowerwarning =  reader.IsDBNull(reader.GetOrdinal("LOWERWARNING"))? 0 : reader.GetDecimal(reader.GetOrdinal("LOWERWARNING"));
+            paramInfo.Loweraction = reader.IsDBNull(reader.GetOrdinal("LOWERACTION")) ? 0 : reader.GetDecimal(reader.GetOrdinal("LOWERACTION"));
             paramInfo.Llpmnum = reader["LLPMNUM"].ToString();
             paramInfo.Llpriority = TypeConverter.ObjectToInt(reader["LLPRIORITY"]);
-            paramInfo.Upperwarning = reader.GetDecimal(reader.GetOrdinal("UPPERWARNING"));
-            paramInfo.Upperaction = reader.GetDecimal(reader.GetOrdinal("UPPERACTION"));
+            paramInfo.Upperwarning = reader.IsDBNull(reader.GetOrdinal("UPPERWARNING")) ? 0 : reader.GetDecimal(reader.GetOrdinal("UPPERWARNING"));
+            paramInfo.Upperaction = reader.IsDBNull(reader.GetOrdinal("UPPERACTION")) ? 0 : reader.GetDecimal(reader.GetOrdinal("UPPERACTION"));
             paramInfo.Ulpmnum = reader["ULPMNUM"].ToString();
             paramInfo.Ulpriority = TypeConverter.ObjectToInt(reader["ULPRIORITY"]);
             paramInfo.Abbreviation = reader["Abbreviation"].ToString();
