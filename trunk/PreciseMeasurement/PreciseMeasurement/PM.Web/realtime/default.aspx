@@ -46,8 +46,8 @@
                 </ul>
               </div>
               <%--<button type="button" class="btn btn-sm btn-dark btn-icon" title="Search"><i class="fa fa-fw fa-search"></i></button>--%>
-              <a href="#" class="dropdown-toggle btn btn-sm btn-dark btn-icon" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
-              <section class="dropdown-menu aside-xl animated fadeInUp">
+              <a href="#" class="dropdown-toggle btn btn-sm btn-dark btn-icon btnSeach" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
+              <section class="dropdown-menu aside-xl animated fadeInUp  seachbox">
           <section class="panel bg-white">
               <div id="organizationlist">
                    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="table table-bordered table-hover table-striped">
@@ -87,10 +87,13 @@
               </div>
               <div class="form-group wrapper m-b-none">
                 <div class="input-group">
+                <form class="navbar-search">
                   <input type="text" class="form-control" placeholder="Search">
                   <span class="input-group-btn">
                   <button type="button" class="btn btn-info btn-icon"><i class="fa fa-search"></i></button>
-                  </span> </div>
+                  </span> 
+                </form>
+                  </div>
               </div>
             
           </section>
@@ -104,14 +107,19 @@
 
           <section class="w-f scrollable">
             <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333"> <!-- nav -->
-   
            <nav class="nav-primary hidden-xs">
                 <ul class="nav nav-list bs-sidenav">
                     <%
+                        int k = 1;
                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                         { 
                     %>
-                    <li class="active">
+                    <li class="<% if (currentLevel==0 && k==1) 
+                                      Response.Write("active");
+                                  else {
+                                     if(currentLevel == k)
+                                      Response.Write("active");
+                                  } %>">
 
                     <a href="#"> <i class="fa fa-wrench"></i>
                     <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>
@@ -125,6 +133,7 @@
                         </ul>
                     </li>
                     <%
+                            k++;
                     }
                     %>
                    

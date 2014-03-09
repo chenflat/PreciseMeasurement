@@ -23,6 +23,8 @@ namespace PM.Web.realtime
         public long measurepointid = -1;
         public MeasurePointInfo measurePointInfo = new MeasurePointInfo();
         private string m_type = "";
+        //计量点不为空时，计量点所处层级，用于判断界面活动级别
+        public int currentLevel = 0;
 
         public List<OrganizationInfo> organizationInfoList;
 
@@ -32,8 +34,10 @@ namespace PM.Web.realtime
             {
                 organizationInfoList = Organizations.GetOrganizationTreeList("");
 
+                //系统类型
                 m_type = PMRequest.GetString("type");
                 if (m_type == "") m_type = "steam";
+                //计量点ID
                 measurepointid = PMRequest.GetInt("measurepointid", -1);
                 BindMeasurePointData();
                 if (measurepointid > 0) {
@@ -47,7 +51,8 @@ namespace PM.Web.realtime
                     HistoryData1.MeasurePointInfo = measurePointInfo;
                     AlarmData1.MeasurePointInfo = measurePointInfo;
                     AlarmData1.Orgid = orgid;
-                    
+
+                    currentLevel = measurePointInfo.Level;
                 }
 
             }
