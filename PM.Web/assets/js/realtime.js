@@ -2,6 +2,7 @@
 
 $(function () {
 
+
     //打开或关闭级别菜单
    $("label.tree-toggler").on('click',function(){
         $(this).parent().children('ul.tree').toggle(300);
