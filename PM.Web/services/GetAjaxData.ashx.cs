@@ -217,6 +217,7 @@ namespace PM.Web.services {
             string m_level = context.Request["level"] == null ? "" : context.Request["level"];
             string m_enddate = context.Request["enddate"];
             string m_type = context.Request["type"];
+            string m_orgid = context.Request["orgid"];
             int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
             bool m_iscustom = context.Request["iscustom"] == null ? false : Utils.StrToBool(context.Request["iscustom"], false);
 
@@ -247,7 +248,7 @@ namespace PM.Web.services {
             }
             else {
                 if (m_type == "All") {
-                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_level, m_type, pageindex, 12);
+                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_level, m_type, m_orgid, pageindex, 12);
                     result = JsonConvert.SerializeObject(pagination);   
                 }
                 else {

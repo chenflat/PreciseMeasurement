@@ -65,7 +65,7 @@
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="phWaterNav" runat="server">
         <ul id="steam_subnav" class="NavButtons ">
-                    <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/water.aspx") %>'">
+                    <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/default.aspx") %>'">
                         <div class="buttonBlowStandard buttonInSquare buttonComm">
                         </div>
                         系统结构</li>
@@ -86,7 +86,7 @@
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="phAirpressureNav" runat="server">
         <ul id="steam_subnav" class="NavButtons ">
-        <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/water.aspx") %>'">
+        <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/default.aspx") %>'">
             <div class="buttonBlowStandard buttonInSquare buttonComm">
             </div>
             系统结构</li>
@@ -107,7 +107,7 @@
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="phElectricityNav" runat="server">
         <ul id="steam_subnav" class="NavButtons ">
-        <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/water.aspx") %>'">
+        <li class="" onclick="window.location.href='<%=ResolveUrl("~/structure/default.aspx") %>'">
             <div class="buttonBlowStandard buttonInSquare buttonComm">
             </div>
             系统结构</li>

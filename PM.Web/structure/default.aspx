@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="系统结构" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="PM.Web.structure._default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/knockout/knockout-3.1.0.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure_realdata.js") %>"></script>
 <script>
     var USERID = "<%=userid %>";
     var ORGID = "<%=orgid %>";
@@ -77,7 +79,7 @@
     </td>
     <td> <div class="swichbar" id="swichbar">>></div></td>
     <td>
-    <div class="table-responsive" style="z-index:50; display:none;" id="realdata">
+    <div class="table-responsive scrollable" style="z-index:50; display:none;" id="realdata">
 
             <div class="alert alert-info">
             <span id="spanType1" style="overflow: hidden;">
@@ -92,6 +94,7 @@
             
             </div>
           
+        <div id="datalist">
         <table class="table table-bordered table-striped" id="gvRealtimeData">
         <thead>
             <tr>
@@ -102,10 +105,19 @@
                 <th>瞬时流量(t/h)</th>
             </tr>
         </thead>
-        <tbody>
-        
+        <tbody> 
         </tbody>
         </table>
+
+        <!-- data-bind="foreach: datarows().rows"
+            <tr >
+                <td  data-bind="text: pointnum"></td>
+                 <td  data-bind="text: measuretime"></td>
+                  <td  data-bind="text: SwPressure"></td>
+                   <td  data-bind="text: SwTemperature"></td>
+                    <td  data-bind="text: AfFlowinstant"></td>
+            </tr>-->
+            </div>
     </div>
     </td>
 </tr>
@@ -116,4 +128,20 @@
    
     
 </div>
+
+<script>
+(function() {
+   /* var type = $("input[name='carrier']:checked").val();
+        if (type == '') {
+            type = "steam";
+        }
+
+        var appModel = new ApplicationModel();
+        appModel.carrier = type;
+        ko.applyBindings(appModel);
+        appModel.connect();  */
+    
+})();
+</script>
+
 </asp:Content>
