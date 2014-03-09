@@ -111,6 +111,7 @@ namespace PM.Business
         /// <returns></returns>
         public static Pagination<MeasurementStatInfo> GetMeasurementByPointnum(string pointnum, string startdate, string enddate,string level, string type, string orgid,int pageindex, int pagesize)
         {
+
             Pagination<MeasurementStatInfo> pagination = new Pagination<MeasurementStatInfo>();
             DataSet ds = null;
             if (pointnum == "")

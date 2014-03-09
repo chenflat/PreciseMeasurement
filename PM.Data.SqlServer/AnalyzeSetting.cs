@@ -105,7 +105,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
                                   DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, tablename)
                                   };
-            string commandText = string.Format("select * from [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID and TABLENAME=@TABLENAME", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("select * from [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID and ISNULL(TABLENAME,'')=@TABLENAME", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
     }
