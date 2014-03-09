@@ -356,14 +356,16 @@ function getAllReportData(pageindex) {
     enddate = de.toString("yyyy-MM-dd 23:59:59");
     $.ajax({
         type: "GET",
-        url: "MeasurementReport.ashx",
+        url: "../services/GetAjaxData.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "startdate": startdate, "enddate": enddate, "level": level,"orgid":orgid, "pageindex": pageindex, "type": "All" },
+        data: { "funname": "GetMeasurementReport", "startdate": startdate, "enddate": enddate, "level": level,"orgid":orgid, "pageindex": pageindex, "type": "All" },
         success: OnSuccess,
         error: OnFail
     });
 }
+
+
 
 function OnFail(result) {
     console.log(result);

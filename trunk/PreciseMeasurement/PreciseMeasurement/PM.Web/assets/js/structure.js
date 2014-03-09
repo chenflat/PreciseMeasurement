@@ -3,18 +3,19 @@
  * @author: PING.CHEN
  * @version: 1.0 build20131121
  */
-
 $(function () {
 
+    //为数据列表添加滚动条
+    $('#datalist').slimScroll({
+        height: $("#structrueimg").height()
+    });
 
-
-
+    
     $('#btnSave').button();
+    //拖动区域
     $(".meter_content").draggable();
 
-    /**
-    * 点击记量点，动态显示当前数据的计量值
-    */
+    //点击记量点，动态显示当前数据的计量值
     $("#structure div").click(function () {
         //编辑时不弹出计量点信息
         if (window.dialogArguments) {
@@ -29,49 +30,54 @@ $(function () {
 
     });
 
+
     $("#structure .close").click(function () {
         $(this).parent().hide();
     });
 
     //刷新数据
     $("#refreshData").click(function () {
-
         getRealData();
     });
 
     /**
     * 关闭或显示时间数据表格
     */
-    $("#swichbar").click(function () {
-        $("#realdata").toggle(function () {
+    $("#swichbar").click(function() {
+        $("#realdata").toggle(function() {
             if ($("#realdata").css("display") == 'none') {
                 $("#swichbar").text('>>');
-                $("#refresh").css({ left: 1100 });
+                $("#refresh").css({
+                    left: 1100
+                });
             } else {
                 $("#swichbar").text('<<');
-                $("#refresh").css({ left: 750 });
+                $("#refresh").css({
+                    left: 750
+                });
             }
         });
     });
 
 
     //每60秒自动重新获取实时数据
-    setInterval(getRealData, 60000);
     getRealData()
+    setInterval(getRealData, 60000);
     counter();
 
     //获取设置类型
     function GetType() {
         var type = $("input[name='carrier']:checked").val();
-        if (type == '') { type = "steam"; }
+        if (type == '') {
+            type = "steam";
+        }
         return type;
     }
 
     //切换类型
-    $('input[name="carrier"]:radio').change(function () {
+    $('input[name="carrier"]:radio').change(function() {
         getRealData();
     });
-
     /**
     * 获取所有测点的实时数据
     */
@@ -82,6 +88,8 @@ $(function () {
         var content = "";
         //获取所有测点对应的实时数据
         $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetRealtimeMeasureValue", "carrier": carrier }, function (data) {
+
+   
             //设置计量点数值
             $.each(data, function (index, obj) {
                 var mstyle = "";
@@ -94,21 +102,18 @@ $(function () {
                     $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('noconnection');
                 }
 
-
                 var lasttime = new Date(obj.Measuretime);
                 var currtime = new Date();
 
-                console.log("last:" + lasttime);
-                console.log("currtime:" + currtime);
+                //console.log("last:" + lasttime);
+              //  console.log("currtime:" + currtime);
 
+                //当前时间和最后采集时间比较，如果相差为10，也就是10分钟内未采集数据，则设置当前计量器为故障状态
                 var diff = (currtime - lasttime)/(1000*60);
-
-                if (diff > 1) {
+                if (diff > 10) {
                     $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('fault');
                 }
 
-
-               // console.log(mstyle);
                 content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
                 content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
                 content += "<td>" + obj.SwPressure + "</td>"
@@ -128,6 +133,11 @@ $(function () {
             $("#gvRealtimeData tbody").append(content);
         });
     }
+
+
+    
+
+
 
 
     /**
@@ -154,21 +164,6 @@ $(function () {
             }
         });
 
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "../services/SaveMeasurePoint.ashx",
-        //            contentType: "application/json; charset=utf-8",
-        //            dataType: "json",
-        //            data: JSON.stringify(coordinates),
-        //            success: function (data) {
-        //                console.log(data);
-        //                alert("计量点位置保存成功，请关闭窗口!");
-        //            },
-        //            error: function (data) {
-        //                //console.log(response);
-        //            }
-        //        });
-
     });
 
 });
@@ -187,6 +182,10 @@ function counter() {
 }
 
 
+/**
+ * [计量点编辑]
+ * @return {[type]}
+ */
 $(window).load(function () {
 
     //计量点编辑

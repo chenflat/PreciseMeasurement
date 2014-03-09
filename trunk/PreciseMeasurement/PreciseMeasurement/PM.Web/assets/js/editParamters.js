@@ -109,19 +109,21 @@ $(function () {
         //定义变量并赋值
         var pointnum = $("[id*=ddlPointNum]").val();
         var measureunitid = $("[id*=ddlMeasureUnitId]").val();
-        var upperwarning = $("#txtUpperwarning").val();
-        var lowerwarning = $("#txtLowerwarning").val();
-        var upperaction = $("#txtUpperaction").val();
-        var loweraction = $("#txtLoweraction").val();
+        var upperwarning = $("#txtUpperwarning").val()==""? "0" : $("#txtUpperwarning").val();
+        var lowerwarning = $("#txtLowerwarning").val()==""? "0" : $("#txtLowerwarning").val();
+        var upperaction = $("#txtUpperaction").val()=="" ? 0 : $("#txtUpperaction").val();
+        var loweraction = $("#txtLoweraction").val()=="" ? 0 : $("#txtLoweraction").val();
         var Abbreviation = $("[id*=ddlAbbreviation]").val();
-        var IsMainParam = $("#ddlIsMainParam").val();
-        var IsCalculate = $("#ddlIsCalculate").val();
-        var Visabled = $("#ddlVisabled").val();
+        var IsMainParam = $("#ddlIsMainParam").val()=="" ? "true" : $("#ddlIsMainParam").val();
+        var IsCalculate = $("#ddlIsCalculate").val()=="" ? "true" : $("#ddlIsCalculate").val();
+        var Visabled = $("#ddlVisabled").val()=="" ? "true" : $("#ddlVisabled").val();
         var Displaysequence = $("#txtDisplaysequence").val();
+        if(Displaysequence=="" || Displaysequence==null)
+            Displaysequence = "0"
 
         var measurePointParamInfo = { "Measurepointparamuid": $("#measurepointparamuid").val(), "Pointnum": pointnum, "Measureunitid": measureunitid, "Lowerwarning": lowerwarning, "Loweraction": loweraction, "Upperwarning": upperwarning, "Upperaction": upperaction, "Abbreviation": Abbreviation, "IsMainParam": IsMainParam, "IsCalculate": IsCalculate, "Visabled": Visabled, "Displaysequence": Displaysequence };
 
-        //console.log(measurePointParamInfo);
+        console.log(measurePointParamInfo);
 
         $.ajax({
             type: "POST",
