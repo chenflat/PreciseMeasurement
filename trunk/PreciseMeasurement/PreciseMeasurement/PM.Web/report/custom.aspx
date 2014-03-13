@@ -51,12 +51,39 @@
                 
                 <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
-                <a href="default.aspx" class="btn btn-info" >返回主报表</a>
+               <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>
+                <a href="week.aspx" class="btn btn-info" id="btnWeekQuery">周报</a>
+                <a href="month.aspx" class="btn btn-info" id="btnMonthQuery">月报</a>
+                
+                  <a href="default.aspx" class="btn btn-info" >返回主报表</a>
                 
             </div>
         </div>
     </div>
     <div class="row">
+            <div class="col-md-2">
+            <div class="panel panel-default">
+              <div class="panel-heading">自定报表导航</div>
+              <div class="panel-body">       
+                <% foreach (var item in SettingList) { %>
+                    <div><a href="#" class="customQuery"> <%=item %></a>  <span class="pull-right">
+                    <a href="#" class="editSetting"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href="#" class="delSetting"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div> 
+                <%  } %>
+              </div>
+            </div>
+
+            </div>
+        <div class="col-md-10">
+
+            <div class="alert alert-info fade in">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>操作提示</h4>
+              <p>点击左侧导航菜单，生成对应的自定义报表.</p>
+             
+            </div>
+
         <table id="gvCustomReport" class="table table-bordered table-hover">
         <thead>
             <tr></tr>
@@ -65,6 +92,7 @@
         
         </tbody>
         </table>
+            </div>
     </div>
 
     <!-- Modal -->
@@ -91,7 +119,7 @@
                                      <ul class="nav bs-sidenav" style="margin:0px;">
                                     <%
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
-                                        { 
+                                      { 
                                     %>
                                     <li class="active"><a href="#">
                                         <%= pair.Key %></a>

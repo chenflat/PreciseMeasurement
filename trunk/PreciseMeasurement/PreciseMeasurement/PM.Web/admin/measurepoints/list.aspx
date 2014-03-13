@@ -14,6 +14,13 @@
             <asp:ListItem Value="electricity">电</asp:ListItem>
             <asp:ListItem Value="area">空气</asp:ListItem>
         </asp:DropDownList>
+        级别：<asp:DropDownList ID="ddlLevel" runat="server" CssClass="level">
+                     <asp:ListItem Value="">全部</asp:ListItem>
+                     <asp:ListItem Value="1">一级</asp:ListItem>
+                     <asp:ListItem Value="2">二级</asp:ListItem>
+                     <asp:ListItem Value="3">三级</asp:ListItem>
+                     <asp:ListItem Value="4">四级</asp:ListItem>
+                </asp:DropDownList>
         计量点名称：<asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
         <asp:Button ID="btnQuery" runat="server" CssClass="btn btn-primary" Text="查询" />
         <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="导出" />

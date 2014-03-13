@@ -88,7 +88,10 @@ namespace PM.Web.admin.measurepoints
                 condition += string.Format(" and {0}MEASUREPOINT.CARRIER='{1}'",
                     BaseConfigs.GetTablePrefix, ddlCarrier.SelectedValue);
             }
-
+            if (ddlLevel.SelectedValue.Length>0 && ddlLevel.SelectedValue!="") {
+                condition += string.Format(" and {0}MEASUREPOINT.level='{1}'",
+                    BaseConfigs.GetTablePrefix, ddlLevel.SelectedValue);
+            }
             BindData();
             
         }
