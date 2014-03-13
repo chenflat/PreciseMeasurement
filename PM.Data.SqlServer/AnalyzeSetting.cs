@@ -82,12 +82,14 @@ namespace PM.Data.SqlServer
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
         public bool DeleteAnalyzeSettingInfoByUser(int userid, string orgid,string tablename) {
+            if (tablename == null)
+                tablename = "";
             DbParameter[] parms = { 
                                   DbHelper.MakeInParam("@USERID", (DbType)SqlDbType.Int, 4, userid),
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
                                   DbHelper.MakeInParam("@TABLENAME", (DbType)SqlDbType.VarChar, 50, tablename)
                                   };
-            string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND [ORGID]=@ORGID and TABLENAME=@TABLENAME", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("DELETE FROM [{0}ANALYZESETTING] WHERE [USERID]=@USERID AND isnull([ORGID],'')=@ORGID and isnull(TABLENAME,'')=@TABLENAME", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) > 0;
         }
 
