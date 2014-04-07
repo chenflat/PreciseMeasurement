@@ -40,7 +40,7 @@
                  &nbsp;
                      <asp:Button ID="btnWeekQuery" runat="server" CssClass="btn btn-info" Text="周报查询" />
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
-                <a href="default.aspx" class="btn btn-info" >返回主报表</a>
+                <a href="custom.aspx" class="btn btn-info" >返回主报表</a>
             </div>
         </div>
     </div>

@@ -33,7 +33,7 @@
                 <button type="button" class="btn btn-info" id="btnQuery">查询</button>
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" />
                
-                <a href="custom.aspx" class="btn btn-danger" id="btnCustomReport">自定义报表</a>
+                <a href="custom.aspx" class="btn btn-danger" id="btnCustomReport">报表统计</a>
                 
             </div>
         </div>
@@ -49,9 +49,9 @@
                         <%# PM.Common.Utils.ConvertToRoma(PM.Common.Utils.StrToInt(Eval("LEVEL"),0))%> 级
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="起始时间" />
+                <asp:BoundField DataField="STARTTIME" DataFormatString="{0:yyyy-MM-dd hh:mm}" HeaderText="起始时间" />
                 <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
-                 <asp:BoundField DataField="ENDTIME" DataFormatString="{0:yyyy-MM-dd}" HeaderText="截止时间" />
+                 <asp:BoundField DataField="ENDTIME" DataFormatString="{0:yyyy-MM-dd hh:mm}" HeaderText="截止时间" />
                 <asp:BoundField DataField="LASTVALUE" HeaderText="终止表数(t)" />
                 <asp:BoundField DataField="VALUE" HeaderText="日用量(t)" />
             
