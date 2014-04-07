@@ -5,6 +5,7 @@ using PM.Entity;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using PM.Common;
+using Newtonsoft.Json;
 
 
 namespace PM.Web.services
@@ -38,9 +39,11 @@ namespace PM.Web.services
             string result = "";
 
             Pagination<AlarmlogInfo> pagination = PM.Business.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate, m_pointnum, m_status, orgid, m_pageindex, m_pagesize);
-            result = javaScriptSerializer.Serialize(pagination);
+            //result = javaScriptSerializer.Serialize(pagination);
 
-            result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
+            result= JsonConvert.SerializeObject(pagination);
+
+            //result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
             context.Response.Write(result);
 
 
