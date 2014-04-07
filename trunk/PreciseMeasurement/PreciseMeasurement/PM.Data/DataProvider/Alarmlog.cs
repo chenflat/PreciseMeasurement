@@ -55,6 +55,7 @@ namespace PM.Data
             alarmlogInfo.Reviewtime = TypeConverter.ObjectToDateTime(reader["REVIEWTIME"]);
             alarmlogInfo.Reviewcontent = reader["REVIEWCONTENT"].ToString();
             alarmlogInfo.Reviewer = reader["REVIEWER"].ToString();
+            alarmlogInfo.Measureunitname = reader["MEASUREUNITNAME"].ToString();
 
             alarmlogInfo.Status = reader.IsDBNull(reader.GetOrdinal("STATUS")) ? 0 : reader.GetInt32(reader.GetOrdinal("STATUS"));
             alarmlogInfo.Orgid = reader["ORGID"].ToString();
