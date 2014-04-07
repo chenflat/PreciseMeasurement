@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Data;
 using PM.Entity;
@@ -7,6 +8,7 @@ using PM.Data;
 using PM.Common;
 using PM.Config;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace PM.Business
 {
@@ -391,9 +393,138 @@ namespace PM.Business
 
         }
 
+        /// <summary>
+        /// 获取自定义报表数据
+        /// </summary>
+        /// <param name="settings">自定义报表设置列表</param>
+        /// <param name="startdate">统计开始日期</param>
+        /// <param name="enddate">统计结束日期</param>
+        /// <param name="reporttype">报表类型</param>
+        /// <returns></returns>
+        public static Dictionary<string, List<MeasurementStatInfo>> GetCustomReportData(List<ReportSettingInfo> settings, string startdate, string enddate, ReportType type, out bool success) {
 
 
+            //正则表达式匹配公式中的测点编号(字母+数字)
+            const string FormulaItemPattern = @"[a-z][0-9]";
+            //保存公式中涉及到的测点
+            List<string> listPointnum = new List<string>();
+            //保存测点对应的测量值
+            Dictionary<string, List<MeasurementStatInfo>> measurements = new Dictionary<string, List<MeasurementStatInfo>>();
 
+            //自定义结果
+            Dictionary<string, List<MeasurementStatInfo>> results = new Dictionary<string, List<MeasurementStatInfo>>();
+
+            //利用COM组件实现计量
+            MSScriptControl.ScriptControl sc = new MSScriptControl.ScriptControlClass();
+            sc.Language = "JavaScript";
+
+
+            //迭代自定义设置，取出每一项设置的公式
+            for (int i = 0; i < settings.Count; i++) {
+                ReportSettingInfo setting = (ReportSettingInfo)settings[i];
+                string pointnum = setting.Pointnum; //测点
+                string formula = setting.Formula; //公式
+                //获取公式中对应测点的结果
+                foreach (Match match in new Regex(FormulaItemPattern,RegexOptions.IgnoreCase).Matches(formula)) {
+
+                    var item = match.Groups[0].ToString();
+                    //判断列表中是否存在计量点
+                    bool isexist = listPointnum.Exists(delegate(string s) {
+                        return s == item;
+                    });
+                    if (!isexist) {
+                        listPointnum.Add(item);
+                    }
+                    
+                }
+            }
+
+
+            //获取每个测点的计量值
+            foreach (string pointnum in listPointnum) {
+                Pagination<MeasurementStatInfo> measurementInfo = GetMeasurementByPointnum(pointnum, startdate, enddate, "0",type.ToString(),"", 1, 3600);
+                List<MeasurementStatInfo> pointMeasurements = measurementInfo.List;
+                measurements.Add(pointnum, pointMeasurements);
+            }
+
+
+            //计量时间差值
+            DateTime dtStarttime = DateTime.Parse(startdate);
+            DateTime dtEndtime = DateTime.Parse(enddate);
+            TimeSpan diffDate = dtEndtime.Subtract(dtStarttime);
+            //计算TimeSpan差值
+            double totalHours = diffDate.TotalHours;
+            double totalDays = diffDate.TotalDays;
+            double totalMonth = dtStarttime.Month - dtEndtime.Month;
+
+
+            //迭代自定义设置，替换公式中的测点为具体的数值并运行公式计算
+            foreach (ReportSettingInfo setting in settings) {
+
+                string formula = setting.Formula;
+                //日期列表
+                List<string> statDateList = new List<string>();
+
+                //按报表类型构建查询日期列表
+                string dateformat = "";
+                if (type == ReportType.Hour) {
+                    dateformat = "yyyy-MM-dd HH";
+                    for (int h = 0; h < totalHours; h++) {
+                        DateTime dh = dtStarttime.AddHours(h);
+                        statDateList.Add(dh.ToString(dateformat));
+                    }
+                } else if (type == ReportType.Day) {
+                    dateformat = "yyyy-MM-dd";
+                    for (int d = 0; d < totalDays; d++) {
+                        DateTime dd = dtStarttime.AddDays(d);
+                        statDateList.Add(dd.ToString(dateformat));
+                    }
+                } else if (type == ReportType.Month) {
+                    dateformat = "yyyy-MM";
+                    for (int m = 0; m <= totalMonth; m++) {
+                        DateTime dd = dtStarttime.AddMonths(m);
+                        statDateList.Add(dd.ToString(dateformat));
+                    }
+                }
+
+                //每项自定义设置的计量值列表
+                List<MeasurementStatInfo> retStatInfoList = new List<MeasurementStatInfo>();
+                foreach (var rowDate in statDateList) {
+                    //替换公式
+                    foreach (var pointnum in listPointnum)
+	                {
+                        if (measurements[pointnum].Exists(x => x.Measuretime.ToString(dateformat) == rowDate)) {
+                            formula = formula.Replace(pointnum, measurements[pointnum].Find(x => x.Measuretime.ToString(dateformat) == rowDate).Value.ToString());
+                        } else {
+                            formula = "0";
+                        }
+	                }
+
+                    //dom方式计算公式值
+                    decimal value = 1;
+                    try {
+                        value = decimal.Round(decimal.Parse(sc.Eval(formula).ToString()),3);
+
+                    } catch (Exception ex) {
+                        success = false;
+                        throw ex;
+                    }
+                  
+                    //设置对象
+                    MeasurementStatInfo statInfo = new MeasurementStatInfo(DateTime.Parse(rowDate));
+                    statInfo.Value = value;
+                    retStatInfoList.Add(statInfo);
+                }
+                results.Add(setting.Description, retStatInfoList);
+            }
+            success = true;
+           
+          //  string tmp = sc.Eval("((2*3)-5+(3*4))+6/2").ToString();
+
+
+            return results;
+        }
+       
 
     }
 }
