@@ -481,6 +481,7 @@ namespace PM.Data {
         /// <returns></returns>
         IDataReader GetLastMeasureValueByAllPoint(string carrier);
 
+        IDataReader GetLastMeasureValueByAllPoint();
 
 
         /// <summary>

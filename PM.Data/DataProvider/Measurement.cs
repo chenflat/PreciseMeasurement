@@ -57,6 +57,15 @@ namespace PM.Data
         /// <summary>
         /// 获取所有测点的最后测量值
         /// </summary>
+        /// <param name="carrier">携能载体</param>
+        /// <returns></returns>
+        public static IDataReader GetLastMeasureValueByAllPoint() {
+            return DatabaseProvider.GetInstance().GetLastMeasureValueByAllPoint();
+        }
+
+        /// <summary>
+        /// 获取所有测点的最后测量值
+        /// </summary>
         /// <param name="carrier"></param>
         /// <returns></returns>
         public static List<MeasurementInfo> GetLastMeasureValueList(string carrier) {
@@ -70,6 +79,24 @@ namespace PM.Data
             }
             return list;
         }
+
+        /// <summary>
+        /// 获取所有测点的最后测量值
+        /// </summary>
+        /// <param name="carrier"></param>
+        /// <returns></returns>
+        public static List<MeasurementInfo> GetLastMeasureValueList() {
+            List<MeasurementInfo> list = new List<MeasurementInfo>();
+            using (IDataReader reader = GetLastMeasureValueByAllPoint()) {
+                while (reader.Read()) {
+                    MeasurementInfo measurementInfo = LoadMeasurementInfo(reader);
+                    list.Add(measurementInfo);
+                }
+                reader.Close();
+            }
+            return list;
+        }
+
 
         /// <summary>
         /// 获取指定计量器的第一条记录值
