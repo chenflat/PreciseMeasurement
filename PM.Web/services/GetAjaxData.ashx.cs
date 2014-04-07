@@ -86,11 +86,13 @@ namespace PM.Web.services {
                     List<MeasurementInfo> list = PM.Data.Measurement.GetLastMeasureValueList(carrier);
                     ret = JsonConvert.SerializeObject(list);
 
-                } else if (pointnum!="") {
+                } else if (pointnum != "") {
 
                     MeasurementInfo measurementInfo = PM.Data.Measurement.GetLastMeasurement(pointnum);
                     ret = JsonConvert.SerializeObject(measurementInfo);
-
+                } else {
+                    List<MeasurementInfo> list = PM.Data.Measurement.GetLastMeasureValueList();
+                    ret = JsonConvert.SerializeObject(list);
                 }
             }
             catch (Exception ex)  {
@@ -182,6 +184,85 @@ namespace PM.Web.services {
 
         }
 
+
+        /// <summary>
+        /// 获取自定义报表结果
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string GetCustomReportResult(HttpContext context) {
+            int m_userid = PM.Common.Utils.StrToInt(context.Request["userid"].ToString(), 0);
+            string m_orgid = context.Request["orgid"].ToString();
+            string m_settingname = context.Request["settingname"].ToString();
+            string m_startdate = context.Request["startdate"].ToString();
+            string m_enddate = context.Request["enddate"].ToString();
+            string m_type = context.Request["type"].ToString();
+
+            ReportType type;
+            type = (ReportType)Enum.Parse(typeof(ReportType), m_type);
+
+
+
+            //报表设置列表
+            List<ReportSettingInfo> list = PM.Business.ReportSetting.GetReportSettingByUserId(m_settingname, m_userid, m_orgid);
+
+            Dictionary<string, List<MeasurementStatInfo>> dic = new Dictionary<string, List<MeasurementStatInfo>>();
+            bool success = true;
+            dic = PM.Business.Measurement.GetCustomReportData(list, m_startdate, m_enddate, type,out success);
+
+            DataTable table = new DataTable();
+            table.Columns.Add("统计日期");
+            foreach (var item in dic.Keys) {
+                table.Columns.Add(item);
+            }
+
+            DataRow row;
+
+            string dateformat = "";
+            if (type == ReportType.Hour) {
+                dateformat = "yyyy-MM-dd HH";
+            } else if (type == ReportType.Day) {
+                dateformat = "yyyy-MM-dd";
+
+            } else if (type == ReportType.Month) {
+                dateformat = "yyyy-MM";
+
+            }
+            List<string> datelist = new List<string>();
+
+            int i = 0;
+            foreach (KeyValuePair<string, List<MeasurementStatInfo>> pair in dic) {
+                if (i == 0) {
+                    List<MeasurementStatInfo> values = pair.Value;
+                    foreach (var item in values) {
+                        datelist.Add(item.Measuretime.ToString(dateformat));
+                    }
+                }
+                i++;
+            }
+
+            foreach (var curDaste in datelist) {
+                row = table.NewRow();
+                row["统计日期"] = curDaste;
+                foreach (KeyValuePair<string, List<MeasurementStatInfo>> pair in dic) {
+                    foreach (var item in pair.Value) {
+                        if (item.Measuretime.ToString(dateformat) == curDaste) {
+                            row[pair.Key] = item.Value;
+                        }
+                    }
+                }
+                table.Rows.Add(row);
+            }
+
+
+
+
+            string result = JsonConvert.SerializeObject(table);
+
+           
+            return result;
+        }
+
         /// <summary>
         /// 获取计量参量信息
         /// </summary>
@@ -221,11 +302,10 @@ namespace PM.Web.services {
             int pageindex = Utils.StrToInt(context.Request["pageindex"], 1);
             bool m_iscustom = context.Request["iscustom"] == null ? false : Utils.StrToBool(context.Request["iscustom"], false);
 
-            ReportType type;
-
             if (m_enddate == null || m_enddate == "")
                 m_enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
+            ReportType type;
             type = (ReportType)Enum.Parse(typeof(ReportType), m_type);
 
             
