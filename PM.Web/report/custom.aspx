@@ -20,42 +20,24 @@
                 <label for="enddate" class="endzone">
                 &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
 
-                设置列表：
-                <select id="settingNameList">
-                     <% foreach (var item in SettingList) {
-                        %>
-                     <option><%=item %></option> 
-                        <% 
-                     } %>
-                
-                </select>
-
-               
-                  <asp:HiddenField ID="hdnSettingName" runat="server" />
-                <button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>
+                 
                 
                 &nbsp;
                 <div class="btn-group">
                 <button type="button" class="btn btn-danger" id="CreateSetting">自定义设置</button>
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" id="SettingNameList">
-                  <% foreach (var item in SettingList) {
-                        %>
-                        <li><a href="#"><%=item %></a></li>
-                        <% 
-                     } %>
-                </ul>
               </div>
 
               
                 
                 <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
-                <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
+                
                <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>
                 <a href="week.aspx" class="btn btn-info" id="btnWeekQuery">周报</a>
                 <a href="month.aspx" class="btn btn-info" id="btnMonthQuery">月报</a>
-                
-                  <a href="default.aspx" class="btn btn-info" >返回主报表</a>
+                <button type="button" class="btn btn-info" id="btnCustomQuery">数据运算</button>
+                <input type="hidden" name="hdnSettingName" id="hdnSettingName">
+                <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
+                  <a href="default.aspx" class="btn btn-info" >返回</a>
                 
             </div>
         </div>
@@ -64,11 +46,12 @@
             <div class="col-md-2">
             <div class="panel panel-default">
               <div class="panel-heading">自定报表导航</div>
-              <div class="panel-body">       
+              <div class="panel-body" id="SettingNameList">       
                 <% foreach (var item in SettingList) { %>
-                    <div><a href="#" class="customQuery"> <%=item %></a>  <span class="pull-right">
-                    <a href="#" class="editSetting"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a href="#" class="delSetting"><i class="glyphicon glyphicon-remove"></i></a>
+                    <div class="settingitem"><a href="#" class="rowQuery" itemname="<%=item %>" title="点击标题执行运算"> <%=item %></a>  <span class="pull-right">
+
+                    <a href="#" class="editSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href="#" class="delSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-remove"></i></a>
                     </div> 
                 <%  } %>
               </div>
@@ -85,6 +68,7 @@
             </div>
 
         <table id="gvCustomReport" class="table table-bordered table-hover">
+            <caption id="caption"></caption>
         <thead>
             <tr></tr>
         </thead>
@@ -109,14 +93,44 @@
                 <div class="modal-body">
                     <div id="message"></div>
                     <div class="row">
-                    <div class="col-md-6">
-                           <div class="panel panel-default">
+                    <div class="col-md-4">
+
+                           <div class="panel panel-default clearfix ">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         1、选择计量点</h3>
                                 </div>
                                 <div class="panel-body bs-sidebar">
-                                     <ul class="nav bs-sidenav" style="margin:0px;">
+                                    <div class="panel-group" id="accordion">
+                                        <!--分级显示-->
+                                        <%
+                                            int k = 0;
+                                            foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList) { 
+                                        %>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%=k %>">
+                                                        <%= pair.Key %></a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse_<%=k %>" class="panel-collapse collapse <% if (k == 0) Response.Write("in"); %>">
+                                                <div class="panel-body"><ul class="nav measurepoint-list">
+                                                    <% foreach (PM.Entity.MeasurePointInfo point in pair.Value) {%>
+                                                    <li id="<%=point.Pointnum %>"><a href="#">[<%=point.Pointnum %>] <%=point.Description%></a></li>
+                                                    <% } %></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%
+                                                k++;
+                                            }
+                                        %>
+                                    </div>
+
+
+                                    <%-- <ul class="nav bs-sidenav" style="margin:0px;">
                                     <%
                                         foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
                                       { 
@@ -134,31 +148,70 @@
                                     }
                                     %>
                    
-                                </ul>
+                                </ul>--%>
                                 </div>
                             </div></div>
                        
-                        
-                        <div class="col-md-6">
-                             <div class="panel panel-default">
+                            <div class="col-md-8">
+                               <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         2、设置参数</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="settingname">
-                                    设置名称：<input type="text" id="SettingName" />
-                                    <input type="hidden" name="IsItemFormula" id="IsItemFormula" value="true" />
                                     </div>
-                                    <div class="sel-points">
-                                    选择的计量点
-                                    <ul id="container-measurepoints">
-                                    
-                                    </ul>
+                                    <div class="panel-body">
+                                        <div class="settingname">
+                                           <strong>设置名称：</strong><input type="text" id="SettingName" /> *
+                                            <input type="hidden" name="IsItemFormula" id="IsItemFormula" value="true" />
+                                            <input type="hidden" name="action" id="action" value="create" />
+                                        </div>
+                                        <div class="sel-points setting">
+                                            <strong>选择的计量点</strong>
+                                            <ul id="container-measurepoints" class="customlist">
+
+                                            </ul>
+                                        </div>
+                                        <div class="operators" style="display:none;z-index:210000; position:absolute;">
+                                            <strong>可用运算符号</strong>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default" title="加">+</button>
+                                                    <button type="button" class="btn btn-default" title="减">-</button>
+                                                    <button type="button" class="btn btn-default" title="乘">×</button>
+                                                    <button type="button" class="btn btn-default" title="除">/</button>
+                                                    <button type="button" class="btn btn-default" title="左括符">(</button>
+                                                    <button type="button" class="btn btn-default" title="左括符">)</button>
+                                                    <button type="button" class="btn btn-default" title="小数点">.</button>
+                                                    <button type="button" class="btn btn-default" title="百分比">%</button>
+                                                    <button type="button" class="btn btn-default" title="And">|</button>
+                                                </div>
+                                            </div>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default">0</button>
+                                                    <button type="button" class="btn btn-default">1</button>
+                                                    <button type="button" class="btn btn-default">2</button>
+                                                    <button type="button" class="btn btn-default">3</button>
+                                                    <button type="button" class="btn btn-default">4</button>
+                                                    <button type="button" class="btn btn-default">5</button>
+                                                    <button type="button" class="btn btn-default">6</button>
+                                                    <button type="button" class="btn btn-default">7</button>
+                                                    <button type="button" class="btn btn-default">8</button>
+                                                    <button type="button" class="btn btn-default">9</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <!--
+                                        <div class="formulaWrap">
+                                            <strong>显示公式</strong> <br />
+                                            <textarea rows="4" cols="48" id="formula" class="formula"></textarea>
+
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
-                           </div>
                     </div>
                 </div>
                 <div class="modal-footer">
