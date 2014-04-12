@@ -21,7 +21,7 @@ namespace PM.Web.analysis
             if (!IsPostBack)
             {
                 m_type = PMRequest.GetString("type");
-                if (m_type == "") m_type = "steam";
+                //if (m_type == "") m_type = "steam";
                 BindMeasurePointData();
             }
 
