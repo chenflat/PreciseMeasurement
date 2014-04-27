@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Data;
@@ -290,7 +291,6 @@ namespace PM.Web.services {
 
 
 
-
         public string GetMeasurementReport(HttpContext context) {
             string m_pointnum = context.Request["pointnum"] == null ? "" : context.Request["pointnum"];
             string m_formula = context.Request["formula"] == null ? "" : context.Request["formula"];
@@ -328,7 +328,12 @@ namespace PM.Web.services {
             }
             else {
                 if (m_type == "All") {
-                    Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_level, m_type, m_orgid, pageindex, 12);
+                    Pagination<MeasurementStatInfo> pagination = null;
+                    if (m_pointnum != "") {
+                        pagination = Business.Measurement.GetMeasurementByPointnum(m_pointnum, m_startdate, m_enddate, m_level, m_type, m_orgid, pageindex, 12);
+                    } else {
+                        pagination = Business.Measurement.GetMeasurementByAllPoint(m_startdate, m_enddate, m_level, m_type, m_orgid, pageindex, 12);
+                    }
                     result = JsonConvert.SerializeObject(pagination);   
                 }
                 else {
@@ -338,7 +343,35 @@ namespace PM.Web.services {
             return result;
         }
 
+        public string GetMeasurementHistoryData(HttpContext context) {
 
+
+            string m_pointnum = context.Request["pointnum"];
+            string m_startdate = context.Request["startdate"];
+            string m_enddate = context.Request["enddate"];
+            string m_type = context.Request["type"];
+            ReportType type;
+
+            if (m_startdate == null || m_startdate == "")
+                m_startdate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd hh:mm:ss");
+            if (m_enddate == null || m_enddate == "")
+                m_enddate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+            if (m_type == "MINUTE") {
+                type = ReportType.Minute;
+            } else if (m_type == "HOUR") {
+                type = ReportType.Hour;
+            } else {
+                type = ReportType.Minute;
+            }
+
+            List<MeasurementInfo> measurements = PM.Business.Measurement.GetMeasurementHistoryData(m_pointnum, m_startdate, m_enddate, type);
+            var newList = measurements.OrderBy(x => x.Measuretime).ToList();
+
+            string result = JsonConvert.SerializeObject(newList);
+
+            return result;
+        }
 
 
         private void OutputString(HttpContext context, string strReturn) {
