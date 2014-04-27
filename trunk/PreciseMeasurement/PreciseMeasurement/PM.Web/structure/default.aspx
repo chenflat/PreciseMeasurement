@@ -2,8 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/knockout/knockout-3.1.0.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/moment/moment-with-langs.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure.js") %>"></script>
-<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure_realdata.js") %>"></script>
+<!--<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure_realdata.js") %>"></script>-->
 <script>
     var USERID = "<%=userid %>";
     var ORGID = "<%=orgid %>";
@@ -83,11 +84,11 @@
 
             <div class="alert alert-info">
             <span id="spanType1" style="overflow: hidden;">
-                                <input id="radSteam1" type="radio" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
+                                <input id="radSteam1" type="radio" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radSteam1" style="cursor: pointer;">汽</label>
                                 <input id="radWater1" type="radio" value="water" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radWater1" style="cursor: pointer;">水</label>
-                                 <input id="radAll" type="radio" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                 <input id="radAll" type="radio" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
                                 <label for="radAll" style="cursor: pointer;">全部</label>
                             </span>
                         
@@ -99,24 +100,25 @@
         <thead>
             <tr>
                 <th>计量点</th>
-                <th>采集时间</th>
-                <th>压力(MPa)</th>
-                <th>温度(℃)</th>
-                <th>瞬时流量(t/h)</th>
+                <th>采集<br />时间</th>
+                <th>压力<br />(MPa)</th>
+                <th>温度<br />(℃)</th>
+                <th>瞬时<br />流量(t/h)</th>
             </tr>
         </thead>
-        <tbody> 
+        <tbody data-bind="foreach: measurepoint().rows"> 
+            <tr data-bind="attr:{type:Carrier}">
+                <td data-bind="text: fullName"></td>
+                <td data-bind="text: time"></td>
+                <td data-bind="text: formattedPressure"></td>
+                <td data-bind="text: formattedTemp"></td>
+                <td data-bind="text: AfFlowinstant"></td>
+            </tr>
         </tbody>
         </table>
 
-        <!-- data-bind="foreach: datarows().rows"
-            <tr >
-                <td  data-bind="text: pointnum"></td>
-                 <td  data-bind="text: measuretime"></td>
-                  <td  data-bind="text: SwPressure"></td>
-                   <td  data-bind="text: SwTemperature"></td>
-                    <td  data-bind="text: AfFlowinstant"></td>
-            </tr>-->
+        
+            
             </div>
     </div>
     </td>
@@ -129,19 +131,5 @@
     
 </div>
 
-<script>
-(function() {
-   /* var type = $("input[name='carrier']:checked").val();
-        if (type == '') {
-            type = "steam";
-        }
-
-        var appModel = new ApplicationModel();
-        appModel.carrier = type;
-        ko.applyBindings(appModel);
-        appModel.connect();  */
-    
-})();
-</script>
 
 </asp:Content>
