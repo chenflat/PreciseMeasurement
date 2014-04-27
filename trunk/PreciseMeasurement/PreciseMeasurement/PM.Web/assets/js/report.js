@@ -9,11 +9,11 @@ $(function () {
 
     //为开始、结束时间绑定日历控制
     $(".startdate").click(function () {
-        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
+        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d-1}' })
     });
 
     $(".enddate").click(function () {
-        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
+        WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d-1}' })
     });
 
     //时期为年时绑定日历格式
@@ -21,7 +21,6 @@ $(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy' })
     });
     initQueryDate();
-
 
     //查询事件
     $("#btnQuery").click(function () {
@@ -34,6 +33,7 @@ $(function () {
     });
 
     $("#btnDayQuery").click(function () {
+        console.log('getDayReportData');
         getDayReportData();
     });
 
@@ -49,8 +49,12 @@ $(function () {
     var $reportrows = $("[id*=gvReport] tr");
     for (var i = 1; i < $reportrows.length; i++) {
         $($reportrows[i]).find("td").eq(0).attr("width", "100px");
+        var index = $($reportrows[i]).find("td").eq(0).text().indexOf(" ");
+        var d = $($reportrows[i]).find("td").eq(0).text().substr(0, index);
+        d = d.replace("-","/").replace("-","/");
+        //console.log(d);
 
-        $($reportrows[i]).find("td").eq(0).text($($reportrows[i]).find("td").eq(0).text().substr(0, 10));
+        $($reportrows[i]).find("td").eq(0).text(d);
     }
 
 
@@ -64,7 +68,13 @@ $(function () {
         $reportrows = $("[id*=gvMonthReport] tr");
         for (var j = 1; j < $reportrows.length; j++) {
             $($reportrows[j]).find("td").eq(0).attr("width", "100px");
-            $($reportrows[j]).find("td").eq(0).text(($($reportrows[j]).find("td").eq(0).text()).substr(0, 7));
+
+            var index = $($reportrows[j]).find("td").eq(0).text().lastIndexOf("-");
+            var d = $($reportrows[j]).find("td").eq(0).text().substr(0, index);
+            d = d.replace("-","/").replace("-","/");
+
+            $($reportrows[j]).find("td").eq(0).text(d);
+
         }
     }
 
@@ -83,7 +93,10 @@ $(function () {
         //清空设置名称，显示设置窗口
         $("#SettingName").val("");
         $('#myModal').modal('show');
-        $("#btnDelete").hide();
+        $("#formula").val("");
+        $(".customlist").html("");
+        $("#action").val("create");
+       // $("#btnDelete").hide();
     });
 
     /**
@@ -96,14 +109,21 @@ $(function () {
 
         //设置名称
         $("#SettingName").val(name);
+        var formula = "";
+
+        console.log("name:" + name);
 
         //获取设置数据
         $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetReportSetting", "userid": USERID, "orgid": ORGID, "settingname": name }, function (data) {
             var points = [];
             //遍历数组
+            var i = 0;
             $.each(data, function (index, obj) {
                 if ($.trim(obj.SettingName) == name) {
-                    points.push('<li id="' + obj.Pointnum + '"><span class="desc">' + obj.Description + '</span><div class="pull-right">×</div></li>');
+                    
+                    var li = '<li id="' +  obj.Pointnum + '" class="span12"><div class="desc  ">' + obj.Description + '</div><input type="text" name="formula" class="formula" Value="'+ obj.Formula +'" size="60" title="请输入计算公式" placeholder="请输入计算公式" /><a href="#" class="pull-right removeSetting">×</a></li>';
+                    points.push(li);
+                    i++;
                 }
             });
 
@@ -111,14 +131,76 @@ $(function () {
         });
     }
 
+
     /**
-    * 编辑自定义设置
-    */
-    $("#SettingNameList").on("click", "li", function () {
-        $("#btnDelete").show();
-        GetReportSettingByName($(this).text());
-        $('#myModal').modal('show');
+     * 编辑自定义报表设置
+     */
+    $("#SettingNameList").on("click",".editSetting",function(){
+        $("#action").val("edit");
+         $("#message").empty();
+        var name = $(this).attr("itemname");
+
+        console.log("name:"+ name);
+
+        GetReportSettingByName(name);
+         $('#myModal').modal('show');
+    })
+
+    /**
+     * 删除自定义报表设置
+     */
+    $("#SettingNameList").on("click", ".delSetting", function() {
+        var name = $(this).attr("itemname");
+
+        var ret = confirm("删除数据不可恢复，确定要删除名称为" + name + "的报表吗？");
+        if (ret) {
+
+            var data = JSON.stringify({
+                "funname": "DeleteReportSetting",
+                "settingname": name,
+                "userid": USERID,
+                "orgid": ORGID
+            });
+            $.post("../services/PostAjaxData.ashx", data, function(data) {
+                if (data == "True") {
+                    $.each($("#SettingNameList .settingitem"), function(index, obj) {
+                        var thisName = $.trim($(this).text());
+                        if (thisName == name) {
+                            $(this).remove();
+                        }
+                    });
+                };
+            });
+        }
     });
+
+
+
+
+    $(".formula").on('click', function(event) {
+
+        console.log('ss');
+
+        event.preventDefault();
+       
+        var div = $(".operators");  
+
+            console.log($(div));
+
+         if(div.is(":hidden")){  
+             div.show();  
+                
+             div.css("left",document.body.scrollLeft+event.clientX+1);  
+             div.css("top",document.body.scrollLeft+event.clientY+10);  
+             div.css("background-color","#EFF7FE");  
+         }else{  
+            div.hide();   
+         }
+
+    });
+
+
+
 
     /**
     * 动态添加计量点到列表
@@ -128,27 +210,39 @@ $(function () {
         $("#message").empty();
         var text = $(this).text();
         var id = $(this).attr("id");
-        var li = "<li id='" + id + "'>" + text + "  <input type='hidden' value='' /> <i class='.glyphicon .glyphicon-remove'></i></li>";
-        if (!hasPointElement(text)) {
+        //添加到列表
+        var li = '<li id="' + id + '" class="span12"><div class="desc  ">' + text + '</div><input type="text" name="formula" class="formula" Value="'+ id +'" size="60" title="请输入计算公式" placeholder="请输入计算公式" /><a href="#" class="pull-right removeSetting">×</a></li>';
+        if (!hasPointElement(id)) {
             $("#container-measurepoints").append(li);
         }
     });
 
-    //判断是否存在计量点元素
-    function hasPointElement(text) {
+    //运算符操作
+    $(".operators button").click(function(){
+        var operator = $(this).text();
+        var formula = $("#formula").val();
+        $("#formula").val(formula+operator);
+
+    });
+
+
+
+    //判断计量点元素是否已经存在已选择的列表中
+    function hasPointElement(id) {
         var ret = false;
         $("#container-measurepoints li").each(function (index, obj) {
-            if ($(obj).text() == text) {
+            if ($(obj).attr("id") == id) {
                 ret = true;
             }
+            //console.log($(obj).attr("id"));
         });
         return ret;
     }
 
 
     //移除计量点
-    $("#container-measurepoints").on("click", "li", function () {
-        $(this).remove();
+    $("#container-measurepoints").on("click", ".removeSetting", function () {
+        $(this).parent().remove();
     });
 
     //保存设置
@@ -172,13 +266,18 @@ $(function () {
 
         $.post("../services/PostAjaxData.ashx", data, function (result) {
             if (result == "True") {
-                var li = "<li><a href=\"#\">" + $("#SettingName").val() + "</a></li>";
+                var html = "<div class=\"settingitem\"><a href=\"#\" class=\"customQuery\" itemname=\""+ $("#SettingName").val() +"\">"+ $("#SettingName").val() +"</a> "
+                    + "<span class=\"pull-right\"> "
+                    + "<a href=\"#\" class=\"editSetting\" itemname=\""+ $("#SettingName").val() +"\"><i class=\"glyphicon glyphicon-pencil\"></i></a> "
+                    + "<a href=\"#\" class=\"delSetting\"  itemname=\""+ $("#SettingName").val() +"\"><i class=\"glyphicon glyphicon-remove\"></i></a>"
+                    + "</div>";
 
-                console.log(li);
 
-                $("#SettingNameList").append(li);
-                $("#CreateSettingNameList").append(li);
-
+                 console.log("action:"+ $("#action").val());
+                if($("#action").val()=="create") {
+                    $("#SettingNameList").append(html);
+                }
+               
             }
         });
 
@@ -189,7 +288,9 @@ $(function () {
     function getSelectPoints() {
         var points = new Array();
         $("#container-measurepoints li").each(function (index, obj) {
-            var p = { "Pointnum": $(obj).attr("id"), "Description": $.trim($(obj).text()), "SettingName": $.trim($("#SettingName").val()), "Userid": USERID, "Orgid": ORGID };
+            var formula = $(obj).find('.formula').val();
+            var desc = $.trim($(obj).find('.desc').text().replace("×",""));
+            var p = { "Pointnum": $(obj).attr("id"), "Description": desc, "SettingName": $.trim($("#SettingName").val()),"Formula":$.trim(formula), "Userid": USERID, "Orgid": ORGID };
             points.push(p);
         });
 
@@ -209,22 +310,7 @@ $(function () {
 
     $("#btnDelete").click(function () {
         var settingname = $("#SettingName").val();
-        var data = JSON.stringify({ "funname": "DeleteReportSetting", "settingname": settingname, "userid": USERID, "orgid": ORGID });
-        $.post("../services/PostAjaxData.ashx", data, function (data) {
-            if (data == "True") {
-                $.each($("#SettingNameList li"), function (index, obj) {
-                    if ($(this).text() == settingname) {
-                        $(this).remove();
-                    }
-                });
 
-                $.each($("#CreateSettingNameList li"), function (index, obj) {
-                    if ($(this).text() == settingname) {
-                        $(this).remove();
-                    }
-                });
-            }
-        });
 
     });
 
@@ -233,15 +319,19 @@ $(function () {
     * 生成自定义报表
     */
     $("#btnCustomQuery").click(function () {
-
-        //取第一个设置为默认值
-        var defSettingName = $.trim($("#settingNameList").val());
-        //给隐藏域赋值：
-        $('[id$=hdnSettingName]').val(defSettingName);
-        //创建自定义报表
-        CreateCustomReport(defSettingName);
-
+        var selSettingName = $("#hdnSettingName").val();
+        CreateCustomFormulaReport(selSettingName);
     });
+
+    //点击自定报表导航数据，生成对应自定义数据，相当于点击数据运算。
+     $(".settingitem").on("click", ".rowQuery", function() {
+
+         var name = $.trim($(this).attr("itemname"));
+        //给隐藏域赋值：
+        $('#hdnSettingName').val(name);
+        //创建自定义报表
+        CreateCustomReport(name);
+     });
 
     /**
     * 选择设置创建报表
@@ -249,14 +339,80 @@ $(function () {
     $("#CreateSettingNameList li").click(function () {
 
         var settingName = $(this).text();
-        $('[id$=hdnSettingName]').val(settingName);
+        $('#hdnSettingName').val(settingName);
         $('[id$=btnExport]').attr("disabled", false);
 
         CreateCustomReport(settingName);
     });
 
     /**
-    * 创建自定义报表
+    * 创建自定义报表  运行公式
+    * @param settingName 设置名称
+    */
+    function CreateCustomFormulaReport(settingName) {
+
+        var startdate = $(".startdate").val();
+        var enddate = $(".enddate").val();
+
+        var ds = new Date(startdate);
+        var de = new Date(enddate);
+
+        startdate = moment(startdate).format('YYYY-MM-DD 00:00:00');
+
+       // startdate = ds.toString("yyyy-MM-dd 00:00:00");
+        enddate = de.toString("yyyy-MM-dd 23:59:59");
+
+        console.log(startdate)
+
+        //获取自定义报表结果
+         $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetCustomReportResult", "startdate": startdate, "enddate": enddate, "type": "Day","userid": USERID, "orgid": ORGID, "settingname": settingName }, function (data) {
+
+            console.log(data);
+
+            if (data.length == 0)
+                return;
+
+            //清空表格式数据
+            var th = "", td = "";
+            $("#gvCustomReport thead tr").html("");
+            $("#gvCustomReport tbody").html("");
+
+            $.each(data, function(index, obj) {
+                var i = 0;
+                if(index==0) {
+                     $.each(obj, function(key, value) {
+                        if(i==0) {
+                             th += "<th>" + key + "</th>";
+                        }
+                     });
+                }
+            });
+
+            $("#gvCustomReport thead tr").append(th);
+            //动态构造表格内容
+            $.each(data, function (index, obj) {
+                td += "<tr>"
+                $.each(obj, function (key, val) {
+                   // console.log(key);
+
+                    if (key == "统计日期") {
+                        td += "<td>" + new Date(val).toString('yyyy-MM-dd') + "</td>";
+                    } else {
+                        td += "<td>" + val + "</td>";
+                    }
+                });
+                td += "</tr>"
+            });
+
+            $("#gvCustomReport tbody").append(td);
+            
+
+         });
+
+    }
+
+    /**
+    * 创建自定义报表  不运行公式
     * @param settingName 设置名称
     */
     function CreateCustomReport(settingName) {
@@ -297,7 +453,6 @@ $(function () {
 
 
     }
-
 
 
     function OnSuccessCustomReport(response) {
@@ -342,24 +497,26 @@ $(function () {
  * @param pageindex 当前页次
  */
 function getAllReportData(pageindex) {
-    var startdate = $(".startdate").val();
-    var enddate = $(".enddate").val();
-    var level = $(".level").val();
-    var orgid = $(".orgid").val();
+    var startdate = $(".startdate").val(),
+        enddate = $(".enddate").val(),
+        level = $(".level").val(),
+        orgid = $(".orgid").val(),
+        pointnum = "",
+        type = "All";
 
     console.log(orgid);
 
     var ds = new Date(startdate);
     var de = new Date(enddate);
 
-    startdate = ds.toString("yyyy-MM-dd");
+    startdate = ds.toString("yyyy-MM-dd 00:00:00");
     enddate = de.toString("yyyy-MM-dd 23:59:59");
     $.ajax({
         type: "GET",
         url: "../services/GetAjaxData.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "funname": "GetMeasurementReport", "startdate": startdate, "enddate": enddate, "level": level,"orgid":orgid, "pageindex": pageindex, "type": "All" },
+        data: { "funname": "GetMeasurementReport", "pointnum":pointnum,"startdate": startdate, "enddate": enddate, "level": level,"orgid":orgid, "pageindex": pageindex, "type": type },
         success: OnSuccess,
         error: OnFail
     });
@@ -384,12 +541,12 @@ function OnSuccess(response) {
     $("[id*=gvMeasurementReport] tr").not($("[id*=gvMeasurementReport] tr:first-child")).remove();
 
     $.each(measurements, function (index, obj) {
-        // console.log(obj);
+         //console.log(obj);
         $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html(toRoman(obj.Level) + " 级");
-        $("td", row).eq(2).html(new Date(obj.Starttime).toString("yyyy-MM-dd"));
+        $("td", row).eq(2).html(moment(obj.Starttime).format("YYYY-MM-DD HH:mm"));
         $("td", row).eq(3).html(obj.StartValue);
-        $("td", row).eq(4).html(new Date(obj.Endtime).toString("yyyy-MM-dd"));
+        $("td", row).eq(4).html(moment(obj.Endtime).format("YYYY-MM-DD HH:mm"));
         $("td", row).eq(5).html(obj.LastValue);
         $("td", row).eq(6).html(obj.Value);
 
@@ -412,7 +569,7 @@ function initQueryDate () {
     var $enddate = $(".enddate");
 
     if ($startdate.val() == '') {
-        $enddate.val(Date.today().toString("yyyy-MM-dd"));
+        $enddate.val(Date.today().addDays(-1).toString("yyyy-MM-dd"));
         $startdate.val(Date.today().addDays(-8).toString("yyyy-MM-dd"));
     }
 
@@ -428,10 +585,11 @@ function getDayReportData() {
     var startdate = $(".startdate").val();
     var enddate = $(".enddate").val();
 
+    //startdate = moment(startdate).format('YYYY-MM-DD 00:00:00');
     var ds = new Date(startdate);
     var de = new Date(enddate);
 
-    startdate = ds.toString("yyyy-MM-dd");
+    startdate = ds.toString("yyyy-MM-dd 00:00:00");
     enddate = de.toString("yyyy-MM-dd 23:59:59");
     $.ajax({
         type: "GET",
@@ -467,3 +625,19 @@ function toRoman(num) {
     }
     return roman;
 }
+
+
+$(window).load(function() {
+    console.log();
+    var contentHeight = $(window).height() - $(".header").height() - $("#toolbars").height();
+    $("#reportContainer").width($("#contents").width());
+    //$("#dayReport").height(contentHeight);
+    $("#reportContainer").mCustomScrollbar({
+        horizontalScroll: true,
+        scrollButtons: {
+            enable: true
+        },
+        theme: "dark-thin"
+    });
+
+});

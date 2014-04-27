@@ -153,21 +153,23 @@ $(function () {
 	});
 
 	//生成曲线
-	$("#btnQuery").click(function () {
+	$("#btnQuery").click(function() {
+		$("#dvProgress").show();
 		historyDataChart()
+		
 	});
 
 
 	function historyDataChart() {
-		$("#processing").show();
+
 		//获取开始和结束日期，时间类型（分钟、小时）
 		var startdate = $(".startdate").val();
 		var enddate = $(".enddate").val();
 		var datetype = $("input[name='datetype']:checked").val();
 		GetChart(startdate, enddate, datetype);
-		$("#processing").hide();
+		
 	}
-	historyDataChart();
+	
 
 });
 
@@ -199,26 +201,40 @@ function AddEvent() {
 	if (type == "Minute") {
 
 
-		$(".analysis .startdate").click(function () {
-			WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d %H' })
+		$(".analysis .startdate").click(function() {
+			WdatePicker({
+				lang: 'zh-cn',
+				dateFmt: GetFormat(),
+				maxDate: '%y-%M-%d %H'
+			})
 		});
 
-		$(".analysis .enddate").click(function () {
-			WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d {%H + 12}' })
+		$(".analysis .enddate").click(function() {
+			WdatePicker({
+				lang: 'zh-cn',
+				dateFmt: GetFormat(),
+				maxDate: '%y-%M-%d {%H + 12}'
+			})
 		});
-	}
-	else {
+	} else {
 
-		$(".analysis .startdate").click(function () {
-			WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d}' })
+		$(".analysis .startdate").click(function() {
+			WdatePicker({
+				lang: 'zh-cn',
+				dateFmt: GetFormat(),
+				maxDate: '%y-%M-{%d}'
+			})
 		});
 
-		$(".analysis .enddate").click(function () {
-			WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d + 1}' })
+		$(".analysis .enddate").click(function() {
+			WdatePicker({
+				lang: 'zh-cn',
+				dateFmt: GetFormat(),
+				maxDate: '%y-%M-{%d + 1}'
+			})
 		});
 	}
 }
-
 
 
 
@@ -226,17 +242,24 @@ function AddEvent() {
 //获取比较参数据
 function getCompareParams() {
 	var params = new Array();
-	$("#container-params li").each(function (index, obj) {
-		var p = { "num": $(obj).attr("id"), "description": $(obj).text() };
+	$("#container-params li").each(function(index, obj) {
+		var p = {
+			"num": $(obj).attr("id"),
+			"description": $(obj).text()
+		};
 		params.push(p);
 	});
 	return params;
 }
+
 //获取比较测点
 function getComparePoints() {
 	var points = new Array();
-	$("#container-measurepoints li").each(function (index, obj) {
-		var p = { "num": $(obj).attr("id"), "description": $(obj).text()};
+	$("#container-measurepoints li").each(function(index, obj) {
+		var p = {
+			"num": $(obj).attr("id"),
+			"description": $(obj).text()
+		};
 		points.push(p);
 	});
 	return points;
@@ -250,7 +273,6 @@ function getComparePoints() {
 * @param enddate 结束统计日期
 */
 function GetChart(startdate, enddate, datetype) {
-
 
 	//获取比较参数
 	var params = getCompareParams();
@@ -267,89 +289,95 @@ function GetChart(startdate, enddate, datetype) {
 
 
 	//计量数据地址,分别查询单点
-	var path = "MeasurementHistoryData.ashx";
-	$.each(points, function (i, point) {
+	var path = "../services/GetAjaxData.ashx";
+	$.each(points, function(i, point) {
+		$.ajax({
+			type: "GET",
+			url: path,
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data: {
+				"funname": "GetMeasurementHistoryData",
+				"pointnum": point.num,
+				"startdate": startdate,
+				"enddate": enddate,
+				"type": datetype
+			},
+			success: function(result) {
 
-		$.getJSON(path, { "pointnum": point.num, "startdate": startdate, "enddate": enddate, "type": datetype }, function (result) {
-			var data_SwTemperature = [];  //温度数据
-			var data_AiDensity = []; //频率数据
-			var data_AfFlowInstant = []; //瞬时流量
-			var data_SwPressure = [];  //压力
-
-
-			//重新整理数据到指定类型的数组
-			$.each(result, function (index, obj) {
-				data_SwTemperature.push([obj.Measuretime, obj.SwTemperature]);
-				data_AiDensity.push([obj.Measuretime, obj.AiDensity]);
-				data_AfFlowInstant.push([obj.Measuretime, obj.AfFlowinstant]);
-				data_SwPressure.push([obj.Measuretime, obj.SwPressure]);
-			});
-
-
-			//多个序列
-			seriesOptions_Temp[i] = {
-				name: point.description,
-				data: data_SwTemperature
-			};
-			seriesOptions_Density[i] = {
-				name: point.description,
-				data: data_AiDensity
-			};
-			seriesOptions_FlowInstant[i] = {
-				name: point.description,
-				data: data_AfFlowInstant
-			};
-			seriesOptions_Pressure[i] = {
-				name: point.description,
-				data: data_SwPressure
-			};
+				var data_SwTemperature = []; //温度数据
+				var data_AiDensity = []; //频率数据
+				var data_AfFlowInstant = []; //瞬时流量
+				var data_SwPressure = []; //压力
 
 
-
-			// As we're loading the data asynchronously, we don't know what order it will arrive. So
-			// we keep a counter and create the chart when all the data is loaded.
-			seriesCounter++;
-
-			if (seriesCounter == points.length) {
-
-
-				//console.log(data_SwTemperature);
-				//console.log(data_AiDensity);
-				//console.log(data_AfFlowInstant);
-				//console.log(data_SwPressure);
-
-				// set the allowed units for data grouping
-				var groupingUnits = [[
-					'week',                         // unit name
-					[1]                             // allowed multiples
-				], [
-					'month',
-					[1, 2, 3, 4, 6]
-				]];
-
-
-				//不同的参数创建不同的图表
-				$.each(params, function (index, obj) {
-					switch (obj.num) {
-						case "SW_Temperature":
-							createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)', seriesCounter);
-							break;
-						case "AI_Density":
-							createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)', seriesCounter);
-							break;
-						case "AF_FlowInstant":
-							createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)', seriesCounter);
-							break;
-						case "SW_Pressure":
-							createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)', seriesCounter);
-							break;
-						default:
-							break;
-					}
-
+				//重新整理数据到指定类型的数组
+				$.each(result, function(index, obj) {
+					data_SwTemperature.push([new Date(obj.Measuretime).getTime(), obj.SwTemperature]);
+					data_AiDensity.push([new Date(obj.Measuretime).getTime(), obj.AiDensity]);
+					data_AfFlowInstant.push([new Date(obj.Measuretime).getTime(), obj.AfFlowinstant]);
+					data_SwPressure.push([new Date(obj.Measuretime).getTime(), obj.SwPressure]);
 				});
-			}
+
+
+				//多个序列
+				seriesOptions_Temp[i] = {
+					name: point.description,
+					data: data_SwTemperature
+				};
+				seriesOptions_Density[i] = {
+					name: point.description,
+					data: data_AiDensity
+				};
+				seriesOptions_FlowInstant[i] = {
+					name: point.description,
+					data: data_AfFlowInstant
+				};
+				seriesOptions_Pressure[i] = {
+					name: point.description,
+					data: data_SwPressure
+				};
+
+				seriesCounter++;
+
+				if (seriesCounter == points.length) {
+					// set the allowed units for data grouping
+					var groupingUnits = [
+						[
+							'week', // unit name
+							[1] // allowed multiples
+						],
+						[
+							'month', [1, 2, 3, 4, 6]
+						]
+					];
+
+
+					//不同的参数创建不同的图表
+					$.each(params, function(index, obj) {
+						switch (obj.num) {
+							case "SW_Temperature":
+								createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)', seriesCounter);
+								break;
+							case "AI_Density":
+								createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)', seriesCounter);
+								break;
+							case "AF_FlowInstant":
+								createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)', seriesCounter);
+								break;
+							case "SW_Pressure":
+								createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)', seriesCounter);
+								break;
+							default:
+								break;
+						}
+
+					});
+				} //end if
+				$("#dvProgress").hide();
+			} //end success
 		});
+
 	});
 
 	/**
@@ -357,9 +385,7 @@ function GetChart(startdate, enddate, datetype) {
 	*/
 	function createChart(obj,series,ytitle,unit,countParam) {
 
-
-		console.log(obj.description);
-		$("#charts").append("<div id='"+ obj.num +"'></div>");
+		$("#charts").append("<div id='" + obj.num + "'></div>");
 		var id = obj.num;
 		Highcharts.setOptions({
 			global: {
@@ -367,13 +393,12 @@ function GetChart(startdate, enddate, datetype) {
 			}
 		});
 		$('#' + id).highcharts('StockChart', {
-			chart: {
-			},
+			chart: {},
 			title: {
 				text: obj.description + '曲线' + unit
 			},
 			legend: {
-				enabled:true,
+				enabled: true,
 				layout: 'vertical',
 				align: 'right',
 				verticalAlign: 'middle',
@@ -382,20 +407,26 @@ function GetChart(startdate, enddate, datetype) {
 			xAxis: {
 				events: {
 					setExtremes: function(e) {
-					   if (e.trigger === "navigator") {
-						   setTimeout(function () {
-							   for (var k = 0; k < countParam; k++) {
-								   Highcharts.charts[k].xAxis[0].setExtremes(e.min, e.max);
-							   }
-						   }, 4);
-					   }
-					 
+						if (e.trigger === "navigator") {
+							setTimeout(function() {
+								for (var k = 0; k < countParam; k++) {
+									console.log(Highcharts.charts[k].xAxis);
+									if(typeof(Highcharts.charts[k].xAxis)!='undefined') {
+										Highcharts.charts[k].xAxis[0].setExtremes(e.min, e.max);
+									}
+								}
+							}, 4);
+						}
+
 					}
 				},
 				tickPixelInterval: 240, //x轴上的间隔  
 				type: 'datetime', //定义x轴上日期的显示格式  
 				labels: {
-					formatter: function () {
+					formatter: function() {
+
+						//console.log("x lables:"+ this.value);
+
 						var vDate = new Date(this.value);
 						var ret = ""
 						//区分分钟和小时数据的日期格式
@@ -412,19 +443,17 @@ function GetChart(startdate, enddate, datetype) {
 			},
 
 			yAxis: {
-				/* labels: {
-				formatter: function () {
-				return (this.value > 0 ? '+' : '') + this.value + '%';
-				}
-				}, */
-				title : {
+				title: {
 					text: ytitle
 				},
 				plotLines: [{
 					value: 0,
 					width: 2,
 					color: 'silver'
-				}]
+				}],
+				allowDecimals: true,
+				minorGridLineColor: '#F0F0F0',
+				minorTickInterval: 'auto'
 			},
 
 			plotOptions: {
@@ -432,9 +461,9 @@ function GetChart(startdate, enddate, datetype) {
 				compare: 'percent'
 				} */
 			},
-			 credits: {
-					enabled: false
-				},
+			credits: {
+				enabled: false
+			},
 			tooltip: {
 				xDateFormat: '%Y-%m-%d %H:%M',
 				pointFormat: '<span style="color:{series.color}">{series.name} ' + obj.description + '</span>: <b>{point.y}</b> <br/>',
@@ -442,7 +471,7 @@ function GetChart(startdate, enddate, datetype) {
 			},
 
 			rangeSelector: {
-				buttons: [{//定义一组buttons,下标从0开始  
+				buttons: [{ //定义一组buttons,下标从0开始  
 					type: 'week',
 					count: 1,
 					text: '1w'
@@ -469,11 +498,11 @@ function GetChart(startdate, enddate, datetype) {
 					type: 'all',
 					text: 'All'
 				}],
-				selected: 0//表示以上定义button的index,从0开始  
+				selected: 0 //表示以上定义button的index,从0开始  
 			},
 			series: series
 		});
-}
+	}
 
 }
 

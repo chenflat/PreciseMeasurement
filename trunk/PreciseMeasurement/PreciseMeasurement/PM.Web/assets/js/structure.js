@@ -3,17 +3,202 @@
  * @author: PING.CHEN
  * @version: 1.0 build20131121
  */
+
+function StructureModel() {
+    var self = this;
+    self.measurepoint = ko.observable(new MeasurePointModel());
+}
+
+function MeasurePointModel() {
+
+    var self = this;
+
+    self.rows = ko.observableArray();
+
+    var rowLookup = {};
+    self.loadPositions = function(positions) {
+        for ( var i = 0; i < positions.length; i++) {
+          var row = new MeasurePointDataModel(positions[i]);
+          self.rows.push(row);
+          rowLookup[row.Pointnum] = row;
+        }
+    };
+    self.updatePosition = function(position) {
+        var row = rowLookup[position.Pointnum];
+        if(typeof(row)!='undefined') {
+            
+            row.Measuretime(position.Measuretime);
+            row.SwPressure(position.SwPressure);
+            row.SwTemperature(position.SwTemperature);
+            row.AfFlowinstant(position.AfFlowinstant);
+            row.AtFlow(position.AtFlow);
+            row.AiDensity(position.AiDensity);
+
+
+            $("#" + position.Pointnum + "_data .SW_Temperature span").text(position.SwTemperature);
+            $("#" + position.Pointnum + "_data .SW_Pressure span").text(position.SwPressure);
+            $("#" + position.Pointnum + "_data .AF_FlowInstant span").text(position.AfFlowinstant);
+            $("#" + position.Pointnum + "_data .AT_Flow span").text(position.AtFlow);
+            $("#" + position.Pointnum + "_data .AI_Density span").text(position.AiDensity);
+            $("#" + position.Pointnum + "_data .MEASURETIME div").text(position.Measuretime);
+
+
+            if ((new Date(position.Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
+                    mstyle = " style='color:red;'";
+
+                    $("#" + position.Pointnum).find(".status").hide();
+
+                    $("#" + position.Pointnum).find(".icon").removeClass('nomarl').addClass('noconnection');
+                }
+
+            var lasttime = new Date(position.Measuretime);
+            var currtime = new Date();
+
+            //当前时间和最后采集时间比较，如果相差为10，也就是10分钟内未采集数据，则设置当前计量器为故障状态
+            var diff = (currtime - lasttime)/(1000*60);
+            if (diff > 10) {
+                 $("#" + position.Pointnum).find(".icon").removeClass('nomarl').addClass('fault');
+            }
+        }
+    };
+
+    self.updatePositions = function(positions) {
+         for ( var i = 0; i < positions.length; i++) {
+            //console.log(positions[i]);
+            self.updatePosition(positions[i]);
+         }
+    };
+}
+
+//计量点模型
+function MeasurePointDataModel(data) {
+    var self = this;
+    self.Pointnum = data.Pointnum;
+    self.Description = data.Description;
+    self.Carrier = data.Carrier;
+    self.Measuretime = ko.observable();
+    self.SwPressure = ko.observable(0);
+    self.SwTemperature = ko.observable(0);
+    self.AfFlowinstant = ko.observable(0);
+    self.AtFlow = ko.observable(0);
+    self.AiDensity = ko.observable(0);
+    self.fullName = ko.computed(function(){return "["+ self.Pointnum + "]" + self.Description});
+    self.time = ko.computed(function() {
+        var t = ko.toJS(self.Measuretime);
+        if(typeof(t)!='undefined ') {
+           var a = moment(t).format("MM-DD HH:mm:ss");
+          // console.log(a + "  " + t);
+           return a;
+        }
+    });
+    self.formattedTemp = ko.computed(function() { return self.SwTemperature().toFixed(1); });
+    self.formattedPressure = ko.computed(function() { return self.SwPressure().toFixed(2); });
+
+    self.change = ko.observable(0);
+    self.arrow = ko.observable();
+
+    self.updateTime = function(newTime) {
+      //  var delta = (newPrice - self.price()).toFixed(2);
+       // self.arrow((delta < 0) ? '<i class="icon-arrow-down"></i>' : '<i class="icon-arrow-up"></i>');
+       // self.change((delta / self.price() * 100).toFixed(2));
+       // self.price(newPrice);
+      };
+}
+
+
+
+
 $(function () {
 
-    //为数据列表添加滚动条
-    $('#datalist').slimScroll({
-        height: $("#structrueimg").height()
+    var appModel = new StructureModel();
+    ko.applyBindings(appModel);
+
+   
+    //获取计量点列表
+    $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetMeasurePointList"}, function (data) {
+        appModel.measurepoint().loadPositions(data);
     });
 
-    
-    $('#btnSave').button();
-    //拖动区域
-    $(".meter_content").draggable();
+
+
+
+    //每60秒自动重新获取实时数据
+    getRealtimeData()
+    setInterval(getRealtimeData, 60000);
+    counter();
+
+    //防止未加载，1秒后重新加载一次
+    setTimeout(getRealtimeData,1000);
+  
+    //为数据列表添加滚动条
+    $("img#structrueimg").load(function(){
+        $('#datalist').slimScroll({
+         height: $(this).height()
+        });
+    });
+
+
+
+
+    //获取设置类型
+    function GetType() {
+        var type = $("input[name='carrier']:checked").val();
+        if (type == '') {
+            type = "steam";
+        }
+        return type;
+    }
+
+    //切换类型
+    $('input[name="carrier"]:radio').change(function() {
+         var carrier = $("input[name='carrier']:checked").val();
+
+       $.each($("#gvRealtimeData tr"),function(index,row){
+            $(row).show();
+            var type = $(row).attr("type");
+            if(type!=carrier && (carrier!="")) {
+                $(row).hide();
+            }
+       });
+
+
+
+    });
+
+    //获取所有测点的实时数据
+    function getRealtimeData() {
+
+        $.ajax({
+            type: "GET",
+            url: '../services/GetAjaxData.ashx',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function() {
+                $("#dvProgress").show();
+            },
+            data: {
+                "funname": "GetRealtimeMeasureValue"
+            },
+            success: function(data) {
+
+                //var mappedData= jQuery.map(data, function(item) { return new MeasurePointDataModel(item) });
+               // appModel.measurepoint().rows(mappedData);
+                appModel.measurepoint().updatePositions(data);
+
+                $("#dvProgress").hide();
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+
+        /*
+        $.getJSON('../services/GetAjaxData.ashx', {
+            "funname": "GetRealtimeMeasureValue"
+        }, function(data) {
+            appModel.measurepoint().updatePositions(data);
+        }); */
+    }
 
     //点击记量点，动态显示当前数据的计量值
     $("#structure div").click(function () {
@@ -37,7 +222,7 @@ $(function () {
 
     //刷新数据
     $("#refreshData").click(function () {
-        getRealData();
+        getRealtimeData();
     });
 
     /**
@@ -59,87 +244,9 @@ $(function () {
         });
     });
 
-
-    //每60秒自动重新获取实时数据
-    getRealData()
-    setInterval(getRealData, 60000);
-    counter();
-
-    //获取设置类型
-    function GetType() {
-        var type = $("input[name='carrier']:checked").val();
-        if (type == '') {
-            type = "steam";
-        }
-        return type;
-    }
-
-    //切换类型
-    $('input[name="carrier"]:radio').change(function() {
-        getRealData();
-    });
-    /**
-    * 获取所有测点的实时数据
-    */
-    function getRealData() {
-        var carrier = GetType();
-
-        $("#gvRealtimeData tbody").html("");
-        var content = "";
-        //获取所有测点对应的实时数据
-        $.getJSON('../services/GetAjaxData.ashx', { "funname": "GetRealtimeMeasureValue", "carrier": carrier }, function (data) {
-
-   
-            //设置计量点数值
-            $.each(data, function (index, obj) {
-                var mstyle = "";
-
-                if ((new Date(obj.Measuretime).toString('yyyy-MM-dd')) == '1900-01-01') {
-                    mstyle = " style='color:red;'";
-
-                    $("#" + obj.Pointnum).find(".status").hide();
-
-                    $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('noconnection');
-                }
-
-                var lasttime = new Date(obj.Measuretime);
-                var currtime = new Date();
-
-                //console.log("last:" + lasttime);
-              //  console.log("currtime:" + currtime);
-
-                //当前时间和最后采集时间比较，如果相差为10，也就是10分钟内未采集数据，则设置当前计量器为故障状态
-                var diff = (currtime - lasttime)/(1000*60);
-                if (diff > 10) {
-                    $("#" + obj.Pointnum).find(".icon").removeClass('nomarl').addClass('fault');
-                }
-
-                content += "<tr " + mstyle + "><td>[" + obj.Pointnum + "]" + obj.Description + "</td>"
-                content += "<td>" + new Date(obj.Measuretime).toString('yyyy-MM-dd HH:mm') + "</td>"
-                content += "<td>" + obj.SwPressure + "</td>"
-                content += "<td>" + obj.SwTemperature + "</td>"
-                content += "<td>" + obj.AfFlowinstant + "</td>"
-                content += "</tr>";
-
-                $("#" + obj.Pointnum + "_data .SW_Temperature span").text(obj.SwTemperature);
-                $("#" + obj.Pointnum + "_data .SW_Pressure span").text(obj.SwPressure);
-                $("#" + obj.Pointnum + "_data .AF_FlowInstant span").text(obj.AfFlowinstant);
-                $("#" + obj.Pointnum + "_data .AT_Flow span").text(obj.AtFlow);
-                $("#" + obj.Pointnum + "_data .AI_Density span").text(obj.AiDensity);
-                $("#" + obj.Pointnum + "_data .MEASURETIME div").text(obj.Measuretime);
-
-            });
-
-            $("#gvRealtimeData tbody").append(content);
-        });
-    }
-
-
-    
-
-
-
-
+    $('#btnSave').button();
+    //拖动区域
+    $(".meter_content").draggable();
     /**
     * 保存测点位置
     */
