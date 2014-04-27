@@ -17,15 +17,15 @@ namespace PM.Web.alarm
         {
             if (!IsPostBack)
             {
-                if (txtStartDate.Text.Trim() == "") {
-                    txtStartDate.Text = DateTime.Now.AddDays(-5).ToString("yyyy-MM-dd");
-                }
-                if (txtEndDate.Text.Trim()=="")
-                {
-                    txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                }
+                //if (txtStartDate.Text.Trim() == "") {
+                //    txtStartDate.Text = DateTime.Now.AddDays(-5).ToString("yyyy-MM-dd");
+                //}
+                //if (txtEndDate.Text.Trim()=="")
+                //{
+                //    txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                //}
 
-                BindData();
+                //BindData();
             }
         }
 
@@ -34,17 +34,17 @@ namespace PM.Web.alarm
         /// </summary>
         private void BindData() { 
         
-            string m_startdate = txtStartDate.Text.Trim();
-            string m_enddate = txtEndDate.Text.Trim();
+            //string m_startdate = txtStartDate.Text.Trim();
+            //string m_enddate = txtEndDate.Text.Trim();
 
-            int m_status = Utils.StrToInt(ddlStatus.SelectedValue,-1);
-            DataTable dt = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate,"", -1, orgid, 1, 15).Tables[0];
-            if (dt.Rows.Count == 0)
-            {
-                dt.Rows.Add();
-            }
-            gvAlarmData.DataSource = dt;
-            gvAlarmData.DataBind();
+            //int m_status = Utils.StrToInt(ddlStatus.SelectedValue,-1);
+            //DataTable dt = PM.Data.Alarmlog.FindAlarmlogInfo(m_startdate, m_enddate,"", -1, orgid, 1, 15).Tables[0];
+            //if (dt.Rows.Count == 0)
+            //{
+            //    dt.Rows.Add();
+            //}
+            //gvAlarmData.DataSource = dt;
+            //gvAlarmData.DataBind();
 
         }
     }
