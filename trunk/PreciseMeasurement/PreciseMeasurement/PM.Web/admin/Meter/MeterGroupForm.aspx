@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="计量器组" Language="C#" MasterPageFile="~/admin/Admin.master" AutoEventWireup="true"
     CodeBehind="MeterGroupForm.aspx.cs" Inherits="PM.Web.admin.Meter.MeterGroupForm" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="cph" runat="server">
-
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/MeterGroup/MeterGroupForm.js") %>"></script>
             <asp:Button ID="btnSave" CssClass="btn btn-warning" runat="server" Text="保存" />
              <a href="MeterGroupList.aspx" class="btn btn-info">返回</a>
 
