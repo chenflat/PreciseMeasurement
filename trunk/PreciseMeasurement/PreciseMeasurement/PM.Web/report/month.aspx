@@ -35,9 +35,10 @@
         </div>
     </div>
     <div class="row">
+     <div id="reportContainer">
       <asp:GridView ID="gvMonthReport" runat="server"  CssClass="table table-bordered table-striped table-hover">
         </asp:GridView>
-
+</div>
 
     </div>
 </asp:Content>

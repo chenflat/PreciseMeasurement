@@ -5,6 +5,7 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/Pager.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/moment/moment-with-langs.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
 <script language="javascript">
     var USERID = "<%=userid %>";
@@ -13,7 +14,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="row">
+<div class="row" id="toolbars">
         <div class="bs-docs-section">
             <div class="toolbar bs-callout-info">
                 起始时间：
@@ -39,9 +40,10 @@
 
  
         <div class="row">
+            <div id="reportContainer">
         <asp:GridView ID="gvReport" runat="server" EnableModelValidation="True"  CssClass="table table-bordered table-striped table-hover">
         </asp:GridView>
-        
+        </div>
     </div>
 
 
