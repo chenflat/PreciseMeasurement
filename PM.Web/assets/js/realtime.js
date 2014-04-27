@@ -1,14 +1,13 @@
-﻿
-
+﻿/**
+ * 实时数据JS操作类
+ * 
+ */
 $(function () {
-
 
     //打开或关闭级别菜单
    $("label.tree-toggler").on('click',function(){
         $(this).parent().children('ul.tree').toggle(300);
-   
    });
-
 
    //获取设置类型
    function GetType() {
@@ -22,37 +21,32 @@ $(function () {
         GetMeasurePointList($(this).val());
    });
 
-
    $("#organizationlist a").click(function () {
        var orgid = $(this).attr("id");
-       //console.log(orgid);
-
        var url = "../services/GetAjaxData.ashx";
        var params = { "funname": "GetMeasurePointList", "orgid": orgid };
-
        $.getJSON(url, params, function (data) {
-           // console.log(data);
            CreateMeasurePointTreeList(data);
        });
    });
 
 
-   /**
-   * 获取测量点列表
-   * @param type 测点类型
-   */
-   function GetMeasurePointList(type) {
-       // console.log(type);
-
+    /**
+     * 获取测量点列表
+     * @param type 测点类型
+     */
+    function GetMeasurePointList(type) {
         var url = "../services/GetAjaxData.ashx";
-        var params = {"funname":"GetMeasurePointList", "carrier" : type, "orgid" : ORGID};
+        var params = {
+            "funname": "GetMeasurePointList",
+            "carrier": type,
+            "orgid": ORGID
+        };
 
-        $.getJSON(url,params,function(data){
-           // console.log(data);
+        $.getJSON(url, params, function(data) {
             CreateMeasurePointTreeList(data);
         });
-   }
-
+    }
 
    $("#carrier li").click(function(){
         var type = $(this).attr("id");
@@ -131,7 +125,7 @@ $(function () {
             $.getJSON('../services/GetAjaxData.ashx',{ "funname": "GetRealtimeMeasureValue","pointnum":pointnum},function(data){
                 if(data!=null) {
                     $AiDensity.text(isNaN(data.AiDensity)?data.AiDensity.substr(0,data.AiDensity.indexOf(".")+2) : data.AiDensity);  
-                    $SWTemperature.text(isNaN(data.SwTemperature)?data.SwTemperature.substr(0,data.SwTemperature.indexOf(".")+2) : data.SwTemperature);
+                    $SWTemperature.text(isNaN(data.SwTemperature)?data.SwTemperature.substr(0,data.SwTemperature.indexOf(".")+2) : data.SwTemperature.toFixed(1));
                     $AFFlowInstant.text(isNaN(data.AfFlowinstant)?data.AfFlowinstant.substr(0,data.AfFlowinstant.indexOf(".")+2) : data.AfFlowinstant);
                     $SWPressure.text(isNaN(data.SwPressure)?data.SwPressure.substr(0,data.SwPressure.indexOf(".")+2) : data.SwPressure);
                     $ATFlow.text(isNaN(data.AtFlow)?data.AtFlow.substr(0,data.AtFlow.indexOf(".")+2) : data.AtFlow);
@@ -142,88 +136,95 @@ $(function () {
             });
         }
     }
-    //每5秒自动更新实时数据
+    //每10秒自动更新实时数据
     setInterval(getRealtimeData,10000);
     getRealtimeData();
 
 
-    $(".minute #startdate").val(new Date().add(-1).day().toString("yyyy-MM-dd HH:mm"));
-    $(".minute #enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
+    function initMinuteDateRange() {
+        var minute_initStartdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
+        var minute_initEnddate = new Date().toString("yyyy-MM-dd HH:mm");
+        if($("#mstartdate").val()=='') {
+            $("#mstartdate").val(minute_initStartdate);
+        }
+        if($("#menddate").val()=='') {
+             $("#menddate").val(minute_initEnddate);
+        }
+    }
 
-    $(".minute #startdate").change(function () {
-        var startdate = $(".minute #startdate").val();
-        $(".minute #enddate").val(Date.parse(startdate).add(1).toString("yyyy-MM-dd HH:mm"));
+    initMinuteDateRange();
+   
+
+    $("#mstartdate").change(function () {
+        var startdate = $("#mstartdate").val();
+        $("#menddate").val(Date.parse(startdate).add(1).toString("yyyy-MM-dd HH:mm"));
     });
 
-    $(".minute #startdate").click(function () {
-
+    $("#mstartdate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd HH:mm', maxDate: '%y-%M-{%d} 00:00' })
-
     });
 
-    $(".minute #enddate").click(function () {
-
+    $("#menddate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd HH:mm', maxDate: '%y-%M-{%d}' })
-
     });
 
     //小时数据
-    $(".hour #startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
-    $(".hour #enddate").val(Date.today().toString("yyyy-MM-dd"));
+    function initHourDateRange() {
+        var hour_initStartdate = Date.today().add(-1).day().toString("yyyy-MM-dd");
+        var hour_initEnddate = Date.today().toString("yyyy-MM-dd");
+        if ($("#hstartdate").val() == '') $("#hstartdate").val(hour_initStartdate);
+        if ($("#henddate").val() == '') $("#henddate").val(hour_initEnddate);
+    }
+   initHourDateRange();
 
-    $(".hour #startdate").click(function () {
-
+    $("#hstartdate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d} 00:00' })
-
     });
 
-    $(".hour #enddate").click(function () {
-
+    $("#henddate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
-
     });
 
     //每天数据
-
-    $(".day .startdate").val(Date.today().add(-8).day().toString("yyyy-MM-dd"));
-    $(".day .enddate").val(Date.today().toString("yyyy-MM-dd"));
-
-    $(".day .startdate").click(function () {
-
+    function initDayDateRange() {
+        var day_initStartdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
+        var day_initEnddate = Date.today().toString("yyyy-MM-dd")
+        if ($("#dstartdate").val() == '') $("#dstartdate").val(day_initStartdate);
+        if ($("#denddate").val() == '') $("#denddate").val(day_initEnddate);
+    }
+    initDayDateRange();
+     $("#dstartdate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d} 00:00' })
-
     });
 
-    $(".day .enddate").click(function () {
-
+    $("#denddate").click(function () {
         WdatePicker({ lang: 'zh-cn', dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-{%d}' })
-
     });
 
     //历史
     function initHistoryMinute() {
-        $(".history .startdate").val(new Date().addHours(-10).toString("yyyy-MM-dd HH:mm"));
-        $(".history .enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
+        $("#hisStartdate").val(new Date().addHours(-10).toString("yyyy-MM-dd HH:mm"));
+        $("#hisEnddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
     }
 
     function initHistoryHour() {
-        $(".history .startdate").val(Date.today().add(-5).day().toString("yyyy-MM-dd"));
-        $(".history .enddate").val(Date.today().toString("yyyy-MM-dd"));
+        $("#hisStartdate").val(Date.today().add(-5).day().toString("yyyy-MM-dd"));
+        $("#hisEnddate").val(Date.today().toString("yyyy-MM-dd"));
     }
 
     initHistoryMinute();
 
 
-    $(".history .startdate").click(function () {   
+    $("#hisStartdate").click(function () {   
        AddEvent();
     });
 
-    $(".history .enddate").click(function () {
+    $("#hisEnddate").click(function () {
         AddEvent();
 
     });
 	//更新历史开始结束日期
-	 $(".history .startdate").change(function(){
+	 $("#hisStartdate").change(function(){
 		 console.log('change');
 		setEndDay();
 	 });
@@ -238,61 +239,96 @@ $(function () {
         }
     });
 
-    
-        /**
-         * 获取时间格式
-         */
-        function GetFormat() {
-            var type = getDateType();
-            if (type == "MINUTE") {
-                return 'yyyy-MM-dd HH:00';
-            }
-            else {
-                return 'yyyy-MM-dd';
-            }
+
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        //e.target // activated tab
+        //e.relatedTarget // previous tab
+        initMinuteDateRange();
+        initHourDateRange();
+        initDayDateRange();
+
+        var activated = e.target;
+        var curTag = $(activated).attr('href');
+        var isInitChart = $("#isInitChart").val();
+        if(curTag=='#history' && isInitChart=="0") {
+            $("#btnHistoryQuery").trigger('click');
+            $("#isInitChart").val("1");
         }
+       
+
+//btnHistoryQuery();
+
+    })
+
+
+
+    /**
+     * 获取时间格式
+     */
+    function GetFormat() {
+        var type = getDateType();
+        if (type == "MINUTE") {
+            return 'yyyy-MM-dd HH:00';
+        } else {
+            return 'yyyy-MM-dd';
+        }
+    }
     function AddEvent() {
         var type = getDateType();
 
         if (type == "Minute") {
-            $(".history .startdate").click(function () {
-                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d %H' })
+            $("#hisStartdate").click(function() {
+                WdatePicker({
+                    lang: 'zh-cn',
+                    dateFmt: GetFormat(),
+                    maxDate: '%y-%M-%d %H'
+                })
             });
 
-            $(".history .enddate").click(function () {
-                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-%d {%H + 12}' })
+            $("#hisEnddate").click(function() {
+                WdatePicker({
+                    lang: 'zh-cn',
+                    dateFmt: GetFormat(),
+                    maxDate: '%y-%M-%d {%H + 12}'
+                })
             });
-        }
-        else {
-            $(".history .startdate").click(function () {
-                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d}' })
+        } else {
+            $("#hisStartdate").click(function() {
+                WdatePicker({
+                    lang: 'zh-cn',
+                    dateFmt: GetFormat(),
+                    maxDate: '%y-%M-{%d}'
+                })
             });
 
-            $(".history .enddate").click(function () {
-                WdatePicker({ lang: 'zh-cn', dateFmt: GetFormat(), maxDate: '%y-%M-{%d + 1}' })
+            $("#hisEnddate").click(function() {
+                WdatePicker({
+                    lang: 'zh-cn',
+                    dateFmt: GetFormat(),
+                    maxDate: '%y-%M-{%d + 1}'
+                })
             });
         }
-}
+    }
 
 	
 
-	//设置开始日期
-	function setEndDay() {
-		var type = getDateType();
-		 if (type == "MINUTE") {
-			if($(".history .startdate").val().length>0) {
-				//Date startdate = Date.parse($(".history .startdate").val());
-				// $(".history .enddate").val();
-			}
+    //设置开始日期
+    function setEndDay() {
+        var type = getDateType();
+        if (type == "MINUTE") {
+            if ($("#hisStartdate").val().length > 0) {
+                //Date startdate = Date.parse($("#hisStartdate").val());
+                // $("#hisEnddate").val();
+            }
 
-		 } else {
-			 console.log(type);
-			if($(".history .startdate").val().length>0) {
-				 $(".history .enddate").val(new Date($(".history .startdate").val()).addDay(1));
-			}
-		 }
-	}
-
+        } else {
+            if ($("#hisStartdate").val().length > 0) {
+                $("#hisEnddate").val(new Date($("#hisStartdate").val()).addDay(1));
+            }
+        }
+    }
 
 
     //每日数据
@@ -301,9 +337,7 @@ $(function () {
     });
 
     //分钟数据
-
     function initMinuteData() {
-
         var pointnum = $("#pointnum").val();
         var startdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
         var endate = new Date().toString("yyyy-MM-dd HH:mm");
@@ -311,18 +345,18 @@ $(function () {
     }
     initMinuteData();
 
-    $("#btnMinuteQuery").click(function () {
+    $("#btnMinuteQuery").click(function() {
         console.log("minute");
         var pointnum = $("#pointnum").val();
-        var startdate = $(".minute #startdate").val();
-        var endate = $(".minute #enddate").val();
+        var startdate = $("#mstartdate").val();
+        var endate = $("#menddate").val();
         GetMinuteData(pointnum, startdate, endate, 1)
     });
 
-    $("#minutepager").on("click", "a", function () {
+    $("#minutepager").on("click", "a", function() {
         var pointnum = $("#pointnum").val();
-        var startdate = $(".minute #startdate").val();
-        var endate = $(".minute #enddate").val();
+        var startdate = $("#mstartdate").val();
+        var endate = $("#menddate").val();
         GetMinuteData(pointnum, startdate, endate, parseInt($(this).attr('page')))
     });
 
@@ -340,41 +374,37 @@ $(function () {
     $("#btnHourQuery").click(function () {
 
         var pointnum = $("#pointnum").val();
-        var startdate = $(".hour #startdate").val();
-        var endate = $(".hour #enddate").val();
+        var startdate = $("#hstartdate").val();
+        var endate = $("#henddate").val();
 
         GetHourData(pointnum, startdate, endate, 1)
     });
 
 
-    $("#hourpager").on("click", "a", function () {
+    $("#hourpager").on("click", "a", function() {
         //console.log($(this));
         var pointnum = $("#pointnum").val();
-        var startdate = $(".hour #startdate").val();
-        var endate = $(".hour #enddate").val();
+        var startdate = $("#hstartdate").val();
+        var endate = $("#henddate").val();
 
-       // console.log($(this).attr('page'));
+        // console.log($(this).attr('page'));
 
         GetHourData(pointnum, startdate, endate, parseInt($(this).attr('page')))
     });
 
     //每日数据
     function initDayData() {
-         var pointnum = $("#pointnum").val();
+        var pointnum = $("#pointnum").val();
         var startdate = Date.today().add(-8).day().toString("yyyy-MM-dd");
         var endate = Date.today().toString("yyyy-MM-dd");
         GetDayData(pointnum, startdate, endate, 1)
     }
     initDayData();
-
     $("#btnDayQuery").click(function () {
 
         var pointnum = $("#pointnum").val();
         var startdate = $(".day #startdate").val();
         var endate = $(".day #enddate").val();
-
-        //console.log(pointnum + "," + startdate +"," + endate);
-
         GetDayData(pointnum, startdate, endate, 1)
     });
 
@@ -390,29 +420,18 @@ $(function () {
     });
 
     //历史数据
-
-    $("#btnHistoryQuery").click(function () {
+    $("#btnHistoryQuery").click(function() {
         var type = $('input:radio[name=datetype]:checked').val();
         var pointnum = $("#pointnum").val();
         var startdate = $(".hsdate").val();
         var enddate = $(".hedate").val();
-		
-        console.log(pointnum + "," + startdate + "," + enddate );
 
+        console.log(pointnum + "," + startdate + "," + enddate);
 
         if (type == "MINUTE") {
             GetMinuteChart(pointnum, startdate, enddate);
         } else {
-//			if(endate==startdate) {
-//				enddate = enddate + " 23:59";
-//			} else {
-
-//				enddate = dn.addDays(-1).toString('yyyy-MM-dd') + " 23:59";
-
-//			}
-
             enddate = enddate + " 23:59";
-
             GetHourChart(pointnum, startdate, enddate);
         }
     });
@@ -431,6 +450,9 @@ function GetMinuteData(pointnum, startdate, enddate, pageindex) {
         type: "GET",
         url: "RealtimeParam.ashx",
         contentType: "application/json; charset=utf-8",
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
         dataType: "json",
         data: {"pointnum":pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex,"type":"MINUTE"},
         success: OnSuccessForMinute,
@@ -470,6 +492,8 @@ function OnSuccessForMinute(response) {
         PageSize: parseInt(pager.PageSize),
         RecordCount: parseInt(pager.RecordCount)
     });
+
+    $("#dvProgress").hide();
 };
 
 
@@ -480,6 +504,9 @@ function GetHourData(pointnum, startdate, enddate, pageindex) {
         type: "GET",
         url: "RealtimeParam.ashx",
         contentType: "application/json; charset=utf-8",
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
         dataType: "json",
         data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "HOUR" },
         success: OnSuccessForHour,
@@ -521,6 +548,8 @@ function OnSuccessForHour(response) {
         PageSize: parseInt(pager.PageSize),
         RecordCount: parseInt(pager.RecordCount)
     });
+
+    $("#dvProgress").hide();
 };
 
 
@@ -533,6 +562,9 @@ function GetDayData(pointnum, startdate, enddate, pageindex) {
         type: "GET",
         url: "RealtimeParam.ashx",
         contentType: "application/json; charset=utf-8",
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
         dataType: "json",
         data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "pageindex": pageindex, "type": "DAY" },
         success: OnSuccessForDay,
@@ -572,6 +604,8 @@ function OnSuccessForDay(response) {
         PageSize: parseInt(pager.PageSize),
         RecordCount: parseInt(pager.RecordCount)
     });
+
+    $("#dvProgress").hide();
 };
 
 
@@ -587,12 +621,18 @@ function OnSuccessForDay(response) {
 */
 function GetMinuteChart(pointnum, startdate, enddate) {
     
+    var url = "../services/GetAjaxData.ashx";
+    var params = { "funname": "GetMeasurementHistoryData", "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "MINUTE"  };
+
     $.ajax({
         type: "GET",
-        url: "MeasurementHistoryData.ashx",
+        url: url,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "MINUTE" },
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
+        data: params,
         success: OnSuccessHourChart,
         error: OnFail
     });
@@ -606,13 +646,19 @@ function GetMinuteChart(pointnum, startdate, enddate) {
 * @param enddate 结束统计日期
 */
 function GetHourChart(pointnum, startdate, enddate) {
-    console.log(pointnum + "," + startdate + "," + enddate);
+    
+    var url = "../services/GetAjaxData.ashx";
+    var params = { "funname": "GetMeasurementHistoryData", "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "HOUR"  };
+
     $.ajax({
         type: "GET",
-        url: "MeasurementHistoryData.ashx",
+        url: url,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: { "pointnum": pointnum, "startdate": startdate, "enddate": enddate, "type": "HOUR" },
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
+        data: params,
         success: OnSuccessHourChart,
         error: OnFail
     });
@@ -658,15 +704,19 @@ function getChartXAxis(datetype){
 
 function OnSuccessHourChart(response){
 
-	var dateZone = getChartXAxis("HOUR")
+    console.log(response.length);
+    if(response.length==0) {
+        $("#dvProgress").hide();
+        return false;
+    }
+    var dateZone = getChartXAxis("HOUR")
     var type = getDateType();
     var dtformat = "MM-dd"
-    var step = 24;
-    if(type=="MINUTE") {
+    //如果数据长度不足100
+    var step = response.length > 100 ? Math.floor(response.length / 10) : 24;
+    if (type == "MINUTE") {
         dtformat = "MM-dd HH:00";
-        step = 60;
     }
-    
 
 	var charItems = [
 			{"name":"SW_TEMPERATURE","title":"温度曲线","unit":"°C"},
@@ -692,6 +742,9 @@ function OnSuccessHourChart(response){
 		arrSwpressure.push(response[i].SwPressure);
 		arrAfflowinstant.push(response[i].AfFlowinstant);
         arrAiDensity.push(response[i].AiDensity);
+
+        //console.log(response[i]);
+
 	}
 
     $('#temperature').hide();
@@ -709,24 +762,32 @@ function OnSuccessHourChart(response){
 			    xAxis: {
                     tickInterval:step,
                     tickWidth: 0,
-			        labels: {
-			            formatter: function () {
-			                return Date.parse(this.value).toString(dtformat);
-			            }
-			        },
+                    labels: {
+                        formatter: function() {
+                           console.log(this.value);
+                            return Date.parse(this.value).toString(dtformat);
+                        }
+                    },
 			        categories: times,
-			        gridLineWidth: 1
+			        gridLineWidth: 1,
+                    minorGridLineColor: '#F0F0F0',
+                    minorTickInterval: 'auto'
 			    },
-			    yAxis: {
-			        title: {
-			            text: 'Temperature (°C)'
-			        },
-			        plotLines: [{
-			            value: 0,
-			            width: 0,
-			            color: '#808080'
-			        }]
-			    },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    },
+                    min: 0,
+                    max: 300,
+                    allowDecimals: true,
+                    minorGridLineColor: '#F0F0F0',
+                    minorTickInterval: 'auto',
+                     labels: {
+                        formatter: function() {
+                            return (this.value).toFixed(1);
+                        }
+                    },
+                },
 			    tooltip: {
 			        valueSuffix: '°C',
                     valueDecimals : 1
@@ -760,8 +821,6 @@ function OnSuccessHourChart(response){
 				xAxis: {
                     tickInterval:step,
 				    labels: {
-				        //staggerLines: 4,
-				        //step: 24,
 				        formatter: function () {
 				            return Date.parse(this.value).toString(dtformat);
 				        }
@@ -777,26 +836,36 @@ function OnSuccessHourChart(response){
 						value: 0,
 						width: 1,
 						color: '#808080'
-					}]
+					}],
+                    labels: {
+                        formatter: function() {
+                            return (this.value).toFixed(3);
+                        }
+                    },
+                    min: 1.0,
+                    max: 6.0,
+                    allowDecimals: true,
+                    minorGridLineColor: '#F0F0F0',
+                    minorTickInterval: 'auto'
 				},
-				tooltip: {
-					valueSuffix: 'MPa',
-                    valueDecimals : 3
-				},
-				legend: {
-				    enabled: false
-				},
-				series: [{
-					name: '压力',
-					data: arrSwpressure
-				}],
+                tooltip: {
+                    valueSuffix: 'MPa',
+                    valueDecimals: 3
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: '压力',
+                    data: arrSwpressure
+                }],
                 plotOptions: {
                     line: {
                         marker: {
                             enabled: false
                         }
                     }
-			    },
+                },
 	            credits: {
 	                enabled: false
 	            }
@@ -810,10 +879,10 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
-                     tickInterval:step,
+                    tickInterval:step,
 				    labels: {
-				        step: 24,
 				        formatter: function () {
+                          //  console.log(this.value);
 				            return Date.parse(this.value).toString(dtformat);
 				        }
 				    },
@@ -828,7 +897,17 @@ function OnSuccessHourChart(response){
 						value: 0,
 						width: 1,
 						color: '#808080'
-					}]
+					}],
+                    labels: {
+                        formatter: function() {
+                            return (this.value).toFixed(1);
+                        }
+                    },
+                    min: 0,
+                    max: 100,
+                    allowDecimals: true,
+                    minorGridLineColor: '#F0F0F0',
+                    minorTickInterval: 'auto'
 				},
 				tooltip: {
 					valueSuffix: 't/h',
@@ -861,10 +940,10 @@ function OnSuccessHourChart(response){
 					x: -20 //center
 				},
 				xAxis: {
-                     tickInterval:step,
+                    tickInterval:step,
 				    labels: {
-				        step: 24,
 				        formatter: function () {
+                           // console.log(this.value);
 				            return Date.parse(this.value).toString(dtformat);
 				        }
 				    },
@@ -879,11 +958,21 @@ function OnSuccessHourChart(response){
 						value: 0,
 						width: 1,
 						color: '#808080'
-					}]
+					}],
+                    labels: {
+                        formatter: function() {
+                            return (this.value).toFixed();
+                        }
+                    },
+                    min: 0,
+                    max: 3000,
+                    allowDecimals: true,
+                    minorGridLineColor: '#F0F0F0',
+                    minorTickInterval: 'auto'
 				},
 				tooltip: {
 					valueSuffix: 'Hz',
-                    valueDecimals : 1
+                    valueDecimals : 2
 				},
 				legend: {
 				    enabled: false
@@ -905,15 +994,6 @@ function OnSuccessHourChart(response){
 			});			
 
 		}
-
-
-		
-	
 	}
-
-
-
-
-   
-
+     $("#dvProgress").hide();
 }
