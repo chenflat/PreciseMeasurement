@@ -66,8 +66,10 @@ namespace PM.Web.report
         }
 
         private void BindData() {
+            string m_startdate = startdate.Text.Trim() + " 00:00:00";
+            string m_enddate = enddate.Text.Trim() + " 23:59:59";
 
-            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(startdate.Text.Trim(), enddate.Text.Trim(),ddlLevel.SelectedValue,ddlOrgId.SelectedValue, Entity.ReportType.Day);
+            gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, ddlOrgId.SelectedValue, Entity.ReportType.Day);
             gvReport.DataBind();
 
         }
