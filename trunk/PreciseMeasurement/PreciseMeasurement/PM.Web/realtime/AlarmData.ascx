@@ -5,40 +5,68 @@
 </ol>
 <div class="panel panel-default">
     <div class="panel-heading alarm">
-                报警状态：<asp:DropDownList ID="ddlStatus" CssClass="status" runat="server">
-                    <asp:ListItem Value="0">未确认</asp:ListItem>
-                    <asp:ListItem Value="1">已确认</asp:ListItem>
-                    <asp:ListItem Value="-1">全部</asp:ListItem>
-                </asp:DropDownList>
-                起始时间：<asp:TextBox ID="txtStartDate" CssClass="startdate" runat="server"></asp:TextBox>
-                &nbsp;终止时间：<asp:TextBox ID="txtEndDate" CssClass="enddate" runat="server"></asp:TextBox>
-                &nbsp;
-                <button type="button" class="btn btn-danger btnAlarmQuery" id="btnAlarmQuery">查询</button>
+               报警状态：
+                <select id="ddlStatus" name="ddlStatus" class="status input-sm" >
+                    <option value="0">未确认</option> 
+                    <option value="1">已确认</option> 
+                    <option value="-1">全部</option> 
+                </select>
+
+                起始时间：
+                   <input type="text" class="startdate" name="txtStartDate" id="txtStartDate" />  
+                   &nbsp;
+                终止时间：<input type="text" class="enddate" name="txtEndDate" id="txtEndDate" />  
+                &nbsp; <button id="btnAlarmQuery" class="btn btn-danger btnAlarmQuery" type="button" data-bind="click: loadAlarmlogs">查询</button>
                 
       </div>
      <div class="panel-body">
         <div class="bs-docs-section">
-            <asp:GridView ID="gvAlarmData" runat="server" AllowPaging="True" 
-                AutoGenerateColumns="False" EnableModelValidation="True" CssClass="table table-bordered table-striped table-hover">
-                <Columns>
-                    <asp:TemplateField HeaderText="报警类型">
-                        <ItemTemplate>
-                            低报警 
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="MEASUREVALUE" HeaderText="报警值" />
-                    <asp:BoundField DataField="ALMCOMMENT" HeaderText="报警描述" />
-                    <asp:BoundField DataField="LOGTIME" HeaderText="报警时间" />
-                    <asp:BoundField DataField="ACKTIME" HeaderText="确认时间" />
-                    <asp:BoundField DataField="ACKOPERATORNAME" HeaderText="确认人" />
-                    <asp:TemplateField HeaderText="处理">
-                        <ItemTemplate>处理</ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <PagerSettings Visible="False" />
-            </asp:GridView>
-            <br />
-            <div id="alarmpager" class="pager"></div>
+           <table class="table table-bordered table-striped" data-bind="dataTable:
+            {
+                dataSource: alarmlogInfos,
+                rowTemplate: 'alarmlogGridTemplate',
+                iDisplayLength: 10,
+                sPaginationType: 'bootstrap',
+                gridId: 'alarmlogGrid',
+                sDom: 't<\'row\'<\'col-md-6\'i><\'col-md-6 text-right\'p>>',
+                columns: [
+                    {'name':'Pointnum' },
+                    {'name':'Alarmtype' },
+                    {'name':'Measureunitname' },
+                    {'name':'Measurevalue'},
+                    {'name':'Almcomment'},
+                    {'name':'Logtime'},
+                    {'name':'Acktime'},
+                    {'name':'Ackoperatorname'},
+                    {'name':'Logid'}
+                ]}">
+                    <thead>
+                        <tr>
+                            <th>计量点</th>
+                            <th>报警类型</th>
+                            <th>报警参量</th>
+                            <th>报警值</th>
+                            <th>报警描述</th>
+                            <th>报警时间</th>
+                            <th>确认时间</th>
+                            <th>确认人</th>
+                            <th>处理</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    </tbody>
+        </table>
+                    
+        <script Id="alarmlogGridTemplate" type="text/html">
+            <td data-bind="text: Pointnum"></td><td data-bind="text: Alarmtype"></td><td data-bind="text: Measureunitname"></td><td data-bind="    text: Measurevalue"></td>
+            <td data-bind="text: Almcomment"></td>
+            <td data-bind="text: Logtime"></td>
+            <td data-bind="text: Acktime"></td>
+            <td data-bind="text: Ackoperatorname"></td>
+            <td data-bind="text: Logid"></td>
+
+            </script>
         </div>
     </div>
 </div>

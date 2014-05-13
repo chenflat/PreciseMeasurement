@@ -48,7 +48,7 @@
               <div class="panel-heading">自定报表导航</div>
               <div class="panel-body" id="SettingNameList">       
                 <% foreach (var item in SettingList) { %>
-                    <div class="settingitem"><a href="#" class="rowQuery" itemname="<%=item %>" title="点击标题执行运算"> <%=item %></a>  <span class="pull-right">
+                    <div class="settingitem" style="padding:4px;"><a href="#" class="rowQuery" itemname="<%=item %>" title="点击标题显示自定义报表"> <%=item %></a>  <span class="pull-right">
 
                     <a href="#" class="editSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-pencil"></i></a>
                     <a href="#" class="delSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-remove"></i></a>

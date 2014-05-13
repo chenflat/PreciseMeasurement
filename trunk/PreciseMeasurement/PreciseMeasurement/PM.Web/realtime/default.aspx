@@ -85,17 +85,7 @@
         </table>
 
               </div>
-              <div class="form-group wrapper m-b-none">
-                <div class="input-group">
-                <form class="navbar-search">
-                  <input type="text" class="form-control" placeholder="Search">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-info btn-icon"><i class="fa fa-search"></i></button>
-                  </span> 
-                </form>
-                  </div>
-              </div>
-            
+                          
           </section>
         </section>
 

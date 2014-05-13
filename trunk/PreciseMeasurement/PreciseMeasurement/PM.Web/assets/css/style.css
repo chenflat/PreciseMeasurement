@@ -393,7 +393,7 @@ h1[id] {
   left: auto;
   margin-left: auto;
   margin-right: auto;
-  width:900px;
+  width:920px;
 }
 
 /* Example dropdowns */
@@ -3474,22 +3474,32 @@ width:50%;
 float:left;
 }
 .row-2 .col-0 {
-clear:none;
+  clear:none;
 }
 .row-2 li:nth-child(odd) {
-clear:left;
-margin-left:0;
+  clear:left;
+  margin-left:0;
 }
 .text-center-xs {
-text-align:center;
+  text-align:center;
 }
 .text-left-xs {
-text-align:left;
+  text-align:left;
 }
 .pull-none-xs {
-float:none !important;
+  float:none !important;
 }
 .hidden-xs.show {
-    display:inherit !important;
+  display:inherit !important;
 }
 }
+
+
+.pagination {
+margin:0px;}
+
+
+/** 2014-03-15 新增 */
+
+.setting {margin-top:10px;}
+.setting .customlist { line-height: 20px; list-style: none; padding:0px;margin-top:10px;}
