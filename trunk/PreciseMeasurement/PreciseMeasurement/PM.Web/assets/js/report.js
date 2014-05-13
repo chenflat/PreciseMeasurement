@@ -1,4 +1,4 @@
-﻿/**
+/**
 * 统计报表JS
 * @author PING.CHEN
 * @version 1.0 build20131121
@@ -331,6 +331,8 @@ $(function () {
         $('#hdnSettingName').val(name);
         //创建自定义报表
         CreateCustomReport(name);
+        $(".settingitem").css("background-color",'#fff');
+        $(this).parent().css("background-color","#ececec");
      });
 
     /**
@@ -436,8 +438,8 @@ $(function () {
             var ds = new Date(startdate);
             var de = new Date(enddate);
 
-            startdate = ds.toString("yyyy-MM-dd");
-            enddate = de.toString("yyyy-MM-dd 23:59:59");
+            $(".startdate").attr('title', "开始日期" + startdate);
+            $(".enddate").attr('title', "结束日期" + enddate);
 
             $.ajax({
                 type: "GET",
@@ -511,11 +513,18 @@ function getAllReportData(pageindex) {
 
     startdate = ds.toString("yyyy-MM-dd 00:00:00");
     enddate = de.toString("yyyy-MM-dd 23:59:59");
+
+    $(".startdate").attr('title',"开始日期"+ startdate);
+    $(".enddate").attr('title',"结束日期"+ enddate);
+
     $.ajax({
         type: "GET",
         url: "../services/GetAjaxData.ashx",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        beforeSend: function() {
+            $("#dvProgress").show();
+        },
         data: { "funname": "GetMeasurementReport", "pointnum":pointnum,"startdate": startdate, "enddate": enddate, "level": level,"orgid":orgid, "pageindex": pageindex, "type": type },
         success: OnSuccess,
         error: OnFail
@@ -534,14 +543,31 @@ function OnFail(result) {
 function OnSuccess(response) {
    // console.log(response);
     var measurements = response.List;
-    if (measurements.length == 0)
-        return;
 
     var row = $("[id*=gvMeasurementReport] tr:last-child").clone(true);
     $("[id*=gvMeasurementReport] tr").not($("[id*=gvMeasurementReport] tr:first-child")).remove();
 
+    //没有查询结果时，自动添加一行空数据
+    if (measurements.length == 0) {
+        var obj = {
+            Description: "",
+            Endtime: "",
+            LastValue: 0,
+            Level: "",
+            Measuretime: "",
+            Measureunitid: "",
+            Pointnum: "",
+            StartValue: 0,
+            Starttime: "",
+            Value: 0
+        }
+        measurements.push(obj);
+        //return;
+    }
+
+
     $.each(measurements, function (index, obj) {
-         //console.log(obj);
+       //  console.log(obj);
         $("td", row).eq(0).html(obj.Description);
         $("td", row).eq(1).html(toRoman(obj.Level) + " 级");
         $("td", row).eq(2).html(moment(obj.Starttime).format("YYYY-MM-DD HH:mm"));
@@ -549,7 +575,10 @@ function OnSuccess(response) {
         $("td", row).eq(4).html(moment(obj.Endtime).format("YYYY-MM-DD HH:mm"));
         $("td", row).eq(5).html(obj.LastValue);
         $("td", row).eq(6).html(obj.Value);
-
+        //判断是否空数据，如果是则清空所有内容
+        if (obj.Description == "") {
+            $("td", row).html('');
+        }
         $("[id*=gvMeasurementReport]").append(row);
         row = $("[id*=gvMeasurementReport] tr:last-child").clone(true);
     });
@@ -562,6 +591,7 @@ function OnSuccess(response) {
         PageSize: parseInt(pager.PageSize),
         RecordCount: parseInt(pager.RecordCount)
     });
+    $("#dvProgress").hide();
 }
 
 function initQueryDate () {

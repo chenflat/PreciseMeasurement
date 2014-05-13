@@ -313,10 +313,14 @@ function GetChart(startdate, enddate, datetype) {
 
 				//重新整理数据到指定类型的数组
 				$.each(result, function(index, obj) {
-					data_SwTemperature.push([new Date(obj.Measuretime).getTime(), obj.SwTemperature]);
-					data_AiDensity.push([new Date(obj.Measuretime).getTime(), obj.AiDensity]);
-					data_AfFlowInstant.push([new Date(obj.Measuretime).getTime(), obj.AfFlowinstant]);
-					data_SwPressure.push([new Date(obj.Measuretime).getTime(), obj.SwPressure]);
+
+					//new Date(obj.Measuretime).getTime()
+					var time = moment(moment(obj.Measuretime).format("YYYY-MM-DD HH:mm:00")).valueOf();
+					console.log(time);
+					data_SwTemperature.push([time, obj.SwTemperature]);
+					data_AiDensity.push([time, obj.AiDensity]);
+					data_AfFlowInstant.push([time, obj.AfFlowinstant]);
+					data_SwPressure.push([time, obj.SwPressure]);
 				});
 
 
