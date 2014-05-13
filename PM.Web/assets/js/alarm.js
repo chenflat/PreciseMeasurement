@@ -19,11 +19,14 @@ $(function () {
     });
 
 
-
+    //报警日志Model
     function AlarmlogInfo(data) {
         var self = this;
         self.Logid = ko.observable(data.Logid);
-        self.Logtime = ko.observable(data.Logtime);
+        self.Logtime = ko.computed(function(){
+            return moment(data.Logtime).format("YYYY-MM-DDTHH:mm");
+        });
+
         self.Measurevalue = ko.observable(data.Measurevalue);
         self.Limitvalue = ko.observable(data.Limitvalue);
         self.Alarmtype = ko.observable(data.Alarmtype);
@@ -32,7 +35,9 @@ $(function () {
         self.Pointnum = ko.observable(data.Pointnum);
         self.Almpriority = ko.observable(data.Almpriority);
         self.Almoperatorname = ko.observable(data.Almoperatorname);
-        self.Acktime = ko.observable(data.Acktime);
+        self.Acktime = ko.computed(function(){
+            return moment(data.Acktime).format("YYYY-MM-DDTHH:mm");
+        });
         self.Ackvalue = ko.observable(data.Ackvalue);
         self.Ackoperatorname = ko.observable(data.Ackoperatorname);
         self.Rettime = ko.observable(data.Rettime);
@@ -44,31 +49,28 @@ $(function () {
         self.Status = ko.observable(data.Status);
         self.Orgid = ko.observable(data.Orgid);
         self.Measureunitname = ko.observable(data.Measureunitname);
+        self.AlarmtypeDesc = ko.computed(function(){
+            switch (data.Alarmtype) {
+            case 1: return "低报警";
+            case 2: return "超低报警";
+            case 3: return "高报警";
+            case 4: return "超高报警";
+            default: return "";
+        }
+        });
 
     }
 
+    //视图模型
     function ViewModel() {
         var self = this;
         // create an empty observable array...will fill with json data
         self.alarmlogInfos = ko.observableArray([]); 
-        // page.php below is a link to the php page that contains your json code created above
-       /* jQuery.getJSON('http://chadmullins.com/misc-php/knockout-series-json.php', {
-            returnformat: 'json'
-            }, function(allData) {
-                var mappedData= jQuery.map(allData, function(item) { return new AlarmlogInfo(item) });
-                self.alarmlogInfos(mappedData);
-            });
-        }
-*/
 
         self.loadAlarmlogs = function() {
 
-
             var oTable = $('#alarmgrd').dataTable();
             var oSettings = oTable.fnSettings();
-
-            console.log(oSettings);
-
 
             startdate = $(".alarm .startdate").val();
             enddate = $(".alarm .enddate").val();
@@ -84,9 +86,11 @@ $(function () {
             var ds = new Date(startdate);
             var de = new Date(enddate);
 
-            startdate = ds.toString("yyyy-MM-dd");
+            startdate = ds.toString("yyyy-MM-dd 00:00:00");
             enddate = de.toString("yyyy-MM-dd 23:59:59");
 
+            $(".alarm .startdate").attr('title', '开始时间：'+ startdate );
+            $(".alarm .enddate").attr('title', '结束时间：'+ enddate);
             console.log(enddate);
 
             var path = CONTEXT_PATH + "services/GetAlarmlogs.ashx"

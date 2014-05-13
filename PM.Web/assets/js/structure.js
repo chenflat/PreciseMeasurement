@@ -120,25 +120,24 @@ $(function () {
     });
 
 
-
-
     //每60秒自动重新获取实时数据
     getRealtimeData()
     setInterval(getRealtimeData, 60000);
     counter();
 
     //防止未加载，1秒后重新加载一次
-    setTimeout(getRealtimeData,1000);
+    setTimeout(getRealtimeData,2000);
   
     //为数据列表添加滚动条
-    $("img#structrueimg").load(function(){
+    $("img#structrueimg").load(function() {
+        var height =  $(this).height()-50;
         $('#datalist').slimScroll({
-         height: $(this).height()
+            height:height
         });
+
     });
 
-
-
+    
 
     //获取设置类型
     function GetType() {
@@ -153,7 +152,7 @@ $(function () {
     $('input[name="carrier"]:radio').change(function() {
          var carrier = $("input[name='carrier']:checked").val();
 
-       $.each($("#gvRealtimeData tr"),function(index,row){
+       $.each($("#gvRealtimeData tbody tr"),function(index,row){
             $(row).show();
             var type = $(row).attr("type");
             if(type!=carrier && (carrier!="")) {
@@ -191,13 +190,6 @@ $(function () {
                 console.log(response);
             }
         });
-
-        /*
-        $.getJSON('../services/GetAjaxData.ashx', {
-            "funname": "GetRealtimeMeasureValue"
-        }, function(data) {
-            appModel.measurepoint().updatePositions(data);
-        }); */
     }
 
     //点击记量点，动态显示当前数据的计量值
@@ -238,7 +230,7 @@ $(function () {
             } else {
                 $("#swichbar").text('<<');
                 $("#refresh").css({
-                    left: 750
+                    left: 980
                 });
             }
         });
@@ -308,8 +300,8 @@ $(window).load(function () {
         $(".meter").draggable();
         $("#structure").droppable({
             deactivate: function (event, ui) {
-                console.log(ui);
-                console.log(ui.draggable);
+                //console.log(ui);
+                //console.log(ui.draggable);
 
                 var elementId = ui.draggable.attr("id");
 

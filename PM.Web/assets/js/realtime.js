@@ -341,6 +341,9 @@ $(function () {
         var pointnum = $("#pointnum").val();
         var startdate = new Date().add(-1).day().toString("yyyy-MM-dd HH:mm");
         var endate = new Date().toString("yyyy-MM-dd HH:mm");
+
+        console.log("startdate:"+ startdate);
+
         GetMinuteData(pointnum, startdate, endate, 1)
     }
     initMinuteData();
@@ -499,6 +502,9 @@ function OnSuccessForMinute(response) {
 
 //获取小时数据
 function GetHourData(pointnum, startdate, enddate, pageindex) {
+
+    console.log("hour startdate:" + startdate);
+
     enddate = enddate + " 23:59";
     $.ajax({
         type: "GET",
@@ -715,7 +721,7 @@ function OnSuccessHourChart(response){
     //如果数据长度不足100
     var step = response.length > 100 ? Math.floor(response.length / 10) : 24;
     if (type == "MINUTE") {
-        dtformat = "MM-dd HH:00";
+        dtformat = "HH:00";
     }
 
 	var charItems = [
