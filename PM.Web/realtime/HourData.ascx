@@ -5,8 +5,8 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading hour">
-        起始时间：<input type="text" id="startdate" class="Wdate startdate" />
-        终止时间：<input type="text" class="Wdate enddate" id="enddate" />
+        起始时间：<input type="text" id="hstartdate" class="Wdate" />
+        终止时间：<input type="text" class="Wdate" id="henddate" />
          <input type="button" class="btn btn-info" id="btnHourQuery" value="查询" />
     </div>
     <div class="panel-body">

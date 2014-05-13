@@ -4,10 +4,12 @@
 <%@ Register src="../controls/PageControl.ascx" tagname="PageControl" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/lang/zh-cn.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/My97DatePicker/WdatePicker.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
 
+    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/moment/moment-with-langs.min.js") %>"></script>
 
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/alarm.js") %>"></script>
@@ -53,7 +55,7 @@
                 sDom: 't<\'row\'<\'col-md-6\'i><\'col-md-6 text-right\'p>>', 
                 columns: [
                     {'name':'Pointnum' },
-                    {'name':'Alarmtype' },
+                    {'name':'AlarmtypeDesc' },
                     {'name':'Measureunitname' },
                     {'name':'Measurevalue'},
                     {'name':'Almcomment'},
@@ -81,12 +83,15 @@
         </table>
                     
         <script Id="alarmlogGridTemplate" type="text/html">
-            <td data-bind="text: Pointnum"></td><td data-bind="text: Alarmtype"></td><td data-bind="text: Measureunitname"></td><td data-bind="text: Measurevalue"></td>
+            <td data-bind="text: Pointnum"></td>
+            <td data-bind="text: AlarmtypeDesc"></td>
+            <td data-bind="text: Measureunitname"></td>
+            <td data-bind="text: Measurevalue"></td>
             <td data-bind="text: Almcomment"></td>
             <td data-bind="text: Logtime"></td>
             <td data-bind="text: Acktime"></td>
             <td data-bind="text: Ackoperatorname"></td>
-            <td data-bind="text: Logid"></td>
+                <td><a href="#" data-bind="attr : {id: Logid }">处理</a></td>
 
             </script>
             

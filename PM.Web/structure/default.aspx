@@ -76,7 +76,13 @@
         </ItemTemplate>
         </asp:Repeater>
         <img src="../assets/img/systemrunchart.png" width="1100" alt="" id="structrueimg" />
+        <div id="info" style="padding-left:25px;margin-top:5px;"> 图例信息：
+            <span class="icon nomarl"></span> 连通
+            <span class="icon fault"></span> 中断
+        
     </div>
+    </div>
+    
     </td>
     <td> <div class="swichbar" id="swichbar">>></div></td>
     <td>
