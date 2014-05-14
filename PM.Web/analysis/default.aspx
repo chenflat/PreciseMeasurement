@@ -7,7 +7,6 @@
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/ASPSnippets_Pager.min.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 
-    <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/moment/moment-with-langs.min.js") %>"></script>
 
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/highcharts/highstock.js") %>"></script>
     <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/analysis.js") %>"></script>
