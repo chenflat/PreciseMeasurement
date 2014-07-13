@@ -1,3 +1,5 @@
+//var console = {};console.log = function {};
+
 $(function () {
 
     var $window = $(window)
@@ -55,7 +57,7 @@ $(function () {
 
     //main-nav
 
-    console.log(window.location.pathname);
+   // console.log(window.location.pathname);
     if (window.location.pathname == "/" || window.location.pathname.toLowerCase() == "/default.aspx") {
         console.log("this");
         $("#main-nav").hide();
@@ -122,7 +124,7 @@ $(function () {
                     $slimResize;
         $self.slimScroll($data);
 
-        console.log($data);
+       // console.log($data);
 
 
       
@@ -132,7 +134,7 @@ $(function () {
         });
     });
 
-    setInterval("GetTime()", 60000);
+    setInterval("GetTime()", 1000);
 
 
 
@@ -185,8 +187,8 @@ function GetTime() {
 			+ now.getDate();
     //var week = day[now.getDay()];
 
-    if ($("#time").length) {
-        $("#time").html(time);
+    if ($(".clock .time").length) {
+        $(".clock .time").text(time);
     }
 }
 

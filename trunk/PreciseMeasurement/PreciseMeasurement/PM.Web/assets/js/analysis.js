@@ -15,12 +15,20 @@ $(function () {
 
 	//初始化分钟
 	function initHistoryMinute() {
-		$(".analysis .startdate").val(new Date().addHours(-12).toString("yyyy-MM-dd HH:mm"));
-		$(".analysis .enddate").val(new Date().toString("yyyy-MM-dd HH:mm"));
+		$(".analysis .startdate").val(new Date().addHours(-11).toString("yyyy-MM-dd HH:mm"));
+		//结束时间取整点
+		var date = moment().format("YYYY-MM-DD");
+		var hour = parseInt(moment().format("HH")) + 1;
+		var fullDate = date + " " + hour + ":00"
+		//console.log(fullDate);
+		$(".analysis .enddate").val(fullDate);
+
 	}
 	//初始化小时
 	function initHistoryHour() {
-		$(".analysis .startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+		//$(".analysis .startdate").val(Date.today().add(-1).day().toString("yyyy-MM-dd"));
+		  var start = moment().subtract('days', 7).format('YYYY-MM-DD');
+        $(".analysis .startdate").val(start);
 		$(".analysis .enddate").val(Date.today().toString("yyyy-MM-dd"));
 	}
 
@@ -148,12 +156,16 @@ $(function () {
 		$.post('../../services/PostAjaxData.ashx', data, function (result) {
 			if (result == "True") {
 				$('#myModal').modal('hide');
+
+				//$("#btnQuery").trigger("click");
+
 			}
 		});
 	});
 
 	//生成曲线
 	$("#btnQuery").click(function() {
+		console.log('create chart');
 		$("#dvProgress").show();
 		historyDataChart()
 		
@@ -162,9 +174,24 @@ $(function () {
 
 	function historyDataChart() {
 
+		var type = getDateType();
+
+		console.log(type)
+
 		//获取开始和结束日期，时间类型（分钟、小时）
 		var startdate = $(".startdate").val();
 		var enddate = $(".enddate").val();
+
+
+		if(moment(startdate).isValid() && (type != "MINUTE")) {
+			startdate = moment(startdate).format("YYYY-MM-DD 00:00:00")
+		}
+		if(moment(enddate).isValid() && (type != "MINUTE")) {
+			enddate = moment(enddate).format("YYYY-MM-DD 23:59:59")
+		}
+
+		console.log("chart date range:"+ startdate + "," + enddate);
+
 		var datetype = $("input[name='datetype']:checked").val();
 		GetChart(startdate, enddate, datetype);
 		
@@ -197,10 +224,9 @@ function GetFormat() {
 
 function AddEvent() {
 	var type = getDateType();
+	console.log(type);
 
-	if (type == "Minute") {
-
-
+	if (type == "MINUTE") {
 		$(".analysis .startdate").click(function() {
 			WdatePicker({
 				lang: 'zh-cn',
@@ -213,7 +239,10 @@ function AddEvent() {
 			WdatePicker({
 				lang: 'zh-cn',
 				dateFmt: GetFormat(),
-				maxDate: '%y-%M-%d {%H + 12}'
+				maxDate: '%y-%M-%d {%H + 12}',
+				onpicked:function(){
+					//$("#btnQuery").trigger("click");
+				}
 			})
 		});
 	} else {
@@ -230,7 +259,10 @@ function AddEvent() {
 			WdatePicker({
 				lang: 'zh-cn',
 				dateFmt: GetFormat(),
-				maxDate: '%y-%M-{%d + 1}'
+				maxDate: '%y-%M-{%d + 1}',
+				onpicked:function(){
+					//$("#btnQuery").trigger("click");
+				}
 			})
 		});
 	}
@@ -276,6 +308,10 @@ function GetChart(startdate, enddate, datetype) {
 
 	//获取比较参数
 	var params = getCompareParams();
+
+	console.log(params);
+
+
 	//获取要比较的计量点
 	var points = getComparePoints();
 	var datetype = getDateType();
@@ -316,7 +352,7 @@ function GetChart(startdate, enddate, datetype) {
 
 					//new Date(obj.Measuretime).getTime()
 					var time = moment(moment(obj.Measuretime).format("YYYY-MM-DD HH:mm:00")).valueOf();
-					console.log(time);
+					//console.log(time);
 					data_SwTemperature.push([time, obj.SwTemperature]);
 					data_AiDensity.push([time, obj.AiDensity]);
 					data_AfFlowInstant.push([time, obj.AfFlowinstant]);
@@ -356,21 +392,24 @@ function GetChart(startdate, enddate, datetype) {
 						]
 					];
 
+					//清空容器，防止再次显示
+					$("#charts").html("");
 
 					//不同的参数创建不同的图表
 					$.each(params, function(index, obj) {
+						
 						switch (obj.num) {
 							case "SW_Temperature":
-								createChart(obj, seriesOptions_Temp, '温度(℃)', '(℃)', seriesCounter);
+								createChart(obj, seriesOptions_Temp, 'Temperature(℃)', '(℃)', seriesCounter);
 								break;
 							case "AI_Density":
-								createChart(obj, seriesOptions_Density, '频率(Hz)', '(Hz)', seriesCounter);
+								createChart(obj, seriesOptions_Density, 'Density(Hz)', '(Hz)', seriesCounter);
 								break;
 							case "AF_FlowInstant":
-								createChart(obj, seriesOptions_FlowInstant, '流量(t)', '(t)', seriesCounter);
+								createChart(obj, seriesOptions_FlowInstant, 'Flowinstant(t/h)', '(t/h)', seriesCounter);
 								break;
 							case "SW_Pressure":
-								createChart(obj, seriesOptions_Pressure, '压力(MPa)', '(MPa)', seriesCounter);
+								createChart(obj, seriesOptions_Pressure, 'Pressure(MPa)', '(MPa)', seriesCounter);
 								break;
 							default:
 								break;
@@ -390,6 +429,7 @@ function GetChart(startdate, enddate, datetype) {
 	function createChart(obj,series,ytitle,unit,countParam) {
 
 		$("#charts").append("<div id='" + obj.num + "'></div>");
+
 		var id = obj.num;
 		Highcharts.setOptions({
 			global: {
