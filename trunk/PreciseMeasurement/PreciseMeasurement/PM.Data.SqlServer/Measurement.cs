@@ -41,6 +41,12 @@ namespace PM.Data.SqlServer
            return DbHelper.ExecuteReader(CommandType.StoredProcedure, "GetLastMeasureValueByAllPoint", param);;
        }
 
+       public IDataReader GetLastMeasureValueByAllPoint() {
+           string commandText = string.Format("select ment.* from [{0}MEASUREMENT] ment inner join (select MAX(MEASUREMENTID) as MEASUREMENTID from [{0}MEASUREMENT] group by POINTNUM) point on ment.MEASUREMENTID=point.MEASUREMENTID", BaseConfigs.GetTablePrefix);
+           return DbHelper.ExecuteReader(CommandType.Text, commandText);
+       }
+
+
        /// <summary>
        /// 获取指定计量器的第一条记录值
        /// </summary>
@@ -96,7 +102,7 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@PointNum", (DbType)SqlDbType.VarChar, 30, pointnum), 
                                   DbHelper.MakeInParam("@StartDate", (DbType)SqlDbType.VarChar, 30, startdate), 
                                   DbHelper.MakeInParam("@EndDate", (DbType)SqlDbType.VarChar, 30, enddate), 
-                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, type), 
+                                  DbHelper.MakeInParam("@Type", (DbType)SqlDbType.VarChar, 20, type.ToUpper()), 
                                   DbHelper.MakeInParam("@PageIndex",(DbType)SqlDbType.Int,4,pageindex),
                                   DbHelper.MakeInParam("@PageSize",(DbType)SqlDbType.Int,4,pagesize),
                                   DbHelper.MakeOutParam("@RecordCount",(DbType)SqlDbType.Int,4)

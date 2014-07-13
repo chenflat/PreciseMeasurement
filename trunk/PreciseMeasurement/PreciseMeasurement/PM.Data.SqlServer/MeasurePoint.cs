@@ -72,11 +72,16 @@ namespace PM.Data.SqlServer
                                   DbHelper.MakeInParam("@ORGID", (DbType)SqlDbType.VarChar, 8, orgid),
                                   DbHelper.MakeInParam("@SITEID", (DbType)SqlDbType.VarChar, 8, siteid)
                                     };
-
-
-            string commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] inner join CP_GetOrgIdTable('{1}') b on [{0}MEASUREPOINT].orgid=b.orgid WHERE [{0}MEASUREPOINT].LEVEL=@LEVEL and [{0}MEASUREPOINT].CARRIER=@CARRIER " +
+            string commandText = "";
+            if (carrier == "") {
+                commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] inner join CP_GetOrgIdTable('{1}') b on [{0}MEASUREPOINT].orgid=b.orgid WHERE [{0}MEASUREPOINT].LEVEL=@LEVEL " +
                 " and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
-                BaseConfigs.GetTablePrefix,orgid);
+                BaseConfigs.GetTablePrefix, orgid);
+            } else {
+                commandText = string.Format("SELECT [{0}MEASUREPOINT].* FROM [{0}MEASUREPOINT] inner join CP_GetOrgIdTable('{1}') b on [{0}MEASUREPOINT].orgid=b.orgid WHERE [{0}MEASUREPOINT].LEVEL=@LEVEL and [{0}MEASUREPOINT].CARRIER=@CARRIER " +
+                " and isnull([{0}MEASUREPOINT].siteid,'')=@SITEID AND [{0}MEASUREPOINT].STATUS='ACTIVE'",
+                BaseConfigs.GetTablePrefix, orgid);
+            }
 
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
