@@ -84,11 +84,25 @@ namespace PM.Web.services {
         /// <returns></returns>
         public string SaveReportSetting(HttpContext context, Dictionary<string, object> dictionary) {
 
+            string editname = "";
+
+            if (dictionary.ContainsKey("editname"))
+            {
+                editname = dictionary["editname"].ToString();
+            }
+            
+
             bool ret = false;
             if (dictionary.ContainsKey("data")) {
 
+               
                 List<ReportSettingInfo> list = JsonConvert.DeserializeObject<List<ReportSettingInfo>>(dictionary["data"].ToString());
                 ret = PM.Business.ReportSetting.SaveReportSetting(list);
+
+                if (editname.Length > 0)
+                {
+                    PM.Data.ReportSetting.DeleteReportSettingByUserId(editname, list[0].UserId, list[0].Orgid);
+                }
             }
             return ret.ToString();
         }

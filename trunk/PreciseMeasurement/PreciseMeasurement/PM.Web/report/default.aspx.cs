@@ -21,7 +21,6 @@ namespace PM.Web.report
             if (!IsPostBack)
             {
                 BindDropDownList();
-                BindData();
             }
         }
 
@@ -48,8 +47,8 @@ namespace PM.Web.report
                
             }
 
-            gvMeasurementReport.DataSource = measurements;
-            gvMeasurementReport.DataBind();
+           // gvMeasurementReport.DataSource = measurements;
+            //gvMeasurementReport.DataBind();
          
         }
 
@@ -67,7 +66,7 @@ namespace PM.Web.report
             }
             if (m_enddate == "")
             {
-                m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59";
+                m_enddate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
             }
 
             DataTable measurements = Data.Measurement.FindMeasurementByAllPoint(m_startdate, m_enddate,m_level, "ALL",ddlOrgId.SelectedValue, pageindex, pagesize).Tables[0];

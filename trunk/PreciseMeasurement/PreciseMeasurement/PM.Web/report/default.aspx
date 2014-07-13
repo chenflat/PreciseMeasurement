@@ -60,6 +60,31 @@
             
             </Columns>
         </asp:GridView>
+
+        <table id="gvMeasurementReport" class="table table-bordered table-striped">
+            <tr>
+                <th>计量点</th>
+                <th>级别</th>
+                <th>起始时间</th>
+                <th>起始表数(t)</th>
+                <th>截止时间</th>
+                <th>终止表数(t)</th>
+                <th>日用量(t)</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+
         <br />
         <div id="pager" class="pager">
         </div>
