@@ -142,10 +142,10 @@ namespace PM.Data
             measurement.DeviceNum = reader.GetSchemaTable().Columns["DEVICENUM"] == null ? "" : reader["DEVICENUM"].ToString();
             measurement.Inspector = reader.GetSchemaTable().Columns["INSPECTOR"] == null ? "" : reader["INSPECTOR"].ToString();
             measurement.Measuretime = TypeConverter.StrToDateTime(reader["MEASURETIME"].ToString(), DateTime.Parse("1900-01-01"));
-            measurement.AiDensity = reader.IsDBNull(reader.GetOrdinal("AI_DENSITY")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AI_DENSITY"));
-            measurement.SwTemperature = reader.IsDBNull(reader.GetOrdinal("SW_TEMPERATURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_TEMPERATURE"));
-            measurement.AfFlowinstant = reader.IsDBNull(reader.GetOrdinal("AF_FLOWINSTANT")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT"));
-            measurement.SwPressure = reader.IsDBNull(reader.GetOrdinal("SW_PRESSURE")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE"));
+            measurement.AiDensity = reader.IsDBNull(reader.GetOrdinal("AI_DENSITY")) ? 0 : decimal.Round(reader.GetDecimal(reader.GetOrdinal("AI_DENSITY")),2);
+            measurement.SwTemperature = reader.IsDBNull(reader.GetOrdinal("SW_TEMPERATURE")) ? 0.0m : decimal.Round(reader.GetDecimal(reader.GetOrdinal("SW_TEMPERATURE")),1);
+            measurement.AfFlowinstant = reader.IsDBNull(reader.GetOrdinal("AF_FLOWINSTANT")) ? 0.00m : decimal.Round(reader.GetDecimal(reader.GetOrdinal("AF_FLOWINSTANT")),2);
+            measurement.SwPressure = reader.IsDBNull(reader.GetOrdinal("SW_PRESSURE")) ? 0.000m : decimal.Round(reader.GetDecimal(reader.GetOrdinal("SW_PRESSURE")),3);
             measurement.AtFlow = reader.IsDBNull(reader.GetOrdinal("AT_FLOW")) ? 0 : reader.GetDecimal(reader.GetOrdinal("AT_FLOW"));
             measurement.MV1 = reader.GetSchemaTable().Columns["MV1"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV1"));
             measurement.MV2 = reader.GetSchemaTable().Columns["MV2"] == null ? 0 : reader.GetDecimal(reader.GetOrdinal("MV2"));

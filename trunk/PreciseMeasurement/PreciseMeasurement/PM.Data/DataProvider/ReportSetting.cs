@@ -64,7 +64,7 @@ namespace PM.Data
         /// <param name="userid">用户ID</param>
         /// <param name="orgid">组织机构ID</param>
         /// <returns></returns>
-        public static List<String> GetReportSettingNameList(int userid, string orgid) {
+        public static List<string> GetReportSettingNameList(int userid, string orgid) {
             List<String> settingNameList = new List<string>();
             using (IDataReader reader =DatabaseProvider.GetInstance().GetReportSettingNameList(userid, orgid)) {
                 while (reader.Read()) {
