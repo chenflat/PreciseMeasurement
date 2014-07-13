@@ -1,9 +1,10 @@
-﻿/**
+﻿
+
+/**
  * 系统结构图
  * @author: PING.CHEN
  * @version: 1.0 build20131121
  */
-
 function StructureModel() {
     var self = this;
     self.measurepoint = ko.observable(new MeasurePointModel());
@@ -14,6 +15,43 @@ function MeasurePointModel() {
     var self = this;
 
     self.rows = ko.observableArray();
+
+    self.filter = ko.observable("");
+    self.filteredItems = ko.dependentObservable(function() {
+        var filter = self.filter().toLowerCase();
+
+        if (!filter) {
+            return self.rows();
+        } else {
+            return ko.utils.arrayFilter(self.rows(), function(item) {
+                if(filter!="") {
+                     return item.Carrier.toLowerCase()==filter;
+                 } else {
+                     return self.rows();
+                 }
+               
+            });
+        }
+    }, self);
+
+    self.gridOptions = { 
+        data: self.filteredItems,
+        columnDefs: [
+            {field: 'fullName', displayName: '计量点',width:'150px'},
+            {field: 'time', displayName: '采集时间',width:'110px'},
+            {field: 'formattedPressure', displayName: '压力(MPa)',width:'80px'},
+            {field: 'formattedTemp', displayName: '温度(℃)',width:'80px'},
+            {field: 'formattedAfFlowinstant', displayName: '瞬时流量(t/h)',width:'100px'}
+        ],
+        displaySelectionCheckbox:false,
+        footerVisible: false,
+        multiSelect: false
+    };
+
+    
+
+
+
 
     var rowLookup = {};
     self.loadPositions = function(positions) {
@@ -76,23 +114,36 @@ function MeasurePointDataModel(data) {
     self.Pointnum = data.Pointnum;
     self.Description = data.Description;
     self.Carrier = data.Carrier;
-    self.Measuretime = ko.observable();
-    self.SwPressure = ko.observable(0);
-    self.SwTemperature = ko.observable(0);
-    self.AfFlowinstant = ko.observable(0);
-    self.AtFlow = ko.observable(0);
-    self.AiDensity = ko.observable(0);
+    self.Measuretime = ko.observable(data.Measuretime);
+    self.SwPressure = ko.observable(data.SwPressure);
+    self.SwTemperature = ko.observable(data.SwTemperature);
+    self.AfFlowinstant = ko.observable(data.AfFlowinstant);
+    self.AtFlow = ko.observable(data.AtFlow);
+    self.AiDensity = ko.observable(data.AiDensity);
     self.fullName = ko.computed(function(){return "["+ self.Pointnum + "]" + self.Description});
     self.time = ko.computed(function() {
         var t = ko.toJS(self.Measuretime);
         if(typeof(t)!='undefined ') {
            var a = moment(t).format("MM-DD HH:mm:ss");
-          // console.log(a + "  " + t);
            return a;
         }
     });
-    self.formattedTemp = ko.computed(function() { return self.SwTemperature().toFixed(1); });
-    self.formattedPressure = ko.computed(function() { return self.SwPressure().toFixed(2); });
+    self.formattedTemp = ko.computed(function() { 
+       // return self.SwTemperature(); 
+        var num = parseFloat(ko.toJS(self.SwTemperature()));
+        return  formartNumber(num,1)
+
+    });
+    self.formattedPressure = ko.computed(function() { 
+        var num = parseFloat(ko.toJS(self.SwPressure()));
+        return  formartNumber(num,3)
+    });
+
+    self.formattedAfFlowinstant = ko.computed(function(){
+        var num = parseFloat(ko.toJS(self.AfFlowinstant()));
+        return  formartNumber(num,2)
+    });
+
 
     self.change = ko.observable(0);
     self.arrow = ko.observable();
@@ -103,6 +154,26 @@ function MeasurePointDataModel(data) {
        // self.change((delta / self.price() * 100).toFixed(2));
        // self.price(newPrice);
       };
+}
+
+
+ function formartNumber(num,length) {
+    if (isNaN(num)) {  
+        return;  
+    } 
+    var ret = Math.floor(num * 1000) / 1000;
+
+    var s = ret.toString();  
+    var rs = s.indexOf('.');  
+    if (rs < 0) {  
+        rs = s.length;  
+        s += '.';  
+    }  
+    while (s.length <= rs + length) {  
+         s += '0';  
+    }  
+    //console.log(s);
+    return s;
 }
 
 
@@ -126,20 +197,10 @@ $(function () {
     counter();
 
     //防止未加载，1秒后重新加载一次
-    setTimeout(getRealtimeData,2000);
+    setTimeout(getRealtimeData,1000);
   
-    //为数据列表添加滚动条
-    $("img#structrueimg").load(function() {
-        var height =  $(this).height()-50;
-        $('#datalist').slimScroll({
-            height:height
-        });
 
-    });
-
-    
-
-    //获取设置类型
+   //获取设置类型
     function GetType() {
         var type = $("input[name='carrier']:checked").val();
         if (type == '') {
@@ -152,6 +213,7 @@ $(function () {
     $('input[name="carrier"]:radio').change(function() {
          var carrier = $("input[name='carrier']:checked").val();
 
+/*
        $.each($("#gvRealtimeData tbody tr"),function(index,row){
             $(row).show();
             var type = $(row).attr("type");
@@ -160,7 +222,7 @@ $(function () {
             }
        });
 
-
+*/
 
     });
 
@@ -173,7 +235,7 @@ $(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             beforeSend: function() {
-                $("#dvProgress").show();
+               // $("#dvProgress").show();
             },
             data: {
                 "funname": "GetRealtimeMeasureValue"
@@ -184,10 +246,11 @@ $(function () {
                // appModel.measurepoint().rows(mappedData);
                 appModel.measurepoint().updatePositions(data);
 
-                $("#dvProgress").hide();
+                ///$("#dvProgress").hide();
             },
             error: function(response) {
                 console.log(response);
+                //$("#dvProgress").hide();
             }
         });
     }

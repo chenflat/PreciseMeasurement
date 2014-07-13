@@ -91,7 +91,7 @@ $(function () {
 
             $(".alarm .startdate").attr('title', '开始时间：'+ startdate );
             $(".alarm .enddate").attr('title', '结束时间：'+ enddate);
-            console.log(enddate);
+            //console.log(enddate);
 
             var path = CONTEXT_PATH + "services/GetAlarmlogs.ashx"
             $.ajax({
