@@ -6,6 +6,7 @@
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/cookies/jquery.cookies.2.2.0.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report.js") %>"></script>
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/report_custom.js") %>?time=<%=DateTime.Now.Ticks %>"></script>
 <script language="javascript">
     var USERID = "<%=userid %>";
     var ORGID = "<%=orgid %>"; 
@@ -16,26 +17,24 @@
         <div class="bs-docs-section">
             <div class="toolbar bs-callout-info">
                 起始时间：
-                <asp:TextBox ID="startdate" CssClass="Wdate startdate" runat="server"></asp:TextBox>
+                <asp:TextBox ID="startdate" CssClass="Wdate customStartdate" runat="server"></asp:TextBox>
                 <label for="enddate" class="endzone">
-                &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate enddate" runat="server"></asp:TextBox></label>
+                &nbsp;终止时间：<asp:TextBox ID="enddate" CssClass="Wdate customEnddate" runat="server"></asp:TextBox></label>
 
                  
                 
                 &nbsp;
                 <div class="btn-group">
-                <button type="button" class="btn btn-danger" id="CreateSetting">自定义设置</button>
+                <button type="button" class="btn btn-danger" id="CreateSetting" data-bind="click:add">自定义设置</button>
               </div>
 
-              
-                
                 <%--<button type="button" class="btn btn-info" id="btnCustomQuery">生成报表</button>--%>
                 
                <a href="day.aspx" class="btn btn-info" id="btnDayQuery">日报</a>
                 <a href="week.aspx" class="btn btn-info" id="btnWeekQuery">周报</a>
                 <a href="month.aspx" class="btn btn-info" id="btnMonthQuery">月报</a>
-                <button type="button" class="btn btn-info" id="btnCustomQuery">数据运算</button>
-                <input type="hidden" name="hdnSettingName" id="hdnSettingName">
+                <button type="button" class="btn btn-info" id="btnCustomQuery" data-bind="click: customQuery">数据运算</button>
+                <input type="hidden" name="hdnSettingName" id="hdnSettingName" runat="server">
                 <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="btn btn-info" data-toggle="tooltip" data-placement="right" title="必须生成报表后才能导出Excel" />
                   <a href="default.aspx" class="btn btn-info" >返回</a>
                 
@@ -46,14 +45,15 @@
             <div class="col-md-2">
             <div class="panel panel-default">
               <div class="panel-heading">自定报表导航</div>
-              <div class="panel-body" id="SettingNameList">       
-                <% foreach (var item in SettingList) { %>
-                    <div class="settingitem" style="padding:4px;"><a href="#" class="rowQuery" itemname="<%=item %>" title="点击标题显示自定义报表"> <%=item %></a>  <span class="pull-right">
+              <div class="panel-body" id="SettingNameList" data-bind="foreach:rows">       
 
-                    <a href="#" class="editSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a href="#" class="delSetting" itemname="<%=item %>"><i class="glyphicon glyphicon-remove"></i></a>
+                  <div class="settingitem" style="padding:4px;"><a href="#" class="rowQuery" itemname="" title="点击标题显示自定义报表" data-bind="text: settingname,click:$root.rowQuery"></a>  <span class="pull-right">
+
+                    <a href="#" data-bind="click: $root.edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href="#" data-bind="click: $root.delete"><i class="glyphicon glyphicon-remove"></i></a>
                     </div> 
-                <%  } %>
+
+
               </div>
             </div>
 
@@ -129,26 +129,6 @@
                                         %>
                                     </div>
 
-
-                                    <%-- <ul class="nav bs-sidenav" style="margin:0px;">
-                                    <%
-                                        foreach (System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<PM.Entity.MeasurePointInfo>> pair in measurePointList)
-                                      { 
-                                    %>
-                                    <li class="active"><a href="#">
-                                        <%= pair.Key %></a>
-                                        <ul class="nav measurepoint-list">
-                                            <% foreach (PM.Entity.MeasurePointInfo point in pair.Value)
-                                               {%>
-                                            <li id="<%=point.Pointnum %>" style="padding-left:30px;cursor:pointer;">[<%=point.Pointnum %>]<%=point.Description%> </li>
-                                            <% } %>
-                                        </ul>
-                                    </li>
-                                    <%
-                                    }
-                                    %>
-                   
-                                </ul>--%>
                                 </div>
                             </div></div>
                        
@@ -160,9 +140,10 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="settingname">
-                                           <strong>设置名称：</strong><input type="text" id="SettingName" /> *
+                                           <strong>设置名称：</strong><input type="text" id="SettingName" data-bind="value: currentRow().settingname" /> *
                                             <input type="hidden" name="IsItemFormula" id="IsItemFormula" value="true" />
-                                            <input type="hidden" name="action" id="action" value="create" />
+                                            <input type="hidden" name="action" id="action" data-bind="value:action" />
+                                             <input type="hidden" name="oldSettingname" id="oldSettingname" data-bind="value: editname" />
                                         </div>
                                         <div class="sel-points setting">
                                             <strong>选择的计量点</strong>
@@ -217,7 +198,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         关闭</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveSetting">
+                    <button type="button" class="btn btn-primary" id="btnSaveSetting" data-bind="click: save">
                         保存设置</button>
                     <button type="button" id="btnDelete" class="btn btn-default" data-dismiss="modal">
                         删除</button>

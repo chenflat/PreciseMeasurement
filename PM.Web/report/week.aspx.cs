@@ -24,7 +24,7 @@ namespace PM.Web.report
             {
                 if (weekstartdate.Text.Trim()=="")
                 {
-                    weekstartdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    weekstartdate.Text = DateTime.Now.ToString("yyyy-MM-dd") + " 08:00";
                 }
                 BindData();
                 BindDropDownList();

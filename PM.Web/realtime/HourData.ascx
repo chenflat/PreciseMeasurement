@@ -14,10 +14,10 @@
             EnableModelValidation="True" BorderStyle="None">
             <Columns>
                 <asp:BoundField DataField="POINTNUM" HeaderText="计量点" />
-                <asp:BoundField DataField="Starttime" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="起始时间" />
+                <asp:BoundField DataField="Starttime" DataFormatString="{0:yyyy-MM-dd hh:mm}" HeaderText="起始时间" />
                 <asp:BoundField DataField="STARTVALUE" HeaderText="起始表数(t)" />
-                 <asp:BoundField DataField="Endtime" DataFormatString="{0:yyyy-MM:dd hh:mm}" HeaderText="终止时间" />
-                <asp:BoundField DataField="LASTVALUE" HeaderText="终止表数(t)" />
+                 <asp:BoundField DataField="Endtime" DataFormatString="{0:yyyy-MM-dd hh:mm}" HeaderText="截止时间" />
+                <asp:BoundField DataField="LASTVALUE" HeaderText="截止表数(t)" />
                 <asp:BoundField DataField="VALUE" HeaderText="小时用量(t)" />
             </Columns>
         </asp:GridView>

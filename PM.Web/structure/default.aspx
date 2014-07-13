@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/date.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/knockout/knockout-3.1.0.js") %>"></script>
+<link href="<%=ResolveUrl("~/assets/lib/KoGrid/KoGrid.css") %>" rel="stylesheet" />
+<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/KoGrid/koGrid-2.1.1.js") %>"></script>
+
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/lib/moment/moment-with-langs.min.js") %>"></script>
 <script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure.js") %>"></script>
 <!--<script language="javascript" type="text/javascript" src="<%=ResolveUrl("~/assets/js/structure_realdata.js") %>"></script>-->
@@ -90,11 +93,11 @@
 
             <div class="alert alert-info">
             <span id="spanType1" style="overflow: hidden;">
-                                <input id="radSteam1" type="radio" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                <input id="radSteam1" type="radio" data-bind="checked:measurepoint().filter" value="steam" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radSteam1" style="cursor: pointer;">汽</label>
-                                <input id="radWater1" type="radio" value="water" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
+                                <input id="radWater1" type="radio" data-bind="checked:measurepoint().filter" value="water" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;">
                                 <label for="radWater1" style="cursor: pointer;">水</label>
-                                 <input id="radAll" type="radio" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
+                                 <input id="radAll" type="radio" data-bind="checked:measurepoint().filter" value="" name="carrier" style="width: 15px; height: auto; margin: auto; padding: 0px; cursor: pointer;" checked="checked">
                                 <label for="radAll" style="cursor: pointer;">全部</label>
                             </span>
                         
@@ -102,7 +105,10 @@
             </div>
           
         <div id="datalist">
-        <table class="table table-bordered table-striped" id="gvRealtimeData">
+
+        <div style="width: 600px; height:670px" data-bind="koGrid: measurepoint().gridOptions"></div>
+        <!--
+        <table class="table table-bordered table-striped" id="gvRealtimeData" style="display:none;">
         <thead>
             <tr>
                 <th>计量点</th>
@@ -122,7 +128,7 @@
             </tr>
         </tbody>
         </table>
-
+    -->
         
             
             </div>

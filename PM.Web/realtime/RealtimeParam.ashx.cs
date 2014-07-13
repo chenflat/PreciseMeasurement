@@ -9,6 +9,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using PM.Entity;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace PM.Web.realtime
 {
@@ -42,13 +43,12 @@ namespace PM.Web.realtime
             if (type == "MINUTE")
             {
                 Pagination<MeasurementInfo> pagination = Business.Measurement.GetMinuteMeasurementByPointnum(pointnum, startdate, enddate, type, pageindex, 12);
-                result = javaScriptSerializer.Serialize(pagination);
+                result = JsonConvert.SerializeObject(pagination);
             }
             else
             {
                 Pagination<MeasurementStatInfo> pagination = Business.Measurement.GetMeasurementByPointnum(pointnum, startdate, enddate,"", type,"", pageindex, 12);
-                result = javaScriptSerializer.Serialize(pagination);
-
+                result = JsonConvert.SerializeObject(pagination);
                 result = Regex.Replace(result, @"\""\\/Date\((\d+)\)\\/\""", "$1");
              
             }

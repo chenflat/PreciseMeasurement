@@ -373,6 +373,18 @@ namespace PM.Web.services {
             return result;
         }
 
+        public string GetReportSettingNameList(HttpContext context)
+        { 
+            string m_orgid = context.Request["orgid"]!=null?context.Request["orgid"].ToString() : "";
+            int m_userid = PM.Common.Utils.StrToInt(context.Request["userid"].ToString(), 0);
+
+            List<string>  namelist =  PM.Data.ReportSetting.GetReportSettingNameList(m_userid, m_orgid);
+            string result = JsonConvert.SerializeObject(namelist);
+            return result;
+        }
+
+
+
 
         private void OutputString(HttpContext context, string strReturn) {
             try {

@@ -22,12 +22,12 @@ namespace PM.Web.report
             {
                 if (startdate.Text.Trim()=="")
                 {
-                    int days = DateTime.Now.Day - 1;
-                    startdate.Text = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd");
+                    int days = DateTime.Now.Day-1;
+                    startdate.Text = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd")+ " 08:00";
                 }
                 if (enddate.Text.Trim()=="")
                 {
-                    enddate.Text = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                    enddate.Text = DateTime.Now.ToString("yyyy-MM-dd") + " 08:00";
                 }
 
                 BindData();
@@ -66,9 +66,8 @@ namespace PM.Web.report
         }
 
         private void BindData() {
-            string m_startdate = startdate.Text.Trim() + " 00:00:00";
-            string m_enddate = enddate.Text.Trim() + " 23:59:59";
-
+            string m_startdate = startdate.Text.Trim();
+            string m_enddate = enddate.Text.Trim();
             gvReport.DataSource = PM.Data.Measurement.GetMeasurementReport(m_startdate, m_enddate, ddlLevel.SelectedValue, ddlOrgId.SelectedValue, Entity.ReportType.Day);
             gvReport.DataBind();
 
